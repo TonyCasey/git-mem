@@ -38,6 +38,18 @@
       "tags": [],
       "createdAt": "2026-02-05T15:07:01.811Z",
       "updatedAt": "2026-02-05T15:07:01.811Z"
+    },
+    {
+      "id": "c4c68b98-1992-45db-873b-bb7d1242d974",
+      "content": "To be deleted",
+      "type": "fact",
+      "sha": "20f3e752dbbece6dae3af539d7689656551c0ae8",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-05T15:07:01.915Z",
+      "updatedAt": "2026-02-05T15:07:01.915Z"
     }
   ]
 }
