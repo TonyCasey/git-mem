@@ -1,0 +1,16 @@
+{
+  "memories": [
+    {
+      "id": "3c666fc7-dc3c-4ec9-abfc-5ffd24a1f1a5",
+      "content": "Chose JWT because it's stateless instead of sessions",
+      "type": "decision",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-05T18:32:05.395Z",
+      "updatedAt": "2026-02-05T18:32:05.395Z"
+    }
+  ]
+}
