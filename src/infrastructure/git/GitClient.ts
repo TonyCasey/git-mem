@@ -228,4 +228,31 @@ export class GitClient implements IGitClient {
       return 0;
     }
   }
+
+  diffStaged(cwd?: string): string {
+    try {
+      return execFileSync('git', ['diff', '--cached'], {
+        encoding: 'utf8',
+        cwd,
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
+    } catch {
+      return '';
+    }
+  }
+
+  diffStagedNames(cwd?: string): string[] {
+    try {
+      const output = execFileSync('git', ['diff', '--cached', '--name-only'], {
+        encoding: 'utf8',
+        cwd,
+        stdio: ['pipe', 'pipe', 'pipe'],
+      }).trim();
+
+      if (!output) return [];
+      return output.split('\n').filter(line => line.trim());
+    } catch {
+      return [];
+    }
+  }
 }

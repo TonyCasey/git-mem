@@ -5,6 +5,7 @@ import { rememberCommand } from './commands/remember';
 import { recallCommand } from './commands/recall';
 import { retrofitCommand } from './commands/retrofit';
 import { syncCommand } from './commands/sync';
+import { contextCommand } from './commands/context';
 
 const program = new Command();
 
@@ -40,6 +41,14 @@ program
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .action(retrofitCommand);
+
+program
+  .command('context')
+  .description('Show memories relevant to staged changes')
+  .option('-n, --limit <n>', 'Max results', '10')
+  .option('--threshold <n>', 'Min relevance score 0-1', '0.1')
+  .option('--json', 'Output as JSON')
+  .action(contextCommand);
 
 program
   .command('sync')
