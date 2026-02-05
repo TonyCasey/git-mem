@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Git-native memory layer for AI coding tools. Store decisions, context, and knowledge directly in your git repository using commit trailers and git notes.",
   "bin": {
-    "git-mem": "dist/cli.js"
+    "git-mem": "dist/cli.js",
+    "git-mem-mcp": "dist/mcp-server.js"
   },
   "type": "commonjs",
   "main": "dist/cli.js",
@@ -37,8 +38,9 @@
   "author": "Tony Casey",
   "license": "MIT",
   "dependencies": {
-    "commander": "^11.1.0",
-    "chalk": "^5.3.0"
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
