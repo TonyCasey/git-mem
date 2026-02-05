@@ -6,6 +6,7 @@ import { recallCommand } from './commands/recall';
 import { retrofitCommand } from './commands/retrofit';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
+import { initMcpCommand } from './commands/init-mcp';
 
 const program = new Command();
 
@@ -56,5 +57,12 @@ program
   .option('--push', 'Push only')
   .option('--pull', 'Pull only')
   .action(syncCommand);
+
+program
+  .command('init-mcp')
+  .description('Generate .mcp.json for AI coding tools')
+  .option('--force', 'Overwrite existing .mcp.json')
+  .option('--global', 'Use globally installed git-mem-mcp binary')
+  .action(initMcpCommand);
 
 program.parse(process.argv);

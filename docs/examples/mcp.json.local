@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "git-mem": {
+      "command": "node",
+      "args": ["/path/to/git-mem/dist/mcp-server.js"]
+    }
+  }
+}

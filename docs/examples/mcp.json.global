@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "git-mem": {
+      "command": "git-mem-mcp"
+    }
+  }
+}
