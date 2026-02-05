@@ -1,0 +1,81 @@
+/**
+ * MCP Tool: git_mem_retrofit
+ *
+ * Scan and annotate existing commit history with structured memory notes.
+ */
+
+import { z } from 'zod';
+import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { RetrofitService } from '../../application/services/RetrofitService';
+import { GitTriageService } from '../../application/services/GitTriageService';
+import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
+import { NotesService } from '../../infrastructure/services/NotesService';
+import { GitClient } from '../../infrastructure/git/GitClient';
+
+export function registerRetrofitTool(server: McpServer): void {
+  server.tool(
+    'git_mem_retrofit',
+    'Scan commit history, score commits for interest, and extract decisions/gotchas/conventions as memories',
+    {
+      dry_run: z.boolean().optional().describe('Preview without writing notes (default: false)'),
+      since: z.string().optional().describe('Start date for scanning (ISO 8601, e.g. "2024-01-01")'),
+      max_commits: z.number().optional().describe('Maximum commits to process'),
+      threshold: z.number().optional().describe('Interest score threshold (default: 3)'),
+    },
+    async (args) => {
+      try {
+        const gitClient = new GitClient();
+        const triageService = new GitTriageService(gitClient);
+        const notesService = new NotesService();
+        const memoryRepo = new MemoryRepository(notesService);
+        const retrofitService = new RetrofitService(triageService, memoryRepo);
+
+        const result = await retrofitService.retrofit({
+          dryRun: args.dry_run ?? false,
+          since: args.since ? new Date(args.since) : undefined,
+          maxCommits: args.max_commits,
+          threshold: args.threshold,
+        });
+
+        const summary = {
+          dryRun: result.dryRun,
+          commitsScanned: result.commitsScanned,
+          commitsAnnotated: result.commitsAnnotated,
+          factsExtracted: result.factsExtracted,
+          durationMs: result.durationMs,
+          annotations: result.annotations.map(a => ({
+            sha: a.sha.slice(0, 7),
+            subject: a.subject,
+            score: a.score,
+            factsExtracted: a.factsExtracted,
+            factTypes: a.factTypes,
+          })),
+        };
+
+        if (result.commitsAnnotated === 0) {
+          return {
+            content: [{
+              type: 'text' as const,
+              text: `Scanned ${result.commitsScanned} commit(s). No interesting patterns found.`,
+            }],
+          };
+        }
+
+        return {
+          content: [{
+            type: 'text' as const,
+            text: JSON.stringify(summary, null, 2),
+          }],
+        };
+      } catch (err) {
+        return {
+          content: [{
+            type: 'text' as const,
+            text: `Error running retrofit: ${err instanceof Error ? err.message : String(err)}`,
+          }],
+          isError: true,
+        };
+      }
+    }
+  );
+}
