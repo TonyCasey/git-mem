@@ -1,0 +1,16 @@
+{
+  "memories": [
+    {
+      "id": "86255dd4-47a0-4093-acf0-07f1db342071",
+      "content": "JWT chosen for stateless API",
+      "type": "fact",
+      "sha": "20f3e752dbbece6dae3af539d7689656551c0ae8",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-05T15:07:01.758Z",
+      "updatedAt": "2026-02-05T15:07:01.758Z"
+    }
+  ]
+}
