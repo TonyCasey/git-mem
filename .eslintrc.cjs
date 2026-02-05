@@ -1,0 +1,37 @@
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2022,
+    sourceType: 'module',
+    project: './tsconfig.json',
+  },
+  plugins: ['@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  rules: {
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'interface',
+        format: ['PascalCase'],
+        prefix: ['I'],
+      },
+    ],
+    'no-case-declarations': 'error',
+    'prefer-rest-params': 'error',
+  },
+  overrides: [
+    {
+      files: ['**/*.test.ts', '**/*.spec.ts', '**/tests/**/*.ts'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'warn',
+      },
+    },
+  ],
+  ignorePatterns: ['dist/', 'node_modules/', '*.js', '*.cjs'],
+};
