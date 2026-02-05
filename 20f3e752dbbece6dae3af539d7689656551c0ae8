@@ -11,6 +11,21 @@
       "tags": [],
       "createdAt": "2026-02-05T15:07:01.758Z",
       "updatedAt": "2026-02-05T15:07:01.758Z"
+    },
+    {
+      "id": "1c151821-7202-43a1-9e03-8f334ab92fa6",
+      "content": "Always use constructor injection",
+      "type": "convention",
+      "sha": "20f3e752dbbece6dae3af539d7689656551c0ae8",
+      "confidence": "verified",
+      "source": "user-explicit",
+      "lifecycle": "permanent",
+      "tags": [
+        "architecture",
+        "di"
+      ],
+      "createdAt": "2026-02-05T15:07:01.783Z",
+      "updatedAt": "2026-02-05T15:07:01.783Z"
     }
   ]
 }
