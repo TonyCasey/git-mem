@@ -26,6 +26,18 @@
       ],
       "createdAt": "2026-02-05T15:07:01.783Z",
       "updatedAt": "2026-02-05T15:07:01.783Z"
+    },
+    {
+      "id": "edcf7b2a-4bc6-426c-b5f5-e973ff8de99c",
+      "content": "Test memory for getById",
+      "type": "fact",
+      "sha": "20f3e752dbbece6dae3af539d7689656551c0ae8",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-05T15:07:01.811Z",
+      "updatedAt": "2026-02-05T15:07:01.811Z"
     }
   ]
 }
