@@ -170,4 +170,18 @@ export interface IGitClient {
    * @returns Total commit count.
    */
   countCommits(cwd?: string): number;
+
+  /**
+   * Get the full diff of staged (cached) changes.
+   * @param cwd - Working directory.
+   * @returns Raw diff output string.
+   */
+  diffStaged(cwd?: string): string;
+
+  /**
+   * Get file names with staged changes.
+   * @param cwd - Working directory.
+   * @returns Array of file paths.
+   */
+  diffStagedNames(cwd?: string): string[];
 }
