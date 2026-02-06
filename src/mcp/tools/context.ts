@@ -10,6 +10,7 @@ import { ContextService } from '../../application/services/ContextService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerContextTool(server: McpServer): void {
   server.tool(
@@ -21,10 +22,11 @@ export function registerContextTool(server: McpServer): void {
     },
     async (args) => {
       try {
+        const logger = createLogger().child({ tool: 'context' });
         const gitClient = new GitClient();
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const contextService = new ContextService(gitClient, memoryRepo);
+        const contextService = new ContextService(gitClient, memoryRepo, logger);
 
         const result = contextService.getContext({
           limit: args.limit || 10,

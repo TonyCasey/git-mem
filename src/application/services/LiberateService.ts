@@ -17,6 +17,7 @@ import type { IGitTriageService } from '../../domain/interfaces/IGitTriageServic
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import type { ILLMClient, ILLMExtractedFact } from '../../domain/interfaces/ILLMClient';
+import type { ILogger } from '../../domain/interfaces/ILogger';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
@@ -43,7 +44,8 @@ export class LiberateService implements ILiberateService {
     private readonly triageService: IGitTriageService,
     private readonly memoryRepository: IMemoryRepository,
     private readonly gitClient?: IGitClient,
-    private readonly llmClient?: ILLMClient
+    private readonly llmClient?: ILLMClient,
+    private readonly logger?: ILogger
   ) {}
 
   async liberate(options?: ILiberateOptions): Promise<ILiberateResult> {
@@ -51,6 +53,8 @@ export class LiberateService implements ILiberateService {
     const dryRun = options?.dryRun ?? false;
     const enrich = options?.enrich ?? false;
     const shouldEnrich = enrich && !!this.llmClient && !!this.gitClient;
+
+    this.logger?.info('Starting liberate', { dryRun, enrich, shouldEnrich, since: options?.since, threshold: options?.threshold });
 
     // Run triage to find interesting commits
     const triageResult = await this.triageService.triage({
@@ -72,8 +76,14 @@ export class LiberateService implements ILiberateService {
       totalOutputTokens: 0,
     };
 
+    this.logger?.debug('Triage complete', {
+      totalCommits: triageResult.totalCommits,
+      highInterest: triageResult.highInterest.length,
+    });
+
     // Process each high-interest commit
     for (const scored of triageResult.highInterest) {
+      this.logger?.debug('Processing commit', { sha: scored.commit.sha, score: scored.score });
       const text = `${scored.commit.subject}\n${scored.commit.body}`.trim();
       const heuristicMatches = extractPatternMatches(text);
 
@@ -103,8 +113,12 @@ export class LiberateService implements ILiberateService {
           (enrichmentStats as { factsExtracted: number }).factsExtracted += llmFacts.length;
           (enrichmentStats as { totalInputTokens: number }).totalInputTokens += result.usage.inputTokens;
           (enrichmentStats as { totalOutputTokens: number }).totalOutputTokens += result.usage.outputTokens;
-        } catch {
+        } catch (err) {
           // Graceful degradation: LLM failure doesn't block heuristic results
+          this.logger?.warn('LLM enrichment failed for commit', {
+            sha: scored.commit.sha,
+            error: err instanceof Error ? err.message : String(err),
+          });
           (enrichmentStats as { commitsFailed: number }).commitsFailed++;
         }
       }
@@ -112,7 +126,10 @@ export class LiberateService implements ILiberateService {
       // Merge heuristic + LLM facts with deduplication
       const mergedFacts = mergeFacts(heuristicMatches, llmFacts);
 
-      if (mergedFacts.length === 0) continue;
+      if (mergedFacts.length === 0) {
+        this.logger?.debug('No facts extracted for commit', { sha: scored.commit.sha });
+        continue;
+      }
 
       const factTypes = [...new Set(mergedFacts.map(f => f.type))];
 
@@ -133,6 +150,12 @@ export class LiberateService implements ILiberateService {
         }
       }
 
+      this.logger?.debug('Commit annotated', {
+        sha: scored.commit.sha,
+        score: scored.score,
+        facts: mergedFacts.length,
+        types: [...new Set(mergedFacts.map(f => f.type))],
+      });
       totalFactsExtracted += mergedFacts.length;
       annotations.push({
         sha: scored.commit.sha,
@@ -152,6 +175,14 @@ export class LiberateService implements ILiberateService {
       dryRun,
       durationMs: Date.now() - startTime,
     };
+
+    this.logger?.info('Liberate complete', {
+      commitsScanned: result.commitsScanned,
+      commitsAnnotated: result.commitsAnnotated,
+      factsExtracted: result.factsExtracted,
+      durationMs: result.durationMs,
+      dryRun,
+    });
 
     if (enrich) {
       return { ...result, enrichment: enrichmentStats };

@@ -9,6 +9,7 @@ import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { MemoryService } from '../../application/services/MemoryService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
+import { createLogger } from '../../infrastructure/logging/factory';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../../domain/types/IMemoryLifecycle';
@@ -27,9 +28,10 @@ export function registerRememberTool(server: McpServer): void {
     },
     async (args) => {
       try {
+        const logger = createLogger().child({ tool: 'remember' });
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const memoryService = new MemoryService(memoryRepo);
+        const memoryService = new MemoryService(memoryRepo, logger);
 
         const memory = memoryService.remember(args.text, {
           sha: args.commit,

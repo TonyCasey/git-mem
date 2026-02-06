@@ -10,11 +10,13 @@ import type { IContextService, IContextOptions, IContextResult, IScoredMemory } 
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IMemoryEntity } from '../../domain/entities/IMemoryEntity';
+import type { ILogger } from '../../domain/interfaces/ILogger';
 
 export class ContextService implements IContextService {
   constructor(
     private readonly gitClient: IGitClient,
-    private readonly memoryRepository: IMemoryRepository
+    private readonly memoryRepository: IMemoryRepository,
+    private readonly logger?: ILogger
   ) {}
 
   getContext(options?: IContextOptions): IContextResult {
@@ -22,14 +24,21 @@ export class ContextService implements IContextService {
     const limit = options?.limit ?? 10;
     const threshold = options?.threshold ?? 0.1;
 
+    this.logger?.debug('Getting context for staged changes', { cwd, limit, threshold });
+
     const stagedFiles = this.gitClient.diffStagedNames(cwd);
 
     if (stagedFiles.length === 0) {
+      this.logger?.info('No staged files found');
       return { files: [], memories: [], totalScanned: 0 };
     }
 
+    this.logger?.debug('Staged files', { count: stagedFiles.length, files: stagedFiles });
+
     const diffContent = this.gitClient.diffStaged(cwd);
     const keywords = this.extractKeywords(stagedFiles, diffContent);
+
+    this.logger?.debug('Extracted keywords', { count: keywords.size });
 
     const allMemories = this.memoryRepository.query({ cwd });
     const scored: IScoredMemory[] = [];
@@ -42,6 +51,12 @@ export class ContextService implements IContextService {
     }
 
     scored.sort((a, b) => b.score - a.score);
+
+    this.logger?.info('Context scan complete', {
+      stagedFiles: stagedFiles.length,
+      totalScanned: allMemories.total,
+      relevant: Math.min(scored.length, limit),
+    });
 
     return {
       files: stagedFiles,

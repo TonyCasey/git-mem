@@ -12,6 +12,7 @@ import { MemoryRepository } from '../../infrastructure/repositories/MemoryReposi
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
 import { createLLMClient } from '../../infrastructure/llm/LLMClientFactory';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerLiberateTool(server: McpServer): void {
   server.tool(
@@ -26,6 +27,7 @@ export function registerLiberateTool(server: McpServer): void {
     },
     async (args) => {
       try {
+        const logger = createLogger().child({ tool: 'liberate' });
         const gitClient = new GitClient();
         const triageService = new GitTriageService(gitClient);
         const notesService = new NotesService();
@@ -38,7 +40,8 @@ export function registerLiberateTool(server: McpServer): void {
           triageService,
           memoryRepo,
           args.enrich ? gitClient : undefined,
-          llmClient ?? undefined
+          llmClient ?? undefined,
+          logger
         );
 
         const result = await liberateService.liberate({
