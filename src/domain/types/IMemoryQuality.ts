@@ -54,7 +54,8 @@ export type SourceType =
   | 'commit-trailer'
   | 'git-note'
   | 'retrofit'
-  | 'heuristic-extraction';
+  | 'heuristic-extraction'
+  | 'llm-enrichment';
 
 /**
  * All valid source types.
@@ -65,6 +66,7 @@ export const SOURCE_VALUES: readonly SourceType[] = [
   'git-note',
   'retrofit',
   'heuristic-extraction',
+  'llm-enrichment',
 ] as const;
 
 /**
@@ -76,6 +78,7 @@ export const DEFAULT_CONFIDENCE: Readonly<Record<SourceType, ConfidenceLevel>> =
   'git-note': 'high',
   'retrofit': 'medium',
   'heuristic-extraction': 'low',
+  'llm-enrichment': 'medium',
 };
 
 /**
