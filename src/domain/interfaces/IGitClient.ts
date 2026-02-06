@@ -172,6 +172,14 @@ export interface IGitClient {
   countCommits(cwd?: string): number;
 
   /**
+   * Get the full diff of a single commit.
+   * @param sha - Commit SHA.
+   * @param cwd - Working directory.
+   * @returns Raw diff output string.
+   */
+  getCommitDiff(sha: string, cwd?: string): string;
+
+  /**
    * Get the full diff of staged (cached) changes.
    * @param cwd - Working directory.
    * @returns Raw diff output string.

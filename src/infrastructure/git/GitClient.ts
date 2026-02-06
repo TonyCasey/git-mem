@@ -229,6 +229,23 @@ export class GitClient implements IGitClient {
     }
   }
 
+  getCommitDiff(sha: string, cwd?: string): string {
+    try {
+      return execFileSync(
+        'git',
+        ['show', '--format=', '--patch', sha],
+        {
+          encoding: 'utf8',
+          cwd,
+          stdio: ['pipe', 'pipe', 'pipe'],
+          maxBuffer: 10 * 1024 * 1024,
+        }
+      );
+    } catch {
+      return '';
+    }
+  }
+
   diffStaged(cwd?: string): string {
     try {
       return execFileSync('git', ['diff', '--cached'], {

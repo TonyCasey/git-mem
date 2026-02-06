@@ -19,6 +19,8 @@ export interface IRetrofitOptions {
   readonly threshold?: number;
   /** Working directory. */
   readonly cwd?: string;
+  /** Enable LLM enrichment (requires API key). */
+  readonly enrich?: boolean;
 }
 
 /**
@@ -35,6 +37,24 @@ export interface IRetrofitAnnotation {
   readonly factsExtracted: number;
   /** Extracted fact types. */
   readonly factTypes: readonly string[];
+  /** Whether LLM enrichment contributed to this annotation. */
+  readonly enrichedByLLM?: boolean;
+}
+
+/**
+ * Statistics for LLM enrichment during retrofit.
+ */
+export interface IEnrichmentStats {
+  /** Commits successfully enriched by LLM. */
+  readonly commitsEnriched: number;
+  /** Commits where LLM enrichment failed (graceful degradation). */
+  readonly commitsFailed: number;
+  /** Total facts extracted by LLM. */
+  readonly factsExtracted: number;
+  /** Total input tokens consumed. */
+  readonly totalInputTokens: number;
+  /** Total output tokens consumed. */
+  readonly totalOutputTokens: number;
 }
 
 /**
@@ -53,6 +73,8 @@ export interface IRetrofitResult {
   readonly dryRun: boolean;
   /** Duration in milliseconds. */
   readonly durationMs: number;
+  /** LLM enrichment statistics (present when enrich: true). */
+  readonly enrichment?: IEnrichmentStats;
 }
 
 /**

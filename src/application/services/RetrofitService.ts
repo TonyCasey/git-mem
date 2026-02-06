@@ -3,7 +3,7 @@
  *
  * Application service that annotates existing git history with
  * structured memory notes by combining triage scoring with
- * heuristic pattern extraction.
+ * heuristic pattern extraction and optional LLM enrichment.
  */
 
 import type {
@@ -11,20 +11,46 @@ import type {
   IRetrofitOptions,
   IRetrofitResult,
   IRetrofitAnnotation,
+  IEnrichmentStats,
 } from '../interfaces/IRetrofitService';
 import type { IGitTriageService } from '../../domain/interfaces/IGitTriageService';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
+import type { IGitClient } from '../../domain/interfaces/IGitClient';
+import type { ILLMClient, ILLMExtractedFact } from '../../domain/interfaces/ILLMClient';
+import type { MemoryType } from '../../domain/entities/IMemoryEntity';
+import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
+import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
+import { extractWords, jaccardSimilarity } from '../../domain/utils/deduplication';
+
+/** Maximum diff length sent to LLM (chars). Truncated at line boundary. */
+const MAX_DIFF_LENGTH = 15_000;
+
+/** Jaccard similarity threshold for deduplication between heuristic and LLM facts. */
+const DEDUP_THRESHOLD = 0.7;
+
+/** Uniform fact shape for merging heuristic and LLM results. */
+interface IUnifiedFact {
+  readonly content: string;
+  readonly type: MemoryType;
+  readonly confidence: ConfidenceLevel;
+  readonly tags: readonly string[];
+  readonly source: 'heuristic-extraction' | 'llm-enrichment';
+}
 
 export class RetrofitService implements IRetrofitService {
   constructor(
     private readonly triageService: IGitTriageService,
-    private readonly memoryRepository: IMemoryRepository
+    private readonly memoryRepository: IMemoryRepository,
+    private readonly gitClient?: IGitClient,
+    private readonly llmClient?: ILLMClient
   ) {}
 
   async retrofit(options?: IRetrofitOptions): Promise<IRetrofitResult> {
     const startTime = Date.now();
     const dryRun = options?.dryRun ?? false;
+    const enrich = options?.enrich ?? false;
+    const shouldEnrich = enrich && !!this.llmClient && !!this.gitClient;
 
     // Run triage to find interesting commits
     const triageResult = await this.triageService.triage({
@@ -38,41 +64,87 @@ export class RetrofitService implements IRetrofitService {
 
     const annotations: IRetrofitAnnotation[] = [];
     let totalFactsExtracted = 0;
+    const enrichmentStats: IEnrichmentStats = {
+      commitsEnriched: 0,
+      commitsFailed: 0,
+      factsExtracted: 0,
+      totalInputTokens: 0,
+      totalOutputTokens: 0,
+    };
 
     // Process each high-interest commit
     for (const scored of triageResult.highInterest) {
       const text = `${scored.commit.subject}\n${scored.commit.body}`.trim();
-      const matches = extractPatternMatches(text);
+      const heuristicMatches = extractPatternMatches(text);
 
-      if (matches.length === 0) continue;
+      // LLM enrichment (if enabled)
+      let llmFacts: ILLMExtractedFact[] = [];
+      let enrichedByLLM = false;
 
-      const factTypes = [...new Set(matches.map(m => m.factType))];
+      if (shouldEnrich) {
+        try {
+          const diff = this.gitClient!.getCommitDiff(scored.commit.sha, options?.cwd);
+          const truncatedDiff = truncateDiff(diff, MAX_DIFF_LENGTH);
+          const fileNames = extractFileNames(diff);
+
+          const result = await this.llmClient!.enrichCommit({
+            sha: scored.commit.sha,
+            subject: scored.commit.subject,
+            body: scored.commit.body,
+            diff: truncatedDiff,
+            filesChanged: fileNames,
+          });
+
+          llmFacts = [...result.facts];
+          enrichedByLLM = llmFacts.length > 0;
+
+          // Track enrichment stats (mutable accumulation)
+          (enrichmentStats as { commitsEnriched: number }).commitsEnriched++;
+          (enrichmentStats as { factsExtracted: number }).factsExtracted += llmFacts.length;
+          (enrichmentStats as { totalInputTokens: number }).totalInputTokens += result.usage.inputTokens;
+          (enrichmentStats as { totalOutputTokens: number }).totalOutputTokens += result.usage.outputTokens;
+        } catch {
+          // Graceful degradation: LLM failure doesn't block heuristic results
+          (enrichmentStats as { commitsFailed: number }).commitsFailed++;
+        }
+      }
+
+      // Merge heuristic + LLM facts with deduplication
+      const mergedFacts = mergeFacts(heuristicMatches, llmFacts);
+
+      if (mergedFacts.length === 0) continue;
+
+      const factTypes = [...new Set(mergedFacts.map(f => f.type))];
 
       if (!dryRun) {
-        // Write each extracted fact as a memory
-        for (const match of matches) {
-          this.memoryRepository.create(match.text, {
+        for (const fact of mergedFacts) {
+          const tags = fact.source === 'llm-enrichment'
+            ? ['retrofit', 'llm-enrichment', ...fact.tags].join(', ')
+            : `retrofit, ${fact.tags.join(', ')}`;
+
+          this.memoryRepository.create(fact.content, {
             sha: scored.commit.sha,
-            type: match.factType,
-            confidence: match.confidence,
-            source: 'heuristic-extraction',
-            tags: `retrofit, pattern:${match.patternName}`,
+            type: fact.type,
+            confidence: fact.confidence,
+            source: fact.source,
+            tags,
             cwd: options?.cwd,
           });
         }
       }
 
-      totalFactsExtracted += matches.length;
+      totalFactsExtracted += mergedFacts.length;
       annotations.push({
         sha: scored.commit.sha,
         subject: scored.commit.subject,
         score: scored.score,
-        factsExtracted: matches.length,
+        factsExtracted: mergedFacts.length,
         factTypes,
+        enrichedByLLM,
       });
     }
 
-    return {
+    const result: IRetrofitResult = {
       commitsScanned: triageResult.totalCommits,
       commitsAnnotated: annotations.length,
       factsExtracted: totalFactsExtracted,
@@ -80,5 +152,86 @@ export class RetrofitService implements IRetrofitService {
       dryRun,
       durationMs: Date.now() - startTime,
     };
+
+    if (enrich) {
+      return { ...result, enrichment: enrichmentStats };
+    }
+
+    return result;
   }
+}
+
+/**
+ * Truncate a diff to maxLength characters at a line boundary.
+ */
+export function truncateDiff(diff: string, maxLength: number): string {
+  if (diff.length <= maxLength) return diff;
+
+  const truncated = diff.slice(0, maxLength);
+  const lastNewline = truncated.lastIndexOf('\n');
+  return lastNewline > 0 ? truncated.slice(0, lastNewline) : truncated;
+}
+
+/**
+ * Extract file names from a unified diff.
+ * Looks for +++ b/path lines.
+ */
+export function extractFileNames(diff: string): string[] {
+  const files: string[] = [];
+  for (const line of diff.split('\n')) {
+    if (line.startsWith('+++ b/')) {
+      files.push(line.slice(6));
+    }
+  }
+  return files;
+}
+
+/**
+ * Merge heuristic pattern matches with LLM-extracted facts.
+ * Deduplicates using Jaccard similarity — LLM version wins on conflicts.
+ */
+export function mergeFacts(
+  heuristicMatches: IPatternMatch[],
+  llmFacts: ILLMExtractedFact[]
+): IUnifiedFact[] {
+  // Convert heuristic matches to unified shape
+  const heuristicFacts: IUnifiedFact[] = heuristicMatches.map(m => ({
+    content: m.text,
+    type: m.factType,
+    confidence: m.confidence,
+    tags: [`pattern:${m.patternName}`],
+    source: 'heuristic-extraction' as const,
+  }));
+
+  // Convert LLM facts to unified shape
+  const llmUnified: IUnifiedFact[] = llmFacts.map(f => ({
+    content: f.content,
+    type: f.type,
+    confidence: f.confidence,
+    tags: [...f.tags],
+    source: 'llm-enrichment' as const,
+  }));
+
+  if (llmUnified.length === 0) return heuristicFacts;
+  if (heuristicFacts.length === 0) return llmUnified;
+
+  // Start with all LLM facts (they win on conflicts)
+  const merged: IUnifiedFact[] = [...llmUnified];
+
+  // Pre-compute word sets for LLM facts
+  const llmWordSets = llmUnified.map(f => extractWords(f.content));
+
+  // Add heuristic facts that aren't duplicates of LLM facts
+  for (const hFact of heuristicFacts) {
+    const hWords = extractWords(hFact.content);
+    const isDuplicate = llmWordSets.some(
+      llmWords => jaccardSimilarity(hWords, llmWords) > DEDUP_THRESHOLD
+    );
+
+    if (!isDuplicate) {
+      merged.push(hFact);
+    }
+  }
+
+  return merged;
 }
