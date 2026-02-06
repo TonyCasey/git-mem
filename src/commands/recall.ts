@@ -5,6 +5,7 @@
 import { MemoryService } from '../application/services/MemoryService';
 import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../infrastructure/services/NotesService';
+import type { ILogger } from '../domain/interfaces/ILogger';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 
 interface IRecallOptions {
@@ -14,10 +15,13 @@ interface IRecallOptions {
   json?: boolean;
 }
 
-export async function recallCommand(query: string | undefined, options: IRecallOptions): Promise<void> {
+export async function recallCommand(query: string | undefined, options: IRecallOptions, logger: ILogger): Promise<void> {
+  const log = logger.child({ command: 'recall' });
+  log.info('Starting recall', { query, type: options.type, limit: options.limit });
+
   const notesService = new NotesService();
   const memoryRepo = new MemoryRepository(notesService);
-  const memoryService = new MemoryService(memoryRepo);
+  const memoryService = new MemoryService(memoryRepo, log);
 
   const result = memoryService.recall(query, {
     limit: options.limit ? parseInt(options.limit, 10) : 10,
@@ -45,4 +49,6 @@ export async function recallCommand(query: string | undefined, options: IRecallO
     }
     console.log();
   }
+
+  log.info('Recall complete', { total: result.total, returned: result.memories.length });
 }

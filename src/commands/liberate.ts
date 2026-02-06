@@ -8,6 +8,7 @@ import { MemoryRepository } from '../infrastructure/repositories/MemoryRepositor
 import { NotesService } from '../infrastructure/services/NotesService';
 import { GitClient } from '../infrastructure/git/GitClient';
 import { createLLMClient } from '../infrastructure/llm/LLMClientFactory';
+import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface ILiberateCommandOptions {
   since?: string;
@@ -17,7 +18,10 @@ interface ILiberateCommandOptions {
   enrich?: boolean;
 }
 
-export async function liberateCommand(options: ILiberateCommandOptions): Promise<void> {
+export async function liberateCommand(options: ILiberateCommandOptions, logger: ILogger): Promise<void> {
+  const log = logger.child({ command: 'liberate' });
+  log.info('Starting liberate', { dryRun: options.dryRun, enrich: options.enrich, since: options.since, max: options.max });
+
   const gitClient = new GitClient();
   const triageService = new GitTriageService(gitClient);
   const notesService = new NotesService();
@@ -37,7 +41,8 @@ export async function liberateCommand(options: ILiberateCommandOptions): Promise
     triageService,
     memoryRepo,
     options.enrich ? gitClient : undefined,
-    llmClient ?? undefined
+    llmClient ?? undefined,
+    log
   );
 
   const since = options.since ? new Date(options.since) : undefined;
@@ -78,4 +83,6 @@ export async function liberateCommand(options: ILiberateCommandOptions): Promise
     console.log(`  Input tokens:     ${result.enrichment.totalInputTokens}`);
     console.log(`  Output tokens:    ${result.enrichment.totalOutputTokens}`);
   }
+
+  log.info('Liberate complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted });
 }

@@ -5,6 +5,7 @@
 import { MemoryService } from '../application/services/MemoryService';
 import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../infrastructure/services/NotesService';
+import type { ILogger } from '../domain/interfaces/ILogger';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../domain/types/IMemoryLifecycle';
@@ -17,10 +18,13 @@ interface IRememberOptions {
   tags?: string;
 }
 
-export async function rememberCommand(text: string, options: IRememberOptions): Promise<void> {
+export async function rememberCommand(text: string, options: IRememberOptions, logger: ILogger): Promise<void> {
+  const log = logger.child({ command: 'remember' });
+  log.info('Starting remember', { type: options.type, commit: options.commit });
+
   const notesService = new NotesService();
   const memoryRepo = new MemoryRepository(notesService);
-  const memoryService = new MemoryService(memoryRepo);
+  const memoryService = new MemoryService(memoryRepo, log);
 
   const memory = memoryService.remember(text, {
     sha: options.commit,
@@ -38,4 +42,6 @@ export async function rememberCommand(text: string, options: IRememberOptions): 
   if (memory.tags.length > 0) {
     console.log(`  tags:       ${memory.tags.join(', ')}`);
   }
+
+  log.info('Remember complete', { id: memory.id });
 }

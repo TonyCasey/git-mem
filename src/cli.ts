@@ -7,7 +7,9 @@ import { liberateCommand } from './commands/liberate';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
+import { createLogger } from './infrastructure/logging/factory';
 
+const cliLogger = createLogger();
 const program = new Command();
 
 program
@@ -23,7 +25,7 @@ program
   .option('--confidence <level>', 'Confidence: verified, high, medium, low', 'high')
   .option('--lifecycle <tier>', 'Lifecycle: permanent, project, session', 'project')
   .option('--tags <tags>', 'Comma-separated tags')
-  .action(rememberCommand);
+  .action((text, options) => rememberCommand(text, options, cliLogger));
 
 program
   .command('recall [query]')
@@ -32,7 +34,7 @@ program
   .option('-t, --type <type>', 'Filter by type')
   .option('--since <date>', 'Filter by date')
   .option('--json', 'Output as JSON')
-  .action(recallCommand);
+  .action((query, options) => recallCommand(query, options, cliLogger));
 
 program
   .command('liberate')
@@ -42,7 +44,7 @@ program
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
-  .action(liberateCommand);
+  .action((options) => liberateCommand(options, cliLogger));
 
 program
   .command('context')
@@ -50,20 +52,20 @@ program
   .option('-n, --limit <n>', 'Max results', '10')
   .option('--threshold <n>', 'Min relevance score 0-1', '0.1')
   .option('--json', 'Output as JSON')
-  .action(contextCommand);
+  .action((options) => contextCommand(options, cliLogger));
 
 program
   .command('sync')
   .description('Push/pull memory refs')
   .option('--push', 'Push only')
   .option('--pull', 'Pull only')
-  .action(syncCommand);
+  .action((options) => syncCommand(options, cliLogger));
 
 program
   .command('init-mcp')
   .description('Generate .mcp.json for AI coding tools')
   .option('--force', 'Overwrite existing .mcp.json')
   .option('--global', 'Use globally installed git-mem-mcp binary')
-  .action(initMcpCommand);
+  .action((options) => initMcpCommand(options, cliLogger));
 
 program.parse(process.argv);

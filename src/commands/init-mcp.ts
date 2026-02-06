@@ -8,6 +8,7 @@
 import { existsSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { execFileSync } from 'child_process';
+import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface IInitMcpOptions {
   force?: boolean;
@@ -26,7 +27,8 @@ function isGloballyInstalled(): boolean {
   }
 }
 
-export async function initMcpCommand(options: IInitMcpOptions): Promise<void> {
+export async function initMcpCommand(options: IInitMcpOptions, logger: ILogger): Promise<void> {
+  const log = logger.child({ command: 'init-mcp' });
   const targetPath = join(process.cwd(), '.mcp.json');
 
   if (existsSync(targetPath) && !options.force) {
@@ -58,6 +60,8 @@ export async function initMcpCommand(options: IInitMcpOptions): Promise<void> {
   }
 
   writeFileSync(targetPath, JSON.stringify(config, null, 2) + '\n');
+  log.info('Created .mcp.json', { path: targetPath, global: options.global || isGloballyInstalled() });
+
   console.log('Created .mcp.json');
   console.log('\nTools available:');
   console.log('  git_mem_remember  — Store a memory');
