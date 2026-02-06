@@ -4,7 +4,7 @@ Your git history is the PERFECT context for AI tools.
 
 ## Why?
 
-Every commit message, every PR description — it's all there. 
+Every commit message, every PR description — it's all there.
 
 IT JUST NEEDS TO BE FREED !!!
 

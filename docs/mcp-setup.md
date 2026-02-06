@@ -93,6 +93,7 @@ Scan commit history, score commits for interest, and extract patterns.
 - `since` — Start date (ISO 8601)
 - `max_commits` — Maximum commits to process
 - `threshold` — Interest score threshold (default: 3)
+- `enrich` — Enable LLM enrichment (requires `ANTHROPIC_API_KEY`)
 
 ## Verification
 

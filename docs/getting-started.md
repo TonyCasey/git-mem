@@ -1,4 +1,4 @@
-# Getting Started 
+# Getting Started
 
 
 Requires Node.js >= 18 and git.
@@ -156,7 +156,7 @@ Or if using a local (non-global) install:
 
 Memories are stored as JSON in git notes on `refs/notes/mem`. Each commit can have a note containing an array of memory entities:
 
-```
+```text
 refs/notes/mem
   └── <commit-sha> → { "memories": [ { id, content, type, confidence, tags, ... } ] }
 ```
@@ -168,7 +168,7 @@ This means memories are:
 
 ### How `remember` stores data
 
-```
+```text
 ┌──────────────────┐
 │  git mem remember │
 │  "Use JWT auth"   │
@@ -204,7 +204,7 @@ This means memories are:
 
 ### How `liberate` frees knowledge from history
 
-```
+```text
 ┌──────────────────────┐
 │  git mem liberate     │
 └────────┬─────────────┘
@@ -237,7 +237,7 @@ This means memories are:
 
 ### How AI tools use git-mem via MCP
 
-```
+```text
 ┌───────────────────┐
 │  AI Coding Tool   │
 │  (Claude Code,    │
