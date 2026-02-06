@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import { rememberCommand } from './commands/remember';
 import { recallCommand } from './commands/recall';
-import { retrofitCommand } from './commands/retrofit';
+import { liberateCommand } from './commands/liberate';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
@@ -35,14 +35,14 @@ program
   .action(recallCommand);
 
 program
-  .command('retrofit')
-  .description('Annotate existing commit history with AI metadata')
+  .command('liberate')
+  .description('Liberate knowledge from existing commit history')
   .option('--since <date>', 'Start date (default: 90 days ago)')
   .option('--max <n>', 'Max commits to process')
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
-  .action(retrofitCommand);
+  .action(liberateCommand);
 
 program
   .command('context')

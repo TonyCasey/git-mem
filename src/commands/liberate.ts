@@ -1,15 +1,15 @@
 /**
- * retrofit command handler
+ * liberate command handler
  */
 
-import { RetrofitService } from '../application/services/RetrofitService';
+import { LiberateService } from '../application/services/LiberateService';
 import { GitTriageService } from '../application/services/GitTriageService';
 import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../infrastructure/services/NotesService';
 import { GitClient } from '../infrastructure/git/GitClient';
 import { createLLMClient } from '../infrastructure/llm/LLMClientFactory';
 
-interface IRetrofitCommandOptions {
+interface ILiberateCommandOptions {
   since?: string;
   max?: string;
   dryRun?: boolean;
@@ -17,7 +17,7 @@ interface IRetrofitCommandOptions {
   enrich?: boolean;
 }
 
-export async function retrofitCommand(options: IRetrofitCommandOptions): Promise<void> {
+export async function liberateCommand(options: ILiberateCommandOptions): Promise<void> {
   const gitClient = new GitClient();
   const triageService = new GitTriageService(gitClient);
   const notesService = new NotesService();
@@ -33,7 +33,7 @@ export async function retrofitCommand(options: IRetrofitCommandOptions): Promise
     }
   }
 
-  const retrofitService = new RetrofitService(
+  const liberateService = new LiberateService(
     triageService,
     memoryRepo,
     options.enrich ? gitClient : undefined,
@@ -48,7 +48,7 @@ export async function retrofitCommand(options: IRetrofitCommandOptions): Promise
     console.log('Dry run — no notes will be written.\n');
   }
 
-  const result = await retrofitService.retrofit({
+  const result = await liberateService.liberate({
     since,
     maxCommits,
     dryRun: options.dryRun,

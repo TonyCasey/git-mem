@@ -4,7 +4,7 @@ import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { RetrofitService } from '../../../../src/application/services/RetrofitService';
+import { LiberateService } from '../../../../src/application/services/LiberateService';
 import { GitTriageService } from '../../../../src/application/services/GitTriageService';
 import { MemoryRepository } from '../../../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../../../src/infrastructure/services/NotesService';
@@ -14,8 +14,8 @@ function git(args: string[], cwd: string): string {
   return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
 }
 
-describe('RetrofitService', () => {
-  let service: RetrofitService;
+describe('LiberateService', () => {
+  let service: LiberateService;
   let repoDir: string;
 
   before(() => {
@@ -23,9 +23,9 @@ describe('RetrofitService', () => {
     const triageService = new GitTriageService(gitClient);
     const notesService = new NotesService();
     const memoryRepo = new MemoryRepository(notesService);
-    service = new RetrofitService(triageService, memoryRepo);
+    service = new LiberateService(triageService, memoryRepo);
 
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-retrofit-test-'));
+    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-liberate-test-'));
     git(['init'], repoDir);
     git(['config', 'user.email', 'test@test.com'], repoDir);
     git(['config', 'user.name', 'Test User'], repoDir);
@@ -59,9 +59,9 @@ describe('RetrofitService', () => {
     rmSync(repoDir, { recursive: true, force: true });
   });
 
-  describe('retrofit', () => {
+  describe('liberate', () => {
     it('should scan and report results in dry-run mode', async () => {
-      const result = await service.retrofit({
+      const result = await service.liberate({
         cwd: repoDir,
         dryRun: true,
         threshold: 1,
@@ -73,7 +73,7 @@ describe('RetrofitService', () => {
     });
 
     it('should annotate interesting commits when not dry-run', async () => {
-      const result = await service.retrofit({
+      const result = await service.liberate({
         cwd: repoDir,
         dryRun: false,
         threshold: 1,
@@ -84,7 +84,7 @@ describe('RetrofitService', () => {
     });
 
     it('should return zero annotations for high threshold', async () => {
-      const result = await service.retrofit({
+      const result = await service.liberate({
         cwd: repoDir,
         dryRun: true,
         threshold: 100,

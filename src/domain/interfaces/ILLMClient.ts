@@ -1,7 +1,7 @@
 /**
  * ILLMClient
  *
- * Provider-agnostic interface for LLM operations used during retrofit enrichment.
+ * Provider-agnostic interface for LLM operations used during liberate enrichment.
  * Infrastructure layer provides concrete implementations (Anthropic, OpenAI, etc.).
  */
 

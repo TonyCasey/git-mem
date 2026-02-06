@@ -1,5 +1,5 @@
 /**
- * Integration test: Retrofit flow
+ * Integration test: Liberate flow
  *
  * Tests scanning existing commit history, extracting facts via
  * heuristic patterns, and writing them as git notes.
@@ -11,7 +11,7 @@ import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { RetrofitService } from '../../src/application/services/RetrofitService';
+import { LiberateService } from '../../src/application/services/LiberateService';
 import { GitTriageService } from '../../src/application/services/GitTriageService';
 import { MemoryRepository } from '../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../src/infrastructure/services/NotesService';
@@ -21,13 +21,13 @@ function git(args: string[], cwd: string): string {
   return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
 }
 
-describe('Integration: Retrofit', () => {
+describe('Integration: Liberate', () => {
   let repoDir: string;
-  let retrofitService: RetrofitService;
+  let liberateService: LiberateService;
   let notesService: NotesService;
 
   before(() => {
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-integ-retrofit-'));
+    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-integ-liberate-'));
 
     git(['init'], repoDir);
     git(['config', 'user.email', 'test@test.com'], repoDir);
@@ -57,7 +57,7 @@ describe('Integration: Retrofit', () => {
     const triageService = new GitTriageService(gitClient);
     notesService = new NotesService();
     const memoryRepo = new MemoryRepository(notesService);
-    retrofitService = new RetrofitService(triageService, memoryRepo);
+    liberateService = new LiberateService(triageService, memoryRepo);
   });
 
   after(() => {
@@ -65,7 +65,7 @@ describe('Integration: Retrofit', () => {
   });
 
   it('should identify interesting commits in dry-run mode', async () => {
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -82,7 +82,7 @@ describe('Integration: Retrofit', () => {
   });
 
   it('should write notes when not in dry-run mode', async () => {
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: false,
       threshold: 1,
       cwd: repoDir,
@@ -109,13 +109,13 @@ describe('Integration: Retrofit', () => {
         assert.ok(memory.content, 'Memory should have content');
         assert.ok(memory.type, 'Memory should have type');
         assert.equal(memory.source, 'heuristic-extraction');
-        assert.ok(memory.tags.includes('retrofit'));
+        assert.ok(memory.tags.includes('liberate'));
       }
     }
   });
 
   it('should extract correct fact types from commit messages', async () => {
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -131,7 +131,7 @@ describe('Integration: Retrofit', () => {
   });
 
   it('should respect maxCommits option', async () => {
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       maxCommits: 2,

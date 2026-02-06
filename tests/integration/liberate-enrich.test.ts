@@ -1,7 +1,7 @@
 /**
- * Integration test: Retrofit with LLM enrichment
+ * Integration test: Liberate with LLM enrichment
  *
- * Tests the full retrofit pipeline with a real git repo and a mock ILLMClient.
+ * Tests the full liberate pipeline with a real git repo and a mock ILLMClient.
  * Verifies merge, dedup, graceful degradation, and enrichment stats.
  */
 
@@ -11,7 +11,7 @@ import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { RetrofitService } from '../../src/application/services/RetrofitService';
+import { LiberateService } from '../../src/application/services/LiberateService';
 import { GitTriageService } from '../../src/application/services/GitTriageService';
 import { MemoryRepository } from '../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../src/infrastructure/services/NotesService';
@@ -70,7 +70,7 @@ class MockLLMClient implements ILLMClient {
   }
 }
 
-describe('Integration: Retrofit with LLM Enrichment', () => {
+describe('Integration: Liberate with LLM Enrichment', () => {
   let repoDir: string;
   let gitClient: GitClient;
   let notesService: NotesService;
@@ -109,9 +109,9 @@ describe('Integration: Retrofit with LLM Enrichment', () => {
     const mockLLM = new MockLLMClient();
     const triageService = new GitTriageService(gitClient);
     const memoryRepo = new MemoryRepository(notesService);
-    const retrofitService = new RetrofitService(triageService, memoryRepo, gitClient, mockLLM);
+    const liberateService = new LiberateService(triageService, memoryRepo, gitClient, mockLLM);
 
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -145,9 +145,9 @@ describe('Integration: Retrofit with LLM Enrichment', () => {
     const mockLLM = new MockLLMClient();
     const triageService = new GitTriageService(gitClient);
     const memoryRepo = new MemoryRepository(notesService);
-    const retrofitService = new RetrofitService(triageService, memoryRepo, gitClient, mockLLM);
+    const liberateService = new LiberateService(triageService, memoryRepo, gitClient, mockLLM);
 
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: false,
       threshold: 1,
       cwd: repoDir,
@@ -194,9 +194,9 @@ describe('Integration: Retrofit with LLM Enrichment', () => {
 
     const freshNotesService = new NotesService();
     const memoryRepo = new MemoryRepository(freshNotesService);
-    const retrofitService = new RetrofitService(triageService, memoryRepo, gitClient, mockLLM);
+    const liberateService = new LiberateService(triageService, memoryRepo, gitClient, mockLLM);
 
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: freshRepoDir,
@@ -219,9 +219,9 @@ describe('Integration: Retrofit with LLM Enrichment', () => {
     const triageService = new GitTriageService(gitClient);
     const notesService2 = new NotesService();
     const memoryRepo = new MemoryRepository(notesService2);
-    const retrofitService = new RetrofitService(triageService, memoryRepo, gitClient, mockLLM);
+    const liberateService = new LiberateService(triageService, memoryRepo, gitClient, mockLLM);
 
-    const result = await retrofitService.retrofit({
+    const result = await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -243,9 +243,9 @@ describe('Integration: Retrofit with LLM Enrichment', () => {
     const triageService = new GitTriageService(gitClient);
     const notesService2 = new NotesService();
     const memoryRepo = new MemoryRepository(notesService2);
-    const retrofitService = new RetrofitService(triageService, memoryRepo, gitClient, mockLLM);
+    const liberateService = new LiberateService(triageService, memoryRepo, gitClient, mockLLM);
 
-    await retrofitService.retrofit({
+    await liberateService.liberate({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,

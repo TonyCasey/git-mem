@@ -54,11 +54,11 @@ export class GitClientError extends GitMemError {
 }
 
 /**
- * Error thrown when retrofit operations fail.
+ * Error thrown when liberate operations fail.
  */
-export class RetrofitError extends GitMemError {
+export class LiberateError extends GitMemError {
   constructor(message: string, data?: Record<string, unknown>) {
-    super(message, 'RETROFIT_ERROR', data);
-    this.name = 'RetrofitError';
+    super(message, 'LIBERATE_ERROR', data);
+    this.name = 'LiberateError';
   }
 }

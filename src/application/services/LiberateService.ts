@@ -1,5 +1,5 @@
 /**
- * RetrofitService
+ * LiberateService
  *
  * Application service that annotates existing git history with
  * structured memory notes by combining triage scoring with
@@ -7,12 +7,12 @@
  */
 
 import type {
-  IRetrofitService,
-  IRetrofitOptions,
-  IRetrofitResult,
-  IRetrofitAnnotation,
+  ILiberateService,
+  ILiberateOptions,
+  ILiberateResult,
+  ILiberateAnnotation,
   IEnrichmentStats,
-} from '../interfaces/IRetrofitService';
+} from '../interfaces/ILiberateService';
 import type { IGitTriageService } from '../../domain/interfaces/IGitTriageService';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
@@ -38,7 +38,7 @@ interface IUnifiedFact {
   readonly source: 'heuristic-extraction' | 'llm-enrichment';
 }
 
-export class RetrofitService implements IRetrofitService {
+export class LiberateService implements ILiberateService {
   constructor(
     private readonly triageService: IGitTriageService,
     private readonly memoryRepository: IMemoryRepository,
@@ -46,7 +46,7 @@ export class RetrofitService implements IRetrofitService {
     private readonly llmClient?: ILLMClient
   ) {}
 
-  async retrofit(options?: IRetrofitOptions): Promise<IRetrofitResult> {
+  async liberate(options?: ILiberateOptions): Promise<ILiberateResult> {
     const startTime = Date.now();
     const dryRun = options?.dryRun ?? false;
     const enrich = options?.enrich ?? false;
@@ -62,7 +62,7 @@ export class RetrofitService implements IRetrofitService {
       fetchAllStats: false,
     });
 
-    const annotations: IRetrofitAnnotation[] = [];
+    const annotations: ILiberateAnnotation[] = [];
     let totalFactsExtracted = 0;
     const enrichmentStats: IEnrichmentStats = {
       commitsEnriched: 0,
@@ -119,8 +119,8 @@ export class RetrofitService implements IRetrofitService {
       if (!dryRun) {
         for (const fact of mergedFacts) {
           const tags = fact.source === 'llm-enrichment'
-            ? ['retrofit', 'llm-enrichment', ...fact.tags].join(', ')
-            : `retrofit, ${fact.tags.join(', ')}`;
+            ? ['liberate', 'llm-enrichment', ...fact.tags].join(', ')
+            : `liberate, ${fact.tags.join(', ')}`;
 
           this.memoryRepository.create(fact.content, {
             sha: scored.commit.sha,
@@ -144,7 +144,7 @@ export class RetrofitService implements IRetrofitService {
       });
     }
 
-    const result: IRetrofitResult = {
+    const result: ILiberateResult = {
       commitsScanned: triageResult.totalCommits,
       commitsAnnotated: annotations.length,
       factsExtracted: totalFactsExtracted,

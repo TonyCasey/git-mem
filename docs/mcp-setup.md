@@ -49,7 +49,7 @@ If running from a local checkout:
 | `git_mem_remember` | Store a memory (decision, gotcha, convention, fact) attached to a commit |
 | `git_mem_recall` | Search and retrieve stored memories |
 | `git_mem_context` | Get memories relevant to currently staged changes |
-| `git_mem_retrofit` | Scan commit history and extract patterns as memories |
+| `git_mem_liberate` | Scan commit history and extract patterns as memories |
 
 ## Tool Details
 
@@ -84,7 +84,7 @@ Get memories relevant to currently staged git changes. Best used before committi
 - `limit` — Max results (default: 10)
 - `threshold` — Min relevance score 0–1 (default: 0.1)
 
-### git_mem_retrofit
+### git_mem_liberate
 
 Scan commit history, score commits for interest, and extract patterns.
 
@@ -93,6 +93,7 @@ Scan commit history, score commits for interest, and extract patterns.
 - `since` — Start date (ISO 8601)
 - `max_commits` — Maximum commits to process
 - `threshold` — Interest score threshold (default: 3)
+- `enrich` — Enable LLM enrichment (requires `ANTHROPIC_API_KEY`)
 
 ## Verification
 

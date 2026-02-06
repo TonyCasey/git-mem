@@ -1,21 +1,21 @@
 /**
- * MCP Tool: git_mem_retrofit
+ * MCP Tool: git_mem_liberate
  *
  * Scan and annotate existing commit history with structured memory notes.
  */
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { RetrofitService } from '../../application/services/RetrofitService';
+import { LiberateService } from '../../application/services/LiberateService';
 import { GitTriageService } from '../../application/services/GitTriageService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
 import { createLLMClient } from '../../infrastructure/llm/LLMClientFactory';
 
-export function registerRetrofitTool(server: McpServer): void {
+export function registerLiberateTool(server: McpServer): void {
   server.tool(
-    'git_mem_retrofit',
+    'git_mem_liberate',
     'Scan commit history, score commits for interest, and extract decisions/gotchas/conventions as memories',
     {
       dry_run: z.boolean().optional().describe('Preview without writing notes (default: false)'),
@@ -34,14 +34,14 @@ export function registerRetrofitTool(server: McpServer): void {
         // LLM enrichment setup
         const llmClient = args.enrich ? createLLMClient() : null;
 
-        const retrofitService = new RetrofitService(
+        const liberateService = new LiberateService(
           triageService,
           memoryRepo,
           args.enrich ? gitClient : undefined,
           llmClient ?? undefined
         );
 
-        const result = await retrofitService.retrofit({
+        const result = await liberateService.liberate({
           dryRun: args.dry_run ?? false,
           since: args.since ? new Date(args.since) : undefined,
           maxCommits: args.max_commits,
@@ -92,7 +92,7 @@ export function registerRetrofitTool(server: McpServer): void {
         return {
           content: [{
             type: 'text' as const,
-            text: `Error running retrofit: ${err instanceof Error ? err.message : String(err)}`,
+            text: `Error running liberate: ${err instanceof Error ? err.message : String(err)}`,
           }],
           isError: true,
         };

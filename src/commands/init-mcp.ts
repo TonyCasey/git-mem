@@ -63,5 +63,5 @@ export async function initMcpCommand(options: IInitMcpOptions): Promise<void> {
   console.log('  git_mem_remember  — Store a memory');
   console.log('  git_mem_recall    — Search memories');
   console.log('  git_mem_context   — Memories relevant to staged changes');
-  console.log('  git_mem_retrofit  — Scan history for patterns');
+  console.log('  git_mem_liberate  — Liberate knowledge from history');
 }

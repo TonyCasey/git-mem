@@ -2,7 +2,7 @@
  * Integration test: MCP end-to-end session
  *
  * Tests a complete MCP session with all git-mem tools in sequence:
- * initialize → tools/list → remember → recall → context → retrofit
+ * initialize → tools/list → remember → recall → context → liberate
  */
 
 import { describe, it, before, after } from 'node:test';
@@ -112,7 +112,7 @@ describe('Integration: MCP End-to-End Session', () => {
     rmSync(repoDir, { recursive: true, force: true });
   });
 
-  it('should complete a full session: list → remember → recall → context → retrofit', async () => {
+  it('should complete a full session: list → remember → recall → context → liberate', async () => {
     // Stage a change for the context tool
     writeFileSync(join(repoDir, 'auth.ts'), 'export function login() { /* validate JWT */ }');
     git(['add', 'auth.ts'], repoDir);
@@ -148,11 +148,11 @@ describe('Integration: MCP End-to-End Session', () => {
           arguments: {},
         },
       },
-      // 5. retrofit dry-run
+      // 5. liberate dry-run
       {
         method: 'tools/call',
         params: {
-          name: 'git_mem_retrofit',
+          name: 'git_mem_liberate',
           arguments: { dry_run: true },
         },
       },
@@ -168,7 +168,7 @@ describe('Integration: MCP End-to-End Session', () => {
     assert.ok(toolNames.includes('git_mem_remember'), 'Should list remember');
     assert.ok(toolNames.includes('git_mem_recall'), 'Should list recall');
     assert.ok(toolNames.includes('git_mem_context'), 'Should list context');
-    assert.ok(toolNames.includes('git_mem_retrofit'), 'Should list retrofit');
+    assert.ok(toolNames.includes('git_mem_liberate'), 'Should list liberate');
     assert.equal(toolNames.length, 4, 'Should have exactly 4 tools');
 
     // --- 2. Verify remember ---
@@ -199,16 +199,16 @@ describe('Integration: MCP End-to-End Session', () => {
     }
     // Even if no matches scored high enough, no error means success
 
-    // --- 5. Verify retrofit ---
-    const retrofitResult = responses[5] as any;
-    assert.ok(!retrofitResult.result.isError, 'Retrofit should not error');
-    const retrofitText = retrofitResult.result.content[0].text;
+    // --- 5. Verify liberate ---
+    const liberateResult = responses[5] as any;
+    assert.ok(!liberateResult.result.isError, 'Liberate should not error');
+    const liberateText = liberateResult.result.content[0].text;
     // Either JSON summary or "no patterns found" message
-    if (retrofitText.startsWith('{')) {
-      const retrofit = JSON.parse(retrofitText);
-      assert.equal(retrofit.dryRun, true, 'Should be dry run');
+    if (liberateText.startsWith('{')) {
+      const liberate = JSON.parse(liberateText);
+      assert.equal(liberate.dryRun, true, 'Should be dry run');
     } else {
-      assert.ok(retrofitText.includes('Scanned'), 'Should report scanning');
+      assert.ok(liberateText.includes('Scanned'), 'Should report scanning');
     }
   });
 
