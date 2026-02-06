@@ -55,6 +55,10 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 
 **Integration tests** (`tests/integration/`) — Create real temporary git repos in `os.tmpdir()`, run actual git commands, clean up in `after()`. All services instantiated against real repos. 32 tests.
 
+## Environment Variables
+
+- `ANTHROPIC_API_KEY` — Required only for `git mem retrofit --enrich` (LLM enrichment). Without it, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
+
 ## Key Technical Details
 
 - **CommonJS** project (`"type": "commonjs"`) but `@modelcontextprotocol/sdk` is ESM — works via `esModuleInterop: true` and `.js` import extensions

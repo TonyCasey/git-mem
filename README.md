@@ -68,15 +68,17 @@ Options:
 ```bash
 git mem retrofit --since 2024-01-01 --dry-run
 git mem retrofit --threshold 5 --max 100
+git mem retrofit --enrich --dry-run --max 10
 ```
 
-Scores commits by interest (conventional prefixes, decision keywords, diff size, PR merges), then extracts decisions/gotchas/conventions using heuristic patterns.
+Scores commits by interest (conventional prefixes, decision keywords, diff size, PR merges), then extracts decisions/gotchas/conventions using heuristic patterns. Optionally enrich with LLM analysis for deeper insights.
 
 Options:
 - `--since <date>` — Start date (default: 90 days ago)
 - `--max <n>` — Max commits to process
 - `--dry-run` — Preview without writing
 - `--threshold <n>` — Interest score threshold (default: 3)
+- `--enrich` — Enable LLM enrichment (requires `ANTHROPIC_API_KEY`, see [Environment Variables](#environment-variables))
 
 ### Sync memories with remote
 
@@ -292,6 +294,20 @@ This means memories are:
 │  (memory data)    │
 └───────────────────┘
 ```
+
+## Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | Only for `--enrich` | Anthropic API key for LLM enrichment during retrofit. Get one at [console.anthropic.com](https://console.anthropic.com/). |
+
+Copy `.env.example` to `.env` and fill in values:
+
+```bash
+cp .env.example .env
+```
+
+If `--enrich` is used without an API key, git-mem prints a warning and falls back to heuristic extraction only.
 
 ## Development
 
