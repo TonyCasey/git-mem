@@ -11,6 +11,7 @@ import { GitTriageService } from '../../application/services/GitTriageService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
+import { createLLMClient } from '../../infrastructure/llm/LLMClientFactory';
 
 export function registerRetrofitTool(server: McpServer): void {
   server.tool(
@@ -21,6 +22,7 @@ export function registerRetrofitTool(server: McpServer): void {
       since: z.string().optional().describe('Start date for scanning (ISO 8601, e.g. "2024-01-01")'),
       max_commits: z.number().optional().describe('Maximum commits to process'),
       threshold: z.number().optional().describe('Interest score threshold (default: 3)'),
+      enrich: z.boolean().optional().describe('Enable LLM enrichment (requires ANTHROPIC_API_KEY)'),
     },
     async (args) => {
       try {
@@ -28,16 +30,26 @@ export function registerRetrofitTool(server: McpServer): void {
         const triageService = new GitTriageService(gitClient);
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const retrofitService = new RetrofitService(triageService, memoryRepo);
+
+        // LLM enrichment setup
+        const llmClient = args.enrich ? createLLMClient() : null;
+
+        const retrofitService = new RetrofitService(
+          triageService,
+          memoryRepo,
+          args.enrich ? gitClient : undefined,
+          llmClient ?? undefined
+        );
 
         const result = await retrofitService.retrofit({
           dryRun: args.dry_run ?? false,
           since: args.since ? new Date(args.since) : undefined,
           maxCommits: args.max_commits,
           threshold: args.threshold,
+          enrich: args.enrich,
         });
 
-        const summary = {
+        const summary: Record<string, unknown> = {
           dryRun: result.dryRun,
           commitsScanned: result.commitsScanned,
           commitsAnnotated: result.commitsAnnotated,
@@ -49,8 +61,17 @@ export function registerRetrofitTool(server: McpServer): void {
             score: a.score,
             factsExtracted: a.factsExtracted,
             factTypes: a.factTypes,
+            enrichedByLLM: a.enrichedByLLM || false,
           })),
         };
+
+        if (result.enrichment) {
+          summary.enrichment = result.enrichment;
+        }
+
+        if (args.enrich && !llmClient) {
+          summary.warning = 'LLM enrichment requested but no API key found. Using heuristics only.';
+        }
 
         if (result.commitsAnnotated === 0) {
           return {

@@ -41,6 +41,7 @@ program
   .option('--max <n>', 'Max commits to process')
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
+  .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
   .action(retrofitCommand);
 
 program
