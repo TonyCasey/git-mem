@@ -48,7 +48,7 @@ If using a local build:
 
 ### Verify
 
-Restart your AI tool after adding the config. The tools should appear as `git_mem_remember`, `git_mem_recall`, `git_mem_context`, and `git_mem_retrofit`.
+Restart your AI tool after adding the config. The tools should appear as `git_mem_remember`, `git_mem_recall`, `git_mem_context`, and `git_mem_liberate`.
 
 ## Tools
 
@@ -94,7 +94,7 @@ Get memories relevant to currently staged git changes. Useful before committing 
 
 **Returns:** JSON with `files` (staged files analysed), `totalScanned`, `relevant` count, and `memories` array (each with `id`, `content`, `type`, `score`, `reason`, `tags`).
 
-### `git_mem_retrofit`
+### `git_mem_liberate`
 
 Scan commit history, score commits for interest, and extract decisions/gotchas/conventions as memories.
 
@@ -116,7 +116,7 @@ src/mcp/
 │   ├── remember.ts    # registerRememberTool()
 │   ├── recall.ts      # registerRecallTool()
 │   ├── context.ts     # registerContextTool()
-│   └── retrofit.ts    # registerRetrofitTool()
+│   └── liberate.ts    # registerLiberateTool()
 └── README.md          # this file
 ```
 
@@ -129,7 +129,7 @@ src/mcp/
 ```
 remember/recall:  NotesService → MemoryRepository → MemoryService
 context:          GitClient + NotesService → MemoryRepository → ContextService
-retrofit:         GitClient → GitTriageService + NotesService → MemoryRepository → RetrofitService
+liberate:         GitClient → GitTriageService + NotesService → MemoryRepository → LiberateService
 ```
 
 **Transport:** `StdioServerTransport` from `@modelcontextprotocol/sdk/server/stdio.js` — JSON-RPC 2.0 over stdin/stdout. The AI tool spawns `git-mem-mcp` as a child process and communicates via stdio.
@@ -149,7 +149,7 @@ MCP-specific tests live in `tests/integration/`:
 - `mcp-server.test.ts` — server creation and tool registration
 - `mcp-tools.test.ts` — remember + recall tools end-to-end
 - `mcp-context.test.ts` — context tool with staged changes
-- `mcp-retrofit.test.ts` — retrofit tool with real git history
+- `mcp-liberate.test.ts` — liberate tool with real git history
 - `mcp-e2e.test.ts` — full MCP server lifecycle over stdio
 
 Unit test for server creation: `tests/unit/mcp/server.test.ts`

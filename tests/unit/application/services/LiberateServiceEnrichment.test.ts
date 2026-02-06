@@ -4,11 +4,11 @@ import {
   truncateDiff,
   extractFileNames,
   mergeFacts,
-} from '../../../../src/application/services/RetrofitService';
+} from '../../../../src/application/services/LiberateService';
 import type { IPatternMatch } from '../../../../src/infrastructure/services/patterns/HeuristicPatterns';
 import type { ILLMExtractedFact } from '../../../../src/domain/interfaces/ILLMClient';
 
-describe('RetrofitService helpers', () => {
+describe('LiberateService helpers', () => {
   describe('truncateDiff', () => {
     it('should return diff unchanged if under limit', () => {
       const diff = 'line1\nline2\nline3';

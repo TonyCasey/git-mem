@@ -1,14 +1,14 @@
 /**
- * IRetrofitService
+ * ILiberateService
  *
  * Application service interface for annotating existing git history
  * with structured memory notes.
  */
 
 /**
- * Options for retrofit operation.
+ * Options for liberate operation.
  */
-export interface IRetrofitOptions {
+export interface ILiberateOptions {
   /** Start date (default: 90 days ago). */
   readonly since?: Date;
   /** Maximum commits to process. */
@@ -24,9 +24,9 @@ export interface IRetrofitOptions {
 }
 
 /**
- * Annotated commit from retrofit.
+ * Annotated commit from liberate.
  */
-export interface IRetrofitAnnotation {
+export interface ILiberateAnnotation {
   /** Commit SHA. */
   readonly sha: string;
   /** Commit subject. */
@@ -42,7 +42,7 @@ export interface IRetrofitAnnotation {
 }
 
 /**
- * Statistics for LLM enrichment during retrofit.
+ * Statistics for LLM enrichment during liberate.
  */
 export interface IEnrichmentStats {
   /** Commits successfully enriched by LLM. */
@@ -58,9 +58,9 @@ export interface IEnrichmentStats {
 }
 
 /**
- * Result of a retrofit operation.
+ * Result of a liberate operation.
  */
-export interface IRetrofitResult {
+export interface ILiberateResult {
   /** Total commits scanned. */
   readonly commitsScanned: number;
   /** Commits that received annotations. */
@@ -68,7 +68,7 @@ export interface IRetrofitResult {
   /** Total facts extracted across all commits. */
   readonly factsExtracted: number;
   /** Individual annotations (for reporting). */
-  readonly annotations: readonly IRetrofitAnnotation[];
+  readonly annotations: readonly ILiberateAnnotation[];
   /** Whether this was a dry run. */
   readonly dryRun: boolean;
   /** Duration in milliseconds. */
@@ -78,13 +78,13 @@ export interface IRetrofitResult {
 }
 
 /**
- * Retrofit service interface.
+ * Liberate service interface.
  */
-export interface IRetrofitService {
+export interface ILiberateService {
   /**
    * Annotate existing commit history with AI metadata.
-   * @param options - Retrofit options.
-   * @returns Retrofit results.
+   * @param options - Liberate options.
+   * @returns Liberate results.
    */
-  retrofit(options?: IRetrofitOptions): Promise<IRetrofitResult>;
+  liberate(options?: ILiberateOptions): Promise<ILiberateResult>;
 }
