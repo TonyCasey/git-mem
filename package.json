@@ -1,13 +1,14 @@
 {
   "name": "git-mem",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Git-native memory layer for AI coding tools. Store decisions, context, and knowledge directly in your git repository using commit trailers and git notes.",
   "bin": {
     "git-mem": "dist/cli.js",
     "git-mem-mcp": "dist/mcp-server.js"
   },
   "type": "commonjs",
-  "main": "dist/cli.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=18.0.0"
   },
