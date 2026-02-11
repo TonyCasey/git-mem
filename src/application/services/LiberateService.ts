@@ -22,6 +22,7 @@ import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractWords, jaccardSimilarity } from '../../domain/utils/deduplication';
+import type { ILogger } from '../../domain/interfaces/ILogger';
 
 /** Maximum diff length sent to LLM (chars). Truncated at line boundary. */
 const MAX_DIFF_LENGTH = 15_000;
@@ -43,7 +44,8 @@ export class LiberateService implements ILiberateService {
     private readonly triageService: IGitTriageService,
     private readonly memoryRepository: IMemoryRepository,
     private readonly gitClient?: IGitClient,
-    private readonly llmClient?: ILLMClient
+    private readonly llmClient?: ILLMClient,
+    private readonly logger?: ILogger,
   ) {}
 
   async liberate(options?: ILiberateOptions): Promise<ILiberateResult> {
@@ -51,6 +53,7 @@ export class LiberateService implements ILiberateService {
     const dryRun = options?.dryRun ?? false;
     const enrich = options?.enrich ?? false;
     const shouldEnrich = enrich && !!this.llmClient && !!this.gitClient;
+    this.logger?.info('Liberate started', { dryRun, enrich: shouldEnrich, maxCommits: options?.maxCommits });
 
     // Run triage to find interesting commits
     const triageResult = await this.triageService.triage({
@@ -71,6 +74,8 @@ export class LiberateService implements ILiberateService {
       totalInputTokens: 0,
       totalOutputTokens: 0,
     };
+
+    this.logger?.debug('Triage complete', { total: triageResult.totalCommits, highInterest: triageResult.highInterest.length });
 
     // Process each high-interest commit
     for (const scored of triageResult.highInterest) {
@@ -103,8 +108,9 @@ export class LiberateService implements ILiberateService {
           (enrichmentStats as { factsExtracted: number }).factsExtracted += llmFacts.length;
           (enrichmentStats as { totalInputTokens: number }).totalInputTokens += result.usage.inputTokens;
           (enrichmentStats as { totalOutputTokens: number }).totalOutputTokens += result.usage.outputTokens;
-        } catch {
+        } catch (err) {
           // Graceful degradation: LLM failure doesn't block heuristic results
+          this.logger?.warn('LLM enrichment failed for commit', { sha: scored.commit.sha, error: err instanceof Error ? err.message : String(err) });
           (enrichmentStats as { commitsFailed: number }).commitsFailed++;
         }
       }
@@ -152,6 +158,8 @@ export class LiberateService implements ILiberateService {
       dryRun,
       durationMs: Date.now() - startTime,
     };
+
+    this.logger?.info('Liberate complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted, durationMs: result.durationMs });
 
     if (enrich) {
       return { ...result, enrichment: enrichmentStats };

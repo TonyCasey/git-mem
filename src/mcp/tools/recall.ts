@@ -10,6 +10,7 @@ import { MemoryService } from '../../application/services/MemoryService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerRecallTool(server: McpServer): void {
   server.tool(
@@ -23,10 +24,12 @@ export function registerRecallTool(server: McpServer): void {
       tag: z.string().optional().describe('Filter by tag'),
     },
     async (args) => {
+      const logger = createLogger().child({ tool: 'recall' });
       try {
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const memoryService = new MemoryService(memoryRepo);
+        const memoryService = new MemoryService(memoryRepo, logger);
+        logger.info('Tool invoked', { query: args.query });
 
         const result = memoryService.recall(args.query, {
           type: args.type as MemoryType | undefined,
@@ -64,6 +67,7 @@ export function registerRecallTool(server: McpServer): void {
           }],
         };
       } catch (err) {
+        logger.error('Tool failed', { error: err instanceof Error ? err.message : String(err) });
         return {
           content: [{
             type: 'text' as const,

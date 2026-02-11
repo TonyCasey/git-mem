@@ -10,6 +10,7 @@ import { ContextService } from '../../application/services/ContextService';
 import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerContextTool(server: McpServer): void {
   server.tool(
@@ -20,11 +21,13 @@ export function registerContextTool(server: McpServer): void {
       threshold: z.number().optional().describe('Min relevance score 0-1 (default: 0.1)'),
     },
     async (args) => {
+      const logger = createLogger().child({ tool: 'context' });
       try {
         const gitClient = new GitClient();
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const contextService = new ContextService(gitClient, memoryRepo);
+        const contextService = new ContextService(gitClient, memoryRepo, logger);
+        logger.info('Tool invoked');
 
         const result = contextService.getContext({
           limit: args.limit || 10,
@@ -70,6 +73,7 @@ export function registerContextTool(server: McpServer): void {
           }],
         };
       } catch (err) {
+        logger.error('Tool failed', { error: err instanceof Error ? err.message : String(err) });
         return {
           content: [{
             type: 'text' as const,

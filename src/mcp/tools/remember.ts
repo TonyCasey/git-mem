@@ -12,6 +12,7 @@ import { NotesService } from '../../infrastructure/services/NotesService';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../../domain/types/IMemoryLifecycle';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerRememberTool(server: McpServer): void {
   server.tool(
@@ -26,10 +27,12 @@ export function registerRememberTool(server: McpServer): void {
       lifecycle: z.enum(['permanent', 'project', 'session']).optional().describe('Lifecycle tier (default: project)'),
     },
     async (args) => {
+      const logger = createLogger().child({ tool: 'remember' });
       try {
         const notesService = new NotesService();
         const memoryRepo = new MemoryRepository(notesService);
-        const memoryService = new MemoryService(memoryRepo);
+        const memoryService = new MemoryService(memoryRepo, logger);
+        logger.info('Tool invoked', { type: args.type || 'fact' });
 
         const memory = memoryService.remember(args.text, {
           sha: args.commit,
@@ -54,6 +57,7 @@ export function registerRememberTool(server: McpServer): void {
           }],
         };
       } catch (err) {
+        logger.error('Tool failed', { error: err instanceof Error ? err.message : String(err) });
         return {
           content: [{
             type: 'text' as const,

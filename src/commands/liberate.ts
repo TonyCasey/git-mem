@@ -8,6 +8,7 @@ import { MemoryRepository } from '../infrastructure/repositories/MemoryRepositor
 import { NotesService } from '../infrastructure/services/NotesService';
 import { GitClient } from '../infrastructure/git/GitClient';
 import { createLLMClient } from '../infrastructure/llm/LLMClientFactory';
+import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface ILiberateCommandOptions {
   since?: string;
@@ -17,7 +18,8 @@ interface ILiberateCommandOptions {
   enrich?: boolean;
 }
 
-export async function liberateCommand(options: ILiberateCommandOptions): Promise<void> {
+export async function liberateCommand(options: ILiberateCommandOptions, logger?: ILogger): Promise<void> {
+  const log = logger?.child({ command: 'liberate' });
   const gitClient = new GitClient();
   const triageService = new GitTriageService(gitClient);
   const notesService = new NotesService();
@@ -33,11 +35,14 @@ export async function liberateCommand(options: ILiberateCommandOptions): Promise
     }
   }
 
+  log?.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, max: options.max });
+
   const liberateService = new LiberateService(
     triageService,
     memoryRepo,
     options.enrich ? gitClient : undefined,
-    llmClient ?? undefined
+    llmClient ?? undefined,
+    log,
   );
 
   const since = options.since ? new Date(options.since) : undefined;

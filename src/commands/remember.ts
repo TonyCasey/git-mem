@@ -8,6 +8,7 @@ import { NotesService } from '../infrastructure/services/NotesService';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../domain/types/IMemoryLifecycle';
+import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface IRememberOptions {
   commit?: string;
@@ -17,10 +18,12 @@ interface IRememberOptions {
   tags?: string;
 }
 
-export async function rememberCommand(text: string, options: IRememberOptions): Promise<void> {
+export async function rememberCommand(text: string, options: IRememberOptions, logger?: ILogger): Promise<void> {
+  const log = logger?.child({ command: 'remember' });
   const notesService = new NotesService();
   const memoryRepo = new MemoryRepository(notesService);
-  const memoryService = new MemoryService(memoryRepo);
+  const memoryService = new MemoryService(memoryRepo, log);
+  log?.info('Command invoked', { type: options.type || 'fact' });
 
   const memory = memoryService.remember(text, {
     sha: options.commit,
