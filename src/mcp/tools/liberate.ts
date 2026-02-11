@@ -12,6 +12,7 @@ import { MemoryRepository } from '../../infrastructure/repositories/MemoryReposi
 import { NotesService } from '../../infrastructure/services/NotesService';
 import { GitClient } from '../../infrastructure/git/GitClient';
 import { createLLMClient } from '../../infrastructure/llm/LLMClientFactory';
+import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerLiberateTool(server: McpServer): void {
   server.tool(
@@ -25,6 +26,7 @@ export function registerLiberateTool(server: McpServer): void {
       enrich: z.boolean().optional().describe('Enable LLM enrichment (requires ANTHROPIC_API_KEY)'),
     },
     async (args) => {
+      const logger = createLogger().child({ tool: 'liberate' });
       try {
         const gitClient = new GitClient();
         const triageService = new GitTriageService(gitClient);
@@ -33,12 +35,14 @@ export function registerLiberateTool(server: McpServer): void {
 
         // LLM enrichment setup
         const llmClient = args.enrich ? createLLMClient() : null;
+        logger.info('Tool invoked', { dryRun: args.dry_run, enrich: args.enrich });
 
         const liberateService = new LiberateService(
           triageService,
           memoryRepo,
           args.enrich ? gitClient : undefined,
-          llmClient ?? undefined
+          llmClient ?? undefined,
+          logger,
         );
 
         const result = await liberateService.liberate({
@@ -89,6 +93,7 @@ export function registerLiberateTool(server: McpServer): void {
           }],
         };
       } catch (err) {
+        logger.error('Tool failed', { error: err instanceof Error ? err.message : String(err) });
         return {
           content: [{
             type: 'text' as const,

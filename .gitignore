@@ -94,4 +94,7 @@ dist/
 # Lisa logs
 .lisa/logs/
 
+# git-mem logs
+.git-mem/
+
 .dev/*/**

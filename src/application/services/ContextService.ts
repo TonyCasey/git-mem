@@ -10,11 +10,13 @@ import type { IContextService, IContextOptions, IContextResult, IScoredMemory } 
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IMemoryEntity } from '../../domain/entities/IMemoryEntity';
+import type { ILogger } from '../../domain/interfaces/ILogger';
 
 export class ContextService implements IContextService {
   constructor(
     private readonly gitClient: IGitClient,
-    private readonly memoryRepository: IMemoryRepository
+    private readonly memoryRepository: IMemoryRepository,
+    private readonly logger?: ILogger,
   ) {}
 
   getContext(options?: IContextOptions): IContextResult {
@@ -25,6 +27,7 @@ export class ContextService implements IContextService {
     const stagedFiles = this.gitClient.diffStagedNames(cwd);
 
     if (stagedFiles.length === 0) {
+      this.logger?.debug('No staged files found');
       return { files: [], memories: [], totalScanned: 0 };
     }
 
@@ -43,9 +46,12 @@ export class ContextService implements IContextService {
 
     scored.sort((a, b) => b.score - a.score);
 
+    const topMemories = scored.slice(0, limit);
+    this.logger?.info('Context scan complete', { files: stagedFiles.length, matches: topMemories.length, totalScanned: allMemories.total });
+
     return {
       files: stagedFiles,
-      memories: scored.slice(0, limit),
+      memories: topMemories,
       totalScanned: allMemories.total,
     };
   }

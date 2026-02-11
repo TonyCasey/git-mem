@@ -6,13 +6,16 @@
 
 import { execFileSync } from 'child_process';
 import { DEFAULT_NOTES_REF } from '../domain/interfaces/INotesService';
+import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface ISyncOptions {
   push?: boolean;
   pull?: boolean;
 }
 
-export async function syncCommand(options: ISyncOptions): Promise<void> {
+export async function syncCommand(options: ISyncOptions, logger?: ILogger): Promise<void> {
+  const log = logger?.child({ command: 'sync' });
+  log?.info('Command invoked', { push: options.push, pull: options.pull });
   const pushOnly = options.push && !options.pull;
   const pullOnly = options.pull && !options.push;
   const both = !options.push && !options.pull;
