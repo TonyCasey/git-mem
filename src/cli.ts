@@ -9,13 +9,16 @@ import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
 import { createLogger } from './infrastructure/logging/factory';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../package.json') as { version: string };
+
 const logger = createLogger().child({ component: 'cli' });
 const program = new Command();
 
 program
   .name('git-mem')
   .description('Git-native memory layer for AI coding tools')
-  .version('0.1.0');
+  .version(pkg.version);
 
 program
   .command('remember <text>')
