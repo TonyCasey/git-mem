@@ -1,6 +1,6 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { createLogger, createNullLogger, loadLoggerOptions } from '../../../../src/infrastructure/logging/factory';
+import { createLogger, createNullLogger, defaultLogDir, loadLoggerOptions } from '../../../../src/infrastructure/logging/factory';
 import { Logger } from '../../../../src/infrastructure/logging/Logger';
 import { NullLogger } from '../../../../src/infrastructure/logging/NullLogger';
 
@@ -38,7 +38,7 @@ describe('Logging factory', () => {
       const opts = loadLoggerOptions();
 
       assert.equal(opts.level, 'info');
-      assert.equal(opts.logDir, '.git-mem/logs');
+      assert.equal(opts.logDir, defaultLogDir());
       assert.equal(opts.enableConsole, false);
       assert.equal(opts.enableFile, true);
       assert.equal(opts.retentionDays, 7);

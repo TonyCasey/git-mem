@@ -20,8 +20,9 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { createServer } from './mcp/server';
 import { createLogger } from './infrastructure/logging/factory';
 
+const logger = createLogger().child({ component: 'mcp-server' });
+
 async function main(): Promise<void> {
-  const logger = createLogger().child({ component: 'mcp-server' });
   const server = createServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
@@ -29,7 +30,6 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  const logger = createLogger().child({ component: 'mcp-server' });
   logger.fatal('MCP server fatal error', { error: err instanceof Error ? err.message : String(err) });
   process.exit(1);
 });

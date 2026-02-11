@@ -37,13 +37,16 @@ function formatDate(): string {
 export class Logger implements ILogger {
   private readonly minPriority: number;
   private readonly bindings: Record<string, unknown>;
+  private readonly state: { dirCreated: boolean };
 
   constructor(
     private readonly options: ILoggerOptions,
     bindings?: Record<string, unknown>,
+    state?: { dirCreated: boolean },
   ) {
     this.minPriority = LEVEL_PRIORITY[options.level];
     this.bindings = bindings ?? {};
+    this.state = state ?? { dirCreated: false };
   }
 
   trace(message: string, context?: Record<string, unknown>): void {
@@ -71,7 +74,7 @@ export class Logger implements ILogger {
   }
 
   child(bindings: Record<string, unknown>): ILogger {
-    return new Logger(this.options, { ...this.bindings, ...bindings });
+    return new Logger(this.options, { ...this.bindings, ...bindings }, this.state);
   }
 
   isLevelEnabled(level: LogLevel): boolean {
@@ -98,12 +101,35 @@ export class Logger implements ILogger {
 
   private writeToFile(line: string): void {
     try {
-      fs.mkdirSync(this.options.logDir, { recursive: true });
+      if (!this.state.dirCreated) {
+        fs.mkdirSync(this.options.logDir, { recursive: true });
+        this.state.dirCreated = true;
+        this.cleanExpiredLogs();
+      }
       const filename = `git-mem-${formatDate()}.log`;
       const filepath = path.join(this.options.logDir, filename);
       fs.appendFileSync(filepath, line, 'utf8');
     } catch {
       // Logging should never crash the app
+    }
+  }
+
+  private cleanExpiredLogs(): void {
+    try {
+      if (this.options.retentionDays <= 0) return;
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - this.options.retentionDays);
+      const files = fs.readdirSync(this.options.logDir);
+      for (const file of files) {
+        if (!file.startsWith('git-mem-') || !file.endsWith('.log')) continue;
+        const dateStr = file.slice(8, 18);
+        const fileDate = new Date(dateStr);
+        if (!isNaN(fileDate.getTime()) && fileDate < cutoff) {
+          fs.unlinkSync(path.join(this.options.logDir, file));
+        }
+      }
+    } catch {
+      // Cleanup failure should not affect logging
     }
   }
 }

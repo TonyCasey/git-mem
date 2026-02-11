@@ -23,11 +23,12 @@ export class MemoryService implements IMemoryService {
   }
 
   recall(query?: string, options?: IMemoryQueryOptions): IMemoryQueryResult {
+    const effectiveQuery = query ?? options?.query;
     const result = this.memoryRepository.query({
       ...options,
-      query: query || options?.query,
+      query: effectiveQuery,
     });
-    this.logger?.info('Memory recall', { query, count: result.memories.length, total: result.total });
+    this.logger?.info('Memory recall', { query: effectiveQuery, count: result.memories.length, total: result.total });
     return result;
   }
 

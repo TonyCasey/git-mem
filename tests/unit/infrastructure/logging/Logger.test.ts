@@ -10,10 +10,10 @@ function createTempDir(): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'git-mem-log-'));
 }
 
-function createOptions(overrides?: Partial<ILoggerOptions>): ILoggerOptions {
+function createOptions(overrides: Partial<ILoggerOptions> = {}): ILoggerOptions {
   return {
     level: 'trace',
-    logDir: createTempDir(),
+    logDir: overrides.logDir ?? createTempDir(),
     enableConsole: false,
     enableFile: true,
     retentionDays: 7,
