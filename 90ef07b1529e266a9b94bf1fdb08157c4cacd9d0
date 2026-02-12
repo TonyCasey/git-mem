@@ -108,6 +108,25 @@
       ],
       "createdAt": "2026-02-12T22:55:11.522Z",
       "updatedAt": "2026-02-12T22:55:11.522Z"
+    },
+    {
+      "id": "66d813f0-2e18-46f0-bff1-fa0cfbc79c1c",
+      "content": "ESLint is configured to treat explicit 'any' types as errors in production code but only warnings in test files, indicating stricter type safety in production.",
+      "type": "convention",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "eslint",
+        "type-safety",
+        "testing"
+      ],
+      "createdAt": "2026-02-12T22:55:11.534Z",
+      "updatedAt": "2026-02-12T22:55:11.534Z"
     }
   ]
 }
