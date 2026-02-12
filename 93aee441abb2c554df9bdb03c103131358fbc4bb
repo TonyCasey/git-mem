@@ -126,6 +126,25 @@
       ],
       "createdAt": "2026-02-12T23:29:43.272Z",
       "updatedAt": "2026-02-12T23:29:43.272Z"
+    },
+    {
+      "id": "c15f512d-d792-44ac-8ecb-ba9783f6a2d3",
+      "content": "The project includes a convenience script for rebuilding and globally reinstalling the git-mem package, suggesting it's distributed as a global npm package.",
+      "type": "fact",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "npm",
+        "global-install",
+        "git-mem",
+        "deployment"
+      ],
+      "createdAt": "2026-02-12T23:29:43.287Z",
+      "updatedAt": "2026-02-12T23:29:43.287Z"
     }
   ]
 }
