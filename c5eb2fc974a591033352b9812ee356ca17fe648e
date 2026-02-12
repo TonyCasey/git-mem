@@ -80,6 +80,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.167Z",
       "updatedAt": "2026-02-12T22:54:50.167Z"
+    },
+    {
+      "id": "0c02f211-7d9b-43a6-b75b-34b48d7aadaf",
+      "content": "The logging system implements automatic log retention cleanup on first write, deleting expired log files based on configurable retention days.",
+      "type": "fact",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "cleanup",
+        "retention"
+      ],
+      "createdAt": "2026-02-12T22:54:50.182Z",
+      "updatedAt": "2026-02-12T22:54:50.182Z"
     }
   ]
 }
