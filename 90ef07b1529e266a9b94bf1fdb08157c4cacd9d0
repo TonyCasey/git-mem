@@ -89,6 +89,25 @@
       ],
       "createdAt": "2026-02-12T22:55:11.510Z",
       "updatedAt": "2026-02-12T22:55:11.510Z"
+    },
+    {
+      "id": "3e9433a7-8b39-43ce-928c-5743026170ce",
+      "content": "The project maintains high test coverage with 69 tests split between 57 unit tests and 12 integration tests.",
+      "type": "fact",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "coverage",
+        "unit-tests",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T22:55:11.522Z",
+      "updatedAt": "2026-02-12T22:55:11.522Z"
     }
   ]
 }
