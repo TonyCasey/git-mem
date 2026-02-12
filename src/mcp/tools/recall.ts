@@ -6,11 +6,8 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { MemoryService } from '../../application/services/MemoryService';
-import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../../infrastructure/services/NotesService';
+import { createContainer } from '../../infrastructure/di';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
-import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerRecallTool(server: McpServer): void {
   server.tool(
@@ -24,11 +21,9 @@ export function registerRecallTool(server: McpServer): void {
       tag: z.string().optional().describe('Filter by tag'),
     },
     async (args) => {
-      const logger = createLogger().child({ tool: 'recall' });
+      const container = createContainer({ scope: 'mcp:recall' });
+      const { memoryService, logger } = container.cradle;
       try {
-        const notesService = new NotesService();
-        const memoryRepo = new MemoryRepository(notesService);
-        const memoryService = new MemoryService(memoryRepo, logger);
         logger.info('Tool invoked', { query: args.query });
 
         const result = memoryService.recall(args.query, {

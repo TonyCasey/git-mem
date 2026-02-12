@@ -9,7 +9,7 @@ import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
 import { createLogger } from './infrastructure/logging/factory';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const pkg = require('../package.json') as { version: string };
 
 const logger = createLogger().child({ component: 'cli' });

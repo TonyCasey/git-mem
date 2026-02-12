@@ -2,9 +2,7 @@
  * remember command handler
  */
 
-import { MemoryService } from '../application/services/MemoryService';
-import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../infrastructure/services/NotesService';
+import { createContainer } from '../infrastructure/di';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../domain/types/IMemoryLifecycle';
@@ -19,11 +17,9 @@ interface IRememberOptions {
 }
 
 export async function rememberCommand(text: string, options: IRememberOptions, logger?: ILogger): Promise<void> {
-  const log = logger?.child({ command: 'remember' });
-  const notesService = new NotesService();
-  const memoryRepo = new MemoryRepository(notesService);
-  const memoryService = new MemoryService(memoryRepo, log);
-  log?.info('Command invoked', { type: options.type || 'fact' });
+  const container = createContainer({ logger, scope: 'remember' });
+  const { memoryService, logger: log } = container.cradle;
+  log.info('Command invoked', { type: options.type || 'fact' });
 
   const memory = memoryService.remember(text, {
     sha: options.commit,

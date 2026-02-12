@@ -6,11 +6,7 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { ContextService } from '../../application/services/ContextService';
-import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../../infrastructure/services/NotesService';
-import { GitClient } from '../../infrastructure/git/GitClient';
-import { createLogger } from '../../infrastructure/logging/factory';
+import { createContainer } from '../../infrastructure/di';
 
 export function registerContextTool(server: McpServer): void {
   server.tool(
@@ -21,12 +17,9 @@ export function registerContextTool(server: McpServer): void {
       threshold: z.number().optional().describe('Min relevance score 0-1 (default: 0.1)'),
     },
     async (args) => {
-      const logger = createLogger().child({ tool: 'context' });
+      const container = createContainer({ scope: 'mcp:context' });
+      const { contextService, logger } = container.cradle;
       try {
-        const gitClient = new GitClient();
-        const notesService = new NotesService();
-        const memoryRepo = new MemoryRepository(notesService);
-        const contextService = new ContextService(gitClient, memoryRepo, logger);
         logger.info('Tool invoked');
 
         const result = contextService.getContext({
