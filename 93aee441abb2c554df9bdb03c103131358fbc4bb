@@ -108,6 +108,24 @@
       ],
       "createdAt": "2026-02-12T23:29:43.251Z",
       "updatedAt": "2026-02-12T23:29:43.251Z"
+    },
+    {
+      "id": "1088a9dc-fdae-4c75-bfb6-3e58228c7221",
+      "content": "CodeRabbit is configured to review all branches (base_branches: [\".*\"]) including drafts and enable AI agent prompts.",
+      "type": "decision",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "coderabbit",
+        "configuration",
+        "ai-agents"
+      ],
+      "createdAt": "2026-02-12T23:29:43.272Z",
+      "updatedAt": "2026-02-12T23:29:43.272Z"
     }
   ]
 }
