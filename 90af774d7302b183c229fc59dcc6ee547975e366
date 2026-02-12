@@ -91,6 +91,22 @@
       ],
       "createdAt": "2026-02-12T13:34:41.488Z",
       "updatedAt": "2026-02-12T13:34:41.488Z"
+    },
+    {
+      "id": "dc192f96-9fec-414d-9cdf-2d3913efef13",
+      "content": "User prompt at 2026-02-12T14:48:13.053Z: Excellen, it has been merged now, whats next?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T14:48:13.053Z",
+      "updatedAt": "2026-02-12T14:48:13.053Z"
     }
   ]
 }
