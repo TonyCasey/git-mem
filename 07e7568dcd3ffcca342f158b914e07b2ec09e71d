@@ -53,6 +53,24 @@
       ],
       "createdAt": "2026-02-12T22:56:51.839Z",
       "updatedAt": "2026-02-12T22:56:51.839Z"
+    },
+    {
+      "id": "23b1a765-35ea-4d52-8449-f9c77a4885e0",
+      "content": "TypeScript packages should include a types field in package.json pointing to the compiled declaration file for proper type support.",
+      "type": "convention",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "package-json",
+        "type-definitions"
+      ],
+      "createdAt": "2026-02-12T22:56:51.853Z",
+      "updatedAt": "2026-02-12T22:56:51.853Z"
     }
   ]
 }
