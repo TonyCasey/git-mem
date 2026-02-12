@@ -293,6 +293,24 @@
       ],
       "createdAt": "2026-02-12T23:26:52.229Z",
       "updatedAt": "2026-02-12T23:26:52.229Z"
+    },
+    {
+      "id": "3b2c67c5-cd72-4de9-8434-a393223f6c95",
+      "content": "The codebase consolidates standalone hook entry points into a unified `git-mem hook <event>` CLI command architecture, replacing multiple hook scripts with a single dispatcher.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "hook-architecture",
+        "consolidation"
+      ],
+      "createdAt": "2026-02-12T23:29:06.889Z",
+      "updatedAt": "2026-02-12T23:29:06.889Z"
     }
   ]
 }
