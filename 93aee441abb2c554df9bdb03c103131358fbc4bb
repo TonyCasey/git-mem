@@ -54,6 +54,24 @@
       ],
       "createdAt": "2026-02-12T22:56:59.994Z",
       "updatedAt": "2026-02-12T22:56:59.994Z"
+    },
+    {
+      "id": "e9a07a3e-fe78-4698-9b53-865c667be363",
+      "content": "The project includes both `git-mem` and `git-mem-mcp` executables, indicating multiple CLI entry points or related tools.",
+      "type": "fact",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli-tools",
+        "executables",
+        "git-mem"
+      ],
+      "createdAt": "2026-02-12T22:57:00.009Z",
+      "updatedAt": "2026-02-12T22:57:00.009Z"
     }
   ]
 }
