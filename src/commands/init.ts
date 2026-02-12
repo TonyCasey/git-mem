@@ -19,6 +19,7 @@ import {
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
 import { createContainer } from '../infrastructure/di';
+import type { ILiberateProgress } from '../application/interfaces/ILiberateService';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -195,9 +196,22 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     const container = createContainer({ logger, scope: 'init', enrich: true });
     const { liberateService } = container.cradle;
 
+    const onProgress = (p: ILiberateProgress): void => {
+      if (p.phase === 'triage') {
+        process.stderr.write(`Found ${p.total} high-interest commits to analyze.\n`);
+      } else if (p.phase === 'enriching') {
+        const sha = p.sha.slice(0, 7);
+        const subject = p.subject.length > 60 ? p.subject.slice(0, 57) + '...' : p.subject;
+        process.stderr.write(`\r  [${p.current}/${p.total}] ${sha} ${subject}  (${p.factsExtracted} facts)`);
+      } else if (p.phase === 'complete') {
+        process.stderr.write('\n');
+      }
+    };
+
     const result = await liberateService.liberate({
       maxCommits: commitCount,
       enrich: true,
+      onProgress,
     });
 
     console.log(

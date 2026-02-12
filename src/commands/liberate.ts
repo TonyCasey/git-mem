@@ -4,6 +4,7 @@
 
 import { createContainer } from '../infrastructure/di';
 import type { ILogger } from '../domain/interfaces/ILogger';
+import type { ILiberateProgress } from '../application/interfaces/ILiberateService';
 
 interface ILiberateCommandOptions {
   since?: string;
@@ -48,12 +49,25 @@ export async function liberateCommand(options: ILiberateCommandOptions, logger?:
     console.log('Dry run — no notes will be written.\n');
   }
 
+  const onProgress = (p: ILiberateProgress): void => {
+    if (p.phase === 'triage') {
+      process.stderr.write(`Found ${p.total} high-interest commits to analyze.\n`);
+    } else if (p.phase === 'enriching') {
+      const sha = p.sha.slice(0, 7);
+      const subject = p.subject.length > 60 ? p.subject.slice(0, 57) + '...' : p.subject;
+      process.stderr.write(`\r  [${p.current}/${p.total}] ${sha} ${subject}  (${p.factsExtracted} facts)`);
+    } else if (p.phase === 'complete') {
+      process.stderr.write('\n');
+    }
+  };
+
   const result = await liberateService.liberate({
     since,
     maxCommits,
     dryRun: options.dryRun,
     threshold,
     enrich: options.enrich,
+    onProgress,
   });
 
   console.log(`Commits scanned:   ${result.commitsScanned}`);

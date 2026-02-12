@@ -6,6 +6,24 @@
  */
 
 /**
+ * Progress update emitted during liberate processing.
+ */
+export interface ILiberateProgress {
+  /** Current phase of processing. */
+  readonly phase: 'triage' | 'enriching' | 'complete';
+  /** Current commit index (1-based). */
+  readonly current: number;
+  /** Total high-interest commits to process. */
+  readonly total: number;
+  /** Current commit SHA (empty for triage/complete). */
+  readonly sha: string;
+  /** Current commit subject (empty for triage/complete). */
+  readonly subject: string;
+  /** Running total of facts extracted so far. */
+  readonly factsExtracted: number;
+}
+
+/**
  * Options for liberate operation.
  */
 export interface ILiberateOptions {
@@ -21,6 +39,8 @@ export interface ILiberateOptions {
   readonly cwd?: string;
   /** Enable LLM enrichment (requires API key). */
   readonly enrich?: boolean;
+  /** Optional progress callback for UI feedback. */
+  readonly onProgress?: (progress: ILiberateProgress) => void;
 }
 
 /**
