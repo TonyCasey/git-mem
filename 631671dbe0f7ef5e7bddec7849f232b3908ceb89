@@ -829,6 +829,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.809Z",
       "updatedAt": "2026-02-12T23:27:18.809Z"
+    },
+    {
+      "id": "a07fd126-1e22-4b44-b22c-565b215781a0",
+      "content": "ICradle interface defines the typed container shape with all service interface references for type-safe dependency resolution.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "type-safety",
+        "container-typing"
+      ],
+      "createdAt": "2026-02-12T23:27:18.821Z",
+      "updatedAt": "2026-02-12T23:27:18.821Z"
     }
   ]
 }
