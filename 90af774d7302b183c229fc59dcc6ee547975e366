@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T13:34:37.018Z",
       "updatedAt": "2026-02-12T13:34:37.018Z"
+    },
+    {
+      "id": "7d58b532-2b24-4f7d-a103-8302582bc647",
+      "content": "User prompt at 2026-02-12T13:34:37.237Z: <task-notification>\n<task-id>b111632</task-id>\n<output-file>/private/tmp/claude-502/-Users-tony-casey-Repos-git-mem/tasks/b111632.output</output-file>\n<status>failed</status>\n<summary>Background comma...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:34:37.237Z",
+      "updatedAt": "2026-02-12T13:34:37.237Z"
     }
   ]
 }
