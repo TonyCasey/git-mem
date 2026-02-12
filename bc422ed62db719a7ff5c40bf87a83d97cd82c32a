@@ -73,6 +73,25 @@
       ],
       "createdAt": "2026-02-12T22:58:15.883Z",
       "updatedAt": "2026-02-12T22:58:15.883Z"
+    },
+    {
+      "id": "edd996f1-6b0e-42af-84f5-3962f07c7169",
+      "content": "CommonJS project that imports ESM @modelcontextprotocol/sdk using esModuleInterop: true and .js import extensions to handle the module system mismatch.",
+      "type": "gotcha",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "commonjs",
+        "esm",
+        "typescript",
+        "mcp"
+      ],
+      "createdAt": "2026-02-12T22:58:15.896Z",
+      "updatedAt": "2026-02-12T22:58:15.896Z"
     }
   ]
 }
