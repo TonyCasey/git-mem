@@ -98,6 +98,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.182Z",
       "updatedAt": "2026-02-12T22:54:50.182Z"
+    },
+    {
+      "id": "86d19368-28d3-44f5-9fe3-993530bf8433",
+      "content": "Logger instances are cached at module level (like in mcp-server.ts) to avoid creating duplicate instances across the same execution context.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "performance",
+        "singleton-pattern"
+      ],
+      "createdAt": "2026-02-12T22:54:50.196Z",
+      "updatedAt": "2026-02-12T22:54:50.196Z"
     }
   ]
 }
