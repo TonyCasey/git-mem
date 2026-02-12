@@ -11,6 +11,24 @@
       "tags": [],
       "createdAt": "2026-02-05T18:32:05.395Z",
       "updatedAt": "2026-02-05T18:32:05.395Z"
+    },
+    {
+      "id": "efa8ad08-335c-44d0-adfc-cc6057ffb7f7",
+      "content": "The system provides MCP (Model Context Protocol) integration to expose git-mem tools to AI coding assistants like Claude, Cursor, and OpenCode.",
+      "type": "decision",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "ai-integration",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:57:44.716Z",
+      "updatedAt": "2026-02-12T22:57:44.716Z"
     }
   ]
 }
