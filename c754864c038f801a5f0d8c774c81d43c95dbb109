@@ -55,6 +55,24 @@
       ],
       "createdAt": "2026-02-12T22:57:33.711Z",
       "updatedAt": "2026-02-12T22:57:33.711Z"
+    },
+    {
+      "id": "3d3cca4d-e630-4e29-95f3-99a29f91f825",
+      "content": "The npm package is published with public access, indicating this is an open-source library intended for public consumption.",
+      "type": "fact",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "npm",
+        "public-package",
+        "open-source"
+      ],
+      "createdAt": "2026-02-12T22:57:33.725Z",
+      "updatedAt": "2026-02-12T22:57:33.725Z"
     }
   ]
 }
