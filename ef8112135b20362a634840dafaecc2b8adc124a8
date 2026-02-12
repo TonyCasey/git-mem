@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T20:48:08.597Z",
       "updatedAt": "2026-02-12T20:48:08.597Z"
+    },
+    {
+      "id": "fdad1d54-76a3-4a8d-a696-2a3d04b92799",
+      "content": "User prompt at 2026-02-12T20:48:33.386Z: yes create the PR",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:48:33.386Z",
+      "updatedAt": "2026-02-12T20:48:33.386Z"
     }
   ]
 }
