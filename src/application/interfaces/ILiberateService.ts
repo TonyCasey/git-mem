@@ -10,8 +10,8 @@
  */
 export interface ILiberateProgress {
   /** Current phase of processing. */
-  readonly phase: 'triage' | 'enriching' | 'complete';
-  /** Current commit index (1-based). */
+  readonly phase: 'triage' | 'processing' | 'complete';
+  /** Current commit index (1-based during 'processing'; 0 for triage/complete). */
   readonly current: number;
   /** Total high-interest commits to process. */
   readonly total: number;

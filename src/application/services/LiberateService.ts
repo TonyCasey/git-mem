@@ -84,7 +84,7 @@ export class LiberateService implements ILiberateService {
     let commitIndex = 0;
     for (const scored of triageResult.highInterest) {
       commitIndex++;
-      options?.onProgress?.({ phase: 'enriching', current: commitIndex, total: highInterestTotal, sha: scored.commit.sha, subject: scored.commit.subject, factsExtracted: totalFactsExtracted });
+      options?.onProgress?.({ phase: 'processing', current: commitIndex, total: highInterestTotal, sha: scored.commit.sha, subject: scored.commit.subject, factsExtracted: totalFactsExtracted });
       const text = `${scored.commit.subject}\n${scored.commit.body}`.trim();
       const heuristicMatches = extractPatternMatches(text);
 
