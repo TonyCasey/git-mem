@@ -527,6 +527,25 @@
       ],
       "createdAt": "2026-02-12T22:55:21.863Z",
       "updatedAt": "2026-02-12T22:55:21.863Z"
+    },
+    {
+      "id": "f8c4183a-e696-49fc-9fad-ba7dd242b180",
+      "content": "A comprehensive hook suite was implemented with session-stop, prompt-submit handlers, and centralized configuration via .git-mem.json file. All hooks respect per-hook enabled/disabled settings from this config.",
+      "type": "decision",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "configuration",
+        "architecture",
+        "session-management"
+      ],
+      "createdAt": "2026-02-12T23:28:03.781Z",
+      "updatedAt": "2026-02-12T23:28:03.781Z"
     }
   ]
 }
