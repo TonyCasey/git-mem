@@ -126,6 +126,22 @@
       ],
       "createdAt": "2026-02-12T12:39:59.353Z",
       "updatedAt": "2026-02-12T12:39:59.353Z"
+    },
+    {
+      "id": "e3e5b9da-ae32-4a90-b295-1ef5ae2a8b20",
+      "content": "User prompt at 2026-02-12T12:41:40.666Z: Can you update the plan? I also want a DI container as opposed to // Direct instantiation (no DI container)",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:41:40.666Z",
+      "updatedAt": "2026-02-12T12:41:40.666Z"
     }
   ]
 }
