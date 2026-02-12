@@ -1090,6 +1090,21 @@
       ],
       "createdAt": "2026-02-12T23:33:17.514Z",
       "updatedAt": "2026-02-12T23:33:17.514Z"
+    },
+    {
+      "id": "dd8dec84-f745-43ab-8f1c-d90b8d055d05",
+      "content": "manually constructing NotesService → MemoryRepository → Service chains",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-12T23:34:11.642Z",
+      "updatedAt": "2026-02-12T23:34:11.642Z"
     }
   ]
 }
