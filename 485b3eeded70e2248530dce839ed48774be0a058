@@ -53,6 +53,25 @@
       ],
       "createdAt": "2026-02-12T12:17:04.381Z",
       "updatedAt": "2026-02-12T12:17:04.381Z"
+    },
+    {
+      "id": "de2da556-dd70-4c61-81b6-609dbfe84eb2",
+      "content": "Application logs are stored in ~/.git-mem/logs directory in the user's home directory rather than system temp directory for persistence across reboots and easier user access.",
+      "type": "decision",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "directory-structure",
+        "user-data",
+        "persistence"
+      ],
+      "createdAt": "2026-02-12T22:57:24.249Z",
+      "updatedAt": "2026-02-12T22:57:24.249Z"
     }
   ]
 }
