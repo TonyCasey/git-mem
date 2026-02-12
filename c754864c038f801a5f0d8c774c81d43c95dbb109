@@ -166,6 +166,25 @@
       ],
       "createdAt": "2026-02-12T23:30:28.008Z",
       "updatedAt": "2026-02-12T23:30:28.008Z"
+    },
+    {
+      "id": "2ad683e0-db70-487f-a896-235016c17d37",
+      "content": "The npm_token secret must be configured in GitHub repository settings for automated publishing to work.",
+      "type": "fact",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "secrets",
+        "npm-publish",
+        "github-actions"
+      ],
+      "createdAt": "2026-02-12T23:30:28.021Z",
+      "updatedAt": "2026-02-12T23:30:28.021Z"
     }
   ]
 }
