@@ -177,6 +177,22 @@
       ],
       "createdAt": "2026-02-12T20:25:33.428Z",
       "updatedAt": "2026-02-12T20:25:33.428Z"
+    },
+    {
+      "id": "4e5fcca4-5d4b-4523-947f-384c99dbdeeb",
+      "content": "User prompt at 2026-02-12T20:28:04.226Z: yes please, create a \"local\" file that will extend the installed one i.e. .lisa/rules/shared/git-rules.local.md",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:28:04.226Z",
+      "updatedAt": "2026-02-12T20:28:04.226Z"
     }
   ]
 }
