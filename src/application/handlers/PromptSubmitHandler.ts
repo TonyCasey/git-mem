@@ -37,9 +37,7 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
         };
       }
 
-      const output = this.contextFormatter.format(
-        result.memories as import('../../domain/entities/IMemoryEntity').IMemoryEntity[],
-      );
+      const output = this.contextFormatter.format(result.memories);
 
       this.logger?.info('Memories loaded for prompt context', {
         total: result.total,

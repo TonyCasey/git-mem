@@ -20,8 +20,13 @@ describe('loadHookConfig', () => {
     rmSync(tempDir, { recursive: true, force: true });
   });
 
+  function createTestDir(): string {
+    return mkdtempSync(join(tempDir, 'test-'));
+  }
+
   it('should return defaults when no config file exists', () => {
-    const config = loadHookConfig(tempDir);
+    const testDir = createTestDir();
+    const config = loadHookConfig(testDir);
 
     assert.equal(config.hooks.enabled, true);
     assert.equal(config.hooks.sessionStart.enabled, true);
@@ -35,8 +40,8 @@ describe('loadHookConfig', () => {
   });
 
   it('should read and merge config from .git-mem.json', () => {
-    const configPath = join(tempDir, '.git-mem.json');
-    writeFileSync(configPath, JSON.stringify({
+    const testDir = createTestDir();
+    writeFileSync(join(testDir, '.git-mem.json'), JSON.stringify({
       hooks: {
         enabled: true,
         sessionStart: { enabled: true, memoryLimit: 50 },
@@ -44,7 +49,7 @@ describe('loadHookConfig', () => {
       },
     }));
 
-    const config = loadHookConfig(tempDir);
+    const config = loadHookConfig(testDir);
 
     assert.equal(config.hooks.sessionStart.memoryLimit, 50);
     assert.equal(config.hooks.promptSubmit.enabled, true);
@@ -54,32 +59,32 @@ describe('loadHookConfig', () => {
   });
 
   it('should return defaults for invalid JSON', () => {
-    const configPath = join(tempDir, '.git-mem.json');
-    writeFileSync(configPath, 'not-json{{{');
+    const testDir = createTestDir();
+    writeFileSync(join(testDir, '.git-mem.json'), 'not-json{{{');
 
-    const config = loadHookConfig(tempDir);
+    const config = loadHookConfig(testDir);
 
     assert.equal(config.hooks.enabled, true);
     assert.equal(config.hooks.sessionStart.memoryLimit, 20);
   });
 
   it('should return defaults when hooks key is missing', () => {
-    const configPath = join(tempDir, '.git-mem.json');
-    writeFileSync(configPath, JSON.stringify({ other: 'stuff' }));
+    const testDir = createTestDir();
+    writeFileSync(join(testDir, '.git-mem.json'), JSON.stringify({ other: 'stuff' }));
 
-    const config = loadHookConfig(tempDir);
+    const config = loadHookConfig(testDir);
 
     assert.equal(config.hooks.enabled, true);
     assert.equal(config.hooks.sessionStart.enabled, true);
   });
 
   it('should allow disabling all hooks', () => {
-    const configPath = join(tempDir, '.git-mem.json');
-    writeFileSync(configPath, JSON.stringify({
+    const testDir = createTestDir();
+    writeFileSync(join(testDir, '.git-mem.json'), JSON.stringify({
       hooks: { enabled: false },
     }));
 
-    const config = loadHookConfig(tempDir);
+    const config = loadHookConfig(testDir);
 
     assert.equal(config.hooks.enabled, false);
   });

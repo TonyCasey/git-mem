@@ -13,7 +13,14 @@ import type {
 import type { ILiberateService } from '../interfaces/ILiberateService';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 
-/** Scope capture to commits from the last 24 hours. */
+/**
+ * Scope capture to commits from the last 24 hours.
+ *
+ * Claude Code's session-stop payload does not include the session start
+ * time, so we use a rolling 24h window as a pragmatic approximation.
+ * LiberateService skips commits that already have notes, preventing
+ * duplicate extraction across multiple sessions in a single day.
+ */
 const SESSION_WINDOW_MS = 24 * 60 * 60 * 1000;
 
 export class SessionCaptureService implements ISessionCaptureService {

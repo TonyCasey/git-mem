@@ -37,13 +37,10 @@ export class SessionStartHandler implements ISessionStartHandler {
         };
       }
 
-      const output = this.contextFormatter.format(
-        result.memories as import('../../domain/entities/IMemoryEntity').IMemoryEntity[],
-        {
-          trigger: event.trigger,
-          includeStats: true,
-        },
-      );
+      const output = this.contextFormatter.format(result.memories, {
+        trigger: event.trigger,
+        includeStats: true,
+      });
 
       this.logger?.info('Memories loaded for context', {
         total: result.total,

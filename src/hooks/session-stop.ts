@@ -25,7 +25,7 @@ async function main(): Promise<void> {
   const input = await readStdin<ISessionStopInput>();
   const config = loadHookConfig(input.cwd);
 
-  if (!config.hooks.enabled || !config.hooks.sessionStop.enabled) {
+  if (!config.hooks.enabled || !config.hooks.sessionStop.enabled || !config.hooks.sessionStop.autoLiberate) {
     clearTimeout(timer);
     return;
   }
