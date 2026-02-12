@@ -378,6 +378,21 @@
       ],
       "createdAt": "2026-02-12T23:27:30.462Z",
       "updatedAt": "2026-02-12T23:27:30.462Z"
+    },
+    {
+      "id": "c23be53d-475f-47a9-acb9-fad2194647ba",
+      "content": "polluting working trees",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-12T23:27:30.473Z",
+      "updatedAt": "2026-02-12T23:27:30.473Z"
     }
   ]
 }
