@@ -228,6 +228,22 @@
       ],
       "createdAt": "2026-02-12T20:00:04.159Z",
       "updatedAt": "2026-02-12T20:00:04.159Z"
+    },
+    {
+      "id": "01ec13b2-6240-4d52-b3bc-ff24191165f0",
+      "content": "User prompt at 2026-02-12T20:01:53.672Z: i think PR 22 was merged?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:01:53.672Z",
+      "updatedAt": "2026-02-12T20:01:53.672Z"
     }
   ]
 }
