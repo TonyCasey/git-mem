@@ -89,6 +89,24 @@
       ],
       "createdAt": "2026-02-12T23:29:35.096Z",
       "updatedAt": "2026-02-12T23:29:35.096Z"
+    },
+    {
+      "id": "dad00f1d-219a-4197-992a-7f04fcdacd81",
+      "content": "The package.json main field should point to the compiled dist/index.js rather than dist/cli.js for library consumption.",
+      "type": "convention",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "package-json",
+        "entry-point",
+        "library-design"
+      ],
+      "createdAt": "2026-02-12T23:29:35.153Z",
+      "updatedAt": "2026-02-12T23:29:35.153Z"
     }
   ]
 }
