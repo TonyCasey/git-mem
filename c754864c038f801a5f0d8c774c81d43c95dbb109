@@ -110,6 +110,25 @@
       ],
       "createdAt": "2026-02-12T22:57:33.750Z",
       "updatedAt": "2026-02-12T22:57:33.750Z"
+    },
+    {
+      "id": "1138319c-d05e-438e-91f7-c262175ddacd",
+      "content": "The codebase requires full git history (fetch-depth: 0) for GitClient tests to function properly.",
+      "type": "gotcha",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git",
+        "testing",
+        "ci",
+        "github-actions"
+      ],
+      "createdAt": "2026-02-12T23:30:27.964Z",
+      "updatedAt": "2026-02-12T23:30:27.964Z"
     }
   ]
 }
