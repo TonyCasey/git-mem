@@ -583,6 +583,24 @@
       ],
       "createdAt": "2026-02-12T23:28:03.826Z",
       "updatedAt": "2026-02-12T23:28:03.826Z"
+    },
+    {
+      "id": "ccd480e5-234c-4821-921a-3460fba652f5",
+      "content": "The PromptSubmitHandler returns empty output when no memories are found, rather than failing. This allows graceful degradation when the memory store is empty.",
+      "type": "convention",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "graceful-degradation",
+        "prompt-handling"
+      ],
+      "createdAt": "2026-02-12T23:28:03.843Z",
+      "updatedAt": "2026-02-12T23:28:03.843Z"
     }
   ]
 }
