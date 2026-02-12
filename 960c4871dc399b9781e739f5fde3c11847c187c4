@@ -55,6 +55,25 @@
       ],
       "createdAt": "2026-02-12T22:56:45.828Z",
       "updatedAt": "2026-02-12T22:56:45.828Z"
+    },
+    {
+      "id": "ec683679-ebe4-4ce1-bf16-2ae3507f97f3",
+      "content": "When removing git-mem hooks, the system preserves other tools' hooks in Claude's settings.json and only removes empty event types that contained only git-mem hooks.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "cleanup",
+        "interoperability",
+        "claude-settings"
+      ],
+      "createdAt": "2026-02-12T22:56:45.842Z",
+      "updatedAt": "2026-02-12T22:56:45.842Z"
     }
   ]
 }
