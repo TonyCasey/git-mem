@@ -546,6 +546,25 @@
       ],
       "createdAt": "2026-02-12T23:28:03.781Z",
       "updatedAt": "2026-02-12T23:28:03.781Z"
+    },
+    {
+      "id": "8da15a56-f35c-4b29-91c9-8511656b52a8",
+      "content": "Session capture uses a 24-hour rolling window to scope commits because Claude Code's session-stop payload lacks session start time information. LiberateService prevents duplicate extraction by skipping commits that already have notes.",
+      "type": "gotcha",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-capture",
+        "time-window",
+        "duplicate-prevention",
+        "claude-code"
+      ],
+      "createdAt": "2026-02-12T23:28:03.806Z",
+      "updatedAt": "2026-02-12T23:28:03.806Z"
     }
   ]
 }
