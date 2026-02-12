@@ -128,6 +128,24 @@
       ],
       "createdAt": "2026-02-12T22:53:37.331Z",
       "updatedAt": "2026-02-12T22:53:37.331Z"
+    },
+    {
+      "id": "a749737d-9dff-4912-b2df-7e7ef0c90e2a",
+      "content": "The project uses Awilix as the DI container library because it's decorator-free, CommonJS-native, and lightweight (~15KB). This choice avoids decorator dependencies and works well with the existing CommonJS setup.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "awilix",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:54:38.107Z",
+      "updatedAt": "2026-02-12T22:54:38.107Z"
     }
   ]
 }
