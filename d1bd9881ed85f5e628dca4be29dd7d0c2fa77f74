@@ -87,6 +87,25 @@
       ],
       "createdAt": "2026-02-12T22:56:25.164Z",
       "updatedAt": "2026-02-12T22:56:25.164Z"
+    },
+    {
+      "id": "92a6a133-0be4-4647-b89e-239bf46078ef",
+      "content": "Settings.json merge now uses array-level filtering instead of shallow spread to preserve other tools' hooks when installing git-mem hooks. This prevents accidental deletion of hooks from other Claude Code extensions.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "settings-merge",
+        "hooks",
+        "compatibility",
+        "array-filtering"
+      ],
+      "createdAt": "2026-02-12T22:56:25.203Z",
+      "updatedAt": "2026-02-12T22:56:25.203Z"
     }
   ]
 }
