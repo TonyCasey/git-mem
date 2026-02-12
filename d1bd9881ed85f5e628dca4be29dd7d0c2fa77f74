@@ -383,6 +383,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.953Z",
       "updatedAt": "2026-02-12T23:29:06.953Z"
+    },
+    {
+      "id": "44deb5a7-a4fa-40af-931e-a8043ff0a65a",
+      "content": "Hook events use kebab-case names in CLI (session-start, session-stop, prompt-submit) but are mapped to colon-separated internal event types (session:start, session:stop, prompt:submit).",
+      "type": "convention",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "event-naming",
+        "cli-design",
+        "event-mapping"
+      ],
+      "createdAt": "2026-02-12T23:29:06.966Z",
+      "updatedAt": "2026-02-12T23:29:06.966Z"
     }
   ]
 }
