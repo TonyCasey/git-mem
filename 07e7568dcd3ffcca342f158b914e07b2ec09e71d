@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "8929df51-dcf5-4067-9246-e8a60765c67a",
+      "content": "The package was missing a barrel file (src/index.ts) that exports the public API, causing require('git-mem') to fail for consumers.",
+      "type": "gotcha",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "package-publishing",
+        "barrel-exports",
+        "module-entry"
+      ],
+      "createdAt": "2026-02-12T22:56:51.787Z",
+      "updatedAt": "2026-02-12T22:56:51.787Z"
+    }
+  ]
+}
