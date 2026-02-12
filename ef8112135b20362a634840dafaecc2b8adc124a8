@@ -145,6 +145,22 @@
       ],
       "createdAt": "2026-02-12T20:50:42.920Z",
       "updatedAt": "2026-02-12T20:50:42.920Z"
+    },
+    {
+      "id": "80d8d320-a746-402b-aaa5-51028cffb939",
+      "content": "User prompt at 2026-02-12T20:51:17.750Z: keep polling",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:51:17.750Z",
+      "updatedAt": "2026-02-12T20:51:17.750Z"
     }
   ]
 }
