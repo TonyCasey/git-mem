@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T13:17:38.386Z",
       "updatedAt": "2026-02-12T13:17:38.386Z"
+    },
+    {
+      "id": "482a322b-4b8f-4bc7-a797-4d3a68954c3a",
+      "content": "User prompt at 2026-02-12T13:18:51.987Z: you didnt add any tests?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:18:51.987Z",
+      "updatedAt": "2026-02-12T13:18:51.987Z"
     }
   ]
 }
