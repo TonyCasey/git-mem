@@ -71,6 +71,24 @@
       ],
       "createdAt": "2026-02-12T23:30:15.605Z",
       "updatedAt": "2026-02-12T23:30:15.605Z"
+    },
+    {
+      "id": "601d339d-fa9d-4c32-ae4c-bb194d8e9f09",
+      "content": "Progress handling logic is extracted to shared utilities (src/commands/progress.ts) to avoid duplication between init and liberate commands.",
+      "type": "convention",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "code-reuse",
+        "shared-utilities",
+        "command-structure"
+      ],
+      "createdAt": "2026-02-12T23:30:15.618Z",
+      "updatedAt": "2026-02-12T23:30:15.618Z"
     }
   ]
 }
