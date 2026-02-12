@@ -193,6 +193,24 @@
       ],
       "createdAt": "2026-02-12T23:30:37.109Z",
       "updatedAt": "2026-02-12T23:30:37.109Z"
+    },
+    {
+      "id": "b06fbf91-954b-4691-ba34-4aba84da4540",
+      "content": "The MCP server exposes exactly 4 git-mem tools: remember, recall, context, and retrofit, each with specific parameter schemas for AI coding tool integration.",
+      "type": "fact",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "tools",
+        "api-design"
+      ],
+      "createdAt": "2026-02-12T23:30:37.125Z",
+      "updatedAt": "2026-02-12T23:30:37.125Z"
     }
   ]
 }
