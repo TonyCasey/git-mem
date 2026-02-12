@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T13:13:08.312Z",
       "updatedAt": "2026-02-12T13:13:08.312Z"
+    },
+    {
+      "id": "12281ed9-465c-4269-b39a-1980a408bbce",
+      "content": "Session summary [session:55b69a11]: Phase 1 is complete. Here's the summary:  **Phase 1 — DI Container + Event Bus** (all done)  | Issue | Title | Status | |-------|-------|--------| | GIT-39 | Install awilix dependency | Done | | GIT-4...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T13:13:08.332Z",
+      "updatedAt": "2026-02-12T13:13:08.332Z"
     }
   ]
 }
