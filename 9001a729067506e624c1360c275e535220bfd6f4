@@ -217,6 +217,24 @@
       ],
       "createdAt": "2026-02-12T23:28:39.506Z",
       "updatedAt": "2026-02-12T23:28:39.506Z"
+    },
+    {
+      "id": "f2ceab0b-0455-40fc-a795-315ce6a113be",
+      "content": "Context scoring is clamped to a maximum of 1.0 to prevent artificially high scores from memories that match many keywords, maintaining score normalization across the 0-1 range.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "scoring-algorithm",
+        "normalization",
+        "bounds-checking"
+      ],
+      "createdAt": "2026-02-12T23:28:39.519Z",
+      "updatedAt": "2026-02-12T23:28:39.519Z"
     }
   ]
 }
