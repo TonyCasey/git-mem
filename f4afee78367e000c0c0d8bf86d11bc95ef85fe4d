@@ -280,6 +280,22 @@
       ],
       "createdAt": "2026-02-12T20:02:02.546Z",
       "updatedAt": "2026-02-12T20:02:02.546Z"
+    },
+    {
+      "id": "2ea12103-2805-4774-90b5-3a39e40890e9",
+      "content": "User prompt at 2026-02-12T20:02:24.961Z: can you check Linear?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:02:24.962Z",
+      "updatedAt": "2026-02-12T20:02:24.962Z"
     }
   ]
 }
