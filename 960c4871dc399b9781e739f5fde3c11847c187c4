@@ -166,6 +166,25 @@
       ],
       "createdAt": "2026-02-12T23:29:27.927Z",
       "updatedAt": "2026-02-12T23:29:27.927Z"
+    },
+    {
+      "id": "cef9b98b-7342-4f9d-a2bd-84a3d18bd5e8",
+      "content": "Hook integration tests run CLI commands as child processes with 15-second timeouts to prevent hanging during test execution.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "timeouts",
+        "child-processes",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T23:29:27.968Z",
+      "updatedAt": "2026-02-12T23:29:27.968Z"
     }
   ]
 }
