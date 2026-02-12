@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T11:59:57.224Z",
       "updatedAt": "2026-02-12T11:59:57.224Z"
+    },
+    {
+      "id": "ff5ce638-895e-46c0-811d-e32ba57f1c6c",
+      "content": "User prompt at 2026-02-12T12:15:17.076Z: test it locally",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:15:17.076Z",
+      "updatedAt": "2026-02-12T12:15:17.076Z"
     }
   ]
 }
