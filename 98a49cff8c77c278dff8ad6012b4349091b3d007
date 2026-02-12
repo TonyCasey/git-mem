@@ -33,6 +33,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.662Z",
       "updatedAt": "2026-02-12T22:55:47.662Z"
+    },
+    {
+      "id": "60a00206-4454-4d9d-aded-2d4e27b15c06",
+      "content": "The system uses a provider-agnostic ILLMClient interface to support multiple LLM providers, with AnthropicLLMClient as the first implementation.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "provider-agnostic",
+        "llm-client",
+        "anthropic"
+      ],
+      "createdAt": "2026-02-12T22:55:47.694Z",
+      "updatedAt": "2026-02-12T22:55:47.694Z"
     }
   ]
 }
