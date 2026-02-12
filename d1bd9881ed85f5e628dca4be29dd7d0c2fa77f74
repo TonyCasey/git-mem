@@ -162,6 +162,25 @@
       ],
       "createdAt": "2026-02-12T22:56:25.244Z",
       "updatedAt": "2026-02-12T22:56:25.244Z"
+    },
+    {
+      "id": "d186ea23-dfcd-4b4e-aa6e-c1468a2c25f4",
+      "content": "Hook events use a 10-second timeout with setupShutdown() to prevent hanging processes that could block Claude Code.",
+      "type": "fact",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "timeout",
+        "hooks",
+        "shutdown",
+        "performance"
+      ],
+      "createdAt": "2026-02-12T22:56:25.256Z",
+      "updatedAt": "2026-02-12T22:56:25.256Z"
     }
   ]
 }
