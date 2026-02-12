@@ -314,6 +314,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.849Z",
       "updatedAt": "2026-02-12T23:28:28.849Z"
+    },
+    {
+      "id": "45fea19b-b564-4fb0-b862-38ff381bab1a",
+      "content": "The --enrich flag is wired through both CLI and MCP interfaces with consistent behavior and error handling.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "mcp",
+        "enrich-flag",
+        "interface-consistency"
+      ],
+      "createdAt": "2026-02-12T23:28:28.860Z",
+      "updatedAt": "2026-02-12T23:28:28.860Z"
     }
   ]
 }
