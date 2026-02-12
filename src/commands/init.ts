@@ -19,6 +19,7 @@ import {
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
 import { createContainer } from '../infrastructure/di';
+import { createStderrProgressHandler, liberateWithProgress } from './progress';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -195,10 +196,16 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     const container = createContainer({ logger, scope: 'init', enrich: true });
     const { liberateService } = container.cradle;
 
-    const result = await liberateService.liberate({
-      maxCommits: commitCount,
-      enrich: true,
-    });
+    const onProgress = createStderrProgressHandler();
+
+    const result = await liberateWithProgress(
+      () => liberateService.liberate({
+        maxCommits: commitCount,
+        enrich: true,
+        onProgress,
+      }),
+      onProgress,
+    );
 
     console.log(
       `Commits scanned: ${result.commitsScanned}  |  ` +

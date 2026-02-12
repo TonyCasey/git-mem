@@ -1,5 +1,6 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import type { ILiberateProgress } from '../../../../src/application/interfaces/ILiberateService';
 import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
@@ -92,6 +93,53 @@ describe('LiberateService', () => {
 
       assert.equal(result.commitsAnnotated, 0);
       assert.equal(result.factsExtracted, 0);
+    });
+
+    it('should call onProgress with triage, processing, and complete phases', async () => {
+      const events: ILiberateProgress[] = [];
+
+      await service.liberate({
+        cwd: repoDir,
+        dryRun: true,
+        threshold: 1,
+        onProgress: (p) => events.push({ ...p }),
+      });
+
+      assert.ok(events.length >= 2, 'should emit at least triage + complete');
+
+      // First event is triage
+      assert.equal(events[0].phase, 'triage');
+      assert.equal(events[0].current, 0);
+      assert.ok(events[0].total >= 0);
+
+      // Last event is complete
+      const last = events[events.length - 1];
+      assert.equal(last.phase, 'complete');
+
+      // All middle events are processing
+      const processingEvents = events.filter(e => e.phase === 'processing');
+      for (let i = 0; i < processingEvents.length; i++) {
+        assert.equal(processingEvents[i].current, i + 1, 'current should be 1-based');
+        assert.ok(processingEvents[i].sha.length > 0, 'sha should be non-empty');
+        assert.ok(processingEvents[i].subject.length > 0, 'subject should be non-empty');
+      }
+    });
+
+    it('should emit triage and complete even with zero high-interest commits', async () => {
+      const events: ILiberateProgress[] = [];
+
+      await service.liberate({
+        cwd: repoDir,
+        dryRun: true,
+        threshold: 100,
+        onProgress: (p) => events.push({ ...p }),
+      });
+
+      assert.equal(events.length, 2);
+      assert.equal(events[0].phase, 'triage');
+      assert.equal(events[0].total, 0);
+      assert.equal(events[1].phase, 'complete');
+      assert.equal(events[1].factsExtracted, 0);
     });
   });
 });

@@ -77,8 +77,14 @@ export class LiberateService implements ILiberateService {
 
     this.logger?.debug('Triage complete', { total: triageResult.totalCommits, highInterest: triageResult.highInterest.length });
 
+    const highInterestTotal = triageResult.highInterest.length;
+    options?.onProgress?.({ phase: 'triage', current: 0, total: highInterestTotal, sha: '', subject: '', factsExtracted: 0 });
+
     // Process each high-interest commit
+    let commitIndex = 0;
     for (const scored of triageResult.highInterest) {
+      commitIndex++;
+      options?.onProgress?.({ phase: 'processing', current: commitIndex, total: highInterestTotal, sha: scored.commit.sha, subject: scored.commit.subject, factsExtracted: totalFactsExtracted });
       const text = `${scored.commit.subject}\n${scored.commit.body}`.trim();
       const heuristicMatches = extractPatternMatches(text);
 
@@ -149,6 +155,8 @@ export class LiberateService implements ILiberateService {
         enrichedByLLM,
       });
     }
+
+    options?.onProgress?.({ phase: 'complete', current: highInterestTotal, total: highInterestTotal, sha: '', subject: '', factsExtracted: totalFactsExtracted });
 
     const result: ILiberateResult = {
       commitsScanned: triageResult.totalCommits,
