@@ -109,6 +109,25 @@
       ],
       "createdAt": "2026-02-12T22:56:33.634Z",
       "updatedAt": "2026-02-12T22:56:33.634Z"
+    },
+    {
+      "id": "482c2320-94f5-4cd5-b5a3-3989afab9460",
+      "content": "The MCP server uses a stateless design where each tool handler bootstraps a fresh service chain per invocation with no shared state between calls.",
+      "type": "decision",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "architecture",
+        "stateless-design",
+        "service-chain"
+      ],
+      "createdAt": "2026-02-12T23:29:15.727Z",
+      "updatedAt": "2026-02-12T23:29:15.727Z"
     }
   ]
 }
