@@ -181,6 +181,24 @@
       ],
       "createdAt": "2026-02-12T23:28:39.471Z",
       "updatedAt": "2026-02-12T23:28:39.471Z"
+    },
+    {
+      "id": "2510961c-52cb-4d28-bea3-f7554e8e6b9f",
+      "content": "Git diff analysis specifically skips metadata lines (starting with '+++', '---', '@@') and only processes actual added/removed content lines for keyword extraction.",
+      "type": "fact",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "diff-parsing",
+        "git-diff",
+        "content-extraction"
+      ],
+      "createdAt": "2026-02-12T23:28:39.488Z",
+      "updatedAt": "2026-02-12T23:28:39.488Z"
     }
   ]
 }
