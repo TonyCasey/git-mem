@@ -101,6 +101,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.792Z",
       "updatedAt": "2026-02-12T22:57:44.792Z"
+    },
+    {
+      "id": "4e98c593-5496-4a88-9353-2c00bbfa845d",
+      "content": "MCP sessions require proper JSON-RPC protocol with initialize/initialized handshake before tool calls can be made.",
+      "type": "gotcha",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "json-rpc",
+        "protocol"
+      ],
+      "createdAt": "2026-02-12T22:57:44.804Z",
+      "updatedAt": "2026-02-12T22:57:44.804Z"
     }
   ]
 }
