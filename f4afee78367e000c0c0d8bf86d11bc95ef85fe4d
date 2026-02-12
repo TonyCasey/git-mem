@@ -601,6 +601,24 @@
       ],
       "createdAt": "2026-02-12T23:28:03.843Z",
       "updatedAt": "2026-02-12T23:28:03.843Z"
+    },
+    {
+      "id": "b3f723d2-1a04-4569-911e-f1417ec94954",
+      "content": "Hook configuration includes reserved fields (memoryLimit, dateRange, tags, recordPrompts, surfaceContext) that are documented but not yet wired to handlers, indicating planned future functionality.",
+      "type": "fact",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "future-features",
+        "reserved-fields"
+      ],
+      "createdAt": "2026-02-12T23:28:03.858Z",
+      "updatedAt": "2026-02-12T23:28:03.858Z"
     }
   ]
 }
