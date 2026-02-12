@@ -36,6 +36,24 @@
       ],
       "createdAt": "2026-02-12T22:56:59.979Z",
       "updatedAt": "2026-02-12T22:56:59.979Z"
+    },
+    {
+      "id": "01807ab5-dc1b-4569-a398-10ba98fc126b",
+      "content": "The reinstall script uses `2>/dev/null || true` pattern to silently ignore failures when uninstalling, suggesting the tool may not always be previously installed.",
+      "type": "convention",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "bash-scripting",
+        "error-handling",
+        "npm"
+      ],
+      "createdAt": "2026-02-12T22:56:59.994Z",
+      "updatedAt": "2026-02-12T22:56:59.994Z"
     }
   ]
 }
