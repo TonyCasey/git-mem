@@ -144,6 +144,24 @@
       ],
       "createdAt": "2026-02-12T22:58:15.931Z",
       "updatedAt": "2026-02-12T22:58:15.931Z"
+    },
+    {
+      "id": "7b8d8221-5cab-46fa-a723-d40f25a3f076",
+      "content": "The retrofit feature uses weighted commit scoring based on conventional prefixes, decision keywords, diff size, and PR merges to identify interesting commits for memory extraction.",
+      "type": "fact",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "retrofit",
+        "commit-scoring",
+        "heuristics"
+      ],
+      "createdAt": "2026-02-12T22:58:15.941Z",
+      "updatedAt": "2026-02-12T22:58:15.941Z"
     }
   ]
 }
