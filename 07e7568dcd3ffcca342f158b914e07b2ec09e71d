@@ -107,6 +107,24 @@
       ],
       "createdAt": "2026-02-12T23:29:35.153Z",
       "updatedAt": "2026-02-12T23:29:35.153Z"
+    },
+    {
+      "id": "619d08dd-873e-4444-b1d8-e312add72a78",
+      "content": "TypeScript projects should include a types field in package.json pointing to the compiled .d.ts files for proper type information.",
+      "type": "convention",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "package-json",
+        "type-definitions"
+      ],
+      "createdAt": "2026-02-12T23:29:35.184Z",
+      "updatedAt": "2026-02-12T23:29:35.184Z"
     }
   ]
 }
