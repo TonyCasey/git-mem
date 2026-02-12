@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T22:57:33.668Z",
       "updatedAt": "2026-02-12T22:57:33.668Z"
+    },
+    {
+      "id": "a84dcbbb-39fb-4f63-8a5a-10dbd2c53cfd",
+      "content": "The project uses a conventional commit-based release workflow where version bumps in package.json trigger automatic GitHub releases with generated changelogs and npm publishing.",
+      "type": "decision",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "release-automation",
+        "conventional-commits",
+        "versioning",
+        "npm-publish"
+      ],
+      "createdAt": "2026-02-12T22:57:33.693Z",
+      "updatedAt": "2026-02-12T22:57:33.693Z"
     }
   ]
 }
