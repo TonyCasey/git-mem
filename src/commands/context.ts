@@ -2,10 +2,7 @@
  * context command handler
  */
 
-import { ContextService } from '../application/services/ContextService';
-import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../infrastructure/services/NotesService';
-import { GitClient } from '../infrastructure/git/GitClient';
+import { createContainer } from '../infrastructure/di';
 import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface IContextCommandOptions {
@@ -15,12 +12,9 @@ interface IContextCommandOptions {
 }
 
 export async function contextCommand(options: IContextCommandOptions, logger?: ILogger): Promise<void> {
-  const log = logger?.child({ command: 'context' });
-  const gitClient = new GitClient();
-  const notesService = new NotesService();
-  const memoryRepo = new MemoryRepository(notesService);
-  const contextService = new ContextService(gitClient, memoryRepo, log);
-  log?.info('Command invoked');
+  const container = createContainer({ logger, scope: 'context' });
+  const { contextService, logger: log } = container.cradle;
+  log.info('Command invoked');
 
   const result = contextService.getContext({
     limit: options.limit ? parseInt(options.limit, 10) : 10,

@@ -2,12 +2,7 @@
  * liberate command handler
  */
 
-import { LiberateService } from '../application/services/LiberateService';
-import { GitTriageService } from '../application/services/GitTriageService';
-import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../infrastructure/services/NotesService';
-import { GitClient } from '../infrastructure/git/GitClient';
-import { createLLMClient } from '../infrastructure/llm/LLMClientFactory';
+import { createContainer } from '../infrastructure/di';
 import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface ILiberateCommandOptions {
@@ -19,31 +14,15 @@ interface ILiberateCommandOptions {
 }
 
 export async function liberateCommand(options: ILiberateCommandOptions, logger?: ILogger): Promise<void> {
-  const log = logger?.child({ command: 'liberate' });
-  const gitClient = new GitClient();
-  const triageService = new GitTriageService(gitClient);
-  const notesService = new NotesService();
-  const memoryRepo = new MemoryRepository(notesService);
+  const container = createContainer({ logger, scope: 'liberate', enrich: options.enrich });
+  const { liberateService, llmClient, logger: log } = container.cradle;
 
-  // LLM enrichment setup
-  let llmClient = null;
-  if (options.enrich) {
-    llmClient = createLLMClient();
-    if (!llmClient) {
-      console.log('Warning: --enrich specified but no API key found. Set ANTHROPIC_API_KEY.');
-      console.log('Falling back to heuristic extraction only.\n');
-    }
+  if (options.enrich && !llmClient) {
+    console.log('Warning: --enrich specified but no API key found. Set ANTHROPIC_API_KEY.');
+    console.log('Falling back to heuristic extraction only.\n');
   }
 
-  log?.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, max: options.max });
-
-  const liberateService = new LiberateService(
-    triageService,
-    memoryRepo,
-    options.enrich ? gitClient : undefined,
-    llmClient ?? undefined,
-    log,
-  );
+  log.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, max: options.max });
 
   const since = options.since ? new Date(options.since) : undefined;
   const maxCommits = options.max ? parseInt(options.max, 10) : undefined;

@@ -6,13 +6,7 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { LiberateService } from '../../application/services/LiberateService';
-import { GitTriageService } from '../../application/services/GitTriageService';
-import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../../infrastructure/services/NotesService';
-import { GitClient } from '../../infrastructure/git/GitClient';
-import { createLLMClient } from '../../infrastructure/llm/LLMClientFactory';
-import { createLogger } from '../../infrastructure/logging/factory';
+import { createContainer } from '../../infrastructure/di';
 
 export function registerLiberateTool(server: McpServer): void {
   server.tool(
@@ -26,24 +20,10 @@ export function registerLiberateTool(server: McpServer): void {
       enrich: z.boolean().optional().describe('Enable LLM enrichment (requires ANTHROPIC_API_KEY)'),
     },
     async (args) => {
-      const logger = createLogger().child({ tool: 'liberate' });
+      const container = createContainer({ scope: 'mcp:liberate', enrich: args.enrich });
+      const { liberateService, llmClient, logger } = container.cradle;
       try {
-        const gitClient = new GitClient();
-        const triageService = new GitTriageService(gitClient);
-        const notesService = new NotesService();
-        const memoryRepo = new MemoryRepository(notesService);
-
-        // LLM enrichment setup
-        const llmClient = args.enrich ? createLLMClient() : null;
         logger.info('Tool invoked', { dryRun: args.dry_run, enrich: args.enrich });
-
-        const liberateService = new LiberateService(
-          triageService,
-          memoryRepo,
-          args.enrich ? gitClient : undefined,
-          llmClient ?? undefined,
-          logger,
-        );
 
         const result = await liberateService.liberate({
           dryRun: args.dry_run ?? false,

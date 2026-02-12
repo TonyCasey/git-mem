@@ -2,9 +2,7 @@
  * recall command handler
  */
 
-import { MemoryService } from '../application/services/MemoryService';
-import { MemoryRepository } from '../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../infrastructure/services/NotesService';
+import { createContainer } from '../infrastructure/di';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ILogger } from '../domain/interfaces/ILogger';
 
@@ -16,11 +14,9 @@ interface IRecallOptions {
 }
 
 export async function recallCommand(query: string | undefined, options: IRecallOptions, logger?: ILogger): Promise<void> {
-  const log = logger?.child({ command: 'recall' });
-  const notesService = new NotesService();
-  const memoryRepo = new MemoryRepository(notesService);
-  const memoryService = new MemoryService(memoryRepo, log);
-  log?.info('Command invoked', { query });
+  const container = createContainer({ logger, scope: 'recall' });
+  const { memoryService, logger: log } = container.cradle;
+  log.info('Command invoked', { query });
 
   const result = memoryService.recall(query, {
     limit: options.limit ? parseInt(options.limit, 10) : 10,

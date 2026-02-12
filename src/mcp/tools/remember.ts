@@ -6,13 +6,10 @@
 
 import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { MemoryService } from '../../application/services/MemoryService';
-import { MemoryRepository } from '../../infrastructure/repositories/MemoryRepository';
-import { NotesService } from '../../infrastructure/services/NotesService';
+import { createContainer } from '../../infrastructure/di';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../../domain/types/IMemoryLifecycle';
-import { createLogger } from '../../infrastructure/logging/factory';
 
 export function registerRememberTool(server: McpServer): void {
   server.tool(
@@ -27,11 +24,9 @@ export function registerRememberTool(server: McpServer): void {
       lifecycle: z.enum(['permanent', 'project', 'session']).optional().describe('Lifecycle tier (default: project)'),
     },
     async (args) => {
-      const logger = createLogger().child({ tool: 'remember' });
+      const container = createContainer({ scope: 'mcp:remember' });
+      const { memoryService, logger } = container.cradle;
       try {
-        const notesService = new NotesService();
-        const memoryRepo = new MemoryRepository(notesService);
-        const memoryService = new MemoryService(memoryRepo, logger);
         logger.info('Tool invoked', { type: args.type || 'fact' });
 
         const memory = memoryService.remember(args.text, {
