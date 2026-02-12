@@ -203,6 +203,24 @@
       ],
       "createdAt": "2026-02-12T23:29:51.476Z",
       "updatedAt": "2026-02-12T23:29:51.476Z"
+    },
+    {
+      "id": "73a0d7e6-6913-46e6-a23f-3df98be9b538",
+      "content": "The MCP server architecture follows a pattern of registering individual tool modules in the main server.ts file.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "server-architecture",
+        "tool-registration"
+      ],
+      "createdAt": "2026-02-12T23:29:51.488Z",
+      "updatedAt": "2026-02-12T23:29:51.488Z"
     }
   ]
 }
