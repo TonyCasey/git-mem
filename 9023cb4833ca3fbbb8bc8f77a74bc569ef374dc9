@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T20:12:03.617Z",
       "updatedAt": "2026-02-12T20:12:03.617Z"
+    },
+    {
+      "id": "68c61d9b-86d3-4075-9ca1-2cb01a6b36f5",
+      "content": "Session summary [session:d6d5d571]: Done. Here's the summary:  **GIT-56** — PR #23: https://github.com/TonyCasey/git-mem/pull/23 (In Review) **GIT-57** — PR #24: https://github.com/TonyCasey/git-mem/pull/24 (In Review)  Each on its own...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:12:03.635Z",
+      "updatedAt": "2026-02-12T20:12:03.635Z"
     }
   ]
 }
