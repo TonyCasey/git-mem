@@ -231,6 +231,22 @@
       ],
       "createdAt": "2026-02-12T20:28:26.710Z",
       "updatedAt": "2026-02-12T20:28:26.710Z"
+    },
+    {
+      "id": "a652a1b9-d561-479d-842e-ec5ddfea4688",
+      "content": "User prompt at 2026-02-12T20:32:16.600Z: There is a session-start hook in this project that loads the recent memories too?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:32:16.600Z",
+      "updatedAt": "2026-02-12T20:32:16.600Z"
     }
   ]
 }
