@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T20:09:37.731Z",
       "updatedAt": "2026-02-12T20:09:37.731Z"
+    },
+    {
+      "id": "09fef43d-8175-4436-8ae7-e5ec4be7279e",
+      "content": "User prompt at 2026-02-12T20:10:25.522Z: yes do that",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:10:25.522Z",
+      "updatedAt": "2026-02-12T20:10:25.522Z"
     }
   ]
 }
