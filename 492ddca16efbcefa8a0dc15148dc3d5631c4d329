@@ -50,6 +50,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.487Z",
       "updatedAt": "2026-02-12T22:56:12.487Z"
+    },
+    {
+      "id": "a4ba520c-aee1-44ad-a3e1-0381f15c98fd",
+      "content": "Helper functions from initialization modules are exported for reuse and testing, promoting modularity and testability.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "modularity",
+        "exports"
+      ],
+      "createdAt": "2026-02-12T22:56:12.501Z",
+      "updatedAt": "2026-02-12T22:56:12.501Z"
     }
   ]
 }
