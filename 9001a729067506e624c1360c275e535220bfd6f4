@@ -163,6 +163,24 @@
       ],
       "createdAt": "2026-02-12T23:28:39.452Z",
       "updatedAt": "2026-02-12T23:28:39.452Z"
+    },
+    {
+      "id": "372e1f06-9d74-422b-8cf5-0ed21fe7ce2f",
+      "content": "The context tool requires at least 3 characters for keywords to be considered valid, preventing overly generic matches from single letters or short abbreviations.",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "keyword-extraction",
+        "minimum-length",
+        "filtering"
+      ],
+      "createdAt": "2026-02-12T23:28:39.471Z",
+      "updatedAt": "2026-02-12T23:28:39.471Z"
     }
   ]
 }
