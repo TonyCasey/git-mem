@@ -346,6 +346,25 @@
       ],
       "createdAt": "2026-02-12T23:28:53.334Z",
       "updatedAt": "2026-02-12T23:28:53.334Z"
+    },
+    {
+      "id": "0e271a31-160b-4aad-b7d3-f39d0df7f6ec",
+      "content": "The prompts library is added as a dependency to provide interactive CLI prompts for the init command, with a --yes flag to bypass prompts and use defaults.",
+      "type": "fact",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependencies",
+        "prompts",
+        "interactive-cli",
+        "non-interactive-mode"
+      ],
+      "createdAt": "2026-02-12T23:28:53.347Z",
+      "updatedAt": "2026-02-12T23:28:53.347Z"
     }
   ]
 }
