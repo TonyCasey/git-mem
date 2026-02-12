@@ -269,6 +269,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.384Z",
       "updatedAt": "2026-02-12T23:27:30.384Z"
+    },
+    {
+      "id": "3c1fac29-8434-4f8e-9940-e6c17224afa7",
+      "content": "Logger instances are created per command invocation using child loggers with component-specific context (e.g., 'cli', 'context', 'liberate') for better traceability.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "structured-logging",
+        "context-tracking"
+      ],
+      "createdAt": "2026-02-12T23:27:30.403Z",
+      "updatedAt": "2026-02-12T23:27:30.403Z"
     }
   ]
 }
