@@ -109,6 +109,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.382Z",
       "updatedAt": "2026-02-12T22:56:00.382Z"
+    },
+    {
+      "id": "c7914a94-c9d5-4173-830d-b46368bf670d",
+      "content": "A comprehensive noise word list filters out common programming keywords (import, const, function, etc.) and English stop words during keyword extraction to improve relevance matching.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "noise-filtering",
+        "keyword-extraction",
+        "programming-keywords"
+      ],
+      "createdAt": "2026-02-12T22:56:00.394Z",
+      "updatedAt": "2026-02-12T22:56:00.394Z"
     }
   ]
 }
