@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T13:21:17.001Z",
       "updatedAt": "2026-02-12T13:21:17.001Z"
+    },
+    {
+      "id": "3b188061-a57e-4058-a063-5b7a40f2005a",
+      "content": "User prompt at 2026-02-12T13:23:47.303Z: lisa, poll the PR https://github.com/TonyCasey/git-mem/pull/20/ every 60 seconds, and address any comments inline, until all are resolved",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:23:47.303Z",
+      "updatedAt": "2026-02-12T13:23:47.303Z"
     }
   ]
 }
