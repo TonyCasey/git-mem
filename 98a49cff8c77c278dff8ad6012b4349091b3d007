@@ -219,6 +219,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.772Z",
       "updatedAt": "2026-02-12T23:28:28.772Z"
+    },
+    {
+      "id": "90a9b446-c28f-472d-bb42-d133f123e0c0",
+      "content": "LLM diffs are truncated to 15,000 characters at line boundaries to avoid token limits and manage API costs.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-enrichment",
+        "diff-processing",
+        "token-limits",
+        "performance"
+      ],
+      "createdAt": "2026-02-12T23:28:28.800Z",
+      "updatedAt": "2026-02-12T23:28:28.800Z"
     }
   ]
 }
