@@ -109,6 +109,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.734Z",
       "updatedAt": "2026-02-12T22:55:47.734Z"
+    },
+    {
+      "id": "9051a8d2-fc69-44a6-b460-1d7ce0e5220e",
+      "content": "LLM enrichment failures are handled gracefully without blocking the overall retrofit process, allowing partial success scenarios.",
+      "type": "gotcha",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "llm-enrichment",
+        "partial-failure",
+        "resilience"
+      ],
+      "createdAt": "2026-02-12T22:55:47.745Z",
+      "updatedAt": "2026-02-12T22:55:47.745Z"
     }
   ]
 }
