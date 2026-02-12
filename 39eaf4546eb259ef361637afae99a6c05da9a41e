@@ -336,6 +336,25 @@
       ],
       "createdAt": "2026-02-12T20:35:02.568Z",
       "updatedAt": "2026-02-12T20:35:02.568Z"
+    },
+    {
+      "id": "c0801d42-406d-42eb-a10b-6baa10b9a408",
+      "content": "Session summary [session:d6d5d571]: Yes, conceptually:  - **`stdout`** → goes to Claude Code's context window (the AI sees it) - **`stderr`** → goes to the user's terminal (you see it)  So the hook already writes to both: - Line 51: `co...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:35:02.589Z",
+      "updatedAt": "2026-02-12T20:35:02.589Z"
     }
   ]
 }
