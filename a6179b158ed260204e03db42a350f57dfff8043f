@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T20:44:45.415Z",
       "updatedAt": "2026-02-12T20:44:45.415Z"
+    },
+    {
+      "id": "3b4b36d1-ec33-49cc-9ee5-5cc6053a65bc",
+      "content": "Session summary [session:63f19fb5]: All tasks complete. Here's a summary of what was done:  **GIT-60: Unified `git-mem hook` CLI command + safe settings.json merge**  **Changes made:**  1. **`src/commands/hook.ts`** (new) — Single `git-...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:44:45.435Z",
+      "updatedAt": "2026-02-12T20:44:45.435Z"
     }
   ]
 }
