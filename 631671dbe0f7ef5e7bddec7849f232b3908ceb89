@@ -146,6 +146,25 @@
       ],
       "createdAt": "2026-02-12T22:54:38.107Z",
       "updatedAt": "2026-02-12T22:54:38.107Z"
+    },
+    {
+      "id": "f7b25c74-e40e-403f-b175-a40721e74d2d",
+      "content": "The DI container uses CLASSIC injection mode with explicit parameter name matching to registration names. This means constructor parameters must match the exact names used in container registrations, which creates name-coupling between services.",
+      "type": "gotcha",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "awilix",
+        "injection-mode",
+        "naming"
+      ],
+      "createdAt": "2026-02-12T22:54:38.140Z",
+      "updatedAt": "2026-02-12T22:54:38.140Z"
     }
   ]
 }
