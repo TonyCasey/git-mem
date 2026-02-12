@@ -21,7 +21,7 @@ interface IInitHooksOptions {
 }
 
 // ── Git-mem event types managed by init-hooks ────────────────────────
-const GIT_MEM_EVENT_TYPES = ['SessionStart', 'SessionStop', 'UserPromptSubmit'] as const;
+const GIT_MEM_EVENT_TYPES = ['SessionStart', 'Stop', 'UserPromptSubmit'] as const;
 
 // ── Fingerprint detection ────────────────────────────────────────────
 
@@ -171,7 +171,7 @@ export function buildHooksConfig(): Record<string, unknown> {
         hooks: [{ type: 'command', command: 'git-mem hook session-start' }],
       },
     ],
-    SessionStop: [
+    Stop: [
       {
         matcher: '',
         hooks: [{ type: 'command', command: 'git-mem hook session-stop' }],
@@ -274,7 +274,7 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
 
   console.log('\nHooks configured:');
   console.log('  SessionStart     — Load memories into Claude context on startup');
-  console.log('  SessionStop      — Capture memories from session commits on exit');
+  console.log('  Stop             — Capture memories from session commits on exit');
   console.log('  UserPromptSubmit — Surface relevant memories per prompt (disabled by default)');
 
   console.log('\nNext steps:');
