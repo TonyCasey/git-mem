@@ -217,6 +217,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.453Z",
       "updatedAt": "2026-02-12T22:55:34.453Z"
+    },
+    {
+      "id": "7cd047ce-cdc7-45e1-9be2-c174546b0a9d",
+      "content": "Session start events include trigger mapping (startup/resume/compact/clear) to provide contextual messages in the formatted output.",
+      "type": "fact",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-start",
+        "triggers",
+        "context-messages"
+      ],
+      "createdAt": "2026-02-12T22:55:34.464Z",
+      "updatedAt": "2026-02-12T22:55:34.464Z"
     }
   ]
 }
