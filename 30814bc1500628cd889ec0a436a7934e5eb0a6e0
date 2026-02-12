@@ -132,6 +132,24 @@
       ],
       "createdAt": "2026-02-12T23:27:40.100Z",
       "updatedAt": "2026-02-12T23:27:40.100Z"
+    },
+    {
+      "id": "3cf866e7-8ab3-40e4-95d6-72bf31eda51c",
+      "content": "The project uses co-authoring with Claude Opus 4.6 for development work, as indicated by the Co-Authored-By tag in commit messages.",
+      "type": "fact",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "development-process",
+        "ai-collaboration",
+        "git-conventions"
+      ],
+      "createdAt": "2026-02-12T23:27:40.117Z",
+      "updatedAt": "2026-02-12T23:27:40.117Z"
     }
   ]
 }
