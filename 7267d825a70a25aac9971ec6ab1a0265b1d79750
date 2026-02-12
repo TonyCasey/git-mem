@@ -108,6 +108,24 @@
       ],
       "createdAt": "2026-02-12T23:30:01.573Z",
       "updatedAt": "2026-02-12T23:30:01.573Z"
+    },
+    {
+      "id": "ea4b7c5e-3714-4a9a-adaa-20e25b640329",
+      "content": "MCP servers in this codebase follow a factory pattern with a dedicated McpServer factory function in src/mcp/server.ts, separated from the entry point executable.",
+      "type": "convention",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "factory-pattern",
+        "code-organization"
+      ],
+      "createdAt": "2026-02-12T23:30:01.601Z",
+      "updatedAt": "2026-02-12T23:30:01.601Z"
     }
   ]
 }
