@@ -181,6 +181,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.428Z",
       "updatedAt": "2026-02-12T22:55:34.428Z"
+    },
+    {
+      "id": "c96ae081-7309-43c4-8d9e-44029b69b615",
+      "content": "Hook commands are resolved as relative paths from the built JavaScript location, using join(__dirname, '..', 'hooks', 'session-start.js').",
+      "type": "convention",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "path-resolution",
+        "build-output"
+      ],
+      "createdAt": "2026-02-12T22:55:34.440Z",
+      "updatedAt": "2026-02-12T22:55:34.440Z"
     }
   ]
 }
