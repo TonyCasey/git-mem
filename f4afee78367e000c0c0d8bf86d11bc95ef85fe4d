@@ -122,6 +122,22 @@
       ],
       "createdAt": "2026-02-12T17:25:12.820Z",
       "updatedAt": "2026-02-12T17:25:12.820Z"
+    },
+    {
+      "id": "3bf7c781-a236-4c89-b3d2-021c652b10c9",
+      "content": "User prompt at 2026-02-12T17:31:46.365Z: Can you add all of this to .dev/planning/repo-review-app.md",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T17:31:46.365Z",
+      "updatedAt": "2026-02-12T17:31:46.365Z"
     }
   ]
 }
