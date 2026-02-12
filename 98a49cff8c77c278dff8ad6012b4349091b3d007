@@ -166,6 +166,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.768Z",
       "updatedAt": "2026-02-12T22:55:47.768Z"
+    },
+    {
+      "id": "417e3948-4956-44a5-b158-29ea0f521171",
+      "content": "The CLI and MCP interfaces both expose the enrich functionality with consistent parameter names and behavior across different access methods.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli-consistency",
+        "mcp-interface",
+        "parameter-naming",
+        "api-consistency"
+      ],
+      "createdAt": "2026-02-12T22:55:47.780Z",
+      "updatedAt": "2026-02-12T22:55:47.780Z"
     }
   ]
 }
