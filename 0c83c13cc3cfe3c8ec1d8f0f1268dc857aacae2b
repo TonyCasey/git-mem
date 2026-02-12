@@ -271,6 +271,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.486Z",
       "updatedAt": "2026-02-12T22:55:34.486Z"
+    },
+    {
+      "id": "6f45a179-67b1-4796-9a72-94bb64181d4f",
+      "content": "The codebase uses dependency injection with a container pattern, where handlers receive their dependencies through constructor injection.",
+      "type": "convention",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "architecture",
+        "sessionstarthandler"
+      ],
+      "createdAt": "2026-02-12T23:28:16.871Z",
+      "updatedAt": "2026-02-12T23:28:16.871Z"
     }
   ]
 }
