@@ -51,6 +51,22 @@
       ],
       "createdAt": "2026-02-12T11:49:11.046Z",
       "updatedAt": "2026-02-12T11:49:11.046Z"
+    },
+    {
+      "id": "9e12dd03-2862-4c5f-bdea-3aba4f69cb5b",
+      "content": "User prompt at 2026-02-12T11:51:19.832Z: could we create a .git-mem folder in the ~/user directory to make them easier to find",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T11:51:19.960Z",
+      "updatedAt": "2026-02-12T11:51:19.960Z"
     }
   ]
 }
