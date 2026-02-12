@@ -203,6 +203,25 @@
       ],
       "createdAt": "2026-02-12T23:29:27.985Z",
       "updatedAt": "2026-02-12T23:29:27.985Z"
+    },
+    {
+      "id": "6680638e-b3e9-4bf7-83f4-a6aacb2a0bd7",
+      "content": "The init-hooks command preserves existing Claude Desktop hooks from other tools by merging rather than replacing the entire settings.json file.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "claude-desktop",
+        "hooks",
+        "init-hooks",
+        "backward-compatibility"
+      ],
+      "createdAt": "2026-02-12T23:29:27.999Z",
+      "updatedAt": "2026-02-12T23:29:27.999Z"
     }
   ]
 }
