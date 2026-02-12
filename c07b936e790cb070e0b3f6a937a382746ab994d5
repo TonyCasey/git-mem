@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T11:59:57.197Z",
       "updatedAt": "2026-02-12T11:59:57.197Z"
+    },
+    {
+      "id": "583c609f-49c4-41d0-9b4b-b35a869faa86",
+      "content": "Session summary [session:2733e0c6]: Done! Here's the summary:  **Linear Issue:** [GIT-38](https://linear.app/git-mem/issue/GIT-38/move-logs-to-git-mem-directory) (In Progress)  **PR:** https://github.com/TonyCasey/git-mem/pull/19  **Cha...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T11:59:57.224Z",
+      "updatedAt": "2026-02-12T11:59:57.224Z"
     }
   ]
 }
