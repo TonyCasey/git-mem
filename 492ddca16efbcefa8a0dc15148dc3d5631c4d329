@@ -140,6 +140,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.547Z",
       "updatedAt": "2026-02-12T22:56:12.547Z"
+    },
+    {
+      "id": "dba69e7a-5940-43c9-9e61-5a170fb4de8a",
+      "content": "Pure helper functions are extracted and exported to enable comprehensive unit testing with 16 test cases covering the initialization logic.",
+      "type": "decision",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "pure-functions",
+        "unit-tests"
+      ],
+      "createdAt": "2026-02-12T22:56:12.559Z",
+      "updatedAt": "2026-02-12T22:56:12.559Z"
     }
   ]
 }
