@@ -161,6 +161,22 @@
       ],
       "createdAt": "2026-02-12T20:51:17.750Z",
       "updatedAt": "2026-02-12T20:51:17.750Z"
+    },
+    {
+      "id": "72ba8325-5125-4ca8-994a-ed97fbf6cc9f",
+      "content": "User prompt at 2026-02-12T20:53:15.619Z: I would like a brief welcome message in the terminal, but I am not seeing it. Can you see all of the messages in this session? ",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:53:16.369Z",
+      "updatedAt": "2026-02-12T20:53:16.369Z"
     }
   ]
 }
