@@ -125,6 +125,25 @@
       ],
       "createdAt": "2026-02-12T22:56:25.219Z",
       "updatedAt": "2026-02-12T22:56:25.219Z"
+    },
+    {
+      "id": "2eb89758-8f38-4502-9286-8cf03ed44a18",
+      "content": "Hook commands must never disrupt Claude Code operation - they exit cleanly (process.exit(0)) even on failures to maintain IDE stability.",
+      "type": "convention",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "hooks",
+        "stability",
+        "exit-codes"
+      ],
+      "createdAt": "2026-02-12T22:56:25.232Z",
+      "updatedAt": "2026-02-12T22:56:25.232Z"
     }
   ]
 }
