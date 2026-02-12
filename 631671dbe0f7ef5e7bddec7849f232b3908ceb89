@@ -793,6 +793,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.784Z",
       "updatedAt": "2026-02-12T23:27:18.784Z"
+    },
+    {
+      "id": "d2579670-945a-46c1-bc18-5b89f8ab0a81",
+      "content": "LLM client creation in DI container is conditional based on options.enrich flag to avoid unnecessary instantiation.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-client",
+        "conditional-creation",
+        "performance"
+      ],
+      "createdAt": "2026-02-12T23:27:18.797Z",
+      "updatedAt": "2026-02-12T23:27:18.797Z"
     }
   ]
 }
