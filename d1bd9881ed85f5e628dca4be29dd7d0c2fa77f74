@@ -347,6 +347,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.927Z",
       "updatedAt": "2026-02-12T23:29:06.927Z"
+    },
+    {
+      "id": "dd795e57-471c-4691-bc0c-9e4fa98daf73",
+      "content": "Hook commands must never disrupt Claude Code - they exit silently on unknown events and cleanly (exit 0) even on errors to ensure the main application continues running.",
+      "type": "gotcha",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "hook-safety",
+        "claude-integration"
+      ],
+      "createdAt": "2026-02-12T23:29:06.941Z",
+      "updatedAt": "2026-02-12T23:29:06.941Z"
     }
   ]
 }
