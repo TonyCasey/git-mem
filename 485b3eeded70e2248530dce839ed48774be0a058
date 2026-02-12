@@ -108,6 +108,25 @@
       ],
       "createdAt": "2026-02-12T22:57:24.302Z",
       "updatedAt": "2026-02-12T22:57:24.302Z"
+    },
+    {
+      "id": "f2069e4c-774a-43ef-926f-43f06cd31c58",
+      "content": "Log files are stored in ~/.git-mem/logs by default instead of system temp directory to ensure persistence across reboots and provide easier user access.",
+      "type": "decision",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "file-system",
+        "persistence",
+        "user-experience"
+      ],
+      "createdAt": "2026-02-12T23:30:20.452Z",
+      "updatedAt": "2026-02-12T23:30:20.452Z"
     }
   ]
 }
