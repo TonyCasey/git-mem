@@ -565,6 +565,24 @@
       ],
       "createdAt": "2026-02-12T23:28:03.806Z",
       "updatedAt": "2026-02-12T23:28:03.806Z"
+    },
+    {
+      "id": "790b2a08-cb1c-4868-b9a0-220ffe334a26",
+      "content": "Three hook types are now supported: SessionStart (loads context), SessionStop (captures memories from commits), and UserPromptSubmit (surfaces relevant memories per prompt, disabled by default).",
+      "type": "fact",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "session-lifecycle",
+        "memory-management"
+      ],
+      "createdAt": "2026-02-12T23:28:03.826Z",
+      "updatedAt": "2026-02-12T23:28:03.826Z"
     }
   ]
 }
