@@ -127,6 +127,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.394Z",
       "updatedAt": "2026-02-12T22:56:00.394Z"
+    },
+    {
+      "id": "a841a457-8884-4f7b-bdbe-8ffa947b15c9",
+      "content": "The git memory system uses a scoring algorithm that combines content keyword matches (up to 0.6 points), tag matches (up to 0.4 points), and file path mentions (0.15 points each) to determine memory relevance to staged changes.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "context-service",
+        "scoring-algorithm",
+        "memory-relevance"
+      ],
+      "createdAt": "2026-02-12T23:28:39.419Z",
+      "updatedAt": "2026-02-12T23:28:39.419Z"
     }
   ]
 }
