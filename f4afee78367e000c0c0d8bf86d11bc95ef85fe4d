@@ -53,6 +53,22 @@
       ],
       "createdAt": "2026-02-12T17:23:34.851Z",
       "updatedAt": "2026-02-12T17:23:34.851Z"
+    },
+    {
+      "id": "30a6f0f5-1c1e-4048-9ba9-44c831304993",
+      "content": "User prompt at 2026-02-12T17:24:59.470Z: lets remember where we are finishing off today",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T17:24:59.471Z",
+      "updatedAt": "2026-02-12T17:24:59.471Z"
     }
   ]
 }
