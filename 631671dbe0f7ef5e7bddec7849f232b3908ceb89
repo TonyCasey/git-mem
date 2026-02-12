@@ -201,6 +201,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.173Z",
       "updatedAt": "2026-02-12T22:54:38.173Z"
+    },
+    {
+      "id": "95bf6514-29f9-4d8e-81a4-9e5cc593b867",
+      "content": "Logger scoping is implemented via options.scope with child() pattern, allowing each command/tool to have its own scoped logger instance derived from the parent logger.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "scoping",
+        "child-logger"
+      ],
+      "createdAt": "2026-02-12T22:54:38.186Z",
+      "updatedAt": "2026-02-12T22:54:38.186Z"
     }
   ]
 }
