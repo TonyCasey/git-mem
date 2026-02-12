@@ -361,6 +361,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.954Z",
       "updatedAt": "2026-02-12T23:28:16.954Z"
+    },
+    {
+      "id": "69328cd3-2047-48bc-be3c-f2e369e3cd33",
+      "content": "Memory context formatting groups memories by type (decision, gotcha, convention, fact) and outputs them in a specific order with consistent markdown structure.",
+      "type": "convention",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "context-formatter",
+        "memory-types",
+        "markdown"
+      ],
+      "createdAt": "2026-02-12T23:28:16.966Z",
+      "updatedAt": "2026-02-12T23:28:16.966Z"
     }
   ]
 }
