@@ -72,6 +72,25 @@
       ],
       "createdAt": "2026-02-12T21:00:29.974Z",
       "updatedAt": "2026-02-12T21:00:29.974Z"
+    },
+    {
+      "id": "2df3a0f1-4469-49c8-b158-e1441afa559a",
+      "content": "Session summary [session:d6d5d571]: Yes. We were talking about:  1. You want a **visible welcome message** in the terminal when a session starts 2. I found that the current `console.error()` in the session-start hook is invisible becaus...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T21:00:29.999Z",
+      "updatedAt": "2026-02-12T21:00:29.999Z"
     }
   ]
 }
