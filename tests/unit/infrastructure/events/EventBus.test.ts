@@ -8,6 +8,7 @@ import { EventBus } from '../../../../src/infrastructure/events/EventBus';
 import type { HookEvent } from '../../../../src/domain/events/HookEvents';
 import type { IEventHandler } from '../../../../src/domain/interfaces/IEventHandler';
 import type { IEventResult } from '../../../../src/domain/interfaces/IEventResult';
+import type { ILogger } from '../../../../src/domain/interfaces/ILogger';
 
 function createSessionStartEvent(overrides?: Partial<HookEvent>): HookEvent {
   return {
@@ -130,6 +131,44 @@ describe('EventBus', () => {
       const results = await bus.emit(createSessionStartEvent());
 
       assert.deepEqual(results, []);
+    });
+
+    it('should log warning when handler fails', async () => {
+      const warnCalls: { message: string; context?: Record<string, unknown> }[] = [];
+      const mockLogger: ILogger = {
+        trace: () => {},
+        debug: () => {},
+        info: () => {},
+        warn: (message: string, context?: Record<string, unknown>) => {
+          warnCalls.push({ message, context });
+        },
+        error: () => {},
+        fatal: () => {},
+        child: () => mockLogger,
+        isLevelEnabled: () => true,
+      };
+
+      const bus = new EventBus(mockLogger);
+      bus.on('session:start', createFailingHandler('BrokenHandler', new Error('oops')));
+
+      await bus.emit(createSessionStartEvent());
+
+      assert.equal(warnCalls.length, 1);
+      assert.equal(warnCalls[0].message, 'Event handler failed');
+      assert.equal(warnCalls[0].context?.event, 'session:start');
+      assert.equal(warnCalls[0].context?.handler, 'BrokenHandler');
+      assert.equal(warnCalls[0].context?.error, 'oops');
+    });
+
+    it('should not crash without logger when handler fails', async () => {
+      const bus = new EventBus(); // no logger
+      bus.on('session:start', createFailingHandler('NoLogHandler', new Error('fail')));
+
+      const results = await bus.emit(createSessionStartEvent());
+
+      assert.equal(results.length, 1);
+      assert.equal(results[0].success, false);
+      assert.equal(results[0].handler, 'NoLogHandler');
     });
   });
 
