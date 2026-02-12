@@ -137,6 +137,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.816Z",
       "updatedAt": "2026-02-12T22:57:44.816Z"
+    },
+    {
+      "id": "02cb1ba5-130c-450d-91b6-575e851f67ec",
+      "content": "MCP test sessions have a 15-second timeout to prevent hanging on incomplete responses or server issues.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "timeouts",
+        "mcp"
+      ],
+      "createdAt": "2026-02-12T22:57:44.841Z",
+      "updatedAt": "2026-02-12T22:57:44.841Z"
     }
   ]
 }
