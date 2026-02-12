@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T15:06:40.412Z",
       "updatedAt": "2026-02-12T15:06:40.412Z"
+    },
+    {
+      "id": "1ca4d2f1-b06e-48ee-a1ff-603dc4e971c9",
+      "content": "User prompt at 2026-02-12T15:13:50.019Z: commit and create a PR for phase 2",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T15:13:50.019Z",
+      "updatedAt": "2026-02-12T15:13:50.019Z"
     }
   ]
 }
