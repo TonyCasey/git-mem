@@ -251,6 +251,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.348Z",
       "updatedAt": "2026-02-12T23:27:30.348Z"
+    },
+    {
+      "id": "78abcb7d-a771-4d4a-98cd-b3a7b83f5356",
+      "content": "Services accept optional logger parameters as their last constructor argument to support gradual adoption and testability without breaking existing code.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "dependency-injection",
+        "optional-parameters"
+      ],
+      "createdAt": "2026-02-12T23:27:30.384Z",
+      "updatedAt": "2026-02-12T23:27:30.384Z"
     }
   ]
 }
