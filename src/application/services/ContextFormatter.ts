@@ -17,6 +17,13 @@ const TYPE_LABELS: Record<MemoryType, string> = {
 
 const TYPE_ORDER: readonly MemoryType[] = ['decision', 'gotcha', 'convention', 'fact'];
 
+const TRIGGER_MESSAGES: Record<string, string> = {
+  startup: 'Session started.',
+  resume: 'Session resumed.',
+  compact: 'Session compacted.',
+  clear: 'Session cleared.',
+};
+
 export class ContextFormatter implements IContextFormatter {
   format(memories: readonly IMemoryEntity[], options?: IFormatOptions): string {
     if (memories.length === 0) {
@@ -27,7 +34,7 @@ export class ContextFormatter implements IContextFormatter {
     sections.push('# Git-mem: Project Memory');
 
     if (options?.trigger) {
-      sections.push(`Session: ${options.trigger}`);
+      sections.push(TRIGGER_MESSAGES[options.trigger] ?? `Session: ${options.trigger}`);
     }
 
     sections.push('');
@@ -60,7 +67,11 @@ export class ContextFormatter implements IContextFormatter {
     let output = sections.join('\n').trimEnd();
 
     if (options?.maxLength && output.length > options.maxLength) {
-      output = output.slice(0, options.maxLength - 3) + '...';
+      if (options.maxLength <= 3) {
+        output = output.slice(0, options.maxLength);
+      } else {
+        output = output.slice(0, options.maxLength - 3) + '...';
+      }
     }
 
     return output;

@@ -2,12 +2,14 @@
  * stdin utility unit tests
  */
 
-import { describe, it } from 'node:test';
+import { describe, it, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { Readable } from 'stream';
 
 // We test readStdin by replacing process.stdin with a custom readable
 import { readStdin } from '../../../../src/hooks/utils/stdin';
+
+const originalStdin = process.stdin;
 
 function createMockStdin(data: string): void {
   const readable = new Readable({
@@ -23,6 +25,14 @@ function createMockStdin(data: string): void {
     configurable: true,
   });
 }
+
+afterEach(() => {
+  Object.defineProperty(process, 'stdin', {
+    value: originalStdin,
+    writable: true,
+    configurable: true,
+  });
+});
 
 describe('readStdin', () => {
   it('should parse valid JSON from stdin', async () => {

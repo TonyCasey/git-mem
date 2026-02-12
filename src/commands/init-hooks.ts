@@ -120,8 +120,13 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n');
   console.log(`Written ${settingsPath}`);
 
-  // Write .git-mem.json
-  writeFileSync(gitMemConfigPath, JSON.stringify(buildGitMemConfig(), null, 2) + '\n');
+  // Merge into existing .git-mem.json (preserve user edits)
+  const existingGitMemConfig = existsSync(gitMemConfigPath)
+    ? (() => { try { return JSON.parse(readFileSync(gitMemConfigPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
+    : {};
+  const newGitMemConfig = buildGitMemConfig();
+  const mergedGitMemConfig = { ...existingGitMemConfig, hooks: { ...((existingGitMemConfig.hooks ?? {}) as Record<string, unknown>), ...((newGitMemConfig.hooks ?? {}) as Record<string, unknown>) } };
+  writeFileSync(gitMemConfigPath, JSON.stringify(mergedGitMemConfig, null, 2) + '\n');
   console.log('Written .git-mem.json');
 
   console.log('\nHooks configured:');

@@ -54,4 +54,7 @@ async function main(): Promise<void> {
   clearTimeout(timer);
 }
 
-main().catch(() => process.exit(0));
+main().catch((err) => {
+  console.error('git-mem: session-start hook failed.', err);
+  process.exit(0); // Exit cleanly — hooks must never disrupt Claude Code
+});

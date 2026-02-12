@@ -8,6 +8,20 @@
 export async function readStdin<T = Record<string, unknown>>(): Promise<T> {
   return new Promise((resolve) => {
     let data = '';
+    let settled = false;
+
+    const finish = (value: T): void => {
+      if (settled) return;
+      settled = true;
+      resolve(value);
+    };
+
+    // If stdin is a TTY or already ended, no data will arrive
+    if (process.stdin.isTTY || process.stdin.readableEnded) {
+      finish({} as T);
+      return;
+    }
+
     process.stdin.setEncoding('utf8');
 
     process.stdin.on('readable', () => {
@@ -19,17 +33,12 @@ export async function readStdin<T = Record<string, unknown>>(): Promise<T> {
 
     process.stdin.on('end', () => {
       try {
-        resolve(JSON.parse(data) as T);
+        finish(JSON.parse(data) as T);
       } catch {
-        resolve({} as T);
+        finish({} as T);
       }
     });
 
-    // Safety: if stdin is already closed or empty, resolve after a tick
-    setTimeout(() => {
-      if (!data) {
-        resolve({} as T);
-      }
-    }, 100);
+    process.stdin.on('error', () => finish({} as T));
   });
 }

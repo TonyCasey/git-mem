@@ -83,7 +83,7 @@ describe('ContextFormatter', () => {
 
     const output = formatter.format(memories, { trigger: 'startup' });
 
-    assert.ok(output.includes('Session: startup'));
+    assert.ok(output.includes('Session started.'));
   });
 
   it('should include stats when includeStats is true', () => {

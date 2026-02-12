@@ -16,6 +16,12 @@ export class MemoryContextLoader implements IMemoryContextLoader {
   ) {}
 
   load(options?: IMemoryContextOptions): IMemoryContextResult {
+    if (options?.tags && options.tags.length > 1) {
+      this.logger?.warn('Multiple tags provided; only the first tag is supported', {
+        tags: options.tags,
+      });
+    }
+
     // First get total count (no filters)
     const allResult = this.memoryRepository.query({ cwd: options?.cwd });
     const total = allResult.total;
