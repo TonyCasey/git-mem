@@ -199,6 +199,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.440Z",
       "updatedAt": "2026-02-12T22:55:34.440Z"
+    },
+    {
+      "id": "984500ff-9a28-48c9-a872-58b161e803b9",
+      "content": "Context formatting includes truncation logic that guards against maxLength <= 3 to prevent malformed output when applying ellipsis.",
+      "type": "gotcha",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "context-formatter",
+        "truncation",
+        "edge-cases"
+      ],
+      "createdAt": "2026-02-12T22:55:34.453Z",
+      "updatedAt": "2026-02-12T22:55:34.453Z"
     }
   ]
 }
