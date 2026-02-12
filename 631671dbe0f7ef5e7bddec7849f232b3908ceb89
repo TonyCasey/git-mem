@@ -219,6 +219,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.186Z",
       "updatedAt": "2026-02-12T22:54:38.186Z"
+    },
+    {
+      "id": "ba903247-1793-4fd8-ba6d-d604cd7c399c",
+      "content": "LLM client creation is conditional via options.enrich flag in the DI container, allowing services to optionally include AI capabilities without always requiring API keys.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-client",
+        "conditional-creation",
+        "api-keys"
+      ],
+      "createdAt": "2026-02-12T22:54:38.198Z",
+      "updatedAt": "2026-02-12T22:54:38.198Z"
     }
   ]
 }
