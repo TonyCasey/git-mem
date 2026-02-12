@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T21:05:25.107Z",
       "updatedAt": "2026-02-12T21:05:25.107Z"
+    },
+    {
+      "id": "0722ac86-5944-46f6-b336-f469735d4f1c",
+      "content": "Session summary [session:63f19fb5]: Done. Removed the legacy regex detection from `isGitMemEntry` and the corresponding legacy test cases. Also saved the decision as a git-mem memory so it's recalled in future sessions....",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T21:05:25.126Z",
+      "updatedAt": "2026-02-12T21:05:25.126Z"
     }
   ]
 }
