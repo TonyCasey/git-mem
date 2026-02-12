@@ -71,6 +71,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.709Z",
       "updatedAt": "2026-02-12T22:55:47.709Z"
+    },
+    {
+      "id": "c36a9cbf-1e91-4f12-b962-f0e3042e8b45",
+      "content": "Heuristic and LLM-extracted facts are deduplicated using Jaccard similarity with a 0.7 threshold, with LLM facts taking precedence on conflicts.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "deduplication",
+        "jaccard-similarity",
+        "fact-merging",
+        "llm-precedence"
+      ],
+      "createdAt": "2026-02-12T22:55:47.722Z",
+      "updatedAt": "2026-02-12T22:55:47.722Z"
     }
   ]
 }
