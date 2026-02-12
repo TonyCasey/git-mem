@@ -1,0 +1,20 @@
+{
+  "memories": [
+    {
+      "id": "bffafa09-4932-452f-806c-4989eab1e239",
+      "content": "User prompt at 2026-02-12T11:48:49.485Z: Where are the logs for this project stored when running on a machine?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T11:48:49.486Z",
+      "updatedAt": "2026-02-12T11:48:49.486Z"
+    }
+  ]
+}
