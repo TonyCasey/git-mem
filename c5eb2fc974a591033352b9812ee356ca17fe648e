@@ -287,6 +287,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.403Z",
       "updatedAt": "2026-02-12T23:27:30.403Z"
+    },
+    {
+      "id": "fd274536-64ef-4344-9c27-9c1ea2900c18",
+      "content": "The logging infrastructure uses daily file rotation with retention cleanup and defaults to os.tmpdir() to avoid polluting working directories.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "file-management",
+        "log-retention"
+      ],
+      "createdAt": "2026-02-12T23:27:30.416Z",
+      "updatedAt": "2026-02-12T23:27:30.416Z"
     }
   ]
 }
