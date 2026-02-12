@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "2a05fb4b-d374-4a72-ba93-91889e46a6b1",
+      "content": "The RetrofitService was exposed as an MCP tool named 'git_mem_retrofit' to allow AI agents to scan commit history and extract structured memories.",
+      "type": "decision",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "retrofit",
+        "api-design",
+        "ai-agents"
+      ],
+      "createdAt": "2026-02-12T22:57:07.760Z",
+      "updatedAt": "2026-02-12T22:57:07.760Z"
+    }
+  ]
+}
