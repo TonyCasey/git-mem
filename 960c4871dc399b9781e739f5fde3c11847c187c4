@@ -129,6 +129,24 @@
       ],
       "createdAt": "2026-02-12T22:56:45.878Z",
       "updatedAt": "2026-02-12T22:56:45.878Z"
+    },
+    {
+      "id": "5656db4f-718f-4c1e-b98e-ae1b2bdcc359",
+      "content": "Hook commands in Claude settings follow a specific schema with matcher, hooks array, type, and command fields for proper Claude Desktop integration.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "claude-settings",
+        "hooks",
+        "schema"
+      ],
+      "createdAt": "2026-02-12T22:56:45.889Z",
+      "updatedAt": "2026-02-12T22:56:45.889Z"
     }
   ]
 }
