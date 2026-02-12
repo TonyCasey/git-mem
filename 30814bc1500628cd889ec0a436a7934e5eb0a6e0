@@ -76,6 +76,25 @@
       ],
       "createdAt": "2026-02-12T22:54:59.184Z",
       "updatedAt": "2026-02-12T22:54:59.184Z"
+    },
+    {
+      "id": "a7d4b9e2-dd83-4ed9-a526-2f415bfc2b71",
+      "content": "Environment variable ANTHROPIC_API_KEY is only required for LLM enrichment during the liberate command, falling back to heuristic extraction with a warning if not provided.",
+      "type": "fact",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "environment-variables",
+        "llm-enrichment",
+        "anthropic",
+        "fallback-behavior"
+      ],
+      "createdAt": "2026-02-12T22:54:59.197Z",
+      "updatedAt": "2026-02-12T22:54:59.197Z"
     }
   ]
 }
