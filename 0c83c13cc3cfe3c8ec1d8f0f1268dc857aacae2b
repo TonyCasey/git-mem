@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T16:16:57.161Z",
       "updatedAt": "2026-02-12T16:16:57.161Z"
+    },
+    {
+      "id": "ec50b14f-f7a7-42af-a722-f90816878f26",
+      "content": "Session summary [session:55b69a11]: PR #21 confirmed merged. Here's where we stand:  **Completed:** - Phase 1 (PR #20) — DI container + event bus foundation - Phase 2 (PR #21) — Session-start hook + init-hooks CLI  **Next up — Phase 3:...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T16:16:57.182Z",
+      "updatedAt": "2026-02-12T16:16:57.182Z"
     }
   ]
 }
