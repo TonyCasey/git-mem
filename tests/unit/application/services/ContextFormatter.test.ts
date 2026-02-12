@@ -113,6 +113,23 @@ describe('ContextFormatter', () => {
     assert.ok(output.endsWith('...'));
   });
 
+  it('should use fallback message for unknown trigger', () => {
+    const memories = [createMemory()];
+
+    const output = formatter.format(memories, { trigger: 'custom-event' });
+
+    assert.ok(output.includes('Session: custom-event'));
+  });
+
+  it('should handle maxLength <= 3 without ellipsis', () => {
+    const memories = [createMemory({ content: 'Short' })];
+
+    const output = formatter.format(memories, { maxLength: 3 });
+
+    assert.equal(output.length, 3);
+    assert.ok(!output.endsWith('...'));
+  });
+
   it('should skip empty type sections', () => {
     const memories = [createMemory({ type: 'decision', content: 'Only decisions' })];
 
