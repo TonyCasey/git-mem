@@ -491,6 +491,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.839Z",
       "updatedAt": "2026-02-12T22:55:21.839Z"
+    },
+    {
+      "id": "eab2a182-cca9-44e6-9184-af283dce90bb",
+      "content": "SessionCaptureService delegates to LiberateService for actual memory extraction but provides session-specific orchestration and result formatting.",
+      "type": "decision",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-capture",
+        "service-delegation",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:55:21.852Z",
+      "updatedAt": "2026-02-12T22:55:21.852Z"
     }
   ]
 }
