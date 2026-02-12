@@ -360,6 +360,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.451Z",
       "updatedAt": "2026-02-12T23:27:30.451Z"
+    },
+    {
+      "id": "4d3d73d4-5bc9-4c28-bb47-db5235c5871c",
+      "content": "The MCP server uses module-level logger instantiation to prevent duplicate logger instances across tool invocations.",
+      "type": "gotcha",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp-server",
+        "logging",
+        "singleton-pattern"
+      ],
+      "createdAt": "2026-02-12T23:27:30.462Z",
+      "updatedAt": "2026-02-12T23:27:30.462Z"
     }
   ]
 }
