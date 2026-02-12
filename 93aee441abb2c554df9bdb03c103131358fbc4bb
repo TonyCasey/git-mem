@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "1206741e-01db-4fcc-9234-d558ffe911c1",
+      "content": "The project uses CodeRabbit for automated code reviews with assertive profile, auto-labeling, and AI agent prompts enabled.",
+      "type": "fact",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "coderabbit",
+        "automated-review",
+        "ci-cd"
+      ],
+      "createdAt": "2026-02-12T22:56:59.949Z",
+      "updatedAt": "2026-02-12T22:56:59.949Z"
+    }
+  ]
+}
