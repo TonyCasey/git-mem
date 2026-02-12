@@ -65,6 +65,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.766Z",
       "updatedAt": "2026-02-12T22:57:44.766Z"
+    },
+    {
+      "id": "2718d302-dcd6-4fee-bdf7-f7b46ea83f71",
+      "content": "Four core tools are exposed via MCP: git_mem_remember (store), git_mem_recall (search), git_mem_context (staged changes), and git_mem_retrofit (history scan).",
+      "type": "fact",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "tools",
+        "api"
+      ],
+      "createdAt": "2026-02-12T22:57:44.779Z",
+      "updatedAt": "2026-02-12T22:57:44.779Z"
     }
   ]
 }
