@@ -11,7 +11,7 @@ function isValidLogLevel(value: string): value is LogLevel {
 }
 
 export function defaultLogDir(): string {
-  return path.join(os.tmpdir(), 'git-mem', 'logs');
+  return path.join(os.homedir(), '.git-mem', 'logs');
 }
 
 export function loadLoggerOptions(): ILoggerOptions {
