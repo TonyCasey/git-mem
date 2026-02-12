@@ -251,6 +251,25 @@
       ],
       "createdAt": "2026-02-12T23:26:52.211Z",
       "updatedAt": "2026-02-12T23:26:52.211Z"
+    },
+    {
+      "id": "f9d3f66d-8075-41a9-88a5-42ebcee85622",
+      "content": "The codebase uses a unified init command that combines multiple setup steps (hooks, MCP config, gitignore, env checks, and optional history liberation) with interactive prompts, replacing separate init-hooks and init-mcp commands.",
+      "type": "decision",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "init-command",
+        "user-experience",
+        "command-consolidation"
+      ],
+      "createdAt": "2026-02-12T23:28:53.273Z",
+      "updatedAt": "2026-02-12T23:28:53.273Z"
     }
   ]
 }
