@@ -126,6 +126,24 @@
       ],
       "createdAt": "2026-02-12T23:30:01.601Z",
       "updatedAt": "2026-02-12T23:30:01.601Z"
+    },
+    {
+      "id": "a4e8c925-609a-4339-af3e-6bd21e59de20",
+      "content": "The binary entry point uses a shebang (#!/usr/bin/env node) and is configured as 'git-mem-mcp' in package.json, making it executable as a standalone command-line tool.",
+      "type": "fact",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "executable",
+        "package-json"
+      ],
+      "createdAt": "2026-02-12T23:30:01.621Z",
+      "updatedAt": "2026-02-12T23:30:01.621Z"
     }
   ]
 }
