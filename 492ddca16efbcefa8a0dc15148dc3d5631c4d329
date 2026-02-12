@@ -32,6 +32,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.464Z",
       "updatedAt": "2026-02-12T22:56:12.464Z"
+    },
+    {
+      "id": "90a75502-f4ed-4116-b94e-affb74f9943c",
+      "content": "Command flags are standardized to use --commit-count instead of --max across commands (init and liberate) for consistency.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "naming-conventions",
+        "flags"
+      ],
+      "createdAt": "2026-02-12T22:56:12.487Z",
+      "updatedAt": "2026-02-12T22:56:12.487Z"
     }
   ]
 }
