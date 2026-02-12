@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "e48113cd-d7f4-42a7-a3c2-5948aebbc44d",
+      "content": "MCP (Model Context Protocol) server implementation uses stdio transport for communication, with the server entry point configured as an executable Node.js script.",
+      "type": "decision",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "stdio-transport",
+        "node-executable"
+      ],
+      "createdAt": "2026-02-12T22:57:16.212Z",
+      "updatedAt": "2026-02-12T22:57:16.212Z"
+    }
+  ]
+}
