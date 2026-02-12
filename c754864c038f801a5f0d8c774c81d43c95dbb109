@@ -185,6 +185,25 @@
       ],
       "createdAt": "2026-02-12T23:30:28.021Z",
       "updatedAt": "2026-02-12T23:30:28.021Z"
+    },
+    {
+      "id": "586090db-11fc-4cd7-a19d-4b60edcc59ab",
+      "content": "The CI pipeline runs build, lint, and test steps on every PR and push to main to catch failures before merge.",
+      "type": "decision",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "ci",
+        "quality-gates",
+        "testing",
+        "build-process"
+      ],
+      "createdAt": "2026-02-12T23:30:28.033Z",
+      "updatedAt": "2026-02-12T23:30:28.033Z"
     }
   ]
 }
