@@ -400,6 +400,25 @@
       ],
       "createdAt": "2026-02-12T20:08:13.503Z",
       "updatedAt": "2026-02-12T20:08:13.503Z"
+    },
+    {
+      "id": "08490298-13b9-49a9-9445-708f2fa6276e",
+      "content": "The git-mem hook system uses a 24-hour rolling window to capture session commits because Claude Code's session-stop payload doesn't include session start time, making it a pragmatic approximation for scope.",
+      "type": "decision",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-capture",
+        "hook-system",
+        "claude-code",
+        "time-window"
+      ],
+      "createdAt": "2026-02-12T22:55:21.754Z",
+      "updatedAt": "2026-02-12T22:55:21.754Z"
     }
   ]
 }
