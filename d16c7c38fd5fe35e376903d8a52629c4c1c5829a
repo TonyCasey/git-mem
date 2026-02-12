@@ -396,6 +396,22 @@
       ],
       "createdAt": "2026-02-12T12:57:50.403Z",
       "updatedAt": "2026-02-12T12:57:50.403Z"
+    },
+    {
+      "id": "6bf73030-a14e-4ab0-9e55-f411aa4fddd9",
+      "content": "User prompt at 2026-02-12T13:03:15.675Z: let's start on phase 1",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:03:15.676Z",
+      "updatedAt": "2026-02-12T13:03:15.676Z"
     }
   ]
 }
