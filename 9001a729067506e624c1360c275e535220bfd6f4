@@ -55,6 +55,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.333Z",
       "updatedAt": "2026-02-12T22:56:00.333Z"
+    },
+    {
+      "id": "c2d2584e-4130-4de0-8b69-71dd40e8a99f",
+      "content": "Git client interface was extended with diffStaged() and diffStagedNames() methods to support context analysis of staged changes specifically.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git-client",
+        "interface-extension",
+        "staged-changes"
+      ],
+      "createdAt": "2026-02-12T22:56:00.352Z",
+      "updatedAt": "2026-02-12T22:56:00.352Z"
     }
   ]
 }
