@@ -147,6 +147,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.757Z",
       "updatedAt": "2026-02-12T22:55:47.757Z"
+    },
+    {
+      "id": "13ad87d8-02ea-4b77-ab98-564e74d47e82",
+      "content": "Memory annotations include an enrichedByLLM flag to distinguish between heuristic-only and LLM-enhanced extractions for transparency.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "annotation-metadata",
+        "enrichment-tracking",
+        "transparency",
+        "memory-entities"
+      ],
+      "createdAt": "2026-02-12T22:55:47.768Z",
+      "updatedAt": "2026-02-12T22:55:47.768Z"
     }
   ]
 }
