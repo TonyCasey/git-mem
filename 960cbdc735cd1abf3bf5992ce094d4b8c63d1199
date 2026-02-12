@@ -180,6 +180,25 @@
       ],
       "createdAt": "2026-02-12T21:08:28.147Z",
       "updatedAt": "2026-02-12T21:08:28.147Z"
+    },
+    {
+      "id": "6bfbca6f-1619-46c1-ab71-2fc4d7ed9a4f",
+      "content": "Session summary [session:04329471]: Yes! We're working on **GIT-60 — unified `git-mem hook` command + safe settings.json merge**.  **Current state:** - Branch: `tony/git-60-unified-hook-command` - PR #25 is **open**: https://github.com/...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T21:08:28.170Z",
+      "updatedAt": "2026-02-12T21:08:28.170Z"
     }
   ]
 }
