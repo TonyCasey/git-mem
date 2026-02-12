@@ -222,6 +222,25 @@
       ],
       "createdAt": "2026-02-12T23:29:27.999Z",
       "updatedAt": "2026-02-12T23:29:27.999Z"
+    },
+    {
+      "id": "ff5ffd6b-ee02-42b0-913e-f798296a02d6",
+      "content": "Hook event types that contain only git-mem entries are completely removed during cleanup, while those with mixed entries only remove git-mem-specific hooks.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cleanup",
+        "hooks",
+        "init-hooks",
+        "claude-desktop"
+      ],
+      "createdAt": "2026-02-12T23:29:28.012Z",
+      "updatedAt": "2026-02-12T23:29:28.012Z"
     }
   ]
 }
