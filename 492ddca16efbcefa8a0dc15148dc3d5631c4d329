@@ -270,6 +270,25 @@
       ],
       "createdAt": "2026-02-12T23:28:53.273Z",
       "updatedAt": "2026-02-12T23:28:53.273Z"
+    },
+    {
+      "id": "0f3f34ec-a185-4b10-a297-5f21d811fa50",
+      "content": "The --commit-count flag is used consistently across init and liberate commands (renamed from --max in liberate) to maintain parameter naming consistency.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "parameter-naming",
+        "consistency",
+        "liberate-command"
+      ],
+      "createdAt": "2026-02-12T23:28:53.291Z",
+      "updatedAt": "2026-02-12T23:28:53.291Z"
     }
   ]
 }
