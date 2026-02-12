@@ -162,6 +162,24 @@
       ],
       "createdAt": "2026-02-12T22:58:15.941Z",
       "updatedAt": "2026-02-12T22:58:15.941Z"
+    },
+    {
+      "id": "e2d47d6a-6bbe-46a1-9c09-77e2a3f73ed7",
+      "content": "The project uses git notes on refs/notes/mem to store AI coding memories as JSON, making them git-native and shareable while being non-invasive to commits.",
+      "type": "fact",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git-notes",
+        "memory-storage",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T23:31:07.388Z",
+      "updatedAt": "2026-02-12T23:31:07.388Z"
     }
   ]
 }
