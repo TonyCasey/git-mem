@@ -33,6 +33,24 @@
       ],
       "createdAt": "2026-02-12T11:49:11.021Z",
       "updatedAt": "2026-02-12T11:49:11.021Z"
+    },
+    {
+      "id": "e556f38b-8094-4008-b9fd-2237c080b1ef",
+      "content": "Session summary [session:2733e0c6]: Logs are stored in the **system temp directory** by default:  **Default location:** `{os.tmpdir()}/git-mem/logs`  On macOS, this typically resolves to: ``` /var/folders/<hash>/<hash>/T/git-mem/logs ``...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium"
+      ],
+      "createdAt": "2026-02-12T11:49:11.046Z",
+      "updatedAt": "2026-02-12T11:49:11.046Z"
     }
   ]
 }
