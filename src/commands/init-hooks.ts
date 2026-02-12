@@ -145,14 +145,14 @@ export function deepMergeGitMemConfig(
 
 // ── Config builders ──────────────────────────────────────────────────
 
-function getSettingsPath(scope: string): string {
+export function getSettingsPath(scope: string): string {
   if (scope === 'user') {
     return join(homedir(), '.claude', 'settings.json');
   }
   return join(process.cwd(), '.claude', 'settings.json');
 }
 
-function readExistingSettings(path: string): Record<string, unknown> {
+export function readExistingSettings(path: string): Record<string, unknown> {
   if (!existsSync(path)) {
     return {};
   }
@@ -163,7 +163,7 @@ function readExistingSettings(path: string): Record<string, unknown> {
   }
 }
 
-function buildHooksConfig(): Record<string, unknown> {
+export function buildHooksConfig(): Record<string, unknown> {
   return {
     SessionStart: [
       {
@@ -186,7 +186,7 @@ function buildHooksConfig(): Record<string, unknown> {
   };
 }
 
-function buildGitMemConfig(): Record<string, unknown> {
+export function buildGitMemConfig(): Record<string, unknown> {
   return {
     hooks: {
       enabled: true,
