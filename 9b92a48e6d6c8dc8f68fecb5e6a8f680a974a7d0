@@ -17,6 +17,24 @@
       ],
       "createdAt": "2026-02-12T22:57:55.940Z",
       "updatedAt": "2026-02-12T22:57:55.940Z"
+    },
+    {
+      "id": "ba448c23-3eae-48ff-a11c-69f3b5ebb6b5",
+      "content": "Each MCP tool must handle its own service instantiation (MemoryService, MemoryRepository, NotesService) rather than receiving them as dependencies.",
+      "type": "decision",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "dependency-injection",
+        "service-layer"
+      ],
+      "createdAt": "2026-02-12T22:57:55.970Z",
+      "updatedAt": "2026-02-12T22:57:55.970Z"
     }
   ]
 }
