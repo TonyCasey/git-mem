@@ -1,0 +1,20 @@
+{
+  "memories": [
+    {
+      "id": "f7b84eef-2cf1-4f50-b8c4-6a0457b7c069",
+      "content": "Phase 3 complete (PR #22): Full hook suite — session-stop hook with SessionCaptureService delegating to LiberateService, user-prompt-submit hook reusing MemoryContextLoader + ContextFormatter, .git-mem.json config reading with per-hook enabled flags and sensible defaults. 20 files changed, 916 insertions. All 229 tests pass. GIT-51 through GIT-54 done.",
+      "type": "decision",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [
+        "phase-3",
+        "hooks",
+        "milestone"
+      ],
+      "createdAt": "2026-02-12T17:23:29.689Z",
+      "updatedAt": "2026-02-12T17:23:29.689Z"
+    }
+  ]
+}
