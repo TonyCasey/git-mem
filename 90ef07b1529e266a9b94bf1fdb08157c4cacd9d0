@@ -240,6 +240,25 @@
       ],
       "createdAt": "2026-02-12T23:27:52.472Z",
       "updatedAt": "2026-02-12T23:27:52.472Z"
+    },
+    {
+      "id": "688ae135-fbb3-4eaa-ae58-dd5f74e2f985",
+      "content": "The system includes comprehensive testing with 69 tests split between unit tests (57) and integration tests (12), indicating a test-driven development approach.",
+      "type": "fact",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "unit-tests",
+        "integration-tests",
+        "test-coverage"
+      ],
+      "createdAt": "2026-02-12T23:27:52.483Z",
+      "updatedAt": "2026-02-12T23:27:52.483Z"
     }
   ]
 }
