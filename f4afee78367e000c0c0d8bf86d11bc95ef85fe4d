@@ -455,6 +455,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.812Z",
       "updatedAt": "2026-02-12T22:55:21.812Z"
+    },
+    {
+      "id": "4ad092a5-9998-4053-963e-1530a0e91b23",
+      "content": "The hook system includes three main hooks: session-start (loads context), session-stop (captures memories), and user-prompt-submit (surfaces relevant memories), with the prompt-submit hook disabled by default.",
+      "type": "fact",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hook-types",
+        "session-lifecycle",
+        "prompt-handling"
+      ],
+      "createdAt": "2026-02-12T22:55:21.826Z",
+      "updatedAt": "2026-02-12T22:55:21.826Z"
     }
   ]
 }
