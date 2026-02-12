@@ -775,6 +775,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.772Z",
       "updatedAt": "2026-02-12T23:27:18.772Z"
+    },
+    {
+      "id": "97f721d0-ea58-489a-8196-75ec8bd20d91",
+      "content": "Logger scoping is implemented via options.scope with child() pattern for command-specific logging contexts.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "scoping",
+        "child-logger"
+      ],
+      "createdAt": "2026-02-12T23:27:18.784Z",
+      "updatedAt": "2026-02-12T23:27:18.784Z"
     }
   ]
 }
