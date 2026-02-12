@@ -127,6 +127,24 @@
       ],
       "createdAt": "2026-02-12T22:55:11.534Z",
       "updatedAt": "2026-02-12T22:55:11.534Z"
+    },
+    {
+      "id": "6da533af-c7a5-41dd-bfd2-0907f300e686",
+      "content": "The system uses deduplication utilities in the domain layer to prevent duplicate memories, suggesting this was identified as a necessary feature.",
+      "type": "decision",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "deduplication",
+        "domain-logic",
+        "memory-management"
+      ],
+      "createdAt": "2026-02-12T22:55:11.544Z",
+      "updatedAt": "2026-02-12T22:55:11.544Z"
     }
   ]
 }
