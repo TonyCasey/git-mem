@@ -231,6 +231,25 @@
       ],
       "createdAt": "2026-02-12T21:02:32.120Z",
       "updatedAt": "2026-02-12T21:02:32.120Z"
+    },
+    {
+      "id": "9461bf40-8cba-4f77-8be3-c61975ed857e",
+      "content": "Session summary [session:d6d5d571]: Done. Next session I'll output that welcome banner automatically when I start up. Want to test it by starting a new session, or shall we get back to the Phase 4 work?...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T21:02:32.144Z",
+      "updatedAt": "2026-02-12T21:02:32.144Z"
     }
   ]
 }
