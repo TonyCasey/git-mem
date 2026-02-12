@@ -46,6 +46,7 @@ describe('createContainer', () => {
       assert.ok(cradle.memoryService);
       assert.ok(cradle.contextService);
       assert.ok(cradle.liberateService);
+      assert.ok(cradle.sessionCaptureService);
     });
 
     it('should return singletons within container scope', () => {
@@ -144,6 +145,18 @@ describe('createContainer', () => {
       const container = createContainer();
       const events = container.cradle.eventBus.registeredEvents();
       assert.ok(events.includes('session:start'));
+    });
+
+    it('should have session:stop handler registered', () => {
+      const container = createContainer();
+      const events = container.cradle.eventBus.registeredEvents();
+      assert.ok(events.includes('session:stop'));
+    });
+
+    it('should have prompt:submit handler registered', () => {
+      const container = createContainer();
+      const events = container.cradle.eventBus.registeredEvents();
+      assert.ok(events.includes('prompt:submit'));
     });
   });
 

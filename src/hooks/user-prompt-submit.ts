@@ -1,11 +1,12 @@
 /**
- * Session-start hook entry point.
+ * User-prompt-submit hook entry point.
  *
- * Invoked by Claude Code on session startup. Reads JSON from stdin,
- * emits a session:start event, and outputs loaded memories to stdout.
+ * Invoked by Claude Code when the user submits a prompt. Reads JSON
+ * from stdin, emits a prompt:submit event, and outputs relevant
+ * memories to stdout for Claude's context.
  *
- * stdout → Claude's context (memories formatted as markdown)
- * stderr → User's terminal (status summary)
+ * stdout -> Claude's context (memories formatted as markdown)
+ * stderr -> User's terminal (status summary)
  */
 
 import { createContainer } from '../infrastructure/di';
@@ -13,9 +14,9 @@ import { readStdin } from './utils/stdin';
 import { setupShutdown } from './utils/shutdown';
 import { loadHookConfig } from './utils/config';
 
-interface ISessionStartInput {
+interface IPromptSubmitInput {
   session_id?: string;
-  source?: string;
+  prompt?: string;
   cwd?: string;
   hook_event_name?: string;
 }
@@ -23,25 +24,25 @@ interface ISessionStartInput {
 const timer = setupShutdown(10_000);
 
 async function main(): Promise<void> {
-  const input = await readStdin<ISessionStartInput>();
+  const input = await readStdin<IPromptSubmitInput>();
   const config = loadHookConfig(input.cwd);
 
-  if (!config.hooks.enabled || !config.hooks.sessionStart.enabled) {
+  if (!config.hooks.enabled || !config.hooks.promptSubmit.enabled) {
     clearTimeout(timer);
     return;
   }
 
-  const container = createContainer({ scope: 'hook:session-start' });
+  const container = createContainer({ scope: 'hook:user-prompt-submit' });
   const { eventBus } = container.cradle;
 
   const results = await eventBus.emit({
-    type: 'session:start',
+    type: 'prompt:submit',
     sessionId: input.session_id ?? 'unknown',
-    trigger: input.source ?? 'startup',
+    prompt: input.prompt ?? '',
     cwd: input.cwd ?? process.cwd(),
   });
 
-  // Successful handler output → stdout (Claude context)
+  // Successful handler output -> stdout (Claude context)
   const output = results
     .filter(r => r.success && r.output)
     .map(r => r.output)
@@ -51,18 +52,16 @@ async function main(): Promise<void> {
     console.log(output);
   }
 
-  // Summary → stderr (user terminal)
+  // Summary -> stderr (user terminal)
   const failed = results.filter(r => !r.success).length;
   if (failed > 0) {
-    console.error(`git-mem: Memory loaded (${results.length - failed} ok, ${failed} failed).`);
-  } else if (output) {
-    console.error(`git-mem: Memory loaded.`);
+    console.error(`git-mem: Prompt context loaded (${results.length - failed} ok, ${failed} failed).`);
   }
 
   clearTimeout(timer);
 }
 
 main().catch((err) => {
-  console.error('git-mem: session-start hook failed.', err);
+  console.error('git-mem: user-prompt-submit hook failed.', err);
   process.exit(0); // Exit cleanly — hooks must never disrupt Claude Code
 });

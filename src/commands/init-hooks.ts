@@ -17,9 +17,8 @@ interface IInitHooksOptions {
   remove?: boolean;
 }
 
-function resolveHookCommand(): string {
-  // Use the built hook entry point relative to this module
-  const hookPath = join(__dirname, '..', 'hooks', 'session-start.js');
+function resolveHookCommand(hookName: string): string {
+  const hookPath = join(__dirname, '..', 'hooks', `${hookName}.js`);
   return `node ${hookPath}`;
 }
 
@@ -42,13 +41,23 @@ function readExistingSettings(path: string): Record<string, unknown> {
 }
 
 function buildHooksConfig(): Record<string, unknown> {
-  const command = resolveHookCommand();
-
   return {
     SessionStart: [
       {
         matcher: '',
-        hooks: [{ type: 'command', command }],
+        hooks: [{ type: 'command', command: resolveHookCommand('session-start') }],
+      },
+    ],
+    SessionStop: [
+      {
+        matcher: '',
+        hooks: [{ type: 'command', command: resolveHookCommand('session-stop') }],
+      },
+    ],
+    UserPromptSubmit: [
+      {
+        matcher: '',
+        hooks: [{ type: 'command', command: resolveHookCommand('user-prompt-submit') }],
       },
     ],
   };
@@ -61,6 +70,16 @@ function buildGitMemConfig(): Record<string, unknown> {
       sessionStart: {
         enabled: true,
         memoryLimit: 20,
+      },
+      sessionStop: {
+        enabled: true,
+        autoLiberate: true,
+        threshold: 3,
+      },
+      promptSubmit: {
+        enabled: false,
+        recordPrompts: false,
+        surfaceContext: true,
       },
     },
   };
@@ -80,6 +99,8 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
       const settings = readExistingSettings(settingsPath);
       if (settings.hooks) {
         delete (settings.hooks as Record<string, unknown>).SessionStart;
+        delete (settings.hooks as Record<string, unknown>).SessionStop;
+        delete (settings.hooks as Record<string, unknown>).UserPromptSubmit;
         // If hooks object is now empty, remove it
         if (Object.keys(settings.hooks as object).length === 0) {
           delete settings.hooks;
@@ -130,7 +151,9 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   console.log('Written .git-mem.json');
 
   console.log('\nHooks configured:');
-  console.log('  SessionStart — Load memories into Claude context on startup');
+  console.log('  SessionStart     — Load memories into Claude context on startup');
+  console.log('  SessionStop      — Capture memories from session commits on exit');
+  console.log('  UserPromptSubmit — Surface relevant memories per prompt (disabled by default)');
 
   console.log('\nNext steps:');
   console.log('  1. Start Claude Code in this repo: claude');
