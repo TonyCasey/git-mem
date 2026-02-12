@@ -238,6 +238,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.800Z",
       "updatedAt": "2026-02-12T23:28:28.800Z"
+    },
+    {
+      "id": "36c2c205-ebed-426f-a51e-bd5519a725fe",
+      "content": "Fact deduplication between heuristic and LLM results uses Jaccard similarity with a 0.7 threshold, with LLM facts winning conflicts.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "deduplication",
+        "jaccard-similarity",
+        "llm-enrichment",
+        "fact-merging"
+      ],
+      "createdAt": "2026-02-12T23:28:28.814Z",
+      "updatedAt": "2026-02-12T23:28:28.814Z"
     }
   ]
 }
