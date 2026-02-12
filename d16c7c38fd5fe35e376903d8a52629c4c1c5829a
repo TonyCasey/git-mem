@@ -234,6 +234,22 @@
       ],
       "createdAt": "2026-02-12T12:46:43.752Z",
       "updatedAt": "2026-02-12T12:46:43.752Z"
+    },
+    {
+      "id": "e27f0111-6106-45db-936a-7464aa9f352e",
+      "content": "User prompt at 2026-02-12T12:48:47.170Z: We will use Interfaces for abstraction?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:48:47.170Z",
+      "updatedAt": "2026-02-12T12:48:47.170Z"
     }
   ]
 }
