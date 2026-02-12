@@ -323,6 +323,25 @@
       ],
       "createdAt": "2026-02-12T23:27:30.428Z",
       "updatedAt": "2026-02-12T23:27:30.428Z"
+    },
+    {
+      "id": "1f7b01c3-e796-4206-a91d-19d3ad00e6e5",
+      "content": "The logging system caches directory creation state to avoid redundant mkdirSync calls when child loggers inherit from parent loggers.",
+      "type": "gotcha",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "performance",
+        "filesystem",
+        "caching"
+      ],
+      "createdAt": "2026-02-12T23:27:30.439Z",
+      "updatedAt": "2026-02-12T23:27:30.439Z"
     }
   ]
 }
