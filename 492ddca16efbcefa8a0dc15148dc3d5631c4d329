@@ -191,6 +191,21 @@
       ],
       "createdAt": "2026-02-12T22:56:12.582Z",
       "updatedAt": "2026-02-12T22:56:12.582Z"
+    },
+    {
+      "id": "41af946c-9b89-44c6-b12d-df6eb9eec80c",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-12T23:13:09.952Z",
+      "updatedAt": "2026-02-12T23:13:09.952Z"
     }
   ]
 }
