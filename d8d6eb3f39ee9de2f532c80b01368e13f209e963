@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T22:57:07.760Z",
       "updatedAt": "2026-02-12T22:57:07.760Z"
+    },
+    {
+      "id": "c7c04146-2643-42d9-a1ae-02fb7a67fb54",
+      "content": "The retrofit tool supports dry_run, since, max_commits, and threshold parameters for flexible history analysis control.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "retrofit",
+        "parameters",
+        "api-design"
+      ],
+      "createdAt": "2026-02-12T22:57:07.785Z",
+      "updatedAt": "2026-02-12T22:57:07.785Z"
     }
   ]
 }
