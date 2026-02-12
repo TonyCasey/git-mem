@@ -72,6 +72,25 @@
       ],
       "createdAt": "2026-02-12T22:57:56.005Z",
       "updatedAt": "2026-02-12T22:57:56.005Z"
+    },
+    {
+      "id": "23c3962e-f700-45e9-a4c7-f8217fe48c70",
+      "content": "MCP tool arguments are validated using Zod schemas with descriptive help text, making tools self-documenting for AI clients.",
+      "type": "decision",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "validation",
+        "zod",
+        "api-design"
+      ],
+      "createdAt": "2026-02-12T22:57:56.017Z",
+      "updatedAt": "2026-02-12T22:57:56.017Z"
     }
   ]
 }
