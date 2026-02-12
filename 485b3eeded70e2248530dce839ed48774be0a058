@@ -72,6 +72,24 @@
       ],
       "createdAt": "2026-02-12T22:57:24.249Z",
       "updatedAt": "2026-02-12T22:57:24.249Z"
+    },
+    {
+      "id": "649607f5-444b-461d-a299-2d50cd4bd8eb",
+      "content": "The LOG_DIR environment variable can override the default log directory location, providing flexibility for different deployment scenarios.",
+      "type": "fact",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "environment-variables",
+        "configuration"
+      ],
+      "createdAt": "2026-02-12T22:57:24.284Z",
+      "updatedAt": "2026-02-12T22:57:24.284Z"
     }
   ]
 }
