@@ -53,6 +53,22 @@
       ],
       "createdAt": "2026-02-12T16:42:10.703Z",
       "updatedAt": "2026-02-12T16:42:10.703Z"
+    },
+    {
+      "id": "3253fedc-f053-45a1-82fc-21fda04df8d6",
+      "content": "User prompt at 2026-02-12T16:52:57.269Z: I am thinking of a new app, one that focuses on techdebt in codebases. I would like a dashboard where I can see graphs of risks in code files/blocks that violate different software performance, princi...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T16:52:57.721Z",
+      "updatedAt": "2026-02-12T16:52:57.721Z"
     }
   ]
 }
