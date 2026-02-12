@@ -200,6 +200,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.797Z",
       "updatedAt": "2026-02-12T22:55:47.797Z"
+    },
+    {
+      "id": "195611cc-0844-4a7c-b229-a7a7670b85c9",
+      "content": "The retrofit service integrates LLM enrichment as an optional feature that gracefully degrades to heuristic-only extraction when no API key is provided or LLM calls fail.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "retrofit-service",
+        "llm-enrichment",
+        "graceful-degradation",
+        "error-handling"
+      ],
+      "createdAt": "2026-02-12T23:28:28.772Z",
+      "updatedAt": "2026-02-12T23:28:28.772Z"
     }
   ]
 }
