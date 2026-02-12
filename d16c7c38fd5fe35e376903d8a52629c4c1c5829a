@@ -431,6 +431,25 @@
       ],
       "createdAt": "2026-02-12T14:48:36.324Z",
       "updatedAt": "2026-02-12T14:48:36.324Z"
+    },
+    {
+      "id": "d61d5478-a714-4817-a55c-d9252c5e49bd",
+      "content": "Session summary [session:55b69a11]: PR #20 is actually still **open** — it hasn't been merged yet. The merge commit is null. Would you like to merge it, or were you thinking of a different PR?...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T14:48:36.354Z",
+      "updatedAt": "2026-02-12T14:48:36.354Z"
     }
   ]
 }
