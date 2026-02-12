@@ -110,6 +110,25 @@
       ],
       "createdAt": "2026-02-12T22:57:07.842Z",
       "updatedAt": "2026-02-12T22:57:07.842Z"
+    },
+    {
+      "id": "9aaa43d6-3352-468d-8b00-cb60e14dfaa0",
+      "content": "The retrofit functionality is exposed as an MCP tool named 'git_mem_retrofit' that allows AI agents to analyze commit history and extract structured memories.",
+      "type": "decision",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "retrofit",
+        "tool-registration",
+        "ai-integration"
+      ],
+      "createdAt": "2026-02-12T23:29:51.402Z",
+      "updatedAt": "2026-02-12T23:29:51.402Z"
     }
   ]
 }
