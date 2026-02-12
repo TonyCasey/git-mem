@@ -35,6 +35,24 @@
       ],
       "createdAt": "2026-02-12T22:57:55.970Z",
       "updatedAt": "2026-02-12T22:57:55.970Z"
+    },
+    {
+      "id": "cddce214-f4fb-4499-9622-276b81d79539",
+      "content": "MCP tool responses use a specific format with `content` array containing `type: 'text'` objects, and errors are indicated by `isError: true`.",
+      "type": "convention",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "response-format",
+        "error-handling"
+      ],
+      "createdAt": "2026-02-12T22:57:55.990Z",
+      "updatedAt": "2026-02-12T22:57:55.990Z"
     }
   ]
 }
