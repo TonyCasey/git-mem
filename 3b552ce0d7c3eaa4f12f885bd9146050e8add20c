@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T20:09:37.712Z",
       "updatedAt": "2026-02-12T20:09:37.712Z"
+    },
+    {
+      "id": "ebbc8211-3d43-4f34-ae2f-43d0af5279d3",
+      "content": "Session summary [session:d6d5d571]: I see the issues. Here's what I understand from the git rules and what I've been doing wrong:  1. **Branch per issue** — I created the GIT-56 branch but then committed GIT-56 work on it and was about...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:09:37.731Z",
+      "updatedAt": "2026-02-12T20:09:37.731Z"
     }
   ]
 }
