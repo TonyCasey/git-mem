@@ -329,6 +329,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.912Z",
       "updatedAt": "2026-02-12T23:29:06.912Z"
+    },
+    {
+      "id": "3155a040-d488-4596-9035-3ce1322ea86d",
+      "content": "Git-mem hooks are identified by fingerprinting command strings that start with 'git-mem hook' to distinguish them from other tools' hooks during merge operations.",
+      "type": "convention",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hook-detection",
+        "fingerprinting",
+        "config-merge"
+      ],
+      "createdAt": "2026-02-12T23:29:06.927Z",
+      "updatedAt": "2026-02-12T23:29:06.927Z"
     }
   ]
 }
