@@ -110,6 +110,25 @@
       ],
       "createdAt": "2026-02-12T22:57:56.029Z",
       "updatedAt": "2026-02-12T22:57:56.029Z"
+    },
+    {
+      "id": "98350771-f0af-465a-86b0-e20c953e37f5",
+      "content": "MCP integration tests require a timeout mechanism as subprocess communication can hang if message counts don't match expectations.",
+      "type": "gotcha",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "mcp",
+        "subprocess",
+        "timeout-handling"
+      ],
+      "createdAt": "2026-02-12T22:57:56.041Z",
+      "updatedAt": "2026-02-12T22:57:56.041Z"
     }
   ]
 }
