@@ -237,6 +237,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.198Z",
       "updatedAt": "2026-02-12T22:54:38.198Z"
+    },
+    {
+      "id": "dcf2a4a2-ec22-44c3-ae93-f0bcd1a6eced",
+      "content": "The DI container refactoring eliminated 72 lines of duplicated service wiring code across 8 entry points (CLI commands and MCP tools), replacing manual NotesService → MemoryRepository → Service chains with container.cradle resolution.",
+      "type": "fact",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "refactoring",
+        "code-duplication",
+        "service-wiring"
+      ],
+      "createdAt": "2026-02-12T22:54:38.210Z",
+      "updatedAt": "2026-02-12T22:54:38.210Z"
     }
   ]
 }
