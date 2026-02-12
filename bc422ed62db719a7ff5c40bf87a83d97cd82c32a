@@ -180,6 +180,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.388Z",
       "updatedAt": "2026-02-12T23:31:07.388Z"
+    },
+    {
+      "id": "6bb468a0-4bdd-4fb5-a255-d8dd5504bb43",
+      "content": "Project ships both a CLI (git-mem/git mem) and an MCP server (git-mem-mcp) to expose capabilities to AI coding tools over stdio.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "mcp-server",
+        "distribution"
+      ],
+      "createdAt": "2026-02-12T23:31:07.408Z",
+      "updatedAt": "2026-02-12T23:31:07.408Z"
     }
   ]
 }
