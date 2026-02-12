@@ -250,6 +250,22 @@
       ],
       "createdAt": "2026-02-12T21:02:32.144Z",
       "updatedAt": "2026-02-12T21:02:32.144Z"
+    },
+    {
+      "id": "dbd9bfd3-1c54-4fc1-b74d-cd266f0d69a3",
+      "content": "User prompt at 2026-02-12T21:04:44.971Z: there is talk about \"legacy support\", we dont need to support legacy, this package hasnt been released yet. Can you clean up legacy supporting code? And remember this decision for future ",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:04:44.971Z",
+      "updatedAt": "2026-02-12T21:04:44.971Z"
     }
   ]
 }
