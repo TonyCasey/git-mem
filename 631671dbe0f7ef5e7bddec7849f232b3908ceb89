@@ -165,6 +165,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.140Z",
       "updatedAt": "2026-02-12T22:54:38.140Z"
+    },
+    {
+      "id": "8556d50e-4931-41a8-9c74-eb66314a4a13",
+      "content": "EventBus implements sequential handler dispatch with try/catch isolation per handler. Failed handlers produce IEventResult with success:false but don't block execution of subsequent handlers.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "event-bus",
+        "error-handling",
+        "isolation"
+      ],
+      "createdAt": "2026-02-12T22:54:38.159Z",
+      "updatedAt": "2026-02-12T22:54:38.159Z"
     }
   ]
 }
