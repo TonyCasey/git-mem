@@ -234,6 +234,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.448Z",
       "updatedAt": "2026-02-12T23:31:07.448Z"
+    },
+    {
+      "id": "544b718b-4b17-485e-9c27-31c23808f732",
+      "content": "Git log parsing uses ASCII separators \\x1e (record) and \\x1f (field) because null bytes don't work reliably with git.",
+      "type": "gotcha",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git-parsing",
+        "ascii-separators",
+        "reliability"
+      ],
+      "createdAt": "2026-02-12T23:31:07.464Z",
+      "updatedAt": "2026-02-12T23:31:07.464Z"
     }
   ]
 }
