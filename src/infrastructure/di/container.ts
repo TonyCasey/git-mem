@@ -15,6 +15,8 @@ import {
 } from 'awilix';
 import type { AwilixContainer } from 'awilix';
 import type { ICradle, IContainerOptions } from './types';
+import type { ILogger } from '../../domain/interfaces/ILogger';
+import type { IGitClient } from '../../domain/interfaces/IGitClient';
 
 // Infrastructure
 import { NotesService } from '../services/NotesService';
@@ -47,7 +49,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
 
-    eventBus: asFunction(({ logger }: ICradle) => {
+    eventBus: asFunction((logger: ILogger) => {
       return new EventBus(logger);
     }).singleton(),
 
@@ -59,7 +61,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
 
     // GitTriageService constructor uses `git` not `gitClient`, so
     // we map it explicitly instead of relying on CLASSIC name matching.
-    triageService: asFunction(({ gitClient }: ICradle) => {
+    triageService: asFunction((gitClient: IGitClient) => {
       return new GitTriageService(gitClient);
     }).singleton(),
 

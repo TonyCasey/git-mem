@@ -1,8 +1,12 @@
 /**
- * ICradle
+ * DI Container Types
  *
- * Typed shape of the DI container. Every key corresponds to a
- * registered service that can be resolved via `container.resolve()`.
+ * ICradle — typed shape of the DI container. Every key corresponds
+ * to a registered service resolved via `container.resolve()`.
+ *
+ * IContainerOptions — configuration passed to `createContainer()`
+ * controlling logger, LLM enrichment, and scope labelling.
+ *
  * All types reference interfaces, not concrete implementations.
  */
 

@@ -42,10 +42,12 @@ Clean architecture with three layers. Dependencies point inward only: Infrastruc
 - `src/commands/` — CLI command handlers
 - `src/mcp/tools/` — MCP tool handlers (remember, recall, context, liberate)
 
-**Bootstrapping pattern** — No DI container. Each command/tool handler manually constructs its dependency chain fresh per invocation:
+**Bootstrapping pattern** — Awilix DI container (`src/infrastructure/di/`). `createContainer(options?)` wires all services; CLI commands and MCP tools resolve from `container.cradle`:
+```typescript
+const container = createContainer({ logger, scope: 'remember' });
+const { memoryService } = container.cradle;
 ```
-NotesService → MemoryRepository → MemoryService
-```
+Uses `InjectionMode.CLASSIC` (matches constructor parameter names to registration names). `ICradle` in `types.ts` defines the typed container shape with all interface references.
 
 ## Testing
 
