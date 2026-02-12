@@ -4,7 +4,7 @@
 
 import { createContainer } from '../infrastructure/di';
 import type { ILogger } from '../domain/interfaces/ILogger';
-import { createStderrProgressHandler, liberateWithProgress } from './progress';
+import { createStderrProgressHandler } from './progress';
 
 interface ILiberateCommandOptions {
   since?: string;
@@ -49,19 +49,14 @@ export async function liberateCommand(options: ILiberateCommandOptions, logger?:
     console.log('Dry run — no notes will be written.\n');
   }
 
-  const onProgress = createStderrProgressHandler();
-
-  const result = await liberateWithProgress(
-    () => liberateService.liberate({
-      since,
-      maxCommits,
-      dryRun: options.dryRun,
-      threshold,
-      enrich: options.enrich,
-      onProgress,
-    }),
-    onProgress,
-  );
+  const result = await liberateService.liberate({
+    since,
+    maxCommits,
+    dryRun: options.dryRun,
+    threshold,
+    enrich: options.enrich,
+    onProgress: createStderrProgressHandler(),
+  });
 
   console.log(`Commits scanned:   ${result.commitsScanned}`);
   console.log(`Commits annotated: ${result.commitsAnnotated}`);
