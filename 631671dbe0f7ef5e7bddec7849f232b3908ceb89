@@ -183,6 +183,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.159Z",
       "updatedAt": "2026-02-12T22:54:38.159Z"
+    },
+    {
+      "id": "877ae12c-bf9f-4f3d-a221-0a9254231b1f",
+      "content": "All DI container registrations are singletons within container scope, meaning each service is instantiated once per container instance.",
+      "type": "fact",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "singleton",
+        "lifecycle"
+      ],
+      "createdAt": "2026-02-12T22:54:38.173Z",
+      "updatedAt": "2026-02-12T22:54:38.173Z"
     }
   ]
 }
