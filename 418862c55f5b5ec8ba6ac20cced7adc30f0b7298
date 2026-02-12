@@ -36,6 +36,25 @@
       ],
       "createdAt": "2026-02-12T22:57:19.350Z",
       "updatedAt": "2026-02-12T22:57:19.350Z"
+    },
+    {
+      "id": "8b37f9d1-1bf0-4b7d-9be5-0cd4afc63392",
+      "content": "The project implements MCP (Model Context Protocol) server functionality with a dedicated SDK, transport layer, and server setup architecture.",
+      "type": "fact",
+      "sha": "418862c55f5b5ec8ba6ac20cced7adc30f0b7298",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "server-architecture",
+        "sdk",
+        "transport-layer"
+      ],
+      "createdAt": "2026-02-12T23:30:06.561Z",
+      "updatedAt": "2026-02-12T23:30:06.561Z"
     }
   ]
 }
