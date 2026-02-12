@@ -68,6 +68,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.501Z",
       "updatedAt": "2026-02-12T22:56:12.501Z"
+    },
+    {
+      "id": "29319d42-6073-4abf-9d5d-50c60bce294e",
+      "content": "The .gitignore modification is made idempotent by detecting existing '# git-mem' header to prevent duplicate entries on re-runs.",
+      "type": "gotcha",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "gitignore",
+        "idempotency",
+        "file-handling"
+      ],
+      "createdAt": "2026-02-12T22:56:12.513Z",
+      "updatedAt": "2026-02-12T22:56:12.513Z"
     }
   ]
 }
