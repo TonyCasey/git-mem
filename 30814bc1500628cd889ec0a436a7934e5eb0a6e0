@@ -1,0 +1,24 @@
+{
+  "memories": [
+    {
+      "id": "4a5ee563-2ad4-4c7b-88a9-cd231d57cfb7",
+      "content": "The CLI command was renamed from 'retrofit' to 'liberate' to better reflect the tool's purpose of freeing knowledge locked in git history.",
+      "type": "decision",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "command-naming",
+        "retrofit",
+        "liberate",
+        "branding"
+      ],
+      "createdAt": "2026-02-12T22:54:59.144Z",
+      "updatedAt": "2026-02-12T22:54:59.144Z"
+    }
+  ]
+}
