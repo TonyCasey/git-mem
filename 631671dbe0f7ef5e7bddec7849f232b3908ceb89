@@ -847,6 +847,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.821Z",
       "updatedAt": "2026-02-12T23:27:18.821Z"
+    },
+    {
+      "id": "8f2d3f88-c8d3-4f4c-900a-bfbc75464836",
+      "content": "EventBus failed handlers produce IEventResult with success:false and don't throw exceptions, maintaining system stability.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "event-bus",
+        "error-handling",
+        "result-pattern"
+      ],
+      "createdAt": "2026-02-12T23:27:18.833Z",
+      "updatedAt": "2026-02-12T23:27:18.833Z"
     }
   ]
 }
