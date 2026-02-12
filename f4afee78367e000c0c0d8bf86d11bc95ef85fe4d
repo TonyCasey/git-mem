@@ -15,6 +15,25 @@
       ],
       "createdAt": "2026-02-12T17:23:29.689Z",
       "updatedAt": "2026-02-12T17:23:29.689Z"
+    },
+    {
+      "id": "1925dd66-4cc1-4f7b-afed-5463fa076a3e",
+      "content": "Session work [session:55b69a11]:. 574 prompts, 856 responses",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T17:23:34.828Z",
+      "updatedAt": "2026-02-12T17:23:34.828Z"
     }
   ]
 }
