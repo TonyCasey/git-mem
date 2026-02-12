@@ -379,6 +379,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.966Z",
       "updatedAt": "2026-02-12T23:28:16.966Z"
+    },
+    {
+      "id": "4f66cd6f-111e-4e2e-9c36-ebd6a7aeb2e1",
+      "content": "Hook entry points are built as standalone JavaScript files that can be executed via 'node' command, resolved relative to the module location.",
+      "type": "fact",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "session-start",
+        "build-process"
+      ],
+      "createdAt": "2026-02-12T23:28:16.978Z",
+      "updatedAt": "2026-02-12T23:28:16.978Z"
     }
   ]
 }
