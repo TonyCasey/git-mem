@@ -233,6 +233,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.274Z",
       "updatedAt": "2026-02-12T22:54:50.274Z"
+    },
+    {
+      "id": "4e98bf92-2fbd-43f5-ab27-6a86887377d8",
+      "content": "The codebase follows a layered architecture pattern with Domain/Application/Infrastructure separation, where infrastructure components (logging, repositories) are injected into application services via constructor dependency injection.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "dependency-injection",
+        "layered-architecture"
+      ],
+      "createdAt": "2026-02-12T23:27:30.348Z",
+      "updatedAt": "2026-02-12T23:27:30.348Z"
     }
   ]
 }
