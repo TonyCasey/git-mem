@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "5778afb7-dd07-426e-acc7-57391c47fc3c",
+      "content": "Progress feedback is implemented using a callback pattern with ILiberateProgress interface that includes phase tracking (triage/processing/complete), commit counts, and facts extracted count.",
+      "type": "decision",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "progress-feedback",
+        "callback-pattern",
+        "user-interface"
+      ],
+      "createdAt": "2026-02-12T23:30:15.540Z",
+      "updatedAt": "2026-02-12T23:30:15.540Z"
+    }
+  ]
+}
