@@ -144,6 +144,24 @@
       ],
       "createdAt": "2026-02-12T22:56:25.232Z",
       "updatedAt": "2026-02-12T22:56:25.232Z"
+    },
+    {
+      "id": "be6ec391-2cef-4d95-8bbe-a6dc57a6cf79",
+      "content": "The isGitMemEntry function uses command fingerprinting (commands starting with 'git-mem hook ') to identify git-mem owned hooks during merge operations.",
+      "type": "fact",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hook-detection",
+        "fingerprinting",
+        "merge-logic"
+      ],
+      "createdAt": "2026-02-12T22:56:25.244Z",
+      "updatedAt": "2026-02-12T22:56:25.244Z"
     }
   ]
 }
