@@ -199,6 +199,22 @@
       ],
       "createdAt": "2026-02-12T21:08:28.170Z",
       "updatedAt": "2026-02-12T21:08:28.170Z"
+    },
+    {
+      "id": "cbbf2387-51fb-463f-806a-08b5df463df6",
+      "content": "User prompt at 2026-02-12T21:11:47.631Z: its merged already, lets move on to phase 4, get the details from Linear",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:11:47.631Z",
+      "updatedAt": "2026-02-12T21:11:47.631Z"
     }
   ]
 }
