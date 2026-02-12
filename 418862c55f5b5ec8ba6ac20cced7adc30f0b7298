@@ -55,6 +55,24 @@
       ],
       "createdAt": "2026-02-12T23:30:06.561Z",
       "updatedAt": "2026-02-12T23:30:06.561Z"
+    },
+    {
+      "id": "239988bc-f1c0-4cba-8c6a-99df45c3b550",
+      "content": "The codebase follows a modular architecture separating SDK components from transport mechanisms and server initialization logic.",
+      "type": "decision",
+      "sha": "418862c55f5b5ec8ba6ac20cced7adc30f0b7298",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "separation-of-concerns",
+        "modularity"
+      ],
+      "createdAt": "2026-02-12T23:30:06.597Z",
+      "updatedAt": "2026-02-12T23:30:06.597Z"
     }
   ]
 }
