@@ -128,6 +128,26 @@
       ],
       "createdAt": "2026-02-12T23:29:15.727Z",
       "updatedAt": "2026-02-12T23:29:15.727Z"
+    },
+    {
+      "id": "8643e48a-0ce8-4f55-942a-3a4698462d70",
+      "content": "MCP tools communicate over stdio using JSON-RPC 2.0 protocol via StdioServerTransport from the @modelcontextprotocol/sdk.",
+      "type": "fact",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "communication",
+        "stdio",
+        "json-rpc",
+        "transport"
+      ],
+      "createdAt": "2026-02-12T23:29:15.759Z",
+      "updatedAt": "2026-02-12T23:29:15.759Z"
     }
   ]
 }
