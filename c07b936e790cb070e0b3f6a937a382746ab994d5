@@ -53,6 +53,18 @@
       ],
       "createdAt": "2026-02-12T12:15:17.076Z",
       "updatedAt": "2026-02-12T12:15:17.076Z"
+    },
+    {
+      "id": "44a39eef-60d5-4e41-8f21-bbc1fea96a31",
+      "content": "testing log location change",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-12T12:15:29.650Z",
+      "updatedAt": "2026-02-12T12:15:29.650Z"
     }
   ]
 }
