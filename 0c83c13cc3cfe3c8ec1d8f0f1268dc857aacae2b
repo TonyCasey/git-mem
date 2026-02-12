@@ -163,6 +163,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.412Z",
       "updatedAt": "2026-02-12T22:55:34.412Z"
+    },
+    {
+      "id": "8047eae5-94cf-4684-a1ff-727a2d5af3c1",
+      "content": "The init-hooks command merges configurations into existing files (.claude/settings.json and .git-mem.json) rather than overwriting them to preserve user customizations.",
+      "type": "decision",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "init-hooks",
+        "configuration",
+        "merge-strategy"
+      ],
+      "createdAt": "2026-02-12T22:55:34.428Z",
+      "updatedAt": "2026-02-12T22:55:34.428Z"
     }
   ]
 }
