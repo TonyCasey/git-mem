@@ -323,6 +323,25 @@
       ],
       "createdAt": "2026-02-12T12:50:26.013Z",
       "updatedAt": "2026-02-12T12:50:26.013Z"
+    },
+    {
+      "id": "d4e9fccb-b176-453e-8d7e-fc8f94949d37",
+      "content": "Session summary [session:55b69a11]: Done. Added:  - **Interactive setup wizard** for `git mem init-hooks` — checkbox selection of hooks, project vs user scope, memory limit config - **Non-interactive mode** (`--yes` / `-y`) with default...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T12:50:26.041Z",
+      "updatedAt": "2026-02-12T12:50:26.041Z"
     }
   ]
 }
