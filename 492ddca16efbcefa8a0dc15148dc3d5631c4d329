@@ -386,6 +386,25 @@
       ],
       "createdAt": "2026-02-12T23:28:53.358Z",
       "updatedAt": "2026-02-12T23:28:53.358Z"
+    },
+    {
+      "id": "b0325933-8b8e-467c-9715-e965d97e4547",
+      "content": "Pure helper functions are explicitly marked and exported for unit testing, demonstrating a commitment to testability and separation of concerns.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "pure-functions",
+        "testability",
+        "separation-of-concerns"
+      ],
+      "createdAt": "2026-02-12T23:28:53.369Z",
+      "updatedAt": "2026-02-12T23:28:53.369Z"
     }
   ]
 }
