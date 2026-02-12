@@ -62,19 +62,9 @@ describe('isGitMemEntry', () => {
     assert.equal(isGitMemEntry({ matcher: '', hooks: [{ type: 'command' }] }), false);
   });
 
-  it('should return true for legacy node-path entry with hooks/session-start.js', () => {
-    const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /path/to/hooks/session-start.js' }] };
-    assert.equal(isGitMemEntry(legacy), true);
-  });
-
-  it('should return true for legacy node-path entry with hooks/session-stop.js', () => {
-    const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /path/to/dist/hooks/session-stop.js' }] };
-    assert.equal(isGitMemEntry(legacy), true);
-  });
-
-  it('should return true for legacy node-path entry with hooks/user-prompt-submit.js', () => {
-    const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /abs/hooks/user-prompt-submit.js' }] };
-    assert.equal(isGitMemEntry(legacy), true);
+  it('should return false for node-path command without git-mem hook prefix', () => {
+    const entry = { matcher: '', hooks: [{ type: 'command', command: 'node /path/to/hooks/session-start.js' }] };
+    assert.equal(isGitMemEntry(entry), false);
   });
 });
 

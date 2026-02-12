@@ -35,14 +35,11 @@ interface IMatcherGroup {
   hooks?: IMatcherHook[];
 }
 
-/** Returns true if a matcher group belongs to git-mem (current or legacy format). */
+/** Returns true if a matcher group belongs to git-mem. */
 export function isGitMemEntry(matcherGroup: IMatcherGroup): boolean {
   if (!Array.isArray(matcherGroup.hooks)) return false;
   return matcherGroup.hooks.some(
-    (h) => typeof h.command === 'string' && (
-      h.command.startsWith('git-mem hook ') ||
-      /hooks\/(session-start|session-stop|user-prompt-submit)\.js$/.test(h.command)
-    ),
+    (h) => typeof h.command === 'string' && h.command.startsWith('git-mem hook '),
   );
 }
 
