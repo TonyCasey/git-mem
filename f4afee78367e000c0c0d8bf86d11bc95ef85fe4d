@@ -210,6 +210,24 @@
       ],
       "createdAt": "2026-02-12T20:00:04.128Z",
       "updatedAt": "2026-02-12T20:00:04.128Z"
+    },
+    {
+      "id": "1e9c5b29-e969-450a-a511-bd0cc2b18924",
+      "content": "Session summary [session:d6d5d571]: Based on the session context and git history, here's where you finished today:  **Phase 3 is complete and merged.** All three phases of the Claude Code hooks integration are done:  1. **Phase 1** (PR...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium"
+      ],
+      "createdAt": "2026-02-12T20:00:04.159Z",
+      "updatedAt": "2026-02-12T20:00:04.159Z"
     }
   ]
 }
