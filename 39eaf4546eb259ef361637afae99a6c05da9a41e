@@ -50,6 +50,25 @@
       ],
       "createdAt": "2026-02-12T20:23:56.444Z",
       "updatedAt": "2026-02-12T20:23:56.444Z"
+    },
+    {
+      "id": "e97224ad-0e3a-4642-bea5-5cf3a5d69326",
+      "content": "Session summary [session:d6d5d571]: Saved to my auto memory. That'll be loaded into every future session on this repo. The key points I'll always follow:  - **One branch per issue** — no mixing - **Full cycle before moving on** — code →...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:23:56.465Z",
+      "updatedAt": "2026-02-12T20:23:56.465Z"
     }
   ]
 }
