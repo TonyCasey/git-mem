@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T12:16:37.946Z",
       "updatedAt": "2026-02-12T12:16:37.946Z"
+    },
+    {
+      "id": "84f9ed0b-7cd6-49a3-beeb-4753bba4da3a",
+      "content": "User prompt at 2026-02-12T12:17:04.381Z: bump the version",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:17:04.381Z",
+      "updatedAt": "2026-02-12T12:17:04.381Z"
     }
   ]
 }
