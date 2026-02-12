@@ -116,6 +116,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.196Z",
       "updatedAt": "2026-02-12T22:54:50.196Z"
+    },
+    {
+      "id": "f484a793-bc87-41df-9e4b-66a84e5e5847",
+      "content": "LLM enrichment failures are gracefully handled without blocking heuristic results, logging warnings but allowing the liberate operation to continue.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "llm",
+        "graceful-degradation"
+      ],
+      "createdAt": "2026-02-12T22:54:50.208Z",
+      "updatedAt": "2026-02-12T22:54:50.208Z"
     }
   ]
 }
