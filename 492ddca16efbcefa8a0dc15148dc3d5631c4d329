@@ -158,6 +158,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.559Z",
       "updatedAt": "2026-02-12T22:56:12.559Z"
+    },
+    {
+      "id": "43ce62d1-d8c6-49e8-b4b3-fece34df6fb2",
+      "content": "The unified init command handles multiple concerns: Claude Code hooks, MCP configuration, .gitignore management, .env file checking, and optional history liberation.",
+      "type": "fact",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "initialization",
+        "multi-concern",
+        "setup"
+      ],
+      "createdAt": "2026-02-12T22:56:12.570Z",
+      "updatedAt": "2026-02-12T22:56:12.570Z"
     }
   ]
 }
