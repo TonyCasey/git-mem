@@ -73,6 +73,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.352Z",
       "updatedAt": "2026-02-12T22:56:00.352Z"
+    },
+    {
+      "id": "fab778e2-a315-40c5-9b08-092f1578db71",
+      "content": "MCP tools follow a consistent pattern of creating service dependencies (GitClient, NotesService, MemoryRepository) within the tool handler rather than using dependency injection.",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp-tools",
+        "dependency-creation",
+        "service-instantiation"
+      ],
+      "createdAt": "2026-02-12T22:56:00.369Z",
+      "updatedAt": "2026-02-12T22:56:00.369Z"
     }
   ]
 }
