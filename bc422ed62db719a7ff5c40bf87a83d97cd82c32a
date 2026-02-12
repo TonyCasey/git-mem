@@ -109,6 +109,23 @@
       ],
       "createdAt": "2026-02-12T22:58:15.908Z",
       "updatedAt": "2026-02-12T22:58:15.908Z"
+    },
+    {
+      "id": "a4b390f4-196f-4287-8757-c98757cba64b",
+      "content": "All service calls must thread through a cwd parameter when operating on repositories that aren't the current working directory.",
+      "type": "gotcha",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "working-directory",
+        "service-calls"
+      ],
+      "createdAt": "2026-02-12T22:58:15.920Z",
+      "updatedAt": "2026-02-12T22:58:15.920Z"
     }
   ]
 }
