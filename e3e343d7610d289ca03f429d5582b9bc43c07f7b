@@ -29,6 +29,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.716Z",
       "updatedAt": "2026-02-12T22:57:44.716Z"
+    },
+    {
+      "id": "b48377bf-88bb-42f0-9054-0fbd20b84698",
+      "content": "The init-mcp command detects whether git-mem is globally installed vs local development setup and generates different .mcp.json configurations accordingly.",
+      "type": "decision",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "installation",
+        "configuration"
+      ],
+      "createdAt": "2026-02-12T22:57:44.749Z",
+      "updatedAt": "2026-02-12T22:57:44.749Z"
     }
   ]
 }
