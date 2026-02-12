@@ -142,6 +142,25 @@
       ],
       "createdAt": "2026-02-12T23:30:53.769Z",
       "updatedAt": "2026-02-12T23:30:53.769Z"
+    },
+    {
+      "id": "311c3bf0-9632-4d63-bb36-620cf8b7c422",
+      "content": "TypeScript requires require() with eslint-disable for importing package.json as there's no standard ES6 import method for JSON files in this context.",
+      "type": "gotcha",
+      "sha": "b31ec72c32350d4f0ab13cae5b453728645af466",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "json-imports",
+        "eslint",
+        "cli"
+      ],
+      "createdAt": "2026-02-12T23:30:53.812Z",
+      "updatedAt": "2026-02-12T23:30:53.812Z"
     }
   ]
 }
