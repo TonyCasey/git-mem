@@ -53,6 +53,24 @@
       ],
       "createdAt": "2026-02-12T23:30:15.590Z",
       "updatedAt": "2026-02-12T23:30:15.590Z"
+    },
+    {
+      "id": "995f8d10-bc8e-4481-890f-55db1baff2c7",
+      "content": "A try/finally wrapper pattern ensures terminal cleanup even if liberate operations throw exceptions, preventing corrupted terminal state.",
+      "type": "decision",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "terminal-cleanup",
+        "resource-management"
+      ],
+      "createdAt": "2026-02-12T23:30:15.605Z",
+      "updatedAt": "2026-02-12T23:30:15.605Z"
     }
   ]
 }
