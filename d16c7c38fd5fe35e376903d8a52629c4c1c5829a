@@ -215,6 +215,25 @@
       ],
       "createdAt": "2026-02-12T12:46:43.723Z",
       "updatedAt": "2026-02-12T12:46:43.723Z"
+    },
+    {
+      "id": "9ad1ba1d-36e4-4a36-bdfd-e9f777c8a583",
+      "content": "Session summary [session:55b69a11]: Plan updated with three changes:  1. **Event bus preserved** — `IEventBus` interface in domain, `EventBus` implementation in infrastructure with error isolation per handler. Hook entry points just emi...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T12:46:43.752Z",
+      "updatedAt": "2026-02-12T12:46:43.752Z"
     }
   ]
 }
