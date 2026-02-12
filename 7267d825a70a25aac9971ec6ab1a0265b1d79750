@@ -35,6 +35,24 @@
       ],
       "createdAt": "2026-02-12T22:57:16.243Z",
       "updatedAt": "2026-02-12T22:57:16.243Z"
+    },
+    {
+      "id": "7a269f0b-ccf6-4d57-81da-4f1695116548",
+      "content": "Binary executables are defined in package.json and mapped to specific entry points (git-mem-mcp -> src/mcp-server.ts).",
+      "type": "convention",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "package-json",
+        "binary-configuration",
+        "entry-points"
+      ],
+      "createdAt": "2026-02-12T22:57:16.263Z",
+      "updatedAt": "2026-02-12T22:57:16.263Z"
     }
   ]
 }
