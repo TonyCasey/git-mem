@@ -235,6 +235,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.464Z",
       "updatedAt": "2026-02-12T22:55:34.464Z"
+    },
+    {
+      "id": "53a6ddf2-c49c-40b2-8bf6-ec6f1daea68d",
+      "content": "The SessionStartHandler returns empty output with success=true when no memories are found, rather than treating it as an error condition.",
+      "type": "decision",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-start-handler",
+        "empty-state",
+        "error-handling"
+      ],
+      "createdAt": "2026-02-12T22:55:34.475Z",
+      "updatedAt": "2026-02-12T22:55:34.475Z"
     }
   ]
 }
