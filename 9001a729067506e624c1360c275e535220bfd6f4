@@ -145,6 +145,24 @@
       ],
       "createdAt": "2026-02-12T23:28:39.419Z",
       "updatedAt": "2026-02-12T23:28:39.419Z"
+    },
+    {
+      "id": "be796b38-9b61-41a2-81fb-bc317dfaa04b",
+      "content": "Context service filters out common programming noise words (like 'function', 'const', 'import') when extracting keywords from git diffs to improve relevance matching quality.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "keyword-extraction",
+        "noise-filtering",
+        "diff-analysis"
+      ],
+      "createdAt": "2026-02-12T23:28:39.452Z",
+      "updatedAt": "2026-02-12T23:28:39.452Z"
     }
   ]
 }
