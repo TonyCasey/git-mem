@@ -35,6 +35,24 @@
       ],
       "createdAt": "2026-02-12T23:30:15.571Z",
       "updatedAt": "2026-02-12T23:30:15.571Z"
+    },
+    {
+      "id": "c92bd0c6-8146-485a-b096-0e138c431433",
+      "content": "Progress tracking uses 0-based indexing for triage/complete phases but 1-based indexing during the processing phase to match user expectations.",
+      "type": "convention",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "indexing-convention",
+        "progress-tracking",
+        "user-experience"
+      ],
+      "createdAt": "2026-02-12T23:30:15.590Z",
+      "updatedAt": "2026-02-12T23:30:15.590Z"
     }
   ]
 }
