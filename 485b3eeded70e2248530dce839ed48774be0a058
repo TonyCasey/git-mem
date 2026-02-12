@@ -127,6 +127,25 @@
       ],
       "createdAt": "2026-02-12T23:30:20.452Z",
       "updatedAt": "2026-02-12T23:30:20.452Z"
+    },
+    {
+      "id": "2b85cc30-ed68-44e9-a959-13a5bdf17d2a",
+      "content": "The LOG_DIR environment variable can still override the default log directory location, maintaining backwards compatibility.",
+      "type": "fact",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "environment-variables",
+        "configuration",
+        "backwards-compatibility"
+      ],
+      "createdAt": "2026-02-12T23:30:20.483Z",
+      "updatedAt": "2026-02-12T23:30:20.483Z"
     }
   ]
 }
