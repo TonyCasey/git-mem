@@ -147,6 +147,25 @@
       ],
       "createdAt": "2026-02-12T22:56:45.889Z",
       "updatedAt": "2026-02-12T22:56:45.889Z"
+    },
+    {
+      "id": "5d70c84b-2b21-4a95-99ff-85d705527c60",
+      "content": "Integration tests for CLI hooks use tsx binary from project node_modules to support execution in temporary directories where the main project may not be accessible.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "tsx",
+        "cli",
+        "child-processes"
+      ],
+      "createdAt": "2026-02-12T23:29:27.927Z",
+      "updatedAt": "2026-02-12T23:29:27.927Z"
     }
   ]
 }
