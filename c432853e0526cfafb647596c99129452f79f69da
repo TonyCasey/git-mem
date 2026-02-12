@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T13:17:38.366Z",
       "updatedAt": "2026-02-12T13:17:38.366Z"
+    },
+    {
+      "id": "7f3426e0-36cb-43f1-8abf-78d5f2c53cde",
+      "content": "Session summary [session:55b69a11]: Pushed. The `eslint-disable` comment was targeting the deprecated `no-var-requires` rule instead of the current `no-require-imports` rule. CI should pass now....",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T13:17:38.386Z",
+      "updatedAt": "2026-02-12T13:17:38.386Z"
     }
   ]
 }
