@@ -365,6 +365,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.941Z",
       "updatedAt": "2026-02-12T23:29:06.941Z"
+    },
+    {
+      "id": "8c4d3fcb-0d71-45dd-ad76-72837440fc77",
+      "content": "Deep-merge strategy is used for .git-mem.json config so user customizations (like memoryLimit settings) survive re-runs of the init command.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "config-merge",
+        "user-customization",
+        "deep-merge"
+      ],
+      "createdAt": "2026-02-12T23:29:06.953Z",
+      "updatedAt": "2026-02-12T23:29:06.953Z"
     }
   ]
 }
