@@ -212,6 +212,25 @@
       ],
       "createdAt": "2026-02-12T20:28:26.687Z",
       "updatedAt": "2026-02-12T20:28:26.687Z"
+    },
+    {
+      "id": "22646f4a-489c-45d4-a756-cbb49dee50d6",
+      "content": "Session summary [session:d6d5d571]: Done. The workflow is now in `.lisa/rules/shared/git-rules.local.md` — it'll be loaded as project context for every Claude Code session on this repo. Want me to commit this to the current branch, or s...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:28:26.710Z",
+      "updatedAt": "2026-02-12T20:28:26.710Z"
     }
   ]
 }
