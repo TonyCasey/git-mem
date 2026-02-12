@@ -17,6 +17,24 @@
       ],
       "createdAt": "2026-02-12T22:57:16.212Z",
       "updatedAt": "2026-02-12T22:57:16.212Z"
+    },
+    {
+      "id": "e27fc237-21e7-4e73-876d-9df1468e694c",
+      "content": "The codebase follows a factory pattern for creating MCP servers, with the main server logic separated from the entry point for better testability.",
+      "type": "convention",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "factory-pattern",
+        "separation-of-concerns",
+        "testability"
+      ],
+      "createdAt": "2026-02-12T22:57:16.243Z",
+      "updatedAt": "2026-02-12T22:57:16.243Z"
     }
   ]
 }
