@@ -125,6 +125,24 @@
       ],
       "createdAt": "2026-02-12T23:29:35.184Z",
       "updatedAt": "2026-02-12T23:29:35.184Z"
+    },
+    {
+      "id": "9152c9d8-f567-4477-a6e9-ed017dc16006",
+      "content": "The public API is organized into logical layers: domain (entities, types, interfaces, errors, utils), application (services), infrastructure (implementations), and MCP server components.",
+      "type": "decision",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "api-design",
+        "layered-architecture"
+      ],
+      "createdAt": "2026-02-12T23:29:35.208Z",
+      "updatedAt": "2026-02-12T23:29:35.208Z"
     }
   ]
 }
