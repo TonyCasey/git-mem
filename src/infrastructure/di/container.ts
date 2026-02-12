@@ -65,6 +65,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
       return new GitTriageService(gitClient);
     }).singleton(),
 
+    // CLASSIC mode: constructor param names must match ICradle keys.
+    // If a param is renamed, wrap in asFunction (like triageService above).
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
     liberateService: asClass(LiberateService).singleton(),
