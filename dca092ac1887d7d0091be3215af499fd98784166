@@ -89,6 +89,24 @@
       ],
       "createdAt": "2026-02-12T23:30:15.618Z",
       "updatedAt": "2026-02-12T23:30:15.618Z"
+    },
+    {
+      "id": "b61c972d-2363-4b12-915f-b82adb88421a",
+      "content": "The phase name 'enriching' was renamed to 'processing' to be more accurate when only heuristic analysis is performed without LLM enrichment.",
+      "type": "decision",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "naming-convention",
+        "accuracy",
+        "phase-terminology"
+      ],
+      "createdAt": "2026-02-12T23:30:15.632Z",
+      "updatedAt": "2026-02-12T23:30:15.632Z"
     }
   ]
 }
