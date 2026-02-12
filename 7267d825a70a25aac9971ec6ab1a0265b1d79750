@@ -53,6 +53,25 @@
       ],
       "createdAt": "2026-02-12T22:57:16.263Z",
       "updatedAt": "2026-02-12T22:57:16.263Z"
+    },
+    {
+      "id": "f8556a1b-afea-419f-8a0b-dac239808eac",
+      "content": "MCP server implementation includes both unit tests for server creation and integration tests for protocol handshake verification.",
+      "type": "convention",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing-strategy",
+        "unit-tests",
+        "integration-tests",
+        "mcp-protocol"
+      ],
+      "createdAt": "2026-02-12T22:57:16.277Z",
+      "updatedAt": "2026-02-12T22:57:16.277Z"
     }
   ]
 }
