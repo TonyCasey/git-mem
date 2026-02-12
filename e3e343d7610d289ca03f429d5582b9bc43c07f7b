@@ -229,6 +229,24 @@
       ],
       "createdAt": "2026-02-12T23:30:37.139Z",
       "updatedAt": "2026-02-12T23:30:37.139Z"
+    },
+    {
+      "id": "04682e16-7a89-4fb9-aba1-f16873901601",
+      "content": "The MCP integration test follows a specific sequence: initialize server, list tools, remember a fact, recall it, check context for staged files, and run retrofit in dry-run mode to validate the complete workflow.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "mcp",
+        "workflow"
+      ],
+      "createdAt": "2026-02-12T23:30:37.151Z",
+      "updatedAt": "2026-02-12T23:30:37.151Z"
     }
   ]
 }
