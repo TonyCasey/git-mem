@@ -53,6 +53,24 @@
       ],
       "createdAt": "2026-02-12T22:55:11.483Z",
       "updatedAt": "2026-02-12T22:55:11.483Z"
+    },
+    {
+      "id": "561dba98-0f00-4d90-bb88-deae1d5d6685",
+      "content": "Heuristic patterns are used to automatically extract decisions, gotchas, and conventions from commit history during the retrofit process.",
+      "type": "fact",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "heuristics",
+        "commit-analysis",
+        "extraction"
+      ],
+      "createdAt": "2026-02-12T22:55:11.497Z",
+      "updatedAt": "2026-02-12T22:55:11.497Z"
     }
   ]
 }
