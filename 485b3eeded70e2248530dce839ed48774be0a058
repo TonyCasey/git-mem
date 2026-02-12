@@ -146,6 +146,25 @@
       ],
       "createdAt": "2026-02-12T23:30:20.483Z",
       "updatedAt": "2026-02-12T23:30:20.483Z"
+    },
+    {
+      "id": "0d12ec93-ed52-4f65-a2d6-8a3005ab0794",
+      "content": "User home directory (~/.git-mem) is preferred over system temp directory for application data that needs to persist across system reboots.",
+      "type": "convention",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "file-system",
+        "application-data",
+        "persistence",
+        "user-directory"
+      ],
+      "createdAt": "2026-02-12T23:30:20.502Z",
+      "updatedAt": "2026-02-12T23:30:20.502Z"
     }
   ]
 }
