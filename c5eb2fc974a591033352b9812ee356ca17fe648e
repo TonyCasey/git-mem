@@ -152,6 +152,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.220Z",
       "updatedAt": "2026-02-12T22:54:50.220Z"
+    },
+    {
+      "id": "3270241c-aa8f-4816-b217-850f0f432b24",
+      "content": "The logging system uses a factory pattern with ILogger interface, supporting both file output with ANSI console logging and NullLogger for testing scenarios.",
+      "type": "fact",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "factory-pattern",
+        "testing"
+      ],
+      "createdAt": "2026-02-12T22:54:50.231Z",
+      "updatedAt": "2026-02-12T22:54:50.231Z"
     }
   ]
 }
