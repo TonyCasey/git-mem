@@ -147,6 +147,25 @@
       ],
       "createdAt": "2026-02-12T23:30:27.992Z",
       "updatedAt": "2026-02-12T23:30:27.992Z"
+    },
+    {
+      "id": "b8ab5f60-17ba-436a-b228-1f1ed26d8879",
+      "content": "Version changes in package.json automatically trigger GitHub releases and npm publishing when PRs are merged to main.",
+      "type": "decision",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "automation",
+        "release-management",
+        "npm-publish",
+        "version-control"
+      ],
+      "createdAt": "2026-02-12T23:30:28.008Z",
+      "updatedAt": "2026-02-12T23:30:28.008Z"
     }
   ]
 }
