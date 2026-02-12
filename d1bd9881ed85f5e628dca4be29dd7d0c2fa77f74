@@ -181,6 +181,24 @@
       ],
       "createdAt": "2026-02-12T22:56:25.256Z",
       "updatedAt": "2026-02-12T22:56:25.256Z"
+    },
+    {
+      "id": "a0d5a828-6441-4f81-bb56-7d8357238858",
+      "content": "Session-stop events have an additional enablement check requiring both the section to be enabled AND autoLiberate to be true.",
+      "type": "gotcha",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-stop",
+        "configuration",
+        "enablement-logic"
+      ],
+      "createdAt": "2026-02-12T22:56:25.267Z",
+      "updatedAt": "2026-02-12T22:56:25.267Z"
     }
   ]
 }
