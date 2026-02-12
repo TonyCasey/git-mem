@@ -184,6 +184,25 @@
       ],
       "createdAt": "2026-02-12T23:29:51.464Z",
       "updatedAt": "2026-02-12T23:29:51.464Z"
+    },
+    {
+      "id": "0a9c0539-73b7-435b-a480-0d5d7202def6",
+      "content": "Integration tests for MCP tools use subprocess spawning with JSON-RPC over stdio, requiring careful response counting and timeout handling.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "mcp",
+        "json-rpc",
+        "subprocess"
+      ],
+      "createdAt": "2026-02-12T23:29:51.476Z",
+      "updatedAt": "2026-02-12T23:29:51.476Z"
     }
   ]
 }
