@@ -211,6 +211,24 @@
       ],
       "createdAt": "2026-02-12T23:30:37.125Z",
       "updatedAt": "2026-02-12T23:30:37.125Z"
+    },
+    {
+      "id": "7a1393a7-a192-4d38-b792-6ce46f8506ad",
+      "content": "MCP responses need to be accumulated and parsed incrementally since stdout may contain incomplete JSON lines, requiring careful buffering and parsing logic.",
+      "type": "gotcha",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "json-parsing",
+        "streaming"
+      ],
+      "createdAt": "2026-02-12T23:30:37.139Z",
+      "updatedAt": "2026-02-12T23:30:37.139Z"
     }
   ]
 }
