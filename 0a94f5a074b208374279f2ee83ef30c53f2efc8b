@@ -54,6 +54,24 @@
       ],
       "createdAt": "2026-02-12T22:56:33.597Z",
       "updatedAt": "2026-02-12T22:56:33.597Z"
+    },
+    {
+      "id": "6d854731-d552-4f4c-b575-a5bb0279b368",
+      "content": "Auto-generation of MCP config is the recommended approach over manual configuration, using `git mem init-mcp` to auto-detect installation method.",
+      "type": "decision",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "configuration",
+        "setup"
+      ],
+      "createdAt": "2026-02-12T22:56:33.611Z",
+      "updatedAt": "2026-02-12T22:56:33.611Z"
     }
   ]
 }
