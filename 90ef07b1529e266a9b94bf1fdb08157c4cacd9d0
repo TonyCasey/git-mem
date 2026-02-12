@@ -17,6 +17,24 @@
       ],
       "createdAt": "2026-02-12T22:55:11.435Z",
       "updatedAt": "2026-02-12T22:55:11.435Z"
+    },
+    {
+      "id": "57afe33d-038d-4ce3-8d7a-0f1e09f011f4",
+      "content": "The system implements a complete MVP with four main CLI commands: remember, recall, retrofit, and sync for managing AI coding memories.",
+      "type": "fact",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "commands",
+        "mvp"
+      ],
+      "createdAt": "2026-02-12T22:55:11.463Z",
+      "updatedAt": "2026-02-12T22:55:11.463Z"
     }
   ]
 }
