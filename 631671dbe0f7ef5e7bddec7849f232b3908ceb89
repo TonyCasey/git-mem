@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T15:06:40.372Z",
       "updatedAt": "2026-02-12T15:06:40.372Z"
+    },
+    {
+      "id": "5e431385-d305-48fe-b119-752aa19b7446",
+      "content": "Session summary [session:55b69a11]: All 6 Linear issues marked Done. Phase 2 is complete. Here's the summary:  **Phase 2: Session-Start Hook (MVP) — Complete**  | Issue | What was built | |-------|---------------| | GIT-45 | `src/hooks/...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T15:06:40.412Z",
+      "updatedAt": "2026-02-12T15:06:40.412Z"
     }
   ]
 }
