@@ -145,6 +145,24 @@
       ],
       "createdAt": "2026-02-12T23:29:43.287Z",
       "updatedAt": "2026-02-12T23:29:43.287Z"
+    },
+    {
+      "id": "6139c623-64be-40a6-8c73-95bc6cc94fc4",
+      "content": "The reinstall script uses '|| true' to ignore errors when uninstalling the global package, preventing script failure if the package wasn't previously installed.",
+      "type": "gotcha",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "bash",
+        "error-handling",
+        "npm-uninstall"
+      ],
+      "createdAt": "2026-02-12T23:29:43.301Z",
+      "updatedAt": "2026-02-12T23:29:43.301Z"
     }
   ]
 }
