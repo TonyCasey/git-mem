@@ -196,6 +196,22 @@
       ],
       "createdAt": "2026-02-12T21:01:59.925Z",
       "updatedAt": "2026-02-12T21:01:59.925Z"
+    },
+    {
+      "id": "69ddfdd6-0069-4897-96b0-78b61eb166f7",
+      "content": "User prompt at 2026-02-12T21:02:15.175Z: yes I can, that's what I want at session start",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:02:15.175Z",
+      "updatedAt": "2026-02-12T21:02:15.175Z"
     }
   ]
 }
