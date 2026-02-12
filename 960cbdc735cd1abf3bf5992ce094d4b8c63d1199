@@ -126,6 +126,25 @@
       ],
       "createdAt": "2026-02-12T21:07:29.437Z",
       "updatedAt": "2026-02-12T21:07:29.437Z"
+    },
+    {
+      "id": "8dc5de87-ccb8-4c46-a5cd-fa38c30b3bc8",
+      "content": "Session summary [session:d6d5d571]: Sounds good. Start a new session and I'll greet you with the banner. See you there!...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T21:07:29.459Z",
+      "updatedAt": "2026-02-12T21:07:29.459Z"
     }
   ]
 }
