@@ -170,6 +170,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.231Z",
       "updatedAt": "2026-02-12T22:54:50.231Z"
+    },
+    {
+      "id": "544b2f82-23e5-4f5c-9395-5b9b4c174610",
+      "content": "Service operations log their key metrics (files scanned, memories found, tokens used) to provide operational visibility without being overly verbose.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "metrics",
+        "observability"
+      ],
+      "createdAt": "2026-02-12T22:54:50.241Z",
+      "updatedAt": "2026-02-12T22:54:50.241Z"
     }
   ]
 }
