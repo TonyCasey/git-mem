@@ -253,6 +253,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.475Z",
       "updatedAt": "2026-02-12T22:55:34.475Z"
+    },
+    {
+      "id": "28968e7e-48b8-47d7-a0c8-9369b78e968d",
+      "content": "Hook configurations support both project-level (.claude/settings.json) and user-level (~/.claude/settings.json) scopes through the --scope parameter.",
+      "type": "fact",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "init-hooks",
+        "configuration-scope",
+        "claude-code"
+      ],
+      "createdAt": "2026-02-12T22:55:34.486Z",
+      "updatedAt": "2026-02-12T22:55:34.486Z"
     }
   ]
 }
