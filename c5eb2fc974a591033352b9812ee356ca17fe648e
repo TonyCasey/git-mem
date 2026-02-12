@@ -134,6 +134,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.208Z",
       "updatedAt": "2026-02-12T22:54:50.208Z"
+    },
+    {
+      "id": "a3706d39-ad5c-402c-a84a-3a06cd6f995e",
+      "content": "Child loggers are created per command/component (e.g., logger.child({command: 'recall'})) to provide contextual logging with structured metadata.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "structured-logging",
+        "context"
+      ],
+      "createdAt": "2026-02-12T22:54:50.220Z",
+      "updatedAt": "2026-02-12T22:54:50.220Z"
     }
   ]
 }
