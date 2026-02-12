@@ -106,6 +106,25 @@
       ],
       "createdAt": "2026-02-12T22:56:25.203Z",
       "updatedAt": "2026-02-12T22:56:25.203Z"
+    },
+    {
+      "id": "72dc15dc-15e6-4020-a650-0eacfd834b2d",
+      "content": "Deep-merge is used for .git-mem.json configuration to ensure user customizations survive re-runs of the init command. User-set values like memoryLimit override defaults.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "deep-merge",
+        "user-customization",
+        "persistence"
+      ],
+      "createdAt": "2026-02-12T22:56:25.219Z",
+      "updatedAt": "2026-02-12T22:56:25.219Z"
     }
   ]
 }
