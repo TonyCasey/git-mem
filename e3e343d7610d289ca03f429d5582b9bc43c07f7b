@@ -174,6 +174,25 @@
       ],
       "createdAt": "2026-02-12T23:30:37.077Z",
       "updatedAt": "2026-02-12T23:30:37.077Z"
+    },
+    {
+      "id": "1e436c6c-a742-47cd-a07d-251e53824ed4",
+      "content": "MCP integration testing requires spawning the server process, sending JSON-RPC messages over stdin, and parsing responses from stdout line by line with proper timeout handling to prevent hanging tests.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "testing",
+        "integration",
+        "json-rpc"
+      ],
+      "createdAt": "2026-02-12T23:30:37.109Z",
+      "updatedAt": "2026-02-12T23:30:37.109Z"
     }
   ]
 }
