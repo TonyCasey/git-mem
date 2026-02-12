@@ -104,6 +104,54 @@ describe('MemoryContextLoader', () => {
     assert.equal(capturedCwd, '/tmp/test-repo');
   });
 
+  it('should filter by tag', () => {
+    const memories = [
+      createMemory({ id: '1', tags: ['arch'] }),
+      createMemory({ id: '2', tags: ['debug'] }),
+    ];
+    const repo = createMockRepository(memories);
+    const loader = new MemoryContextLoader(repo);
+
+    const result = loader.load({ tags: ['arch'] });
+
+    assert.equal(result.filtered, 1);
+    assert.equal(result.memories[0]!.tags[0], 'arch');
+  });
+
+  it('should warn when multiple tags provided', () => {
+    const memories = [createMemory({ id: '1', tags: ['arch'] })];
+    const repo = createMockRepository(memories);
+    let warnCalled = false;
+    const logger = {
+      info: () => {},
+      warn: () => { warnCalled = true; },
+      error: () => {},
+      debug: () => {},
+    };
+    const loader = new MemoryContextLoader(repo, logger);
+
+    loader.load({ tags: ['arch', 'debug'] });
+
+    assert.ok(warnCalled, 'expected logger.warn to be called for multiple tags');
+  });
+
+  it('should not warn when single tag provided', () => {
+    const memories = [createMemory({ id: '1', tags: ['arch'] })];
+    const repo = createMockRepository(memories);
+    let warnCalled = false;
+    const logger = {
+      info: () => {},
+      warn: () => { warnCalled = true; },
+      error: () => {},
+      debug: () => {},
+    };
+    const loader = new MemoryContextLoader(repo, logger);
+
+    loader.load({ tags: ['arch'] });
+
+    assert.ok(!warnCalled, 'expected logger.warn NOT to be called for single tag');
+  });
+
   it('should pass since filter to repository', () => {
     const memories = [
       createMemory({ id: '1', createdAt: '2026-01-01T00:00:00Z' }),
