@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "bf0f9929-4b26-417c-b508-a39ac108eca7",
+      "content": "Integration tests for Git hooks use tsx binary resolved from project node_modules to execute CLI commands in temporary directories, ensuring tests work even when cwd changes.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "integration-tests",
+        "tsx",
+        "child-process"
+      ],
+      "createdAt": "2026-02-12T22:56:45.776Z",
+      "updatedAt": "2026-02-12T22:56:45.776Z"
+    }
+  ]
+}
