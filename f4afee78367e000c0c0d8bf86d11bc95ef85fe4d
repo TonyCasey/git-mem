@@ -314,6 +314,24 @@
       ],
       "createdAt": "2026-02-12T20:02:42.889Z",
       "updatedAt": "2026-02-12T20:02:42.889Z"
+    },
+    {
+      "id": "21beb4ad-8fd9-4ac3-9a29-3662bf26c9c6",
+      "content": "Session summary [session:d6d5d571]: Here's the Linear state for the **Claude Code Hooks + DI Container** project:  **All done (GIT-39 through GIT-54):** - Phase 1: DI Container + Event Bus (GIT-39 to GIT-44) - Phase 2: Session-Start Hoo...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium"
+      ],
+      "createdAt": "2026-02-12T20:02:42.916Z",
+      "updatedAt": "2026-02-12T20:02:42.916Z"
     }
   ]
 }
