@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T13:21:16.983Z",
       "updatedAt": "2026-02-12T13:21:16.983Z"
+    },
+    {
+      "id": "18f8a846-e07d-42d7-a6b0-aed825496da1",
+      "content": "Session summary [session:55b69a11]: Pushed. Added 21 tests across 2 new test files:  - **EventBus.test.ts** (12 tests) — emission, error isolation, handler ordering, event type filtering - **container.test.ts** (9 tests) — service resol...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T13:21:17.001Z",
+      "updatedAt": "2026-02-12T13:21:17.001Z"
     }
   ]
 }
