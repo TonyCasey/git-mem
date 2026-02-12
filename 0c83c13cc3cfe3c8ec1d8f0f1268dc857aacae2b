@@ -107,6 +107,25 @@
       ],
       "createdAt": "2026-02-12T16:54:11.604Z",
       "updatedAt": "2026-02-12T16:54:11.604Z"
+    },
+    {
+      "id": "080e80d7-3c14-47c2-996c-2c2fcdf570a3",
+      "content": "The session-start hook system uses dependency injection with separate handler, loader, and formatter services to maintain clean separation of concerns.",
+      "type": "decision",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "dependency-injection",
+        "session-start",
+        "hooks"
+      ],
+      "createdAt": "2026-02-12T22:55:34.371Z",
+      "updatedAt": "2026-02-12T22:55:34.371Z"
     }
   ]
 }
