@@ -292,6 +292,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.233Z",
       "updatedAt": "2026-02-12T22:54:38.233Z"
+    },
+    {
+      "id": "ae4cc387-f781-433d-b971-21301af9e7bb",
+      "content": "GitTriageService requires special handling in CLASSIC injection mode because its constructor uses 'git' parameter name but the registration is 'gitClient', requiring explicit mapping in asFunction registrations.",
+      "type": "gotcha",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "parameter-mapping",
+        "git-triage-service"
+      ],
+      "createdAt": "2026-02-12T22:54:38.245Z",
+      "updatedAt": "2026-02-12T22:54:38.245Z"
     }
   ]
 }
