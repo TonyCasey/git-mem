@@ -158,6 +158,25 @@
       ],
       "createdAt": "2026-02-12T20:25:33.406Z",
       "updatedAt": "2026-02-12T20:25:33.406Z"
+    },
+    {
+      "id": "e8f6b7e6-02b5-47d3-9d00-cd21a898adf9",
+      "content": "Session summary [session:d6d5d571]: Good question. Right now I only wrote to my **personal** auto memory (`~/.claude-personal/...`). That's only visible to my sessions.  For project-level memory there are two options in this repo:  1. *...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:25:33.428Z",
+      "updatedAt": "2026-02-12T20:25:33.428Z"
     }
   ]
 }
