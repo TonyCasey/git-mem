@@ -397,6 +397,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.978Z",
       "updatedAt": "2026-02-12T23:28:16.978Z"
+    },
+    {
+      "id": "82e96d9c-06be-48dc-8a32-4ca8cbfbc325",
+      "content": "Stdin race conditions in hooks are handled using isTTY and readableEnded checks rather than timeout-based approaches.",
+      "type": "decision",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "stdin",
+        "race-conditions",
+        "hooks"
+      ],
+      "createdAt": "2026-02-12T23:28:16.989Z",
+      "updatedAt": "2026-02-12T23:28:16.989Z"
     }
   ]
 }
