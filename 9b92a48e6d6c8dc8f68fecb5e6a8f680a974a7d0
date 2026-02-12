@@ -221,6 +221,25 @@
       ],
       "createdAt": "2026-02-12T23:30:46.682Z",
       "updatedAt": "2026-02-12T23:30:46.682Z"
+    },
+    {
+      "id": "40d8a6a5-b35b-4702-bb4b-4774446d93ba",
+      "content": "MCP integration tests use a timeout mechanism (10 seconds) and response counting to handle async subprocess communication and prevent hanging tests.",
+      "type": "gotcha",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "async",
+        "timeout",
+        "subprocess"
+      ],
+      "createdAt": "2026-02-12T23:30:46.694Z",
+      "updatedAt": "2026-02-12T23:30:46.694Z"
     }
   ]
 }
