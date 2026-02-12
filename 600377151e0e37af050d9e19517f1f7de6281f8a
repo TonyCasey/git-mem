@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T21:17:14.974Z",
       "updatedAt": "2026-02-12T21:17:14.974Z"
+    },
+    {
+      "id": "a89cd573-4353-40f9-93b4-002658d5ab3a",
+      "content": "User prompt at 2026-02-12T21:17:37.855Z: no its ok, move on",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:17:37.856Z",
+      "updatedAt": "2026-02-12T21:17:37.856Z"
     }
   ]
 }
