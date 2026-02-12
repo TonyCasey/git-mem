@@ -288,6 +288,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.489Z",
       "updatedAt": "2026-02-12T23:31:07.489Z"
+    },
+    {
+      "id": "b5741849-0a28-46c9-b132-0568851a3edf",
+      "content": "Uses bootstrapping pattern with no DI container - each command/tool handler manually constructs its dependency chain fresh per invocation.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "bootstrapping",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T23:31:07.501Z",
+      "updatedAt": "2026-02-12T23:31:07.501Z"
     }
   ]
 }
