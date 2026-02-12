@@ -129,6 +129,24 @@
       ],
       "createdAt": "2026-02-12T23:30:27.964Z",
       "updatedAt": "2026-02-12T23:30:27.964Z"
+    },
+    {
+      "id": "01544e59-9c05-4567-a0d6-0bbbcf7101df",
+      "content": "The project uses conventional commits to automatically generate changelogs for releases.",
+      "type": "convention",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "conventional-commits",
+        "changelog",
+        "release-automation"
+      ],
+      "createdAt": "2026-02-12T23:30:27.992Z",
+      "updatedAt": "2026-02-12T23:30:27.992Z"
     }
   ]
 }
