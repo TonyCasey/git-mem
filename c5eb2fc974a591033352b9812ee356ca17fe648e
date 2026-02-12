@@ -44,6 +44,24 @@
       ],
       "createdAt": "2026-02-12T22:53:37.386Z",
       "updatedAt": "2026-02-12T22:53:37.386Z"
+    },
+    {
+      "id": "ea4589c3-388e-4c4d-b0a1-13264eaa3a89",
+      "content": "The logging infrastructure uses dependency injection with optional logger parameters across all services (MemoryService, LiberateService, ContextService) to maintain clean architecture without breaking existing code.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "dependency-injection",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:54:50.136Z",
+      "updatedAt": "2026-02-12T22:54:50.136Z"
     }
   ]
 }
