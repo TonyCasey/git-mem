@@ -5,7 +5,7 @@
  * Replaces separate init-hooks and init-mcp commands.
  */
 
-import { existsSync, readFileSync, writeFileSync, appendFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, appendFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import prompts from 'prompts';
 import type { ILogger } from '../domain/interfaces/ILogger';
@@ -19,7 +19,6 @@ import {
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
 import { createContainer } from '../infrastructure/di';
-import { mkdirSync } from 'fs';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -30,7 +29,7 @@ interface IInitCommandOptions {
 
 /**
  * Ensure entries exist in .gitignore under a `# git-mem` header.
- * Creates the file if it doesn't exist.
+ * Creates the file if it doesn't exist. Reuses existing header on re-runs.
  */
 export function ensureGitignoreEntries(cwd: string, entries: string[]): void {
   const gitignorePath = join(cwd, '.gitignore');
@@ -45,23 +44,29 @@ export function ensureGitignoreEntries(cwd: string, entries: string[]): void {
 
   if (missing.length === 0) return;
 
+  const hasGitMemHeader = lines.some((line) => line.trim() === '# git-mem');
+
+  if (content.length === 0) {
+    // New file
+    writeFileSync(gitignorePath, '# git-mem\n' + missing.map((e) => e + '\n').join(''));
+    return;
+  }
+
   // Ensure trailing newline before appending
   let append = '';
-  if (content.length > 0 && !content.endsWith('\n')) {
+  if (!content.endsWith('\n')) {
     append += '\n';
   }
 
-  append += '\n# git-mem\n';
+  if (!hasGitMemHeader) {
+    append += '\n# git-mem\n';
+  }
+
   for (const entry of missing) {
     append += entry + '\n';
   }
 
-  if (content.length === 0) {
-    // New file — no leading blank line
-    writeFileSync(gitignorePath, '# git-mem\n' + missing.map((e) => e + '\n').join(''));
-  } else {
-    appendFileSync(gitignorePath, append);
-  }
+  appendFileSync(gitignorePath, append);
 }
 
 /**
@@ -109,6 +114,10 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   // ── Prompts (skipped with --yes) ───────────────────────────────
   let commitCount = options.commitCount ? parseInt(options.commitCount, 10) : 100;
+  if (!Number.isFinite(commitCount) || commitCount <= 0) {
+    console.log(`Invalid --commit-count value: "${options.commitCount}". Using default (100).`);
+    commitCount = 100;
+  }
   let claudeIntegration = true;
 
   if (!options.yes) {
@@ -160,11 +169,15 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     console.log('✓ Created .git-mem.json');
   }
 
-  // ── MCP config ─────────────────────────────────────────────────
-  const mcpConfig = buildMcpConfig();
+  // ── MCP config (skip if already exists) ────────────────────────
   const mcpPath = join(cwd, '.mcp.json');
-  writeFileSync(mcpPath, JSON.stringify(mcpConfig, null, 2) + '\n');
-  console.log('✓ Created .mcp.json');
+  if (existsSync(mcpPath)) {
+    console.log('✓ .mcp.json already exists (skipped)');
+  } else {
+    const mcpConfig = buildMcpConfig();
+    writeFileSync(mcpPath, JSON.stringify(mcpConfig, null, 2) + '\n');
+    console.log('✓ Created .mcp.json');
+  }
 
   // ── .gitignore ─────────────────────────────────────────────────
   ensureGitignoreEntries(cwd, ['.env', '.git-mem.json']);

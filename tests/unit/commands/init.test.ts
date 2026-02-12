@@ -5,9 +5,9 @@
  * using real temp directories (cleaned up in after()).
  */
 
-import { describe, it, before, after } from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync, existsSync } from 'fs';
+import { mkdtempSync, writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { rmSync } from 'fs';
@@ -20,15 +20,6 @@ import {
 // ── ensureGitignoreEntries ───────────────────────────────────────────
 
 describe('ensureGitignoreEntries', () => {
-  let cwd: string;
-
-  before(() => {
-    cwd = mkdtempSync(join(tmpdir(), 'git-mem-init-test-'));
-  });
-
-  after(() => {
-    rmSync(cwd, { recursive: true, force: true });
-  });
 
   it('should create .gitignore with header and entries when file does not exist', () => {
     const dir = mkdtempSync(join(tmpdir(), 'git-mem-gitignore-'));
@@ -120,6 +111,24 @@ describe('ensureGitignoreEntries', () => {
       const content = readFileSync(join(dir, '.gitignore'), 'utf8');
       const envCount = content.split('\n').filter((l: string) => l.trim() === '.env').length;
       assert.equal(envCount, 1);
+      assert.ok(content.includes('.git-mem.json'));
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('should not duplicate # git-mem header on re-run', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'git-mem-gitignore-'));
+    try {
+      // First run
+      ensureGitignoreEntries(dir, ['.env']);
+      // Second run adds another entry
+      ensureGitignoreEntries(dir, ['.env', '.git-mem.json']);
+
+      const content = readFileSync(join(dir, '.gitignore'), 'utf8');
+      const headerCount = content.split('\n').filter((l: string) => l.trim() === '# git-mem').length;
+      assert.equal(headerCount, 1, 'should only have one # git-mem header');
+      assert.ok(content.includes('.env'));
       assert.ok(content.includes('.git-mem.json'));
     } finally {
       rmSync(dir, { recursive: true, force: true });

@@ -25,8 +25,24 @@ export async function liberateCommand(options: ILiberateCommandOptions, logger?:
   log.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, commitCount: options.commitCount });
 
   const since = options.since ? new Date(options.since) : undefined;
-  const maxCommits = options.commitCount ? parseInt(options.commitCount, 10) : undefined;
-  const threshold = options.threshold ? parseInt(options.threshold, 10) : undefined;
+
+  let maxCommits: number | undefined;
+  if (options.commitCount) {
+    const parsed = parseInt(options.commitCount, 10);
+    if (!Number.isFinite(parsed) || parsed <= 0) {
+      throw new Error(`Invalid --commit-count value: "${options.commitCount}". Expected a positive integer.`);
+    }
+    maxCommits = parsed;
+  }
+
+  let threshold: number | undefined;
+  if (options.threshold) {
+    const parsed = parseInt(options.threshold, 10);
+    if (!Number.isFinite(parsed) || parsed <= 0) {
+      throw new Error(`Invalid --threshold value: "${options.threshold}". Expected a positive integer.`);
+    }
+    threshold = parsed;
+  }
 
   if (options.dryRun) {
     console.log('Dry run — no notes will be written.\n');
