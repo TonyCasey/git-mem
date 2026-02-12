@@ -384,6 +384,22 @@
       ],
       "createdAt": "2026-02-12T20:05:16.260Z",
       "updatedAt": "2026-02-12T20:05:16.260Z"
+    },
+    {
+      "id": "b5b4099f-0aef-4304-a16d-598532bd4cae",
+      "content": "User prompt at 2026-02-12T20:08:13.503Z: yeah commit and move on to GIT-57",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:08:13.503Z",
+      "updatedAt": "2026-02-12T20:08:13.503Z"
     }
   ]
 }
