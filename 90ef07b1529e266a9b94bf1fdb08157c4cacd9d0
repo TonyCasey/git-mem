@@ -145,6 +145,25 @@
       ],
       "createdAt": "2026-02-12T22:55:11.544Z",
       "updatedAt": "2026-02-12T22:55:11.544Z"
+    },
+    {
+      "id": "d9235c84-5c3a-47d8-91e1-33d895b219a6",
+      "content": "The system uses git notes (refs/notes/mem) with JSON payloads as the storage mechanism for AI coding memories, integrating natively with git.",
+      "type": "decision",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "storage",
+        "git-notes",
+        "architecture",
+        "ai-memory"
+      ],
+      "createdAt": "2026-02-12T23:27:52.393Z",
+      "updatedAt": "2026-02-12T23:27:52.393Z"
     }
   ]
 }
