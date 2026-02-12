@@ -148,6 +148,25 @@
       ],
       "createdAt": "2026-02-12T23:29:15.759Z",
       "updatedAt": "2026-02-12T23:29:15.759Z"
+    },
+    {
+      "id": "b8939220-c0f1-464a-9d58-f6fc6ba7a314",
+      "content": "The git_mem_context tool requires staged changes (git add first) to analyze files and surface relevant memories.",
+      "type": "gotcha",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "context-tool",
+        "staged-changes",
+        "git-workflow"
+      ],
+      "createdAt": "2026-02-12T23:29:15.775Z",
+      "updatedAt": "2026-02-12T23:29:15.775Z"
     }
   ]
 }
