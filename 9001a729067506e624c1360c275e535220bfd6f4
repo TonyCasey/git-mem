@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "6e1fb8e6-d010-4d1d-82cd-ebd8648dac4f",
+      "content": "Context services use keyword extraction from git diffs and file paths to match against memory content and tags, with configurable scoring thresholds and limits for relevance ranking.",
+      "type": "decision",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "context-service",
+        "git-diff",
+        "keyword-extraction",
+        "memory-scoring"
+      ],
+      "createdAt": "2026-02-12T22:56:00.282Z",
+      "updatedAt": "2026-02-12T22:56:00.282Z"
+    }
+  ]
+}
