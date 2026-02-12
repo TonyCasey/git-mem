@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "4882bede-95f9-423d-b264-01d4f5e69f30",
+      "content": "This project uses a git-native memory layer that stores AI coding context as JSON in git notes under refs/notes/mem rather than external databases, making memories version-controlled and shareable.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git-notes",
+        "memory-storage",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:58:15.821Z",
+      "updatedAt": "2026-02-12T22:58:15.821Z"
+    }
+  ]
+}
