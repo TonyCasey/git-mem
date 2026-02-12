@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T21:12:11.917Z",
       "updatedAt": "2026-02-12T21:12:11.917Z"
+    },
+    {
+      "id": "71f97402-4d51-4cf1-b20d-fee4382defea",
+      "content": "User prompt at 2026-02-12T21:12:27.580Z: yes, start with GIT-55",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:12:27.581Z",
+      "updatedAt": "2026-02-12T21:12:27.581Z"
     }
   ]
 }
