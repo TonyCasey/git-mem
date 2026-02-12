@@ -155,6 +155,25 @@
       ],
       "createdAt": "2026-02-12T22:57:44.841Z",
       "updatedAt": "2026-02-12T22:57:44.841Z"
+    },
+    {
+      "id": "43b7bd84-923b-4992-b90c-5a7d006873dc",
+      "content": "The init-mcp command detects whether git-mem is globally installed by using `which git-mem-mcp` and configures the MCP server command path accordingly - global installs use the binary directly while local installs use node with the path to mcp-server.js.",
+      "type": "decision",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "cli",
+        "installation",
+        "configuration"
+      ],
+      "createdAt": "2026-02-12T23:30:37.077Z",
+      "updatedAt": "2026-02-12T23:30:37.077Z"
     }
   ]
 }
