@@ -274,6 +274,24 @@
       ],
       "createdAt": "2026-02-12T22:54:38.222Z",
       "updatedAt": "2026-02-12T22:54:38.222Z"
+    },
+    {
+      "id": "06c24612-5ef7-4c72-9f7f-46230932c45c",
+      "content": "Domain events are defined as zero-dependency pure domain types (ISessionStartEvent, ISessionStopEvent, IPromptSubmitEvent) with corresponding IEventBus, IEventHandler, and IEventResult interfaces.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "domain-events",
+        "clean-architecture",
+        "interfaces"
+      ],
+      "createdAt": "2026-02-12T22:54:38.233Z",
+      "updatedAt": "2026-02-12T22:54:38.233Z"
     }
   ]
 }
