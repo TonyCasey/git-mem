@@ -36,6 +36,24 @@
       ],
       "createdAt": "2026-02-12T22:58:15.850Z",
       "updatedAt": "2026-02-12T22:58:15.850Z"
+    },
+    {
+      "id": "5214c98d-1196-40fa-ba92-25a3579a17a2",
+      "content": "Uses clean architecture with three layers (Domain → Application → Infrastructure) where dependencies point inward only, with no DI container and manual dependency construction per invocation.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "clean-architecture",
+        "dependency-injection",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:58:15.869Z",
+      "updatedAt": "2026-02-12T22:58:15.869Z"
     }
   ]
 }
