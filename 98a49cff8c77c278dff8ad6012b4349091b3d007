@@ -333,6 +333,24 @@
       ],
       "createdAt": "2026-02-12T23:28:28.860Z",
       "updatedAt": "2026-02-12T23:28:28.860Z"
+    },
+    {
+      "id": "a8414e9a-b09e-433b-98cc-7d2f13b336be",
+      "content": "LLM-enriched memories are tagged with 'llm-enrichment' source type to distinguish them from heuristic extractions.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "memory-tagging",
+        "source-tracking",
+        "llm-enrichment"
+      ],
+      "createdAt": "2026-02-12T23:28:28.871Z",
+      "updatedAt": "2026-02-12T23:28:28.871Z"
     }
   ]
 }
