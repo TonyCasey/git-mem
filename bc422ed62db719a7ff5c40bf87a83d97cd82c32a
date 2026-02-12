@@ -126,6 +126,24 @@
       ],
       "createdAt": "2026-02-12T22:58:15.920Z",
       "updatedAt": "2026-02-12T22:58:15.920Z"
+    },
+    {
+      "id": "f9811cac-026e-46d0-be6b-4514ad6e08ca",
+      "content": "Project uses relaxed TypeScript strict mode (strict: false) for development with interfaces prefixed with 'I' and no 'any' types in production code.",
+      "type": "convention",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "coding-standards",
+        "interfaces"
+      ],
+      "createdAt": "2026-02-12T22:58:15.931Z",
+      "updatedAt": "2026-02-12T22:58:15.931Z"
     }
   ]
 }
