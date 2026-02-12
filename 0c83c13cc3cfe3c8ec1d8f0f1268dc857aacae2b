@@ -415,6 +415,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.989Z",
       "updatedAt": "2026-02-12T23:28:16.989Z"
+    },
+    {
+      "id": "243f64cd-e186-4451-94c6-3b527846f980",
+      "content": "Hook errors are logged to stderr before calling exit(0) to ensure proper cleanup while still allowing the session to continue.",
+      "type": "decision",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "hooks",
+        "logging"
+      ],
+      "createdAt": "2026-02-12T23:28:17.000Z",
+      "updatedAt": "2026-02-12T23:28:17.000Z"
     }
   ]
 }
