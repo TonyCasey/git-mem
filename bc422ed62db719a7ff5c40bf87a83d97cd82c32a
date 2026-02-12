@@ -324,6 +324,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.513Z",
       "updatedAt": "2026-02-12T23:31:07.513Z"
+    },
+    {
+      "id": "be00f59f-7753-4255-bd2f-f2fac0f33ba7",
+      "content": "Memories are stored with structured metadata including type (decision/gotcha/convention/fact), confidence levels, lifecycle tiers, and tags for better categorization.",
+      "type": "fact",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "memory-structure",
+        "metadata",
+        "categorization"
+      ],
+      "createdAt": "2026-02-12T23:31:07.524Z",
+      "updatedAt": "2026-02-12T23:31:07.524Z"
     }
   ]
 }
