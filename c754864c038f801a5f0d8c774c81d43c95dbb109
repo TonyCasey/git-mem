@@ -92,6 +92,24 @@
       ],
       "createdAt": "2026-02-12T22:57:33.738Z",
       "updatedAt": "2026-02-12T22:57:33.738Z"
+    },
+    {
+      "id": "d3a6d5fc-44ac-44c2-b782-672255c2802e",
+      "content": "The project uses Node.js version 22 as the standard runtime, establishing a specific version requirement for consistency across environments.",
+      "type": "convention",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "nodejs",
+        "version",
+        "runtime"
+      ],
+      "createdAt": "2026-02-12T22:57:33.750Z",
+      "updatedAt": "2026-02-12T22:57:33.750Z"
     }
   ]
 }
