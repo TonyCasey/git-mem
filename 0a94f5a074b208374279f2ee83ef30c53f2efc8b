@@ -186,6 +186,25 @@
       ],
       "createdAt": "2026-02-12T23:29:15.789Z",
       "updatedAt": "2026-02-12T23:29:15.789Z"
+    },
+    {
+      "id": "595c2241-cd1f-49d7-bdda-9bcfa1dc48c6",
+      "content": "Each MCP tool handler follows the pattern: server.tool(name, description, zodSchema, handler) for consistent tool registration.",
+      "type": "convention",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "tool-handler",
+        "zod-schema",
+        "registration-pattern"
+      ],
+      "createdAt": "2026-02-12T23:29:15.801Z",
+      "updatedAt": "2026-02-12T23:29:15.801Z"
     }
   ]
 }
