@@ -176,6 +176,22 @@
       ],
       "createdAt": "2026-02-12T17:32:30.287Z",
       "updatedAt": "2026-02-12T17:32:30.287Z"
+    },
+    {
+      "id": "6daf77bc-24ba-4e62-9a76-57b50cc1df1a",
+      "content": "User prompt at 2026-02-12T19:59:41.718Z: do you remember where we finished today?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T19:59:41.718Z",
+      "updatedAt": "2026-02-12T19:59:41.718Z"
     }
   ]
 }
