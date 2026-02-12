@@ -17,6 +17,25 @@
       ],
       "createdAt": "2026-02-12T22:56:59.949Z",
       "updatedAt": "2026-02-12T22:56:59.949Z"
+    },
+    {
+      "id": "a37b7bcb-c45e-49c7-bd73-0c57ebc41b23",
+      "content": "A global reinstall script was created to handle the full rebuild-uninstall-reinstall cycle for the git-mem CLI tool, indicating it's designed for global npm installation.",
+      "type": "decision",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "npm",
+        "global-install",
+        "cli-tool",
+        "build-scripts"
+      ],
+      "createdAt": "2026-02-12T22:56:59.979Z",
+      "updatedAt": "2026-02-12T22:56:59.979Z"
     }
   ]
 }
