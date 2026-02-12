@@ -36,6 +36,25 @@
       ],
       "createdAt": "2026-02-12T22:56:00.306Z",
       "updatedAt": "2026-02-12T22:56:00.306Z"
+    },
+    {
+      "id": "05bc71d6-0029-49da-a5bf-1f70b5e7454a",
+      "content": "Keywords are extracted from file paths by splitting on '/' and stripping extensions, and from diff content by matching 3+ character words while filtering common programming noise words.",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "keyword-extraction",
+        "file-paths",
+        "diff-parsing",
+        "noise-filtering"
+      ],
+      "createdAt": "2026-02-12T22:56:00.333Z",
+      "updatedAt": "2026-02-12T22:56:00.333Z"
     }
   ]
 }
