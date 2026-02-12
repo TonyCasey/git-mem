@@ -74,6 +74,24 @@
       ],
       "createdAt": "2026-02-12T22:57:07.817Z",
       "updatedAt": "2026-02-12T22:57:07.817Z"
+    },
+    {
+      "id": "1c413709-ca84-4596-827b-311e3a787119",
+      "content": "MCP sessions require an initialize handshake followed by notifications/initialized before tool calls can be made.",
+      "type": "gotcha",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "protocol",
+        "initialization"
+      ],
+      "createdAt": "2026-02-12T22:57:07.829Z",
+      "updatedAt": "2026-02-12T22:57:07.829Z"
     }
   ]
 }
