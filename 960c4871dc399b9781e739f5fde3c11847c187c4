@@ -241,6 +241,25 @@
       ],
       "createdAt": "2026-02-12T23:29:28.012Z",
       "updatedAt": "2026-02-12T23:29:28.012Z"
+    },
+    {
+      "id": "decc8863-35bf-46a3-8792-11a7aa2d4ec4",
+      "content": "The prompt-submit hook is disabled by default (enabled: false) and only surfaces context when explicitly enabled with surfaceContext: true.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "prompt-submit",
+        "hooks",
+        "configuration",
+        "defaults"
+      ],
+      "createdAt": "2026-02-12T23:29:28.024Z",
+      "updatedAt": "2026-02-12T23:29:28.024Z"
     }
   ]
 }
