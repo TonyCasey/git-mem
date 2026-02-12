@@ -122,6 +122,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.536Z",
       "updatedAt": "2026-02-12T22:56:12.536Z"
+    },
+    {
+      "id": "4073b527-3480-4300-af39-94c119333406",
+      "content": "The prompts library is added as a dependency to enable interactive CLI setup flows with cancellation support.",
+      "type": "fact",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependencies",
+        "prompts",
+        "interactive-cli"
+      ],
+      "createdAt": "2026-02-12T22:56:12.547Z",
+      "updatedAt": "2026-02-12T22:56:12.547Z"
     }
   ]
 }
