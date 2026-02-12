@@ -91,6 +91,25 @@
       ],
       "createdAt": "2026-02-12T22:57:56.017Z",
       "updatedAt": "2026-02-12T22:57:56.017Z"
+    },
+    {
+      "id": "109a6419-5fad-4451-9544-fcaf286fa933",
+      "content": "The recall tool returns truncated SHA values (7 characters) in responses to keep output concise while maintaining commit traceability.",
+      "type": "decision",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "recall-tool",
+        "git",
+        "output-formatting"
+      ],
+      "createdAt": "2026-02-12T22:57:56.029Z",
+      "updatedAt": "2026-02-12T22:57:56.029Z"
     }
   ]
 }
