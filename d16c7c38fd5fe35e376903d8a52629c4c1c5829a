@@ -180,6 +180,22 @@
       ],
       "createdAt": "2026-02-12T12:44:40.547Z",
       "updatedAt": "2026-02-12T12:44:40.547Z"
+    },
+    {
+      "id": "53ad559a-e6b1-4cce-b392-77f07187cec7",
+      "content": "User prompt at 2026-02-12T12:44:40.777Z: Also.. Complex service abstractions - keep it simple? I prefer these abstractions.\nEvent bus - not needed? Using events decoupled from the hooks and allowed graceful failures as well as not holding up...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:44:40.777Z",
+      "updatedAt": "2026-02-12T12:44:40.777Z"
     }
   ]
 }
