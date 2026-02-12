@@ -366,6 +366,24 @@
       ],
       "createdAt": "2026-02-12T20:05:16.239Z",
       "updatedAt": "2026-02-12T20:05:16.239Z"
+    },
+    {
+      "id": "ae753803-c55d-4440-8cee-2b021f363b63",
+      "content": "Session summary [session:d6d5d571]: All clean. Here's a summary of what was done:  **Added 5 new tests across 2 files:**  - `MemoryContextLoader.test.ts` (+3 tests):   - Tag filter application   - Warning logged when multiple tags provi...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium"
+      ],
+      "createdAt": "2026-02-12T20:05:16.260Z",
+      "updatedAt": "2026-02-12T20:05:16.260Z"
     }
   ]
 }
