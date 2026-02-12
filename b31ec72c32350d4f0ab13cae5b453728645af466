@@ -86,6 +86,25 @@
       ],
       "createdAt": "2026-02-12T22:58:01.777Z",
       "updatedAt": "2026-02-12T22:58:01.777Z"
+    },
+    {
+      "id": "15c44766-d341-4013-a44d-9111bef2d95c",
+      "content": "When importing package.json in TypeScript, use require() with type assertion and eslint-disable comment to handle the CommonJS module properly.",
+      "type": "convention",
+      "sha": "b31ec72c32350d4f0ab13cae5b453728645af466",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "package-json",
+        "require",
+        "eslint"
+      ],
+      "createdAt": "2026-02-12T22:58:01.806Z",
+      "updatedAt": "2026-02-12T22:58:01.806Z"
     }
   ]
 }
