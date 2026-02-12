@@ -71,6 +71,24 @@
       ],
       "createdAt": "2026-02-12T22:56:51.853Z",
       "updatedAt": "2026-02-12T22:56:51.853Z"
+    },
+    {
+      "id": "0ac3c22f-f5be-4295-8ad9-cc56824da675",
+      "content": "Published npm packages require a proper barrel file (src/index.ts) with a main entry point in package.json pointing to dist/index.js to be consumable via require().",
+      "type": "gotcha",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "npm-publishing",
+        "package-json",
+        "barrel-file"
+      ],
+      "createdAt": "2026-02-12T23:29:35.096Z",
+      "updatedAt": "2026-02-12T23:29:35.096Z"
     }
   ]
 }
