@@ -29,6 +29,21 @@
       ],
       "createdAt": "2026-02-12T22:53:37.367Z",
       "updatedAt": "2026-02-12T22:53:37.367Z"
+    },
+    {
+      "id": "e86386d4-39ab-4105-979d-ea1e82fd7670",
+      "content": "unnecessary temp dir allocation in test helper when logDir is overridden",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-12T22:53:37.386Z",
+      "updatedAt": "2026-02-12T22:53:37.386Z"
     }
   ]
 }
