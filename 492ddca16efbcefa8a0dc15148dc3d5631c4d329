@@ -236,6 +236,21 @@
       ],
       "createdAt": "2026-02-12T23:26:20.114Z",
       "updatedAt": "2026-02-12T23:26:20.114Z"
+    },
+    {
+      "id": "9742bcb9-6718-482d-a45a-7060d003238d",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-12T23:26:52.211Z",
+      "updatedAt": "2026-02-12T23:26:52.211Z"
     }
   ]
 }
