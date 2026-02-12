@@ -1,5 +1,7 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { join } from 'path';
+import { execFileSync } from 'child_process';
 import { createLogger, createNullLogger, defaultLogDir, loadLoggerOptions } from '../../../../src/infrastructure/logging/factory';
 import { Logger } from '../../../../src/infrastructure/logging/Logger';
 import { NullLogger } from '../../../../src/infrastructure/logging/NullLogger';
@@ -25,6 +27,16 @@ describe('Logging factory', () => {
         process.env[key] = value;
       }
     }
+  });
+
+  describe('defaultLogDir', () => {
+    it('should return .git-mem/logs under the git root', () => {
+      const gitRoot = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+        encoding: 'utf8',
+      }).trim();
+
+      assert.equal(defaultLogDir(), join(gitRoot, '.git-mem', 'logs'));
+    });
   });
 
   describe('loadLoggerOptions', () => {
