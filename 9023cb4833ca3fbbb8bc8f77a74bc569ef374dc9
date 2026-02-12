@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T20:12:03.635Z",
       "updatedAt": "2026-02-12T20:12:03.635Z"
+    },
+    {
+      "id": "cb876153-9996-4a66-8d8c-6cb89f4f8fcd",
+      "content": "User prompt at 2026-02-12T20:13:15.489Z: Can you take a look at how this app will add the hooks in the settings.json during the install, it must preserve any existing hooks that may be in the destination file and update/add the specific \"git...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:13:16.108Z",
+      "updatedAt": "2026-02-12T20:13:16.108Z"
     }
   ]
 }
