@@ -504,6 +504,22 @@
       ],
       "createdAt": "2026-02-12T14:49:35.926Z",
       "updatedAt": "2026-02-12T14:49:35.926Z"
+    },
+    {
+      "id": "17c92457-78ca-4d82-b0a8-46f21f7d2b2c",
+      "content": "User prompt at 2026-02-12T14:51:15.582Z: its waiting for code scanning results",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T14:51:15.582Z",
+      "updatedAt": "2026-02-12T14:51:15.582Z"
     }
   ]
 }
