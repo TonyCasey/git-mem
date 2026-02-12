@@ -637,6 +637,24 @@
       ],
       "createdAt": "2026-02-12T23:28:03.872Z",
       "updatedAt": "2026-02-12T23:28:03.872Z"
+    },
+    {
+      "id": "1b7a91c8-3c1d-4165-9df7-11c116f3c6a1",
+      "content": "Hook entry points check both global hooks.enabled and specific hook enabled flags before processing, providing granular control over hook execution.",
+      "type": "convention",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "conditional-execution",
+        "feature-flags"
+      ],
+      "createdAt": "2026-02-12T23:28:03.885Z",
+      "updatedAt": "2026-02-12T23:28:03.885Z"
     }
   ]
 }
