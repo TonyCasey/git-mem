@@ -17,6 +17,24 @@
       ],
       "createdAt": "2026-02-12T22:56:51.787Z",
       "updatedAt": "2026-02-12T22:56:51.787Z"
+    },
+    {
+      "id": "662dfd5a-b7b6-4831-9583-312602577fba",
+      "content": "Package.json main field should point to dist/index.js (the compiled barrel file) rather than dist/cli.js for library consumers.",
+      "type": "decision",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "package-json",
+        "entry-points",
+        "library-api"
+      ],
+      "createdAt": "2026-02-12T22:56:51.817Z",
+      "updatedAt": "2026-02-12T22:56:51.817Z"
     }
   ]
 }
