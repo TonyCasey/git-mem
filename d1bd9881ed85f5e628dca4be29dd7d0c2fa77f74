@@ -68,6 +68,25 @@
       ],
       "createdAt": "2026-02-12T22:53:37.437Z",
       "updatedAt": "2026-02-12T22:53:37.437Z"
+    },
+    {
+      "id": "2b88a468-736a-45d0-ba3f-1c78dcca6c99",
+      "content": "The system replaced three separate hook entry points with a unified `git-mem hook <event>` CLI command that dispatches to internal handlers. This simplifies hook management and reduces code duplication.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "hooks",
+        "refactoring",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:56:25.164Z",
+      "updatedAt": "2026-02-12T22:56:25.164Z"
     }
   ]
 }
