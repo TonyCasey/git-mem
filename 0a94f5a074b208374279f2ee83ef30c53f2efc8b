@@ -167,6 +167,25 @@
       ],
       "createdAt": "2026-02-12T23:29:15.775Z",
       "updatedAt": "2026-02-12T23:29:15.775Z"
+    },
+    {
+      "id": "7daf687d-50b9-4b5f-9646-e5a4567bd87d",
+      "content": "MCP server architecture follows a factory pattern where createServer() instantiates McpServer and registers all tools via individual register*Tool() functions.",
+      "type": "convention",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "factory-pattern",
+        "tool-registration",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T23:29:15.789Z",
+      "updatedAt": "2026-02-12T23:29:15.789Z"
     }
   ]
 }
