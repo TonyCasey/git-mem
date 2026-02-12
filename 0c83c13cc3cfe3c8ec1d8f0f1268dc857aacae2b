@@ -144,6 +144,25 @@
       ],
       "createdAt": "2026-02-12T22:55:34.397Z",
       "updatedAt": "2026-02-12T22:55:34.397Z"
+    },
+    {
+      "id": "477414ac-558e-4642-a8c3-02e006ac7b6e",
+      "content": "When multiple tags are provided to MemoryContextLoader, only the first tag is supported and a warning is logged about the limitation.",
+      "type": "gotcha",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "memory-context-loader",
+        "tags",
+        "filtering",
+        "limitations"
+      ],
+      "createdAt": "2026-02-12T22:55:34.412Z",
+      "updatedAt": "2026-02-12T22:55:34.412Z"
     }
   ]
 }
