@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T12:16:37.927Z",
       "updatedAt": "2026-02-12T12:16:37.927Z"
+    },
+    {
+      "id": "1dcb31b6-6eff-4524-bab5-6d89f78477aa",
+      "content": "Session summary [session:2733e0c6]: Done.  - **PR #19** merged to main - **Branch** `git-38` deleted - **GIT-38** marked as Done  Logs now default to `~/.git-mem/logs/` on main....",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T12:16:37.946Z",
+      "updatedAt": "2026-02-12T12:16:37.946Z"
     }
   ]
 }
