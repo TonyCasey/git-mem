@@ -92,6 +92,24 @@
       ],
       "createdAt": "2026-02-12T22:56:45.854Z",
       "updatedAt": "2026-02-12T22:56:45.854Z"
+    },
+    {
+      "id": "332c6604-dc92-40e4-b786-08821e93b679",
+      "content": "Integration test helpers use 15-second timeouts for child process operations to prevent hanging tests while allowing sufficient time for Git operations.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "timeouts",
+        "child-process"
+      ],
+      "createdAt": "2026-02-12T22:56:45.867Z",
+      "updatedAt": "2026-02-12T22:56:45.867Z"
     }
   ]
 }
