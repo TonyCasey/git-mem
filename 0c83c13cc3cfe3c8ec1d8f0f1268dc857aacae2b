@@ -307,6 +307,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.908Z",
       "updatedAt": "2026-02-12T23:28:16.908Z"
+    },
+    {
+      "id": "6584ae11-3f4f-4fd4-bb20-2e25504f2608",
+      "content": "When truncating formatted output, guard against maxLength <= 3 to prevent edge cases where the ellipsis wouldn't fit properly.",
+      "type": "gotcha",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "context-formatter",
+        "truncation",
+        "string-manipulation"
+      ],
+      "createdAt": "2026-02-12T23:28:16.926Z",
+      "updatedAt": "2026-02-12T23:28:16.926Z"
     }
   ]
 }
