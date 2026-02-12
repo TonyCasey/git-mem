@@ -18,6 +18,22 @@
       ],
       "createdAt": "2026-02-12T12:17:25.338Z",
       "updatedAt": "2026-02-12T12:17:25.338Z"
+    },
+    {
+      "id": "65207b1f-21c0-4d1c-a10f-70c2e427a4ad",
+      "content": "User prompt at 2026-02-12T12:38:02.498Z: have a read of .dev/planning/hooks-plan.md",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:38:02.499Z",
+      "updatedAt": "2026-02-12T12:38:02.499Z"
     }
   ]
 }
