@@ -340,6 +340,21 @@
       ],
       "createdAt": "2026-02-12T22:54:38.268Z",
       "updatedAt": "2026-02-12T22:54:38.268Z"
+    },
+    {
+      "id": "5b62fd54-27c7-49b3-9b64-d9ca8ed79308",
+      "content": "destructuring (codex-connector feedback)",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-12T22:54:38.279Z",
+      "updatedAt": "2026-02-12T22:54:38.279Z"
     }
   ]
 }
