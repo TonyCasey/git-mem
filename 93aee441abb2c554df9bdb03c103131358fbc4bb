@@ -163,6 +163,24 @@
       ],
       "createdAt": "2026-02-12T23:29:43.301Z",
       "updatedAt": "2026-02-12T23:29:43.301Z"
+    },
+    {
+      "id": "3341a7aa-c626-4601-b33c-f132c8324439",
+      "content": "The project provides both 'git-mem' and 'git-mem-mcp' executables, indicating it may have MCP (Model Context Protocol) integration.",
+      "type": "fact",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "executables",
+        "mcp",
+        "git-mem"
+      ],
+      "createdAt": "2026-02-12T23:29:43.314Z",
+      "updatedAt": "2026-02-12T23:29:43.314Z"
     }
   ]
 }
