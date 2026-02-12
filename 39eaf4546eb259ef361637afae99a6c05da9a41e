@@ -69,6 +69,22 @@
       ],
       "createdAt": "2026-02-12T20:23:56.465Z",
       "updatedAt": "2026-02-12T20:23:56.465Z"
+    },
+    {
+      "id": "d0e9c2dc-0d55-4b77-b30f-25540cc18542",
+      "content": "User prompt at 2026-02-12T20:24:18.386Z: Where is your \"auto memory\" stored?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:24:18.387Z",
+      "updatedAt": "2026-02-12T20:24:18.387Z"
     }
   ]
 }
