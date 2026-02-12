@@ -90,6 +90,24 @@
       ],
       "createdAt": "2026-02-12T22:57:00.023Z",
       "updatedAt": "2026-02-12T22:57:00.023Z"
+    },
+    {
+      "id": "4c922843-3e13-451a-9463-2a52b78c6327",
+      "content": "The project uses CodeRabbit for automated code reviews with an 'assertive' profile and auto-labeling enabled.",
+      "type": "fact",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "coderabbit",
+        "automation",
+        "code-review"
+      ],
+      "createdAt": "2026-02-12T23:29:43.251Z",
+      "updatedAt": "2026-02-12T23:29:43.251Z"
     }
   ]
 }
