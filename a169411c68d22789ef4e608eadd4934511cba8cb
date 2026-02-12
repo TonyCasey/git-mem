@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T15:16:09.203Z",
       "updatedAt": "2026-02-12T15:16:09.203Z"
+    },
+    {
+      "id": "91c7ae07-9e0d-4a4f-850f-3df00324bd84",
+      "content": "Session summary [session:55b69a11]: PR created: https://github.com/TonyCasey/git-mem/pull/21  Phase 2 PR is up with all 6 Linear issues (GIT-45 through GIT-50) linked. 19 files changed, 1006 insertions, 26 new tests, all 208 tests passi...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T15:16:09.228Z",
+      "updatedAt": "2026-02-12T15:16:09.228Z"
     }
   ]
 }
