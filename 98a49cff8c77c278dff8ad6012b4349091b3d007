@@ -276,6 +276,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.827Z",
       "updatedAt": "2026-02-12T23:28:28.827Z"
+    },
+    {
+      "id": "166dc1f6-57e1-40ae-8bc2-83538bacd601",
+      "content": "LLMClientFactory auto-detects providers from environment variables and returns null when no API key is available, enabling graceful fallback behavior.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-client",
+        "factory-pattern",
+        "environment-variables",
+        "api-keys"
+      ],
+      "createdAt": "2026-02-12T23:28:28.838Z",
+      "updatedAt": "2026-02-12T23:28:28.838Z"
     }
   ]
 }
