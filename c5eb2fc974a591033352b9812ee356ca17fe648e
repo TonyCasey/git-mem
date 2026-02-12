@@ -305,6 +305,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.416Z",
       "updatedAt": "2026-02-12T23:27:30.416Z"
+    },
+    {
+      "id": "61fe3478-249f-4f80-8c22-a9ce1b224d71",
+      "content": "LLM enrichment failures are handled gracefully with warning logs rather than blocking the entire liberate process, implementing a graceful degradation pattern.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "error-handling",
+        "llm-integration",
+        "graceful-degradation"
+      ],
+      "createdAt": "2026-02-12T23:27:30.428Z",
+      "updatedAt": "2026-02-12T23:27:30.428Z"
     }
   ]
 }
