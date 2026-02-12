@@ -90,6 +90,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.722Z",
       "updatedAt": "2026-02-12T22:55:47.722Z"
+    },
+    {
+      "id": "5c18193e-3df6-4fe7-87d0-a9232b2b636c",
+      "content": "The retrofit service tracks comprehensive enrichment statistics including tokens consumed, commits enriched/failed, and facts extracted for monitoring LLM usage.",
+      "type": "convention",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "monitoring",
+        "enrichment-stats",
+        "token-tracking",
+        "llm-metrics"
+      ],
+      "createdAt": "2026-02-12T22:55:47.734Z",
+      "updatedAt": "2026-02-12T22:55:47.734Z"
     }
   ]
 }
