@@ -199,6 +199,22 @@
       ],
       "createdAt": "2026-02-12T13:16:10.395Z",
       "updatedAt": "2026-02-12T13:16:10.395Z"
+    },
+    {
+      "id": "29f9e733-2e25-40da-8d38-cef7d36503e7",
+      "content": "User prompt at 2026-02-12T13:16:50.489Z: no, there are test errors on that pr can you fix?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:16:50.489Z",
+      "updatedAt": "2026-02-12T13:16:50.489Z"
     }
   ]
 }
