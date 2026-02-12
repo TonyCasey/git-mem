@@ -35,6 +35,24 @@
       ],
       "createdAt": "2026-02-12T22:56:51.817Z",
       "updatedAt": "2026-02-12T22:56:51.817Z"
+    },
+    {
+      "id": "bc836d69-c562-4fd7-ba77-763309463343",
+      "content": "The package exports a comprehensive API across domain, application, infrastructure, and MCP layers following a clean architecture pattern.",
+      "type": "fact",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "clean-architecture",
+        "api-design"
+      ],
+      "createdAt": "2026-02-12T22:56:51.839Z",
+      "updatedAt": "2026-02-12T22:56:51.839Z"
     }
   ]
 }
