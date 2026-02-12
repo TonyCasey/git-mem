@@ -72,6 +72,25 @@
       ],
       "createdAt": "2026-02-12T22:56:33.611Z",
       "updatedAt": "2026-02-12T22:56:33.611Z"
+    },
+    {
+      "id": "c48f5756-afdb-4144-a971-d416b523ad3d",
+      "content": "The MCP server uses JSON-RPC 2.0 over stdin/stdout via StdioServerTransport for communication with AI tools that spawn it as a child process.",
+      "type": "fact",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "transport",
+        "json-rpc",
+        "stdio"
+      ],
+      "createdAt": "2026-02-12T22:56:33.623Z",
+      "updatedAt": "2026-02-12T22:56:33.623Z"
     }
   ]
 }
