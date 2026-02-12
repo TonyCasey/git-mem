@@ -419,6 +419,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.978Z",
       "updatedAt": "2026-02-12T23:29:06.978Z"
+    },
+    {
+      "id": "669b373c-6a7a-432a-86ba-fe47063de1b6",
+      "content": "Hook output is split between stdout (for Claude context) and stderr (for user terminal messages), following Unix convention for proper stream separation.",
+      "type": "convention",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "output-streams",
+        "unix-convention",
+        "claude-integration"
+      ],
+      "createdAt": "2026-02-12T23:29:06.989Z",
+      "updatedAt": "2026-02-12T23:29:06.989Z"
     }
   ]
 }
