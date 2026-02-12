@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T21:17:14.955Z",
       "updatedAt": "2026-02-12T21:17:14.955Z"
+    },
+    {
+      "id": "e3d85018-0e10-4689-bfc3-f0b54e21396d",
+      "content": "Session summary [session:04329471]: Done. PR #26 is open: https://github.com/TonyCasey/git-mem/pull/26  **Summary of changes:** - **EventBus.test.ts** — added 2 tests (12 total): logger warning on handler failure + explicit no-logger sa...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T21:17:14.974Z",
+      "updatedAt": "2026-02-12T21:17:14.974Z"
     }
   ]
 }
