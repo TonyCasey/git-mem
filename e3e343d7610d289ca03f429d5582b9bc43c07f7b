@@ -83,6 +83,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.779Z",
       "updatedAt": "2026-02-12T22:57:44.779Z"
+    },
+    {
+      "id": "247db3ed-c566-4f7c-9cd6-d2631892ec67",
+      "content": "The MCP integration test uses a multi-step session pattern: initialize server, then send sequential tool calls, collecting responses for verification.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "mcp",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T22:57:44.792Z",
+      "updatedAt": "2026-02-12T22:57:44.792Z"
     }
   ]
 }
