@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T17:03:56.533Z",
       "updatedAt": "2026-02-12T17:03:56.533Z"
+    },
+    {
+      "id": "0b027b96-bf13-4779-9fd2-775aae1ad050",
+      "content": "User prompt at 2026-02-12T17:12:59.625Z: pr poll 22, address any comments directly inline to the comment and poll until all comments are resolved",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T17:12:59.625Z",
+      "updatedAt": "2026-02-12T17:12:59.625Z"
     }
   ]
 }
