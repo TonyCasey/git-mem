@@ -257,6 +257,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.814Z",
       "updatedAt": "2026-02-12T23:28:28.814Z"
+    },
+    {
+      "id": "4f10fdb5-aa45-4a6a-a04b-f7cc081005ac",
+      "content": "The LLM client interface is designed to be provider-agnostic, starting with Anthropic but extensible to other providers.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "llm-client",
+        "provider-agnostic",
+        "extensibility"
+      ],
+      "createdAt": "2026-02-12T23:28:28.827Z",
+      "updatedAt": "2026-02-12T23:28:28.827Z"
     }
   ]
 }
