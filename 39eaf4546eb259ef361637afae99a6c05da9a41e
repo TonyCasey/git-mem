@@ -123,6 +123,22 @@
       ],
       "createdAt": "2026-02-12T20:24:23.554Z",
       "updatedAt": "2026-02-12T20:24:23.554Z"
+    },
+    {
+      "id": "97781e14-7cfb-4b2d-87a1-16443432b2c1",
+      "content": "User prompt at 2026-02-12T20:25:17.967Z: do you also use a project level memory?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:25:17.968Z",
+      "updatedAt": "2026-02-12T20:25:17.968Z"
     }
   ]
 }
