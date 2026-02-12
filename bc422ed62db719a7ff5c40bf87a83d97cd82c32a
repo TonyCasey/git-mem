@@ -216,6 +216,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.430Z",
       "updatedAt": "2026-02-12T23:31:07.430Z"
+    },
+    {
+      "id": "cfd81126-0601-4257-b5cd-3f7f0118e830",
+      "content": "Uses native Node.js test runner (node:test) with tsx for TypeScript instead of Jest, requiring manual imports of describe/it from node:test.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "node-test",
+        "typescript"
+      ],
+      "createdAt": "2026-02-12T23:31:07.448Z",
+      "updatedAt": "2026-02-12T23:31:07.448Z"
     }
   ]
 }
