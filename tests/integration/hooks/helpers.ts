@@ -5,8 +5,7 @@
  * and `git-mem init-hooks` against real temp git repos.
  */
 
-import { spawnSync } from 'child_process';
-import { execFileSync } from 'child_process';
+import { spawnSync, execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
@@ -82,8 +81,11 @@ export function addCommit(dir: string, filename: string, content: string, messag
   return git(['rev-parse', 'HEAD'], dir);
 }
 
-/** Write .git-mem.json into a directory with optional overrides. */
-export function writeGitMemConfig(dir: string, overrides?: Record<string, unknown>): void {
+/** Write .git-mem.json into a directory with optional per-hook overrides. */
+export function writeGitMemConfig(
+  dir: string,
+  overrides?: Partial<Record<'enabled' | 'sessionStart' | 'sessionStop' | 'promptSubmit', unknown>>,
+): void {
   const defaults = {
     hooks: {
       enabled: true,
@@ -93,8 +95,20 @@ export function writeGitMemConfig(dir: string, overrides?: Record<string, unknow
     },
   };
 
-  const config = overrides ? { ...defaults, hooks: { ...defaults.hooks, ...overrides } } : defaults;
-  writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(config, null, 2) + '\n');
+  if (!overrides) {
+    writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(defaults, null, 2) + '\n');
+    return;
+  }
+
+  const merged = {
+    hooks: {
+      enabled: overrides.enabled ?? defaults.hooks.enabled,
+      sessionStart: { ...defaults.hooks.sessionStart, ...(overrides.sessionStart as object) },
+      sessionStop: { ...defaults.hooks.sessionStop, ...(overrides.sessionStop as object) },
+      promptSubmit: { ...defaults.hooks.promptSubmit, ...(overrides.promptSubmit as object) },
+    },
+  };
+  writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(merged, null, 2) + '\n');
 }
 
 /** Remove a temp directory. */

@@ -8,14 +8,13 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { writeFileSync } from 'fs';
-import { join } from 'path';
 import { MemoryService } from '../../../src/application/services/MemoryService';
 import { MemoryRepository } from '../../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../../src/infrastructure/services/NotesService';
 import {
   runHook,
   createTestRepo,
+  writeGitMemConfig,
   cleanupRepo,
 } from './helpers';
 
@@ -42,15 +41,7 @@ describe('Integration: hook prompt-submit', () => {
       });
 
       // Write config with promptSubmit ENABLED
-      const config = {
-        hooks: {
-          enabled: true,
-          sessionStart: { enabled: true, memoryLimit: 20 },
-          sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
-          promptSubmit: { enabled: true, recordPrompts: false, surfaceContext: true },
-        },
-      };
-      writeFileSync(join(repoDir, '.git-mem.json'), JSON.stringify(config, null, 2) + '\n');
+      writeGitMemConfig(repoDir, { promptSubmit: { enabled: true, recordPrompts: false, surfaceContext: true } });
     });
 
     after(() => {
@@ -90,15 +81,7 @@ describe('Integration: hook prompt-submit', () => {
       repoDir = repo.dir;
 
       // Default config has promptSubmit.enabled: false
-      const config = {
-        hooks: {
-          enabled: true,
-          sessionStart: { enabled: true, memoryLimit: 20 },
-          sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
-          promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
-        },
-      };
-      writeFileSync(join(repoDir, '.git-mem.json'), JSON.stringify(config, null, 2) + '\n');
+      writeGitMemConfig(repoDir);
     });
 
     after(() => {

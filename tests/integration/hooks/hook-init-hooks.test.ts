@@ -8,9 +8,8 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, mkdirSync, writeFileSync, mkdtempSync, rmSync } from 'fs';
 import { join } from 'path';
-import { mkdtempSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { runCli } from './helpers';
 
