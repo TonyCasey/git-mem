@@ -295,6 +295,25 @@
       ],
       "createdAt": "2026-02-12T23:28:28.838Z",
       "updatedAt": "2026-02-12T23:28:28.838Z"
+    },
+    {
+      "id": "ddd2846c-e0e9-41f0-93a3-b1907014353f",
+      "content": "Enrichment statistics are tracked separately including tokens consumed, commits enriched/failed, and facts extracted, providing visibility into LLM usage and costs.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-enrichment",
+        "statistics",
+        "monitoring",
+        "token-tracking"
+      ],
+      "createdAt": "2026-02-12T23:28:28.849Z",
+      "updatedAt": "2026-02-12T23:28:28.849Z"
     }
   ]
 }
