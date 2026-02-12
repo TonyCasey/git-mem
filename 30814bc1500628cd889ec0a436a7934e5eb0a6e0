@@ -39,6 +39,25 @@
       ],
       "createdAt": "2026-02-12T22:54:59.160Z",
       "updatedAt": "2026-02-12T22:54:59.160Z"
+    },
+    {
+      "id": "ac8b439d-e447-4dac-8bef-ecc22d08b9cd",
+      "content": "The application layer contains three main services: MemoryService (remember/recall CRUD), LiberateService (scan git history, score commits, extract patterns), and ContextService (match staged changes against stored memories).",
+      "type": "fact",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "application-layer",
+        "services",
+        "clean-architecture"
+      ],
+      "createdAt": "2026-02-12T22:54:59.172Z",
+      "updatedAt": "2026-02-12T22:54:59.172Z"
     }
   ]
 }
