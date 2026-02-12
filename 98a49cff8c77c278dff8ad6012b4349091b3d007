@@ -351,6 +351,21 @@
       ],
       "createdAt": "2026-02-12T23:28:28.871Z",
       "updatedAt": "2026-02-12T23:28:28.871Z"
+    },
+    {
+      "id": "20675522-bb66-4f78-a673-d1640995ce7f",
+      "content": "writing with LLM source,",
+      "type": "gotcha",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:note"
+      ],
+      "createdAt": "2026-02-12T23:28:28.882Z",
+      "updatedAt": "2026-02-12T23:28:28.882Z"
     }
   ]
 }
