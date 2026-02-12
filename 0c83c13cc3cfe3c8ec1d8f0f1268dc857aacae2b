@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "939a1d75-4824-47dd-b900-fc1ff856d5ca",
+      "content": "Session work [session:55b69a11]:. 411 prompts, 625 responses",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T16:16:57.161Z",
+      "updatedAt": "2026-02-12T16:16:57.161Z"
+    }
+  ]
+}
