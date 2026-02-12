@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T17:03:56.513Z",
       "updatedAt": "2026-02-12T17:03:56.513Z"
+    },
+    {
+      "id": "7a610515-8dc8-4d56-b2b9-2e70a42e61a1",
+      "content": "Session summary [session:55b69a11]: Phase 3 is complete. Here's a summary:  **PR #22**: https://github.com/TonyCasey/git-mem/pull/22  **What was delivered** (14 new files, 5 modified):  | Issue | What | Key files | |-------|------|---...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T17:03:56.533Z",
+      "updatedAt": "2026-02-12T17:03:56.533Z"
     }
   ]
 }
