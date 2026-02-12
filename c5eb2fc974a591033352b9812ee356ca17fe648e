@@ -62,6 +62,24 @@
       ],
       "createdAt": "2026-02-12T22:54:50.136Z",
       "updatedAt": "2026-02-12T22:54:50.136Z"
+    },
+    {
+      "id": "347a66fb-496a-41ac-af34-879288d33b46",
+      "content": "Log files are placed in os.tmpdir() by default to avoid polluting working trees, with a dedicated .git-mem/ directory for project-specific logs that gets git-ignored.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "file-system",
+        "git-ignore"
+      ],
+      "createdAt": "2026-02-12T22:54:50.167Z",
+      "updatedAt": "2026-02-12T22:54:50.167Z"
     }
   ]
 }
