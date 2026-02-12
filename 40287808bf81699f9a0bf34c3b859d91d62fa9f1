@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T20:59:31.428Z",
       "updatedAt": "2026-02-12T20:59:31.428Z"
+    },
+    {
+      "id": "aa1d4d7a-5774-4eee-aa79-9e34619ce574",
+      "content": "User prompt at 2026-02-12T21:00:16.285Z: do you have context of what we are talking about?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:00:17.007Z",
+      "updatedAt": "2026-02-12T21:00:17.007Z"
     }
   ]
 }
