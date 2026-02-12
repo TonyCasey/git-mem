@@ -47,6 +47,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.749Z",
       "updatedAt": "2026-02-12T22:57:44.749Z"
+    },
+    {
+      "id": "012c4680-31ce-4b67-86b7-95ab6d1afaef",
+      "content": "Global installs use the 'git-mem-mcp' binary directly, while local/development setups use 'node' with path to 'mcp-server.js'.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "installation",
+        "binary-execution"
+      ],
+      "createdAt": "2026-02-12T22:57:44.766Z",
+      "updatedAt": "2026-02-12T22:57:44.766Z"
     }
   ]
 }
