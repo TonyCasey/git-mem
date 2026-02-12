@@ -47,6 +47,8 @@ describe('createContainer', () => {
       assert.ok(cradle.contextService);
       assert.ok(cradle.liberateService);
       assert.ok(cradle.sessionCaptureService);
+      assert.ok(cradle.memoryContextLoader);
+      assert.ok(cradle.contextFormatter);
     });
 
     it('should return singletons within container scope', () => {
@@ -157,6 +159,17 @@ describe('createContainer', () => {
       const container = createContainer();
       const events = container.cradle.eventBus.registeredEvents();
       assert.ok(events.includes('prompt:submit'));
+    });
+  });
+
+  describe('hook services', () => {
+    it('should resolve hook services with expected interfaces', () => {
+      const container = createContainer();
+      const { memoryContextLoader, contextFormatter, sessionCaptureService } = container.cradle;
+
+      assert.equal(typeof memoryContextLoader.load, 'function');
+      assert.equal(typeof contextFormatter.format, 'function');
+      assert.equal(typeof sessionCaptureService.capture, 'function');
     });
   });
 
