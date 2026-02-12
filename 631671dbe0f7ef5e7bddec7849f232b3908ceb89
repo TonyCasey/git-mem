@@ -811,6 +811,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.797Z",
       "updatedAt": "2026-02-12T23:27:18.797Z"
+    },
+    {
+      "id": "354a7f60-8f20-4422-8c87-b952c7930fc9",
+      "content": "DI container refactoring removed 72 lines of duplicated service wiring code across 8 entry points (CLI commands and MCP tools).",
+      "type": "fact",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "code-reduction",
+        "duplication-removal",
+        "refactoring"
+      ],
+      "createdAt": "2026-02-12T23:27:18.809Z",
+      "updatedAt": "2026-02-12T23:27:18.809Z"
     }
   ]
 }
