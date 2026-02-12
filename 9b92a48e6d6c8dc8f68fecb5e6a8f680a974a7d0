@@ -166,6 +166,25 @@
       ],
       "createdAt": "2026-02-12T23:30:46.638Z",
       "updatedAt": "2026-02-12T23:30:46.638Z"
+    },
+    {
+      "id": "44d7c949-2eaf-4789-ad0c-a8d982b7d272",
+      "content": "Integration tests for MCP tools use subprocess spawning with stdio communication and JSON-RPC protocol, requiring initialization handshake before tool calls.",
+      "type": "convention",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "integration",
+        "mcp",
+        "json-rpc"
+      ],
+      "createdAt": "2026-02-12T23:30:46.656Z",
+      "updatedAt": "2026-02-12T23:30:46.656Z"
     }
   ]
 }
