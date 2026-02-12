@@ -148,6 +148,24 @@
       ],
       "createdAt": "2026-02-12T23:30:46.601Z",
       "updatedAt": "2026-02-12T23:30:46.601Z"
+    },
+    {
+      "id": "9c0b46ad-8f08-402d-8c62-4af6235c22ac",
+      "content": "MCP tool responses follow a consistent structure with content arrays containing text objects, and errors are handled by setting isError flag rather than throwing exceptions.",
+      "type": "convention",
+      "sha": "9b92a48e6d6c8dc8f68fecb5e6a8f680a974a7d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "error-handling",
+        "response-format"
+      ],
+      "createdAt": "2026-02-12T23:30:46.638Z",
+      "updatedAt": "2026-02-12T23:30:46.638Z"
     }
   ]
 }
