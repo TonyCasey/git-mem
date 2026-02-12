@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T16:16:57.182Z",
       "updatedAt": "2026-02-12T16:16:57.182Z"
+    },
+    {
+      "id": "2b989967-8959-4096-9aec-a97184d44379",
+      "content": "User prompt at 2026-02-12T16:42:10.703Z: yes, start on phase 3",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T16:42:10.703Z",
+      "updatedAt": "2026-02-12T16:42:10.703Z"
     }
   ]
 }
