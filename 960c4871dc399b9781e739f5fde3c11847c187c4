@@ -279,6 +279,24 @@
       ],
       "createdAt": "2026-02-12T23:29:28.036Z",
       "updatedAt": "2026-02-12T23:29:28.036Z"
+    },
+    {
+      "id": "b6f91a69-5dfc-4616-8ebb-7b5550e7c713",
+      "content": "Hook commands in Claude Desktop settings follow the format 'git-mem hook <event-name>' where event-name matches the hook type (session-start, session-stop, prompt-submit).",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "claude-desktop",
+        "hooks",
+        "command-format"
+      ],
+      "createdAt": "2026-02-12T23:29:28.047Z",
+      "updatedAt": "2026-02-12T23:29:28.047Z"
     }
   ]
 }
