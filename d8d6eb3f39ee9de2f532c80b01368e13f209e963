@@ -55,6 +55,25 @@
       ],
       "createdAt": "2026-02-12T22:57:07.802Z",
       "updatedAt": "2026-02-12T22:57:07.802Z"
+    },
+    {
+      "id": "57c9076f-aac0-4e57-ad03-7055f61447d3",
+      "content": "Integration tests for MCP tools spawn the server as a subprocess and communicate via JSON-RPC over stdio.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "mcp",
+        "integration-tests",
+        "json-rpc"
+      ],
+      "createdAt": "2026-02-12T22:57:07.817Z",
+      "updatedAt": "2026-02-12T22:57:07.817Z"
     }
   ]
 }
