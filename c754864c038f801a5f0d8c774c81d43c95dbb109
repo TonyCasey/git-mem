@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "38eebeb3-8c2d-46b8-83db-e989bf819349",
+      "content": "The project requires full git history (fetch-depth: 0) for GitClient tests to function properly, indicating the codebase has git-related functionality that depends on repository history.",
+      "type": "gotcha",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git",
+        "testing",
+        "ci",
+        "fetch-depth"
+      ],
+      "createdAt": "2026-02-12T22:57:33.668Z",
+      "updatedAt": "2026-02-12T22:57:33.668Z"
+    }
+  ]
+}
