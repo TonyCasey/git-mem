@@ -278,6 +278,24 @@
       ],
       "createdAt": "2026-02-12T23:27:52.494Z",
       "updatedAt": "2026-02-12T23:27:52.494Z"
+    },
+    {
+      "id": "8fe75560-2e98-433f-b0db-776f810b6b2a",
+      "content": "The system implements deduplication utilities in the domain layer, addressing the challenge of preventing duplicate memories in collaborative environments.",
+      "type": "decision",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "deduplication",
+        "domain-utils",
+        "data-integrity"
+      ],
+      "createdAt": "2026-02-12T23:27:52.505Z",
+      "updatedAt": "2026-02-12T23:27:52.505Z"
     }
   ]
 }
