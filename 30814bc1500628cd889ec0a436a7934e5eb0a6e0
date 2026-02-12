@@ -150,6 +150,24 @@
       ],
       "createdAt": "2026-02-12T23:27:40.117Z",
       "updatedAt": "2026-02-12T23:27:40.117Z"
+    },
+    {
+      "id": "cfdb88b3-db9d-4d0a-9c95-db55f4945db6",
+      "content": "CodeRabbit review integration is used for code quality checks, catching issues like trailing whitespace, typos, and missing documentation parameters.",
+      "type": "fact",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "code-review",
+        "quality-assurance",
+        "tooling"
+      ],
+      "createdAt": "2026-02-12T23:27:40.131Z",
+      "updatedAt": "2026-02-12T23:27:40.131Z"
     }
   ]
 }
