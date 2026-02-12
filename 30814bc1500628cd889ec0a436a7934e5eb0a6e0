@@ -168,6 +168,25 @@
       ],
       "createdAt": "2026-02-12T23:27:40.131Z",
       "updatedAt": "2026-02-12T23:27:40.131Z"
+    },
+    {
+      "id": "06e12945-3160-43f1-8b9a-d4a5da41a891",
+      "content": "The liberate command (formerly retrofit) requires ANTHROPIC_API_KEY environment variable only when using the --enrich flag for LLM-powered analysis.",
+      "type": "fact",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "environment-variables",
+        "api-keys",
+        "liberate",
+        "llm-integration"
+      ],
+      "createdAt": "2026-02-12T23:27:40.143Z",
+      "updatedAt": "2026-02-12T23:27:40.143Z"
     }
   ]
 }
