@@ -72,6 +72,22 @@
       ],
       "createdAt": "2026-02-12T12:38:13.378Z",
       "updatedAt": "2026-02-12T12:38:13.378Z"
+    },
+    {
+      "id": "ffd93c79-c3b1-4ec5-a9bb-34cbfd7442c5",
+      "content": "User prompt at 2026-02-12T12:39:37.586Z: should be a separate package or just all in this repo/package?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:39:37.586Z",
+      "updatedAt": "2026-02-12T12:39:37.586Z"
     }
   ]
 }
