@@ -91,6 +91,22 @@
       ],
       "createdAt": "2026-02-12T21:07:04.510Z",
       "updatedAt": "2026-02-12T21:07:04.510Z"
+    },
+    {
+      "id": "a44233b4-81e2-4f62-9bcb-4638a1940db0",
+      "content": "User prompt at 2026-02-12T21:07:25.957Z: ok, lets start a new session & see",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:07:25.957Z",
+      "updatedAt": "2026-02-12T21:07:25.957Z"
     }
   ]
 }
