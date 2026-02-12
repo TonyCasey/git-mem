@@ -328,6 +328,24 @@
       ],
       "createdAt": "2026-02-12T23:28:53.322Z",
       "updatedAt": "2026-02-12T23:28:53.322Z"
+    },
+    {
+      "id": "6e462cad-1391-4e82-974a-aa102a0608b2",
+      "content": "Input validation is implemented for --commit-count parameter, requiring it to be a finite positive integer with fallback to default values when validation fails.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "input-validation",
+        "parameter-validation",
+        "error-handling"
+      ],
+      "createdAt": "2026-02-12T23:28:53.334Z",
+      "updatedAt": "2026-02-12T23:28:53.334Z"
     }
   ]
 }
