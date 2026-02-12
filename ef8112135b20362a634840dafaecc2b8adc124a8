@@ -196,6 +196,25 @@
       ],
       "createdAt": "2026-02-12T20:53:35.768Z",
       "updatedAt": "2026-02-12T20:53:35.768Z"
+    },
+    {
+      "id": "d15b0072-4f25-4396-972b-984325331f01",
+      "content": "Session summary [session:d6d5d571]: Looking at the session start output at the top of this conversation:  ``` SessionStart:startup hook success: Success SessionStart hook additional context: Memory loaded for session start. ```  The hoo...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T20:53:35.791Z",
+      "updatedAt": "2026-02-12T20:53:35.791Z"
     }
   ]
 }
