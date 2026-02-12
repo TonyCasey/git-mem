@@ -619,6 +619,24 @@
       ],
       "createdAt": "2026-02-12T23:28:03.858Z",
       "updatedAt": "2026-02-12T23:28:03.858Z"
+    },
+    {
+      "id": "6ba3313d-ff70-42de-bb1a-70bb995cd0db",
+      "content": "The SessionCaptureService delegates to LiberateService for actual memory extraction, maintaining separation of concerns between session management and memory processing.",
+      "type": "decision",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "separation-of-concerns",
+        "service-delegation"
+      ],
+      "createdAt": "2026-02-12T23:28:03.872Z",
+      "updatedAt": "2026-02-12T23:28:03.872Z"
     }
   ]
 }
