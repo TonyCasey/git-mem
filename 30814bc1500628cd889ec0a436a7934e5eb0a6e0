@@ -58,6 +58,24 @@
       ],
       "createdAt": "2026-02-12T22:54:59.172Z",
       "updatedAt": "2026-02-12T22:54:59.172Z"
+    },
+    {
+      "id": "566c2a77-23ca-49fa-a436-67db19374e97",
+      "content": "The codebase follows clean architecture with three layers where dependencies point inward only: Infrastructure → Application → Domain.",
+      "type": "convention",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "clean-architecture",
+        "dependency-direction"
+      ],
+      "createdAt": "2026-02-12T22:54:59.184Z",
+      "updatedAt": "2026-02-12T22:54:59.184Z"
     }
   ]
 }
