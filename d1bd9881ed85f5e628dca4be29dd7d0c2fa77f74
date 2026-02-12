@@ -401,6 +401,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.966Z",
       "updatedAt": "2026-02-12T23:29:06.966Z"
+    },
+    {
+      "id": "4900c651-35d0-4b0f-9352-40fa55a6d8be",
+      "content": "Session-stop events require both the section to be enabled AND autoLiberate flag to be true, implementing a double-gating mechanism for this specific event type.",
+      "type": "gotcha",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "session-stop",
+        "config-validation",
+        "auto-liberate"
+      ],
+      "createdAt": "2026-02-12T23:29:06.978Z",
+      "updatedAt": "2026-02-12T23:29:06.978Z"
     }
   ]
 }
