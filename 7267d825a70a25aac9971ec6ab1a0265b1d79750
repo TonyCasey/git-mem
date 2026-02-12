@@ -144,6 +144,25 @@
       ],
       "createdAt": "2026-02-12T23:30:01.621Z",
       "updatedAt": "2026-02-12T23:30:01.621Z"
+    },
+    {
+      "id": "d9a67f4c-293d-47df-9796-262e541984b2",
+      "content": "MCP server integration follows a standard handshake protocol that must be properly implemented for client compatibility. Both unit tests for server creation and integration tests for protocol compliance are required.",
+      "type": "convention",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "testing",
+        "protocol-compliance",
+        "handshake"
+      ],
+      "createdAt": "2026-02-12T23:30:01.636Z",
+      "updatedAt": "2026-02-12T23:30:01.636Z"
     }
   ]
 }
