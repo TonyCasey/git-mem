@@ -332,6 +332,22 @@
       ],
       "createdAt": "2026-02-12T20:02:42.916Z",
       "updatedAt": "2026-02-12T20:02:42.916Z"
+    },
+    {
+      "id": "611b1c7e-9aae-4135-896b-dd151c40ee5e",
+      "content": "User prompt at 2026-02-12T20:03:08.566Z: yeah lets start on phase 4, kick off GIT-56",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:03:08.567Z",
+      "updatedAt": "2026-02-12T20:03:08.567Z"
     }
   ]
 }
