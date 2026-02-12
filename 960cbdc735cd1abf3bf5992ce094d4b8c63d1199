@@ -72,6 +72,25 @@
       ],
       "createdAt": "2026-02-12T21:07:04.489Z",
       "updatedAt": "2026-02-12T21:07:04.489Z"
+    },
+    {
+      "id": "7a7aaefd-9e26-4b1e-a49e-05bceea4e6f2",
+      "content": "Session summary [session:d6d5d571]: No — it's just saved in my auto memory (`MEMORY.md`). That file gets loaded into my system prompt at the start of every session, so I'll see the instruction and output the banner as text.  No hook cha...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T21:07:04.510Z",
+      "updatedAt": "2026-02-12T21:07:04.510Z"
     }
   ]
 }
