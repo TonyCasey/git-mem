@@ -163,6 +163,24 @@
       ],
       "createdAt": "2026-02-12T23:30:01.636Z",
       "updatedAt": "2026-02-12T23:30:01.636Z"
+    },
+    {
+      "id": "318de992-3a14-4a93-b08d-19bc06d5d55f",
+      "content": "The MCP SDK brings significant dependencies including Express, Hono, CORS, and various validation libraries, indicating the server may support multiple transport methods beyond stdio.",
+      "type": "fact",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependencies",
+        "mcp-sdk",
+        "transport-methods"
+      ],
+      "createdAt": "2026-02-12T23:30:01.650Z",
+      "updatedAt": "2026-02-12T23:30:01.650Z"
     }
   ]
 }
