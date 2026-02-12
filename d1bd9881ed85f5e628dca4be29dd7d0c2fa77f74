@@ -482,6 +482,21 @@
       ],
       "createdAt": "2026-02-12T23:33:17.552Z",
       "updatedAt": "2026-02-12T23:33:17.552Z"
+    },
+    {
+      "id": "e7d49227-d5ce-4b52-bb9a-8b84eebde2bb",
+      "content": "shallow spread. Deep-merge",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-12T23:34:11.771Z",
+      "updatedAt": "2026-02-12T23:34:11.771Z"
     }
   ]
 }
