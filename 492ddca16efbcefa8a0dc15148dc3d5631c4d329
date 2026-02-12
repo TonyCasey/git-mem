@@ -365,6 +365,27 @@
       ],
       "createdAt": "2026-02-12T23:28:53.347Z",
       "updatedAt": "2026-02-12T23:28:53.347Z"
+    },
+    {
+      "id": "18f3ff0f-026b-4452-8e8c-d469a92f22d2",
+      "content": "The init command follows a specific flow: prompts for user input (unless --yes), sets up Claude Code integration, handles MCP config, manages gitignore entries, checks/creates .env file, and optionally runs liberate.",
+      "type": "fact",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "init-command",
+        "setup-flow",
+        "claude-code",
+        "mcp",
+        "gitignore",
+        "env-file"
+      ],
+      "createdAt": "2026-02-12T23:28:53.358Z",
+      "updatedAt": "2026-02-12T23:28:53.358Z"
     }
   ]
 }
