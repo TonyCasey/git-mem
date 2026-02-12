@@ -37,6 +37,24 @@
       ],
       "createdAt": "2026-02-12T22:56:45.808Z",
       "updatedAt": "2026-02-12T22:56:45.808Z"
+    },
+    {
+      "id": "d9afc7b2-91a5-4456-9a3b-f595edaec81f",
+      "content": "The prompt-submit hook can be enabled/disabled via configuration, with the default being disabled to avoid interfering with normal usage.",
+      "type": "fact",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "prompt-submit",
+        "configuration"
+      ],
+      "createdAt": "2026-02-12T22:56:45.828Z",
+      "updatedAt": "2026-02-12T22:56:45.828Z"
     }
   ]
 }
