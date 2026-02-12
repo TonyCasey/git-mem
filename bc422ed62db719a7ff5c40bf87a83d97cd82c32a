@@ -252,6 +252,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.464Z",
       "updatedAt": "2026-02-12T23:31:07.464Z"
+    },
+    {
+      "id": "3d418a74-6a02-4b94-80cf-4fd123e773c7",
+      "content": "Project is CommonJS but @modelcontextprotocol/sdk is ESM, requiring esModuleInterop: true and .js import extensions to work together.",
+      "type": "gotcha",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "commonjs",
+        "esm",
+        "module-interop"
+      ],
+      "createdAt": "2026-02-12T23:31:07.477Z",
+      "updatedAt": "2026-02-12T23:31:07.477Z"
     }
   ]
 }
