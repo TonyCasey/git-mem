@@ -289,6 +289,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.871Z",
       "updatedAt": "2026-02-12T23:28:16.871Z"
+    },
+    {
+      "id": "99defae3-d19f-42e8-85c0-48cc4b856517",
+      "content": "Hook handlers follow a consistent pattern: they implement IEventHandler<T>, handle events by delegating to services, and return IEventResult with success/error status.",
+      "type": "convention",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hooks",
+        "event-handling",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T23:28:16.908Z",
+      "updatedAt": "2026-02-12T23:28:16.908Z"
     }
   ]
 }
