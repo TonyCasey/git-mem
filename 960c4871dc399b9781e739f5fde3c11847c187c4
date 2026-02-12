@@ -110,6 +110,25 @@
       ],
       "createdAt": "2026-02-12T22:56:45.867Z",
       "updatedAt": "2026-02-12T22:56:45.867Z"
+    },
+    {
+      "id": "90cb934c-2e50-449f-9b21-e4e29bd63492",
+      "content": "The init-hooks command supports both installation (--yes) and removal (--remove) modes, creating/removing both .claude/settings.json and .git-mem.json files.",
+      "type": "fact",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "init-hooks",
+        "installation",
+        "claude-settings",
+        "git-mem-config"
+      ],
+      "createdAt": "2026-02-12T22:56:45.878Z",
+      "updatedAt": "2026-02-12T22:56:45.878Z"
     }
   ]
 }
