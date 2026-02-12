@@ -119,6 +119,24 @@
       ],
       "createdAt": "2026-02-12T22:57:44.804Z",
       "updatedAt": "2026-02-12T22:57:44.804Z"
+    },
+    {
+      "id": "a58075cf-9611-42bd-a377-a6276e4143a4",
+      "content": "The 'which' command is used to detect global binary availability on Unix systems for installation detection.",
+      "type": "convention",
+      "sha": "e3e343d7610d289ca03f429d5582b9bc43c07f7b",
+      "confidence": "medium",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "shell-commands",
+        "binary-detection",
+        "unix"
+      ],
+      "createdAt": "2026-02-12T22:57:44.816Z",
+      "updatedAt": "2026-02-12T22:57:44.816Z"
     }
   ]
 }
