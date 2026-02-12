@@ -419,6 +419,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.754Z",
       "updatedAt": "2026-02-12T22:55:21.754Z"
+    },
+    {
+      "id": "edba48f1-c3cf-401a-befd-eb4e6726a31c",
+      "content": "Hook configuration is centralized in .git-mem.json with per-hook enabled/disabled settings, allowing fine-grained control over which hooks are active.",
+      "type": "convention",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "hook-config",
+        "git-mem-json"
+      ],
+      "createdAt": "2026-02-12T22:55:21.792Z",
+      "updatedAt": "2026-02-12T22:55:21.792Z"
     }
   ]
 }
