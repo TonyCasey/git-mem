@@ -7,6 +7,7 @@ import { liberateCommand } from './commands/liberate';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
+import { initHooksCommand } from './commands/init-hooks';
 import { createLogger } from './infrastructure/logging/factory';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -70,5 +71,13 @@ program
   .option('--force', 'Overwrite existing .mcp.json')
   .option('--global', 'Use globally installed git-mem-mcp binary')
   .action((options) => initMcpCommand(options, logger));
+
+program
+  .command('init-hooks')
+  .description('Configure Claude Code hooks for git-mem')
+  .option('-y, --yes', 'Accept defaults without prompting')
+  .option('--scope <scope>', 'Settings scope: project or user', 'project')
+  .option('--remove', 'Remove hooks and clean up config files')
+  .action((options) => initHooksCommand(options, logger));
 
 program.parse(process.argv);

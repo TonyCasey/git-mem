@@ -20,6 +20,8 @@ import type { IEventBus } from '../../domain/interfaces/IEventBus';
 import type { IMemoryService } from '../../application/interfaces/IMemoryService';
 import type { IContextService } from '../../application/interfaces/IContextService';
 import type { ILiberateService } from '../../application/interfaces/ILiberateService';
+import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
+import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 
 export interface ICradle {
   // Infrastructure
@@ -35,6 +37,10 @@ export interface ICradle {
   memoryService: IMemoryService;
   contextService: IContextService;
   liberateService: ILiberateService;
+
+  // Application — hook services
+  memoryContextLoader: IMemoryContextLoader;
+  contextFormatter: IContextFormatter;
 }
 
 export interface IContainerOptions {

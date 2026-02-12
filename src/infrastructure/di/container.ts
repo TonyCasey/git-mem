@@ -15,7 +15,6 @@ import {
 } from 'awilix';
 import type { AwilixContainer } from 'awilix';
 import type { ICradle, IContainerOptions } from './types';
-import type { ILogger } from '../../domain/interfaces/ILogger';
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
 
 // Infrastructure
@@ -26,11 +25,16 @@ import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
 
-// Application
+// Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
 import { ContextService } from '../../application/services/ContextService';
 import { LiberateService } from '../../application/services/LiberateService';
 import { GitTriageService } from '../../application/services/GitTriageService';
+
+// Application — hook services
+import { MemoryContextLoader } from '../../application/services/MemoryContextLoader';
+import { ContextFormatter } from '../../application/services/ContextFormatter';
+import { SessionStartHandler } from '../../application/handlers/SessionStartHandler';
 
 export function createContainer(options?: IContainerOptions): AwilixContainer<ICradle> {
   const container = createAwilixContainer<ICradle>({
@@ -49,8 +53,17 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
 
-    eventBus: asFunction((logger: ILogger) => {
-      return new EventBus(logger);
+    eventBus: asFunction(() => {
+      const bus = new EventBus(container.cradle.logger);
+
+      // Register hook handlers on the event bus
+      bus.on('session:start', new SessionStartHandler(
+        container.cradle.memoryContextLoader,
+        container.cradle.contextFormatter,
+        container.cradle.logger,
+      ));
+
+      return bus;
     }).singleton(),
 
     llmClient: asFunction(() => {
@@ -70,6 +83,10 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
     liberateService: asClass(LiberateService).singleton(),
+
+    // ── Hook services ─────────────────────────────────────────────
+    memoryContextLoader: asClass(MemoryContextLoader).singleton(),
+    contextFormatter: asClass(ContextFormatter).singleton(),
   });
 
   return container;

@@ -140,9 +140,10 @@ describe('createContainer', () => {
       assert.ok(typeof bus.registeredEvents === 'function');
     });
 
-    it('should return empty registered events initially', () => {
+    it('should have session:start handler registered', () => {
       const container = createContainer();
-      assert.deepEqual(container.cradle.eventBus.registeredEvents(), []);
+      const events = container.cradle.eventBus.registeredEvents();
+      assert.ok(events.includes('session:start'));
     });
   });
 
