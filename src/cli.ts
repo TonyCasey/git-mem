@@ -8,6 +8,7 @@ import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initMcpCommand } from './commands/init-mcp';
 import { initHooksCommand } from './commands/init-hooks';
+import { hookCommand } from './commands/hook';
 import { createLogger } from './infrastructure/logging/factory';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -79,5 +80,10 @@ program
   .option('--scope <scope>', 'Settings scope: project or user', 'project')
   .option('--remove', 'Remove hooks and clean up config files')
   .action((options) => initHooksCommand(options, logger));
+
+program
+  .command('hook <event>')
+  .description('Handle Claude Code hook events (session-start, session-stop, prompt-submit)')
+  .action((event) => hookCommand(event, logger));
 
 program.parse(process.argv);
