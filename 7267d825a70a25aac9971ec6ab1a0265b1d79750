@@ -72,6 +72,24 @@
       ],
       "createdAt": "2026-02-12T22:57:16.277Z",
       "updatedAt": "2026-02-12T22:57:16.277Z"
+    },
+    {
+      "id": "ff959191-b5b5-4b47-b57f-7547587c1157",
+      "content": "The @modelcontextprotocol/sdk dependency brings in significant transitive dependencies including express, hono, and various validation libraries.",
+      "type": "fact",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependencies",
+        "mcp-sdk",
+        "transitive-dependencies"
+      ],
+      "createdAt": "2026-02-12T22:57:16.290Z",
+      "updatedAt": "2026-02-12T22:57:16.290Z"
     }
   ]
 }
