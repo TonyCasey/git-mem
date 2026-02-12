@@ -199,6 +199,25 @@
       ],
       "createdAt": "2026-02-12T22:56:25.267Z",
       "updatedAt": "2026-02-12T22:56:25.267Z"
+    },
+    {
+      "id": "4d426ed3-d6a2-4caf-82b0-04742620f49e",
+      "content": "Hook output follows a strict convention: successful handler output goes to stdout (for Claude context) while status summaries go to stderr (for user terminal).",
+      "type": "convention",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "output-streams",
+        "stdout",
+        "stderr",
+        "hooks"
+      ],
+      "createdAt": "2026-02-12T22:56:25.277Z",
+      "updatedAt": "2026-02-12T22:56:25.277Z"
     }
   ]
 }
