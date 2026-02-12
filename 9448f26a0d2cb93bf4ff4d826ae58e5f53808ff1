@@ -91,6 +91,22 @@
       ],
       "createdAt": "2026-02-12T13:14:29.178Z",
       "updatedAt": "2026-02-12T13:14:29.178Z"
+    },
+    {
+      "id": "7fd93c7c-842b-4b87-9a13-0cbb78f579e6",
+      "content": "User prompt at 2026-02-12T13:15:06.008Z: your branch naming isn't following our github workflow rules",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T13:15:06.008Z",
+      "updatedAt": "2026-02-12T13:15:06.008Z"
     }
   ]
 }
