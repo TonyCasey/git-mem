@@ -72,6 +72,24 @@
       ],
       "createdAt": "2026-02-12T22:57:00.009Z",
       "updatedAt": "2026-02-12T22:57:00.009Z"
+    },
+    {
+      "id": "21674edd-fcfa-43b0-8782-e04bcc8f0276",
+      "content": "CodeRabbit is configured to review all branches (base_branches: ['.*']) and enable incremental reviews on drafts, showing comprehensive review coverage strategy.",
+      "type": "decision",
+      "sha": "93aee441abb2c554df9bdb03c103131358fbc4bb",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "coderabbit",
+        "review-strategy",
+        "branch-protection"
+      ],
+      "createdAt": "2026-02-12T22:57:00.023Z",
+      "updatedAt": "2026-02-12T22:57:00.023Z"
     }
   ]
 }
