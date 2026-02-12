@@ -18,6 +18,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.282Z",
       "updatedAt": "2026-02-12T22:56:00.282Z"
+    },
+    {
+      "id": "36b23fe4-b5b4-4e00-94d9-8adac1a5e055",
+      "content": "Memory relevance scoring combines content matches (0.15 per keyword, max 0.6), tag matches (0.2 per tag, max 0.4), and file path mentions (0.15 each) with final scores clamped to [0,1].",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "scoring-algorithm",
+        "memory-relevance",
+        "weighting"
+      ],
+      "createdAt": "2026-02-12T22:56:00.306Z",
+      "updatedAt": "2026-02-12T22:56:00.306Z"
     }
   ]
 }
