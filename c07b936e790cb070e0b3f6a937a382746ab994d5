@@ -103,6 +103,22 @@
       ],
       "createdAt": "2026-02-12T12:15:58.533Z",
       "updatedAt": "2026-02-12T12:15:58.533Z"
+    },
+    {
+      "id": "17024ed3-63f2-4f52-ac03-1ab3599c3072",
+      "content": "User prompt at 2026-02-12T12:16:16.583Z: merge the pr",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:16:16.584Z",
+      "updatedAt": "2026-02-12T12:16:16.584Z"
     }
   ]
 }
