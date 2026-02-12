@@ -52,6 +52,25 @@
       ],
       "createdAt": "2026-02-12T22:55:47.694Z",
       "updatedAt": "2026-02-12T22:55:47.694Z"
+    },
+    {
+      "id": "5f6feded-8816-4a73-b04d-9241cee2ebf9",
+      "content": "Diff content sent to LLM is truncated at 15,000 characters at line boundaries to avoid token limits while preserving meaningful context.",
+      "type": "decision",
+      "sha": "98a49cff8c77c278dff8ad6012b4349091b3d007",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "llm-enrichment",
+        "token-limits",
+        "diff-truncation",
+        "max-diff-length"
+      ],
+      "createdAt": "2026-02-12T22:55:47.709Z",
+      "updatedAt": "2026-02-12T22:55:47.709Z"
     }
   ]
 }
