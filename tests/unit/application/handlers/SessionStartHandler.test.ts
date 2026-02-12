@@ -64,13 +64,31 @@ describe('SessionStartHandler', () => {
 
   it('should return success with empty output when no memories', async () => {
     const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
-    const formatter = createMockFormatter('');
+    let formatterCalled = false;
+    const formatter: IContextFormatter = {
+      format: () => { formatterCalled = true; return ''; },
+    };
     const handler = new SessionStartHandler(loader, formatter);
 
     const result = await handler.handle(createEvent());
 
     assert.equal(result.success, true);
     assert.equal(result.output, '');
+    assert.ok(!formatterCalled, 'formatter should not be called when no memories');
+  });
+
+  it('should handle non-Error throws', async () => {
+    const loader: IMemoryContextLoader = {
+      load: () => { throw 'string error'; },
+    };
+    const formatter = createMockFormatter('');
+    const handler = new SessionStartHandler(loader, formatter);
+
+    const result = await handler.handle(createEvent());
+
+    assert.equal(result.success, false);
+    assert.ok(result.error instanceof Error);
+    assert.equal(result.error!.message, 'string error');
   });
 
   it('should pass event cwd to loader', async () => {
