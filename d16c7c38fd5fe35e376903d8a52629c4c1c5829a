@@ -269,6 +269,25 @@
       ],
       "createdAt": "2026-02-12T12:49:22.297Z",
       "updatedAt": "2026-02-12T12:49:22.297Z"
+    },
+    {
+      "id": "f5faff7a-0dbd-4d4d-9840-304ddbb292a3",
+      "content": "Session summary [session:55b69a11]: Updated. The ICradle now references **interfaces only** — no concrete types. The full interface inventory:  **Domain layer** (contracts): - `IEventBus`, `IEventHandler` — event infrastructure - `IMemo...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T12:49:22.324Z",
+      "updatedAt": "2026-02-12T12:49:22.324Z"
     }
   ]
 }
