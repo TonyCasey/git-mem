@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "id": "a31bcc2b-d73b-4b6f-8239-4eb000c00c9b",
+      "content": "Git notes are used as the storage mechanism for memories, stored in the refs/notes/mem namespace with JSON payloads.",
+      "type": "decision",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "storage",
+        "git-notes",
+        "architecture"
+      ],
+      "createdAt": "2026-02-12T22:55:11.435Z",
+      "updatedAt": "2026-02-12T22:55:11.435Z"
+    }
+  ]
+}
