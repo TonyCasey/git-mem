@@ -739,6 +739,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.745Z",
       "updatedAt": "2026-02-12T23:27:18.745Z"
+    },
+    {
+      "id": "906d4e83-df60-4d3b-a297-269662f6f7a5",
+      "content": "All DI container registrations are singletons within container scope to ensure consistent service instances.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "dependency-injection",
+        "singleton-pattern",
+        "service-lifecycle"
+      ],
+      "createdAt": "2026-02-12T23:27:18.758Z",
+      "updatedAt": "2026-02-12T23:27:18.758Z"
     }
   ]
 }
