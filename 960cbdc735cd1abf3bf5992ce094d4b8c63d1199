@@ -37,6 +37,22 @@
       ],
       "createdAt": "2026-02-12T21:05:25.126Z",
       "updatedAt": "2026-02-12T21:05:25.126Z"
+    },
+    {
+      "id": "edbcc185-e837-4f2c-b842-30e00b4d00e2",
+      "content": "User prompt at 2026-02-12T21:06:59.118Z: Have you coded this in?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:06:59.118Z",
+      "updatedAt": "2026-02-12T21:06:59.118Z"
     }
   ]
 }
