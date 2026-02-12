@@ -53,6 +53,25 @@
       ],
       "createdAt": "2026-02-12T12:38:13.352Z",
       "updatedAt": "2026-02-12T12:38:13.352Z"
+    },
+    {
+      "id": "cc67b34b-6da7-4e7d-bf4b-30c815693136",
+      "content": "Session summary [session:55b69a11]: Got it. This is a solid plan for extracting Claude Code hooks into a standalone `git-mem-hooks` package. Key highlights:  - **Separate package** with git-mem as a peer dependency — keeps the core libr...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T12:38:13.378Z",
+      "updatedAt": "2026-02-12T12:38:13.378Z"
     }
   ]
 }
