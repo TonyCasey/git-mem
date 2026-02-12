@@ -114,6 +114,24 @@
       ],
       "createdAt": "2026-02-12T23:27:40.063Z",
       "updatedAt": "2026-02-12T23:27:40.063Z"
+    },
+    {
+      "id": "00142f33-73e0-46cc-97b2-8d15b33bb3d6",
+      "content": "When renaming a core command, all related service classes, interfaces, errors, file names, source types, tags, and documentation must be updated consistently across the codebase.",
+      "type": "convention",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "refactoring",
+        "consistency",
+        "naming-conventions"
+      ],
+      "createdAt": "2026-02-12T23:27:40.100Z",
+      "updatedAt": "2026-02-12T23:27:40.100Z"
     }
   ]
 }
