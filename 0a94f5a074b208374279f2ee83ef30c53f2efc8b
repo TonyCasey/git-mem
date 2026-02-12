@@ -224,6 +224,25 @@
       ],
       "createdAt": "2026-02-12T23:29:15.813Z",
       "updatedAt": "2026-02-12T23:29:15.813Z"
+    },
+    {
+      "id": "921286ec-c24a-4e01-a62d-ffee97d7b1e0",
+      "content": "MCP tests are organized separately in tests/integration/ with specific files for different aspects (server, tools, context, retrofit, e2e).",
+      "type": "convention",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "testing",
+        "integration-tests",
+        "test-organization"
+      ],
+      "createdAt": "2026-02-12T23:29:15.824Z",
+      "updatedAt": "2026-02-12T23:29:15.824Z"
     }
   ]
 }
