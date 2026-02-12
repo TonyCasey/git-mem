@@ -91,6 +91,24 @@
       ],
       "createdAt": "2026-02-12T22:56:33.623Z",
       "updatedAt": "2026-02-12T22:56:33.623Z"
+    },
+    {
+      "id": "bcaa466b-8304-4520-ae4e-650eaed26cc7",
+      "content": "MCP integration tests are separated into specific files covering different aspects: server lifecycle, individual tools, context with staged changes, retrofit with git history, and full e2e over stdio.",
+      "type": "convention",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "testing",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T22:56:33.634Z",
+      "updatedAt": "2026-02-12T22:56:33.634Z"
     }
   ]
 }
