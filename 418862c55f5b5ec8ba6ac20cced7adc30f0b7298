@@ -1,0 +1,23 @@
+{
+  "memories": [
+    {
+      "id": "facbb373-4a8f-4ab6-a12e-149ed56073c8",
+      "content": "The codebase implements an MCP (Model Context Protocol) server with proper SDK integration and transport layer setup.",
+      "type": "fact",
+      "sha": "418862c55f5b5ec8ba6ac20cced7adc30f0b7298",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "server",
+        "sdk",
+        "transport"
+      ],
+      "createdAt": "2026-02-12T22:57:19.330Z",
+      "updatedAt": "2026-02-12T22:57:19.330Z"
+    }
+  ]
+}
