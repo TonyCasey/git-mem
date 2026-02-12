@@ -199,6 +199,24 @@
       ],
       "createdAt": "2026-02-12T23:28:39.488Z",
       "updatedAt": "2026-02-12T23:28:39.488Z"
+    },
+    {
+      "id": "097761a2-0173-4a94-b361-68d38fd8d5f7",
+      "content": "The MCP context tool provides both programmatic access and CLI interface with identical functionality, following the pattern established by remember/recall tools.",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp-tools",
+        "cli-consistency",
+        "api-design"
+      ],
+      "createdAt": "2026-02-12T23:28:39.506Z",
+      "updatedAt": "2026-02-12T23:28:39.506Z"
     }
   ]
 }
