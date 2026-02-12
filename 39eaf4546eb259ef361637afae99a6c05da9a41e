@@ -1,0 +1,20 @@
+{
+  "memories": [
+    {
+      "id": "7299ca85-e511-474e-8a5b-c2476b8f7c7a",
+      "content": "User prompt at 2026-02-12T20:21:34.220Z: pr poll 24, address comments inline to comment and repeat until all comments are resolved, poll every 60 seconds",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:21:34.221Z",
+      "updatedAt": "2026-02-12T20:21:34.221Z"
+    }
+  ]
+}
