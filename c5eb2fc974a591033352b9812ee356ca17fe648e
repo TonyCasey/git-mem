@@ -342,6 +342,24 @@
       ],
       "createdAt": "2026-02-12T23:27:30.439Z",
       "updatedAt": "2026-02-12T23:27:30.439Z"
+    },
+    {
+      "id": "384a0c71-f1b0-421e-9d95-824ee73219f8",
+      "content": "MemoryService logs the effective query value (resolved from multiple possible sources) rather than the raw parameter to provide clearer debugging information.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "logging",
+        "debugging",
+        "parameter-resolution"
+      ],
+      "createdAt": "2026-02-12T23:27:30.451Z",
+      "updatedAt": "2026-02-12T23:27:30.451Z"
     }
   ]
 }
