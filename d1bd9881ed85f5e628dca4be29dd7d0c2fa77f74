@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T21:12:11.898Z",
       "updatedAt": "2026-02-12T21:12:11.898Z"
+    },
+    {
+      "id": "87f740c5-6d7f-4b25-a1e4-6323f995ab67",
+      "content": "Session summary [session:04329471]: **Phase 4: Tests & Polish** (10% complete) has 3 issues in Backlog:  | # | Issue | Priority | Points | Description | |---|-------|----------|--------|-------------| | 1 | **GIT-55** — Unit tests for D...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T21:12:11.917Z",
+      "updatedAt": "2026-02-12T21:12:11.917Z"
     }
   ]
 }
