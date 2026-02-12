@@ -90,6 +90,24 @@
       ],
       "createdAt": "2026-02-12T22:57:16.290Z",
       "updatedAt": "2026-02-12T22:57:16.290Z"
+    },
+    {
+      "id": "c170d622-503b-419c-ae4a-91e2f73962e5",
+      "content": "The project uses the Model Context Protocol (MCP) SDK for creating a server that communicates via stdio transport. This suggests it's designed to be a tool that can be spawned and communicated with by MCP clients.",
+      "type": "decision",
+      "sha": "7267d825a70a25aac9971ec6ab1a0265b1d79750",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "stdio-transport",
+        "server-architecture"
+      ],
+      "createdAt": "2026-02-12T23:30:01.573Z",
+      "updatedAt": "2026-02-12T23:30:01.573Z"
     }
   ]
 }
