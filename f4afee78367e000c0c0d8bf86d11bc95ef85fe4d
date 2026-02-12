@@ -437,6 +437,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.792Z",
       "updatedAt": "2026-02-12T22:55:21.792Z"
+    },
+    {
+      "id": "a2e6f496-b29e-4f21-9839-7a251050e90f",
+      "content": "LiberateService automatically skips commits that already have notes, preventing duplicate memory extraction when multiple sessions occur in a single day.",
+      "type": "gotcha",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "liberate-service",
+        "duplicate-prevention",
+        "git-notes"
+      ],
+      "createdAt": "2026-02-12T22:55:21.812Z",
+      "updatedAt": "2026-02-12T22:55:21.812Z"
     }
   ]
 }
