@@ -105,6 +105,24 @@
       ],
       "createdAt": "2026-02-12T22:58:01.806Z",
       "updatedAt": "2026-02-12T22:58:01.806Z"
+    },
+    {
+      "id": "5dcc6c22-7b48-4458-89e6-961b0ff4e07f",
+      "content": "The project uses Commander.js for CLI argument parsing and command structure.",
+      "type": "fact",
+      "sha": "b31ec72c32350d4f0ab13cae5b453728645af466",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "commander-js",
+        "dependencies"
+      ],
+      "createdAt": "2026-02-12T22:58:01.821Z",
+      "updatedAt": "2026-02-12T22:58:01.821Z"
     }
   ]
 }
