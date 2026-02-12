@@ -161,6 +161,24 @@
       ],
       "createdAt": "2026-02-12T23:30:53.812Z",
       "updatedAt": "2026-02-12T23:30:53.812Z"
+    },
+    {
+      "id": "1d9abf09-f98f-46e2-a36d-3d158cc029c5",
+      "content": "The package.json version field is typed as a string when importing via require() for type safety.",
+      "type": "convention",
+      "sha": "b31ec72c32350d4f0ab13cae5b453728645af466",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "typescript",
+        "type-safety",
+        "package-json"
+      ],
+      "createdAt": "2026-02-12T23:30:53.833Z",
+      "updatedAt": "2026-02-12T23:30:53.833Z"
     }
   ]
 }
