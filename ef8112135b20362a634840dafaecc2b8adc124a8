@@ -91,6 +91,22 @@
       ],
       "createdAt": "2026-02-12T20:48:58.791Z",
       "updatedAt": "2026-02-12T20:48:58.791Z"
+    },
+    {
+      "id": "6552a8ab-d562-4619-b880-563fe5da8eaf",
+      "content": "User prompt at 2026-02-12T20:49:17.275Z: poll the PR for comments",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:49:17.275Z",
+      "updatedAt": "2026-02-12T20:49:17.275Z"
     }
   ]
 }
