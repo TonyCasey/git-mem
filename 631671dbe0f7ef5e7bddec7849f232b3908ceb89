@@ -703,6 +703,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.703Z",
       "updatedAt": "2026-02-12T23:27:18.703Z"
+    },
+    {
+      "id": "9ec1abb0-8917-40df-be7e-757d980d6c7e",
+      "content": "EventBus implements sequential handler dispatch with per-handler try/catch isolation, ensuring failed handlers don't block others.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "event-bus",
+        "error-handling",
+        "infrastructure"
+      ],
+      "createdAt": "2026-02-12T23:27:18.729Z",
+      "updatedAt": "2026-02-12T23:27:18.729Z"
     }
   ]
 }
