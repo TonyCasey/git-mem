@@ -343,6 +343,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.941Z",
       "updatedAt": "2026-02-12T23:28:16.941Z"
+    },
+    {
+      "id": "fe02fde7-1e02-472a-b53f-148b186b801a",
+      "content": "Claude Code hook configuration uses .claude/settings.json for hook definitions and .git-mem.json for hook-specific settings, with proper merging to preserve existing configurations.",
+      "type": "fact",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "claude-code",
+        "configuration",
+        "init-hooks"
+      ],
+      "createdAt": "2026-02-12T23:28:16.954Z",
+      "updatedAt": "2026-02-12T23:28:16.954Z"
     }
   ]
 }
