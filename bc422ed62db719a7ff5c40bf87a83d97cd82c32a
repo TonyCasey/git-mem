@@ -17,6 +17,25 @@
       ],
       "createdAt": "2026-02-12T22:58:15.821Z",
       "updatedAt": "2026-02-12T22:58:15.821Z"
+    },
+    {
+      "id": "3fecb438-5e9a-47b0-b7bb-532f269d7e41",
+      "content": "The project ships as both a CLI tool (git-mem/git mem) and an MCP server (git-mem-mcp) to integrate with AI coding tools like Claude Code and Cursor.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "cli",
+        "architecture",
+        "ai-tools"
+      ],
+      "createdAt": "2026-02-12T22:58:15.850Z",
+      "updatedAt": "2026-02-12T22:58:15.850Z"
     }
   ]
 }
