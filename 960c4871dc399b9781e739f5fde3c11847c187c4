@@ -74,6 +74,24 @@
       ],
       "createdAt": "2026-02-12T22:56:45.842Z",
       "updatedAt": "2026-02-12T22:56:45.842Z"
+    },
+    {
+      "id": "4eaeda58-2b94-456a-bfa8-150505e2091c",
+      "content": "Hook configuration uses deep merging strategy when applying overrides to default settings, preserving nested object structures.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "merging",
+        "hooks"
+      ],
+      "createdAt": "2026-02-12T22:56:45.854Z",
+      "updatedAt": "2026-02-12T22:56:45.854Z"
     }
   ]
 }
