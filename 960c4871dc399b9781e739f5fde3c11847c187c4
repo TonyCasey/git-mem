@@ -260,6 +260,25 @@
       ],
       "createdAt": "2026-02-12T23:29:28.024Z",
       "updatedAt": "2026-02-12T23:29:28.024Z"
+    },
+    {
+      "id": "e3e6d96e-bc9e-4d90-9611-466bbc4ae1ab",
+      "content": "Integration tests create real temporary git repositories with initial commits to test hooks against actual git state rather than mocks.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "git",
+        "integration-tests",
+        "temp-directories"
+      ],
+      "createdAt": "2026-02-12T23:29:28.036Z",
+      "updatedAt": "2026-02-12T23:29:28.036Z"
     }
   ]
 }
