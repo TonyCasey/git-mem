@@ -18,6 +18,25 @@
       ],
       "createdAt": "2026-02-12T22:56:45.776Z",
       "updatedAt": "2026-02-12T22:56:45.776Z"
+    },
+    {
+      "id": "f48f99a6-7546-4435-bc2c-6d1261a27b43",
+      "content": "Hook integration tests create real temporary Git repositories with initial commits to exercise end-to-end functionality, including proper git config setup for test commits.",
+      "type": "convention",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "git",
+        "temp-repos",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T22:56:45.808Z",
+      "updatedAt": "2026-02-12T22:56:45.808Z"
     }
   ]
 }
