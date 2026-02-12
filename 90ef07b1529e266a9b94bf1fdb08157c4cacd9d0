@@ -35,6 +35,24 @@
       ],
       "createdAt": "2026-02-12T22:55:11.463Z",
       "updatedAt": "2026-02-12T22:55:11.463Z"
+    },
+    {
+      "id": "21ae15f4-288e-4e3c-a3ac-34163b33b98f",
+      "content": "The architecture follows a layered approach with domain, application, and infrastructure layers, implementing clean architecture principles.",
+      "type": "decision",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "clean-architecture",
+        "layered-design"
+      ],
+      "createdAt": "2026-02-12T22:55:11.483Z",
+      "updatedAt": "2026-02-12T22:55:11.483Z"
     }
   ]
 }
