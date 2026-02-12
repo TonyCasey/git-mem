@@ -17,6 +17,24 @@
       ],
       "createdAt": "2026-02-12T23:30:15.540Z",
       "updatedAt": "2026-02-12T23:30:15.540Z"
+    },
+    {
+      "id": "aa535459-14ae-489e-9323-55f7d070e423",
+      "content": "Terminal progress updates use \\r for in-place updates when stderr is a TTY, but fall back to newlines for non-TTY environments to ensure compatibility across different output contexts.",
+      "type": "gotcha",
+      "sha": "dca092ac1887d7d0091be3215af499fd98784166",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "terminal-handling",
+        "tty-detection",
+        "cross-platform"
+      ],
+      "createdAt": "2026-02-12T23:30:15.571Z",
+      "updatedAt": "2026-02-12T23:30:15.571Z"
     }
   ]
 }
