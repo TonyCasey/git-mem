@@ -377,6 +377,25 @@
       ],
       "createdAt": "2026-02-12T12:57:50.370Z",
       "updatedAt": "2026-02-12T12:57:50.370Z"
+    },
+    {
+      "id": "277df0ee-98cb-42a8-81e3-4edad572001d",
+      "content": "Session summary [session:55b69a11]: All done. Here's the summary:  ## Project: [Claude Code Hooks + DI Container](https://linear.app/git-mem/project/claude-code-hooks-di-container-d9780afc35ca)  **21 issues** across 4 milestones with...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T12:57:50.403Z",
+      "updatedAt": "2026-02-12T12:57:50.403Z"
     }
   ]
 }
