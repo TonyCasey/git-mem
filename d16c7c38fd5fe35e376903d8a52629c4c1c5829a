@@ -288,6 +288,22 @@
       ],
       "createdAt": "2026-02-12T12:49:22.324Z",
       "updatedAt": "2026-02-12T12:49:22.324Z"
+    },
+    {
+      "id": "bb0c437b-2c8a-4955-be58-f3d0313cf1b2",
+      "content": "User prompt at 2026-02-12T12:49:45.775Z: There will also be a CLI prompt during install to enable hooks/claude integration?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:49:45.775Z",
+      "updatedAt": "2026-02-12T12:49:45.775Z"
     }
   ]
 }
