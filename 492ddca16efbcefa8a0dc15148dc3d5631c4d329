@@ -308,6 +308,26 @@
       ],
       "createdAt": "2026-02-12T23:28:53.307Z",
       "updatedAt": "2026-02-12T23:28:53.307Z"
+    },
+    {
+      "id": "abd5cf68-9202-4f0c-8970-cba52b92e5e1",
+      "content": "Helper functions from init-hooks.ts and init-mcp.ts are exported to enable code reuse in the unified init command, promoting modularity and testability.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "code-reuse",
+        "modularity",
+        "exports",
+        "init-hooks",
+        "init-mcp"
+      ],
+      "createdAt": "2026-02-12T23:28:53.322Z",
+      "updatedAt": "2026-02-12T23:28:53.322Z"
     }
   ]
 }
