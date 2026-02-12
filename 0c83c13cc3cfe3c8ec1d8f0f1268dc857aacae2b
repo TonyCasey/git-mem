@@ -325,6 +325,24 @@
       ],
       "createdAt": "2026-02-12T23:28:16.926Z",
       "updatedAt": "2026-02-12T23:28:16.926Z"
+    },
+    {
+      "id": "3fe4cc1c-9176-4fce-b0a9-aaf7d72be499",
+      "content": "Multiple tags in memory filtering are not fully supported - only the first tag is used and a warning is logged when multiple tags are provided.",
+      "type": "gotcha",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "memory-context-loader",
+        "filtering",
+        "tags"
+      ],
+      "createdAt": "2026-02-12T23:28:16.941Z",
+      "updatedAt": "2026-02-12T23:28:16.941Z"
     }
   ]
 }
