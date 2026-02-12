@@ -266,6 +266,22 @@
       ],
       "createdAt": "2026-02-12T21:04:44.971Z",
       "updatedAt": "2026-02-12T21:04:44.971Z"
+    },
+    {
+      "id": "5c31debd-0453-4c0b-9069-6118322c5d4a",
+      "content": "No legacy/backward-compatibility support needed in git-mem — the package has not been released yet. Do not add migration code for old formats.",
+      "type": "decision",
+      "sha": "HEAD",
+      "confidence": "verified",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [
+        "legacy",
+        "backwards-compat",
+        "decisions"
+      ],
+      "createdAt": "2026-02-12T21:04:51.209Z",
+      "updatedAt": "2026-02-12T21:04:51.209Z"
     }
   ]
 }
