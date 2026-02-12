@@ -185,6 +185,24 @@
       ],
       "createdAt": "2026-02-12T23:29:27.968Z",
       "updatedAt": "2026-02-12T23:29:27.968Z"
+    },
+    {
+      "id": "8041ee34-24ae-4cd1-b906-06feb2787dba",
+      "content": "The git-mem config uses deep merge strategy when applying overrides, preserving nested hook configuration properties while allowing selective updates.",
+      "type": "decision",
+      "sha": "960c4871dc399b9781e739f5fde3c11847c187c4",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "merge-strategy",
+        "hooks"
+      ],
+      "createdAt": "2026-02-12T23:29:27.985Z",
+      "updatedAt": "2026-02-12T23:29:27.985Z"
     }
   ]
 }
