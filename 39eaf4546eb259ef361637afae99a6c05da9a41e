@@ -285,6 +285,22 @@
       ],
       "createdAt": "2026-02-12T20:32:36.247Z",
       "updatedAt": "2026-02-12T20:32:36.247Z"
+    },
+    {
+      "id": "75d1099e-771a-46ae-8eee-d39df5849d63",
+      "content": "User prompt at 2026-02-12T20:34:09.570Z: is it ppossible to write stdio to the console at session start?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T20:34:09.570Z",
+      "updatedAt": "2026-02-12T20:34:09.570Z"
     }
   ]
 }
