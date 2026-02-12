@@ -205,6 +205,25 @@
       ],
       "createdAt": "2026-02-12T23:29:15.801Z",
       "updatedAt": "2026-02-12T23:29:15.801Z"
+    },
+    {
+      "id": "cf5d8e3a-cd99-45f8-8f68-a3b7e71b36c3",
+      "content": "The git mem init-mcp command auto-generates .mcp.json configuration, detecting whether git-mem is installed globally or locally.",
+      "type": "fact",
+      "sha": "0a94f5a074b208374279f2ee83ef30c53f2efc8b",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "configuration",
+        "auto-generation",
+        "setup"
+      ],
+      "createdAt": "2026-02-12T23:29:15.813Z",
+      "updatedAt": "2026-02-12T23:29:15.813Z"
     }
   ]
 }
