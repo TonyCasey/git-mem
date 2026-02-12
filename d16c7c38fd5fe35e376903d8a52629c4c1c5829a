@@ -450,6 +450,22 @@
       ],
       "createdAt": "2026-02-12T14:48:36.354Z",
       "updatedAt": "2026-02-12T14:48:36.354Z"
+    },
+    {
+      "id": "830b7bd5-fa1c-4ef1-b6d4-5950532ef8e1",
+      "content": "User prompt at 2026-02-12T14:49:26.532Z: merge it",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T14:49:26.533Z",
+      "updatedAt": "2026-02-12T14:49:26.533Z"
     }
   ]
 }
