@@ -558,6 +558,22 @@
       ],
       "createdAt": "2026-02-12T14:51:28.863Z",
       "updatedAt": "2026-02-12T14:51:28.863Z"
+    },
+    {
+      "id": "210ef5be-9b99-4202-aac6-d3b67f8bcc05",
+      "content": "User prompt at 2026-02-12T14:53:28.193Z: yes, start on phase 2, PR 20 has been merged",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T14:53:28.194Z",
+      "updatedAt": "2026-02-12T14:53:28.194Z"
     }
   ]
 }
