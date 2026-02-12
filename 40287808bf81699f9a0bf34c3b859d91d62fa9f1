@@ -91,6 +91,22 @@
       ],
       "createdAt": "2026-02-12T21:00:29.999Z",
       "updatedAt": "2026-02-12T21:00:29.999Z"
+    },
+    {
+      "id": "b819bec0-77fb-429e-bd52-0035c8a98e3c",
+      "content": "User prompt at 2026-02-12T21:01:02.419Z: you are out of plan mode now, lets try and see",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:01:02.419Z",
+      "updatedAt": "2026-02-12T21:01:02.419Z"
     }
   ]
 }
