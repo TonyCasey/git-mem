@@ -311,6 +311,24 @@
       ],
       "createdAt": "2026-02-12T23:29:06.889Z",
       "updatedAt": "2026-02-12T23:29:06.889Z"
+    },
+    {
+      "id": "5baa3e33-916b-4185-bf96-f7e6f8c21d40",
+      "content": "Settings.json merge preserves other tools' hooks by using array-level filtering instead of shallow spread, preventing git-mem from overwriting hooks from other tools.",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hook-integration",
+        "config-merge",
+        "third-party-compatibility"
+      ],
+      "createdAt": "2026-02-12T23:29:06.912Z",
+      "updatedAt": "2026-02-12T23:29:06.912Z"
     }
   ]
 }
