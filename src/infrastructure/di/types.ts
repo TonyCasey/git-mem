@@ -22,6 +22,7 @@ import type { IContextService } from '../../application/interfaces/IContextServi
 import type { ILiberateService } from '../../application/interfaces/ILiberateService';
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
+import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCaptureService';
 
 export interface ICradle {
   // Infrastructure
@@ -41,6 +42,7 @@ export interface ICradle {
   // Application — hook services
   memoryContextLoader: IMemoryContextLoader;
   contextFormatter: IContextFormatter;
+  sessionCaptureService: ISessionCaptureService;
 }
 
 export interface IContainerOptions {

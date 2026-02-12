@@ -34,7 +34,10 @@ import { GitTriageService } from '../../application/services/GitTriageService';
 // Application — hook services
 import { MemoryContextLoader } from '../../application/services/MemoryContextLoader';
 import { ContextFormatter } from '../../application/services/ContextFormatter';
+import { SessionCaptureService } from '../../application/services/SessionCaptureService';
 import { SessionStartHandler } from '../../application/handlers/SessionStartHandler';
+import { SessionStopHandler } from '../../application/handlers/SessionStopHandler';
+import { PromptSubmitHandler } from '../../application/handlers/PromptSubmitHandler';
 
 export function createContainer(options?: IContainerOptions): AwilixContainer<ICradle> {
   const container = createAwilixContainer<ICradle>({
@@ -58,6 +61,15 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
 
       // Register hook handlers on the event bus
       bus.on('session:start', new SessionStartHandler(
+        container.cradle.memoryContextLoader,
+        container.cradle.contextFormatter,
+        container.cradle.logger,
+      ));
+      bus.on('session:stop', new SessionStopHandler(
+        container.cradle.sessionCaptureService,
+        container.cradle.logger,
+      ));
+      bus.on('prompt:submit', new PromptSubmitHandler(
         container.cradle.memoryContextLoader,
         container.cradle.contextFormatter,
         container.cradle.logger,
@@ -87,6 +99,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     // ── Hook services ─────────────────────────────────────────────
     memoryContextLoader: asClass(MemoryContextLoader).singleton(),
     contextFormatter: asClass(ContextFormatter).singleton(),
+    sessionCaptureService: asClass(SessionCaptureService).singleton(),
   });
 
   return container;

@@ -1,61 +1,58 @@
 /**
- * SessionStartHandler
+ * PromptSubmitHandler
  *
- * Handles the session:start event by loading stored memories
- * and formatting them as markdown for Claude Code's context.
+ * Handles the prompt:submit event by loading relevant memories
+ * and formatting them as context for Claude Code.
  */
 
-import type { ISessionStartHandler } from '../interfaces/ISessionStartHandler';
-import type { ISessionStartEvent } from '../../domain/events/HookEvents';
+import type { IPromptSubmitHandler } from '../interfaces/IPromptSubmitHandler';
+import type { IPromptSubmitEvent } from '../../domain/events/HookEvents';
 import type { IEventResult } from '../../domain/interfaces/IEventResult';
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 
-export class SessionStartHandler implements ISessionStartHandler {
+export class PromptSubmitHandler implements IPromptSubmitHandler {
   constructor(
     private readonly memoryContextLoader: IMemoryContextLoader,
     private readonly contextFormatter: IContextFormatter,
     private readonly logger?: ILogger,
   ) {}
 
-  async handle(event: ISessionStartEvent): Promise<IEventResult> {
+  async handle(event: IPromptSubmitEvent): Promise<IEventResult> {
     try {
-      this.logger?.info('Session start handler invoked', {
-        trigger: event.trigger,
+      this.logger?.info('Prompt submit handler invoked', {
+        sessionId: event.sessionId,
         cwd: event.cwd,
       });
 
       const result = this.memoryContextLoader.load({ cwd: event.cwd });
 
       if (result.memories.length === 0) {
-        this.logger?.debug('No memories found');
+        this.logger?.debug('No memories found for prompt context');
         return {
-          handler: 'SessionStartHandler',
+          handler: 'PromptSubmitHandler',
           success: true,
           output: '',
         };
       }
 
-      const output = this.contextFormatter.format(result.memories, {
-        trigger: event.trigger,
-        includeStats: true,
-      });
+      const output = this.contextFormatter.format(result.memories);
 
-      this.logger?.info('Memories loaded for context', {
+      this.logger?.info('Memories loaded for prompt context', {
         total: result.total,
         filtered: result.filtered,
       });
 
       return {
-        handler: 'SessionStartHandler',
+        handler: 'PromptSubmitHandler',
         success: true,
         output,
       };
     } catch (error) {
-      this.logger?.error('Session start handler failed', { error });
+      this.logger?.error('Prompt submit handler failed', { error });
       return {
-        handler: 'SessionStartHandler',
+        handler: 'PromptSubmitHandler',
         success: false,
         error: error instanceof Error ? error : new Error(String(error)),
       };
