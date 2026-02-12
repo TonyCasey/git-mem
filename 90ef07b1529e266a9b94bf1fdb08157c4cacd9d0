@@ -184,6 +184,24 @@
       ],
       "createdAt": "2026-02-12T23:27:52.428Z",
       "updatedAt": "2026-02-12T23:27:52.428Z"
+    },
+    {
+      "id": "2d199600-42c2-4daf-86ac-4a0cf2f9396b",
+      "content": "The CLI provides four main commands: remember (store memories), recall (retrieve memories), retrofit (extract from commit history), and sync (synchronize memories).",
+      "type": "fact",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "commands",
+        "user-interface"
+      ],
+      "createdAt": "2026-02-12T23:27:52.446Z",
+      "updatedAt": "2026-02-12T23:27:52.446Z"
     }
   ]
 }
