@@ -86,6 +86,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.513Z",
       "updatedAt": "2026-02-12T22:56:12.513Z"
+    },
+    {
+      "id": "ccaa24f7-86f9-42ef-9e99-bfbbf2a4745b",
+      "content": "The .mcp.json file is protected from being overwritten if it already exists, preserving user customizations.",
+      "type": "gotcha",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "configuration",
+        "file-protection"
+      ],
+      "createdAt": "2026-02-12T22:56:12.525Z",
+      "updatedAt": "2026-02-12T22:56:12.525Z"
     }
   ]
 }
