@@ -143,6 +143,24 @@
       ],
       "createdAt": "2026-02-12T23:29:35.208Z",
       "updatedAt": "2026-02-12T23:29:35.208Z"
+    },
+    {
+      "id": "53fa1e82-a3ae-4089-bbd5-38d53dfadfeb",
+      "content": "The codebase follows a clean architecture pattern with domain at the core, application services in the middle, and infrastructure as the outer layer.",
+      "type": "decision",
+      "sha": "07e7568dcd3ffcca342f158b914e07b2ec09e71d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "architecture",
+        "clean-architecture",
+        "domain-driven-design"
+      ],
+      "createdAt": "2026-02-12T23:29:35.239Z",
+      "updatedAt": "2026-02-12T23:29:35.239Z"
     }
   ]
 }
