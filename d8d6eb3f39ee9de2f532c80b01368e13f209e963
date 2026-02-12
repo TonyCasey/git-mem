@@ -148,6 +148,24 @@
       ],
       "createdAt": "2026-02-12T23:29:51.434Z",
       "updatedAt": "2026-02-12T23:29:51.434Z"
+    },
+    {
+      "id": "11716aa7-44dd-4ccd-a1b2-eb18b5c31c48",
+      "content": "MCP tool responses are structured with abbreviated SHA (7 chars), subject, score, and fact extraction counts for each annotated commit.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "response-format",
+        "commit-display"
+      ],
+      "createdAt": "2026-02-12T23:29:51.450Z",
+      "updatedAt": "2026-02-12T23:29:51.450Z"
     }
   ]
 }
