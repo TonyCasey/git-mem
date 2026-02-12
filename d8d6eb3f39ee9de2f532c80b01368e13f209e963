@@ -166,6 +166,24 @@
       ],
       "createdAt": "2026-02-12T23:29:51.450Z",
       "updatedAt": "2026-02-12T23:29:51.450Z"
+    },
+    {
+      "id": "f6426dcd-c66c-4461-8309-d35e57f13c81",
+      "content": "The retrofit tool returns different response formats: JSON summary when annotations are found, plain text when no interesting patterns are detected.",
+      "type": "convention",
+      "sha": "d8d6eb3f39ee9de2f532c80b01368e13f209e963",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "mcp",
+        "response-format",
+        "conditional-output"
+      ],
+      "createdAt": "2026-02-12T23:29:51.464Z",
+      "updatedAt": "2026-02-12T23:29:51.464Z"
     }
   ]
 }
