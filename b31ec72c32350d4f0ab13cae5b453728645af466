@@ -123,6 +123,25 @@
       ],
       "createdAt": "2026-02-12T22:58:01.821Z",
       "updatedAt": "2026-02-12T22:58:01.821Z"
+    },
+    {
+      "id": "1dcea168-079c-4dba-9099-e0259404b751",
+      "content": "CLI version should be read dynamically from package.json instead of hardcoded to ensure consistency and avoid manual updates.",
+      "type": "decision",
+      "sha": "b31ec72c32350d4f0ab13cae5b453728645af466",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli",
+        "versioning",
+        "package-management",
+        "maintenance"
+      ],
+      "createdAt": "2026-02-12T23:30:53.769Z",
+      "updatedAt": "2026-02-12T23:30:53.769Z"
     }
   ]
 }
