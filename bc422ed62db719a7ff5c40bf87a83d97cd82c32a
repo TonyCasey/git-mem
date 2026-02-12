@@ -306,6 +306,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.501Z",
       "updatedAt": "2026-02-12T23:31:07.501Z"
+    },
+    {
+      "id": "0b6facc5-51cc-4a1f-9939-afa93d1b8c6d",
+      "content": "The retrofit feature scores commits using weighted criteria: conventional prefixes, decision keywords, diff size, and PR merges to identify interesting commits.",
+      "type": "fact",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "retrofit",
+        "commit-scoring",
+        "heuristics"
+      ],
+      "createdAt": "2026-02-12T23:31:07.513Z",
+      "updatedAt": "2026-02-12T23:31:07.513Z"
     }
   ]
 }
