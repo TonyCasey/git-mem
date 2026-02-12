@@ -91,6 +91,24 @@
       ],
       "createdAt": "2026-02-12T22:56:00.369Z",
       "updatedAt": "2026-02-12T22:56:00.369Z"
+    },
+    {
+      "id": "c1f411ad-cdda-41da-9d88-57290efbd261",
+      "content": "Context command provides both human-readable output (default) and JSON output (--json flag) for different consumption patterns.",
+      "type": "convention",
+      "sha": "9001a729067506e624c1360c275e535220bfd6f4",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "cli-commands",
+        "output-formats",
+        "json-support"
+      ],
+      "createdAt": "2026-02-12T22:56:00.382Z",
+      "updatedAt": "2026-02-12T22:56:00.382Z"
     }
   ]
 }
