@@ -73,6 +73,10 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
       return { type: 'session:stop', ...base };
     case 'prompt:submit':
       return { type: 'prompt:submit', ...base, prompt: input.prompt ?? '' };
+    default: {
+      const exhaustiveCheck: never = eventType;
+      throw new Error(`Unhandled HookEventType in buildEvent: ${exhaustiveCheck as string}`);
+    }
   }
 }
 

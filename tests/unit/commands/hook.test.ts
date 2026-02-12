@@ -2,8 +2,8 @@
  * hook command unit tests
  *
  * Tests the pure helper functions: EVENT_MAP, isEventEnabled, buildEvent.
- * The hookCommand entry point itself requires real stdin/container — tested
- * via integration tests.
+ * The hookCommand entry point itself requires real stdin/container and is
+ * not covered by these unit tests.
  */
 
 import { describe, it } from 'node:test';

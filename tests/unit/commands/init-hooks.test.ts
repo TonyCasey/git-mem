@@ -62,10 +62,19 @@ describe('isGitMemEntry', () => {
     assert.equal(isGitMemEntry({ matcher: '', hooks: [{ type: 'command' }] }), false);
   });
 
-  it('should return true for legacy node-path entry if it starts with git-mem hook', () => {
-    // Only git-mem hook prefix should match
+  it('should return true for legacy node-path entry with hooks/session-start.js', () => {
     const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /path/to/hooks/session-start.js' }] };
-    assert.equal(isGitMemEntry(legacy), false);
+    assert.equal(isGitMemEntry(legacy), true);
+  });
+
+  it('should return true for legacy node-path entry with hooks/session-stop.js', () => {
+    const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /path/to/dist/hooks/session-stop.js' }] };
+    assert.equal(isGitMemEntry(legacy), true);
+  });
+
+  it('should return true for legacy node-path entry with hooks/user-prompt-submit.js', () => {
+    const legacy = { matcher: '', hooks: [{ type: 'command', command: 'node /abs/hooks/user-prompt-submit.js' }] };
+    assert.equal(isGitMemEntry(legacy), true);
   });
 });
 
@@ -321,6 +330,26 @@ describe('deepMergeGitMemConfig', () => {
     const hooks = result.hooks as Record<string, unknown>;
 
     assert.deepEqual(hooks.customFeature, { someFlag: true });
+  });
+
+  it('should preserve optional sessionStart properties like dateRange and tags', () => {
+    const existing = {
+      hooks: {
+        sessionStart: {
+          enabled: true,
+          dateRange: '2024-01-01/2024-01-31',
+          tags: ['work', 'project-x'],
+        },
+      },
+    };
+
+    const result = deepMergeGitMemConfig(existing, defaults);
+    const hooks = result.hooks as Record<string, unknown>;
+    const sessionStart = hooks.sessionStart as Record<string, unknown>;
+
+    assert.equal(sessionStart.dateRange, '2024-01-01/2024-01-31');
+    assert.deepEqual(sessionStart.tags, ['work', 'project-x']);
+    assert.equal(sessionStart.memoryLimit, 20); // Default fills in
   });
 
   it('should deep-merge sub-objects keeping user values over defaults', () => {
