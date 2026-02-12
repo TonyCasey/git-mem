@@ -107,6 +107,25 @@
       ],
       "createdAt": "2026-02-12T12:39:59.331Z",
       "updatedAt": "2026-02-12T12:39:59.331Z"
+    },
+    {
+      "id": "5c16a81d-1e6c-4ae0-9cd9-2942a01dc0b0",
+      "content": "Session summary [session:55b69a11]: I'd keep it in this repo/package. A few reasons:  **The hooks are just thin entry points** — they follow the exact same pattern as your CLI commands: read input, instantiate `NotesService → MemoryRepo...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:planning"
+      ],
+      "createdAt": "2026-02-12T12:39:59.353Z",
+      "updatedAt": "2026-02-12T12:39:59.353Z"
     }
   ]
 }
