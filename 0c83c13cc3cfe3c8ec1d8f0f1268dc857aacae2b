@@ -88,6 +88,25 @@
       ],
       "createdAt": "2026-02-12T16:54:11.570Z",
       "updatedAt": "2026-02-12T16:54:11.570Z"
+    },
+    {
+      "id": "9f6bb3b8-80d6-4b9f-83ca-a2a5a600d7eb",
+      "content": "Session summary [session:ed2d3fad]: This is a great product idea - tech debt visibility is a real pain point for engineering teams. Let me think through the architecture, components, and effort involved.  ## High-Level Product Concept...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T16:54:11.604Z",
+      "updatedAt": "2026-02-12T16:54:11.604Z"
     }
   ]
 }
