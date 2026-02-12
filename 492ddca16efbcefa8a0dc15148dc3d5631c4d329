@@ -104,6 +104,24 @@
       ],
       "createdAt": "2026-02-12T22:56:12.525Z",
       "updatedAt": "2026-02-12T22:56:12.525Z"
+    },
+    {
+      "id": "361c8668-41c7-44d9-86e3-06938b67487a",
+      "content": "Command-line input validation ensures --commit-count is a finite positive integer with fallback to defaults when invalid.",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "validation",
+        "input-handling",
+        "error-handling"
+      ],
+      "createdAt": "2026-02-12T22:56:12.536Z",
+      "updatedAt": "2026-02-12T22:56:12.536Z"
     }
   ]
 }
