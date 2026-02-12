@@ -126,6 +126,25 @@
       ],
       "createdAt": "2026-02-12T13:15:18.136Z",
       "updatedAt": "2026-02-12T13:15:18.136Z"
+    },
+    {
+      "id": "2bf78a6a-ca62-4c1f-b50b-580b1c8b939b",
+      "content": "Session summary [session:55b69a11]: You're right. The rules say to use the Linear issue identifier as the branch name, lowercase and hyphenated — e.g. `git-39`, not `tony/git-39-install-awilix-dependency`.  I'll follow the correct conve...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium",
+        "taskType:execution"
+      ],
+      "createdAt": "2026-02-12T13:15:18.160Z",
+      "updatedAt": "2026-02-12T13:15:18.160Z"
     }
   ]
 }
