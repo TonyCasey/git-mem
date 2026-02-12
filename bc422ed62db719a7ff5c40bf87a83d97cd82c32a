@@ -54,6 +54,25 @@
       ],
       "createdAt": "2026-02-12T22:58:15.869Z",
       "updatedAt": "2026-02-12T22:58:15.869Z"
+    },
+    {
+      "id": "c3df8ecc-3e6e-4e24-a2a5-06f2307485ba",
+      "content": "Testing uses native Node.js test runner (node:test) with tsx for TypeScript support instead of Jest, splitting unit tests (57) and integration tests (32) that use real git repos.",
+      "type": "decision",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "testing",
+        "nodejs-test",
+        "typescript",
+        "integration-tests"
+      ],
+      "createdAt": "2026-02-12T22:58:15.883Z",
+      "updatedAt": "2026-02-12T22:58:15.883Z"
     }
   ]
 }
