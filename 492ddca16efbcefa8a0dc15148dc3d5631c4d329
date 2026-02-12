@@ -289,6 +289,25 @@
       ],
       "createdAt": "2026-02-12T23:28:53.291Z",
       "updatedAt": "2026-02-12T23:28:53.291Z"
+    },
+    {
+      "id": "0eb1c791-bcc9-416a-9794-005fcd9d31f0",
+      "content": "The init command is designed to be idempotent - it detects existing '# git-mem' headers in .gitignore to avoid duplicate entries on re-runs and skips .mcp.json creation if the file already exists.",
+      "type": "decision",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "init-command",
+        "idempotency",
+        "gitignore",
+        "mcp-config"
+      ],
+      "createdAt": "2026-02-12T23:28:53.307Z",
+      "updatedAt": "2026-02-12T23:28:53.307Z"
     }
   ]
 }
