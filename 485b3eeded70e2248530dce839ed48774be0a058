@@ -90,6 +90,24 @@
       ],
       "createdAt": "2026-02-12T22:57:24.284Z",
       "updatedAt": "2026-02-12T22:57:24.284Z"
+    },
+    {
+      "id": "43e43bbe-06e7-44f4-8cc4-a8b59326683f",
+      "content": "Hidden directories (prefixed with dot) are used for application data storage following Unix conventions.",
+      "type": "convention",
+      "sha": "485b3eeded70e2248530dce839ed48774be0a058",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "directory-naming",
+        "unix-conventions",
+        "hidden-files"
+      ],
+      "createdAt": "2026-02-12T22:57:24.302Z",
+      "updatedAt": "2026-02-12T22:57:24.302Z"
     }
   ]
 }
