@@ -262,6 +262,24 @@
       ],
       "createdAt": "2026-02-12T20:02:02.520Z",
       "updatedAt": "2026-02-12T20:02:02.520Z"
+    },
+    {
+      "id": "8642f568-f8ae-4040-a23a-13ff97151510",
+      "content": "Session summary [session:d6d5d571]: Yes, PR #22 was merged today at 17:22 UTC. All three phases are done and on `main`. What's next?...",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "session",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:session",
+        "type:session-capture",
+        "source:session-capture",
+        "confidence:medium"
+      ],
+      "createdAt": "2026-02-12T20:02:02.546Z",
+      "updatedAt": "2026-02-12T20:02:02.546Z"
     }
   ]
 }
