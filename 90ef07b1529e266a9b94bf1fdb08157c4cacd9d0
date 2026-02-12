@@ -221,6 +221,25 @@
       ],
       "createdAt": "2026-02-12T23:27:52.459Z",
       "updatedAt": "2026-02-12T23:27:52.459Z"
+    },
+    {
+      "id": "4cbfd78c-5acd-4ad2-a588-d0c1b25408d7",
+      "content": "Interfaces are prefixed with 'I' as established by the ESLint naming convention rule, enforcing consistent interface naming across the codebase.",
+      "type": "convention",
+      "sha": "90ef07b1529e266a9b94bf1fdb08157c4cacd9d0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "naming-convention",
+        "interfaces",
+        "typescript",
+        "code-style"
+      ],
+      "createdAt": "2026-02-12T23:27:52.472Z",
+      "updatedAt": "2026-02-12T23:27:52.472Z"
     }
   ]
 }
