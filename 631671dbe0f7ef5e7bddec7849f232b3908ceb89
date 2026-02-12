@@ -757,6 +757,24 @@
       ],
       "createdAt": "2026-02-12T23:27:18.758Z",
       "updatedAt": "2026-02-12T23:27:18.758Z"
+    },
+    {
+      "id": "be35a62a-afdb-4ff0-8211-40f1352a830a",
+      "content": "GitTriageService requires special constructor parameter mapping because it uses 'git' parameter name instead of 'gitClient'.",
+      "type": "gotcha",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "git-triage-service",
+        "dependency-injection",
+        "parameter-mapping"
+      ],
+      "createdAt": "2026-02-12T23:27:18.772Z",
+      "updatedAt": "2026-02-12T23:27:18.772Z"
     }
   ]
 }
