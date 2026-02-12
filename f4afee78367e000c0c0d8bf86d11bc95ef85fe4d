@@ -473,6 +473,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.826Z",
       "updatedAt": "2026-02-12T22:55:21.826Z"
+    },
+    {
+      "id": "ee63c0f2-6aae-4502-8bd9-4d85702183a9",
+      "content": "Hook entry points check both global hooks.enabled and individual hook enabled flags before executing, implementing a two-tier disable mechanism.",
+      "type": "convention",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "hook-config",
+        "enable-disable",
+        "configuration-hierarchy"
+      ],
+      "createdAt": "2026-02-12T22:55:21.839Z",
+      "updatedAt": "2026-02-12T22:55:21.839Z"
     }
   ]
 }
