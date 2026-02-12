@@ -1,0 +1,20 @@
+{
+  "memories": [
+    {
+      "id": "2c31d730-72c2-475f-aa50-097c633e5117",
+      "content": "User prompt at 2026-02-12T16:16:09.009Z: ok, that PR is merged. Whats next?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T16:16:09.009Z",
+      "updatedAt": "2026-02-12T16:16:09.009Z"
+    }
+  ]
+}
