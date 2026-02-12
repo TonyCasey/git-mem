@@ -198,6 +198,24 @@
       ],
       "createdAt": "2026-02-12T23:31:07.408Z",
       "updatedAt": "2026-02-12T23:31:07.408Z"
+    },
+    {
+      "id": "2a8a10ff-aa1e-4b28-9cf6-c29581098e10",
+      "content": "Clean architecture with three layers where dependencies point inward only: Infrastructure → Application → Domain.",
+      "type": "convention",
+      "sha": "bc422ed62db719a7ff5c40bf87a83d97cd82c32a",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "clean-architecture",
+        "dependency-direction",
+        "layering"
+      ],
+      "createdAt": "2026-02-12T23:31:07.430Z",
+      "updatedAt": "2026-02-12T23:31:07.430Z"
     }
   ]
 }
