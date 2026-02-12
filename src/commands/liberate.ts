@@ -7,7 +7,7 @@ import type { ILogger } from '../domain/interfaces/ILogger';
 
 interface ILiberateCommandOptions {
   since?: string;
-  max?: string;
+  commitCount?: string;
   dryRun?: boolean;
   threshold?: string;
   enrich?: boolean;
@@ -22,10 +22,10 @@ export async function liberateCommand(options: ILiberateCommandOptions, logger?:
     console.log('Falling back to heuristic extraction only.\n');
   }
 
-  log.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, max: options.max });
+  log.info('Command invoked', { dryRun: options.dryRun, enrich: options.enrich, commitCount: options.commitCount });
 
   const since = options.since ? new Date(options.since) : undefined;
-  const maxCommits = options.max ? parseInt(options.max, 10) : undefined;
+  const maxCommits = options.commitCount ? parseInt(options.commitCount, 10) : undefined;
   const threshold = options.threshold ? parseInt(options.threshold, 10) : undefined;
 
   if (options.dryRun) {

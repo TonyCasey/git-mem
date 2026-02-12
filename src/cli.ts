@@ -6,8 +6,7 @@ import { recallCommand } from './commands/recall';
 import { liberateCommand } from './commands/liberate';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
-import { initMcpCommand } from './commands/init-mcp';
-import { initHooksCommand } from './commands/init-hooks';
+import { initCommand } from './commands/init';
 import { hookCommand } from './commands/hook';
 import { createLogger } from './infrastructure/logging/factory';
 
@@ -21,6 +20,13 @@ program
   .name('git-mem')
   .description('Git-native memory layer for AI coding tools')
   .version(pkg.version);
+
+program
+  .command('init')
+  .description('Set up git-mem: hooks, MCP config, .gitignore, and liberate history')
+  .option('-y, --yes', 'Accept defaults without prompting')
+  .option('--commit-count <n>', 'Number of commits to liberate', '100')
+  .action((options) => initCommand(options, logger));
 
 program
   .command('remember <text>')
@@ -45,7 +51,7 @@ program
   .command('liberate')
   .description('Liberate knowledge from existing commit history')
   .option('--since <date>', 'Start date (default: 90 days ago)')
-  .option('--max <n>', 'Max commits to process')
+  .option('--commit-count <n>', 'Max commits to process')
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
@@ -65,21 +71,6 @@ program
   .option('--push', 'Push only')
   .option('--pull', 'Pull only')
   .action((options) => syncCommand(options, logger));
-
-program
-  .command('init-mcp')
-  .description('Generate .mcp.json for AI coding tools')
-  .option('--force', 'Overwrite existing .mcp.json')
-  .option('--global', 'Use globally installed git-mem-mcp binary')
-  .action((options) => initMcpCommand(options, logger));
-
-program
-  .command('init-hooks')
-  .description('Configure Claude Code hooks for git-mem')
-  .option('-y, --yes', 'Accept defaults without prompting')
-  .option('--scope <scope>', 'Settings scope: project or user', 'project')
-  .option('--remove', 'Remove hooks and clean up config files')
-  .action((options) => initHooksCommand(options, logger));
 
 program
   .command('hook <event>')

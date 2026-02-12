@@ -15,7 +15,7 @@ interface IInitMcpOptions {
   global?: boolean;
 }
 
-function isGloballyInstalled(): boolean {
+export function isGloballyInstalled(): boolean {
   try {
     execFileSync('which', ['git-mem-mcp'], {
       encoding: 'utf8',
@@ -25,6 +25,28 @@ function isGloballyInstalled(): boolean {
   } catch {
     return false;
   }
+}
+
+export function buildMcpConfig(options?: { global?: boolean }): object {
+  if (options?.global || isGloballyInstalled()) {
+    return {
+      mcpServers: {
+        'git-mem': {
+          command: 'git-mem-mcp',
+        },
+      },
+    };
+  }
+
+  const serverPath = join(__dirname, '..', 'mcp-server.js');
+  return {
+    mcpServers: {
+      'git-mem': {
+        command: 'node',
+        args: [serverPath],
+      },
+    },
+  };
 }
 
 export async function initMcpCommand(options: IInitMcpOptions, logger?: ILogger): Promise<void> {
@@ -37,28 +59,7 @@ export async function initMcpCommand(options: IInitMcpOptions, logger?: ILogger)
     return;
   }
 
-  let config: object;
-
-  if (options.global || isGloballyInstalled()) {
-    config = {
-      mcpServers: {
-        'git-mem': {
-          command: 'git-mem-mcp',
-        },
-      },
-    };
-  } else {
-    // Use node with the path to the built mcp-server.js
-    const serverPath = join(__dirname, '..', 'mcp-server.js');
-    config = {
-      mcpServers: {
-        'git-mem': {
-          command: 'node',
-          args: [serverPath],
-        },
-      },
-    };
-  }
+  const config = buildMcpConfig({ global: options.global });
 
   writeFileSync(targetPath, JSON.stringify(config, null, 2) + '\n');
   console.log('Created .mcp.json');
