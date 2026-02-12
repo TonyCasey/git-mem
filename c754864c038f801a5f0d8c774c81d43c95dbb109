@@ -37,6 +37,24 @@
       ],
       "createdAt": "2026-02-12T22:57:33.693Z",
       "updatedAt": "2026-02-12T22:57:33.693Z"
+    },
+    {
+      "id": "12f17fc9-e9ae-4bf2-bb00-3d5e519b4389",
+      "content": "The CI pipeline follows a build-lint-test sequence and requires all three to pass before allowing merges, establishing quality gates for the codebase.",
+      "type": "convention",
+      "sha": "c754864c038f801a5f0d8c774c81d43c95dbb109",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "ci",
+        "quality-gates",
+        "build-process"
+      ],
+      "createdAt": "2026-02-12T22:57:33.711Z",
+      "updatedAt": "2026-02-12T22:57:33.711Z"
     }
   ]
 }
