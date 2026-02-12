@@ -175,14 +175,14 @@ describe('removeGitMemHooks', () => {
   it('should remove git-mem entries from all three event types', () => {
     const hooks = {
       SessionStart: [gitMemMatcher('session-start')],
-      SessionStop: [gitMemMatcher('session-stop')],
+      Stop: [gitMemMatcher('session-stop')],
       UserPromptSubmit: [gitMemMatcher('prompt-submit')],
     };
 
     const result = removeGitMemHooks(hooks);
 
     assert.equal(result.SessionStart, undefined);
-    assert.equal(result.SessionStop, undefined);
+    assert.equal(result.Stop, undefined);
     assert.equal(result.UserPromptSubmit, undefined);
   });
 
