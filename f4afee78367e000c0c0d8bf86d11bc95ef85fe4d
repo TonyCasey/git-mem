@@ -509,6 +509,24 @@
       ],
       "createdAt": "2026-02-12T22:55:21.852Z",
       "updatedAt": "2026-02-12T22:55:21.852Z"
+    },
+    {
+      "id": "886607f3-9c0e-41a1-a631-00473c0ad832",
+      "content": "The system reserves several configuration fields (memoryLimit, dateRange, tags, recordPrompts, surfaceContext) that are not yet wired to handlers, indicating planned future functionality.",
+      "type": "fact",
+      "sha": "f4afee78367e000c0c0d8bf86d11bc95ef85fe4d",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "configuration",
+        "future-features",
+        "reserved-fields"
+      ],
+      "createdAt": "2026-02-12T22:55:21.863Z",
+      "updatedAt": "2026-02-12T22:55:21.863Z"
     }
   ]
 }
