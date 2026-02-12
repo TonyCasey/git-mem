@@ -107,6 +107,22 @@
       ],
       "createdAt": "2026-02-12T21:01:02.419Z",
       "updatedAt": "2026-02-12T21:01:02.419Z"
+    },
+    {
+      "id": "53314ab3-29d1-465a-a293-6ec0c1887974",
+      "content": "User prompt at 2026-02-12T21:01:33.871Z: I DO NOT WANT YOU TO CODE ANYTHING",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T21:01:33.871Z",
+      "updatedAt": "2026-02-12T21:01:33.871Z"
     }
   ]
 }
