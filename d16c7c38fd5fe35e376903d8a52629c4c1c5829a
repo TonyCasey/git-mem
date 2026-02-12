@@ -342,6 +342,22 @@
       ],
       "createdAt": "2026-02-12T12:50:26.041Z",
       "updatedAt": "2026-02-12T12:50:26.041Z"
+    },
+    {
+      "id": "2c3f83a4-f010-4990-a89b-f180ec9bc0ec",
+      "content": "User prompt at 2026-02-12T12:53:17.150Z: Great, can you create a Linear Project and break down all of the required tasks into Linear issues that can be coded and merged?",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "ephemeral",
+      "tags": [
+        "group:users-tony_casey-repos-git-mem",
+        "lifecycle:ephemeral",
+        "type:prompt"
+      ],
+      "createdAt": "2026-02-12T12:53:17.150Z",
+      "updatedAt": "2026-02-12T12:53:17.150Z"
     }
   ]
 }
