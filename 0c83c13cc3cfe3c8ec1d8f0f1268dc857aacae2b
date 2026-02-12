@@ -126,6 +126,24 @@
       ],
       "createdAt": "2026-02-12T22:55:34.371Z",
       "updatedAt": "2026-02-12T22:55:34.371Z"
+    },
+    {
+      "id": "23bc805c-e05e-4090-8c75-4f2dd1c21935",
+      "content": "Memory types are displayed in a fixed order (decision, gotcha, convention, fact) when formatting context output, with a TYPE_ORDER constant controlling the sequence.",
+      "type": "convention",
+      "sha": "0c83c13cc3cfe3c8ec1d8f0f1268dc857aacae2b",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "llm-enrichment",
+        "memory-types",
+        "context-formatter",
+        "ordering"
+      ],
+      "createdAt": "2026-02-12T22:55:34.397Z",
+      "updatedAt": "2026-02-12T22:55:34.397Z"
     }
   ]
 }
