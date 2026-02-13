@@ -28,7 +28,9 @@ export function trailersCommand(sha: string | undefined, options: ITrailersOptio
     const keys = new Set<string>();
     for (const commit of commits) {
       for (const trailer of commit.trailers) {
-        keys.add(trailer.key);
+        if (trailer.key.startsWith('AI-')) {
+          keys.add(trailer.key);
+        }
       }
     }
 

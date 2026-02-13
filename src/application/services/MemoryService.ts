@@ -29,10 +29,12 @@ export class MemoryService implements IMemoryService {
 
     // Dual-write: also add AI-* trailers to the commit (opt-out via trailers: false)
     if (options?.trailers !== false && this.trailerService) {
+      // addTrailers amends HEAD — skip when targeting a commit that isn't HEAD.
+      // Allow both the literal string 'HEAD' and a resolved SHA that matches HEAD
+      // (callers like CLI/MCP tools often pass the resolved SHA).
       const targetSha = options?.sha;
-      if (targetSha && targetSha !== 'HEAD') {
-        // addTrailers amends HEAD — skip when targeting a specific non-HEAD commit
-        // to avoid attaching trailers to the wrong commit
+      const isHeadTarget = !targetSha || targetSha === 'HEAD' || targetSha === memory.sha;
+      if (!isHeadTarget) {
         this.logger?.warn('Skipping trailer write for non-HEAD commit', { sha: targetSha });
       } else {
         try {
