@@ -442,6 +442,24 @@
       ],
       "createdAt": "2026-02-13T17:09:50.093Z",
       "updatedAt": "2026-02-13T17:09:50.093Z"
+    },
+    {
+      "id": "4f567a6d-6469-44e9-8ff2-290d68046f88",
+      "content": "Services accept optional logger parameters as the last constructor argument, enabling graceful operation when logging is not available.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "constructor-injection",
+        "optional-parameters"
+      ],
+      "createdAt": "2026-02-13T17:09:50.142Z",
+      "updatedAt": "2026-02-13T17:09:50.142Z"
     }
   ]
 }
