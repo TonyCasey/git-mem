@@ -795,6 +795,21 @@
       ],
       "createdAt": "2026-02-13T17:33:59.755Z",
       "updatedAt": "2026-02-13T17:33:59.755Z"
+    },
+    {
+      "id": "6f886638-f916-487e-a0e1-c8e76ff1d55c",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-13T17:34:18.460Z",
+      "updatedAt": "2026-02-13T17:34:18.460Z"
     }
   ]
 }
