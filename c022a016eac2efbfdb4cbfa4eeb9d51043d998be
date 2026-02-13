@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "7c336808-5575-46b4-a835-ee89c68a9162",
+      "content": "README updated with git trailers and git notes documentation",
+      "type": "decision",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [
+        "docs",
+        "readme"
+      ],
+      "createdAt": "2026-02-13T13:51:47.242Z",
+      "updatedAt": "2026-02-13T13:51:47.242Z"
+    }
+  ]
+}
