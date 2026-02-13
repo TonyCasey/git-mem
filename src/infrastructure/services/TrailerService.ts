@@ -93,12 +93,14 @@ export class TrailerService implements ITrailerService {
   }
 
   addTrailers(trailers: readonly ITrailer[], cwd?: string): void {
-    if (trailers.length === 0) return;
+    // Only operate on AI-* trailers to match readTrailers/parseTrailerBlock behavior.
+    const aiTrailers = trailers.filter(t => t.key.startsWith(AI_TRAILER_PREFIX));
+    if (aiTrailers.length === 0) return;
 
     // Read existing trailers to avoid duplicates
     const existing = this.readTrailers('HEAD', cwd);
     const existingKeys = new Set(existing.map(t => `${t.key}:${t.value}`));
-    const newTrailers = trailers.filter(t => !existingKeys.has(`${t.key}:${t.value}`));
+    const newTrailers = aiTrailers.filter(t => !existingKeys.has(`${t.key}:${t.value}`));
     if (newTrailers.length === 0) return;
 
     // Get current commit message

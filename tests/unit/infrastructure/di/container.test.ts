@@ -171,6 +171,8 @@ describe('createContainer', () => {
       assert.equal(typeof trailerService.readTrailers, 'function');
       assert.equal(typeof trailerService.formatTrailers, 'function');
       assert.equal(typeof trailerService.queryTrailers, 'function');
+      assert.equal(typeof trailerService.addTrailers, 'function');
+      assert.equal(typeof trailerService.buildCommitMessage, 'function');
     });
 
     it('should return singleton within container scope', () => {
