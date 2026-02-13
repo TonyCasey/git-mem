@@ -22,6 +22,7 @@ export function registerRememberTool(server: McpServer): void {
       confidence: z.enum(['verified', 'high', 'medium', 'low']).optional().describe('Confidence level (default: high)'),
       tags: z.string().optional().describe('Comma-separated tags'),
       lifecycle: z.enum(['permanent', 'project', 'session']).optional().describe('Lifecycle tier (default: project)'),
+      trailers: z.boolean().optional().describe('Write AI-* trailers to commit message (default: true)'),
     },
     async (args) => {
       const container = createContainer({ scope: 'mcp:remember' });
@@ -35,6 +36,7 @@ export function registerRememberTool(server: McpServer): void {
           confidence: (args.confidence || 'high') as ConfidenceLevel,
           lifecycle: (args.lifecycle || 'project') as MemoryLifecycle,
           tags: args.tags,
+          trailers: args.trailers,
         });
 
         return {

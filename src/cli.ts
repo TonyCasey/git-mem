@@ -36,6 +36,7 @@ program
   .option('--confidence <level>', 'Confidence: verified, high, medium, low', 'high')
   .option('--lifecycle <tier>', 'Lifecycle: permanent, project, session', 'project')
   .option('--tags <tags>', 'Comma-separated tags')
+  .option('--no-trailers', 'Skip writing AI-* trailers to the commit message')
   .action((text, options) => rememberCommand(text, options, logger));
 
 program

@@ -69,6 +69,8 @@ export interface ICreateMemoryOptions {
   readonly source?: SourceType;
   /** Working directory. */
   readonly cwd?: string;
+  /** Write AI-* trailers to the commit message (default: true). */
+  readonly trailers?: boolean;
 }
 
 /**
