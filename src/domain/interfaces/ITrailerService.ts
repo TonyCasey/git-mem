@@ -58,4 +58,21 @@ export interface ITrailerService {
    * @returns Array of commits with matching trailers.
    */
   queryTrailers(key: string, options?: ITrailerQueryOptions): ICommitTrailers[];
+
+  /**
+   * Amend HEAD commit to append AI-* trailers to the commit message.
+   * Preserves existing trailers and skips duplicates.
+   * @param trailers - Trailers to add.
+   * @param cwd - Working directory.
+   */
+  addTrailers(trailers: readonly ITrailer[], cwd?: string): void;
+
+  /**
+   * Build a commit message with trailers appended.
+   * Pure string operation — no git commands.
+   * @param message - Original commit message.
+   * @param trailers - Trailers to append.
+   * @returns Complete commit message with trailer block.
+   */
+  buildCommitMessage(message: string, trailers: readonly ITrailer[]): string;
 }
