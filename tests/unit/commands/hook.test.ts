@@ -17,7 +17,7 @@ function createHooksConfig(overrides?: Partial<IHooksConfig>): IHooksConfig {
   return {
     enabled: true,
     sessionStart: { enabled: true, memoryLimit: 20 },
-    sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
+    sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
     promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
     ...overrides,
   };
@@ -51,7 +51,7 @@ describe('isEventEnabled', () => {
     assert.equal(isEventEnabled(config, 'session-start'), true);
   });
 
-  it('should return true for enabled session-stop with autoLiberate', () => {
+  it('should return true for enabled session-stop with autoExtract', () => {
     const config = createHooksConfig();
     assert.equal(isEventEnabled(config, 'session-stop'), true);
   });
@@ -68,9 +68,9 @@ describe('isEventEnabled', () => {
     assert.equal(isEventEnabled(config, 'session-start'), false);
   });
 
-  it('should return false for session-stop when autoLiberate is false', () => {
+  it('should return false for session-stop when autoExtract is false', () => {
     const config = createHooksConfig({
-      sessionStop: { enabled: true, autoLiberate: false, threshold: 3 },
+      sessionStop: { enabled: true, autoExtract: false, threshold: 3 },
     });
     assert.equal(isEventEnabled(config, 'session-stop'), false);
   });

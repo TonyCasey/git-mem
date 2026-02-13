@@ -1,12 +1,12 @@
 /**
- * liberate command handler
+ * extract command handler
  */
 
 import { createContainer } from '../infrastructure/di';
 import type { ILogger } from '../domain/interfaces/ILogger';
 import { createStderrProgressHandler } from './progress';
 
-interface ILiberateCommandOptions {
+interface IExtractCommandOptions {
   since?: string;
   commitCount?: string;
   dryRun?: boolean;
@@ -15,9 +15,9 @@ interface ILiberateCommandOptions {
 }
 
 /** Scan git history, score commits for interest, and extract memories. */
-export async function liberateCommand(options: ILiberateCommandOptions, logger?: ILogger): Promise<void> {
-  const container = createContainer({ logger, scope: 'liberate', enrich: options.enrich });
-  const { liberateService, llmClient, logger: log } = container.cradle;
+export async function extractCommand(options: IExtractCommandOptions, logger?: ILogger): Promise<void> {
+  const container = createContainer({ logger, scope: 'extract', enrich: options.enrich });
+  const { extractService, llmClient, logger: log } = container.cradle;
 
   if (options.enrich && !llmClient) {
     console.log('Warning: --enrich specified but no API key found. Set ANTHROPIC_API_KEY.');
@@ -50,7 +50,7 @@ export async function liberateCommand(options: ILiberateCommandOptions, logger?:
     console.log('Dry run — no notes will be written.\n');
   }
 
-  const result = await liberateService.liberate({
+  const result = await extractService.extract({
     since,
     maxCommits,
     dryRun: options.dryRun,

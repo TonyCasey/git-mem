@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import { rememberCommand } from './commands/remember';
 import { recallCommand } from './commands/recall';
-import { liberateCommand } from './commands/liberate';
+import { extractCommand } from './commands/extract';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initCommand } from './commands/init';
@@ -23,9 +23,9 @@ program
 
 program
   .command('init')
-  .description('Set up git-mem: hooks, MCP config, .gitignore, and liberate history')
+  .description('Set up git-mem: hooks, MCP config, .gitignore, and extract from history')
   .option('-y, --yes', 'Accept defaults without prompting')
-  .option('--commit-count <n>', 'Number of commits to liberate', '100')
+  .option('--commit-count <n>', 'Number of commits to extract', '100')
   .option('--hooks', 'Install prepare-commit-msg git hook for AI-Agent trailers')
   .option('--uninstall-hooks', 'Remove the prepare-commit-msg git hook')
   .action((options) => initCommand(options, logger));
@@ -51,14 +51,14 @@ program
   .action((query, options) => recallCommand(query, options, logger));
 
 program
-  .command('liberate')
-  .description('Liberate knowledge from existing commit history')
+  .command('extract')
+  .description('Extract knowledge from existing commit history')
   .option('--since <date>', 'Start date (default: 90 days ago)')
   .option('--commit-count <n>', 'Max commits to process')
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
-  .action((options) => liberateCommand(options, logger));
+  .action((options) => extractCommand(options, logger));
 
 program
   .command('context')

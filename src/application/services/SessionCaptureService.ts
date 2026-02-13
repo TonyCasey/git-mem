@@ -2,7 +2,7 @@
  * SessionCaptureService
  *
  * Captures memories from commits made during a Claude Code session.
- * Delegates to LiberateService for triage, extraction, and writing.
+ * Delegates to ExtractService for triage, extraction, and writing.
  */
 
 import type {
@@ -10,7 +10,7 @@ import type {
   ISessionCaptureOptions,
   ISessionCaptureResult,
 } from '../../domain/interfaces/ISessionCaptureService';
-import type { ILiberateService } from '../interfaces/ILiberateService';
+import type { IExtractService } from '../interfaces/IExtractService';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 
 /**
@@ -18,14 +18,14 @@ import type { ILogger } from '../../domain/interfaces/ILogger';
  *
  * Claude Code's session-stop payload does not include the session start
  * time, so we use a rolling 24h window as a pragmatic approximation.
- * LiberateService skips commits that already have notes, preventing
+ * ExtractService skips commits that already have notes, preventing
  * duplicate extraction across multiple sessions in a single day.
  */
 const SESSION_WINDOW_MS = 24 * 60 * 60 * 1000;
 
 export class SessionCaptureService implements ISessionCaptureService {
   constructor(
-    private readonly liberateService: ILiberateService,
+    private readonly extractService: IExtractService,
     private readonly logger?: ILogger,
   ) {}
 
@@ -38,7 +38,7 @@ export class SessionCaptureService implements ISessionCaptureService {
       cwd: options.cwd,
     });
 
-    const result = await this.liberateService.liberate({
+    const result = await this.extractService.extract({
       since,
       enrich: false,
       dryRun: false,

@@ -1,11 +1,11 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import type { ILiberateProgress } from '../../../../src/application/interfaces/ILiberateService';
+import type { IExtractProgress } from '../../../../src/application/interfaces/IExtractService';
 import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { LiberateService } from '../../../../src/application/services/LiberateService';
+import { ExtractService } from '../../../../src/application/services/ExtractService';
 import { GitTriageService } from '../../../../src/application/services/GitTriageService';
 import { MemoryRepository } from '../../../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../../../src/infrastructure/services/NotesService';
@@ -16,9 +16,9 @@ function git(args: string[], cwd: string): string {
   return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
 }
 
-describe('LiberateService', () => {
-  let service: LiberateService;
-  let serviceWithTrailers: LiberateService;
+describe('ExtractService', () => {
+  let service: ExtractService;
+  let serviceWithTrailers: ExtractService;
   let memoryRepo: MemoryRepository;
   let repoDir: string;
 
@@ -28,10 +28,10 @@ describe('LiberateService', () => {
     const notesService = new NotesService();
     memoryRepo = new MemoryRepository(notesService);
     const trailerService = new TrailerService();
-    service = new LiberateService(triageService, memoryRepo);
-    serviceWithTrailers = new LiberateService(triageService, memoryRepo, gitClient, undefined, undefined, trailerService);
+    service = new ExtractService(triageService, memoryRepo);
+    serviceWithTrailers = new ExtractService(triageService, memoryRepo, gitClient, undefined, undefined, trailerService);
 
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-liberate-test-'));
+    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-extract-test-'));
     git(['init'], repoDir);
     git(['config', 'user.email', 'test@test.com'], repoDir);
     git(['config', 'user.name', 'Test User'], repoDir);
@@ -65,9 +65,9 @@ describe('LiberateService', () => {
     rmSync(repoDir, { recursive: true, force: true });
   });
 
-  describe('liberate', () => {
+  describe('extract', () => {
     it('should scan and report results in dry-run mode', async () => {
-      const result = await service.liberate({
+      const result = await service.extract({
         cwd: repoDir,
         dryRun: true,
         threshold: 1,
@@ -79,7 +79,7 @@ describe('LiberateService', () => {
     });
 
     it('should annotate interesting commits when not dry-run', async () => {
-      const result = await service.liberate({
+      const result = await service.extract({
         cwd: repoDir,
         dryRun: false,
         threshold: 1,
@@ -90,7 +90,7 @@ describe('LiberateService', () => {
     });
 
     it('should return zero annotations for high threshold', async () => {
-      const result = await service.liberate({
+      const result = await service.extract({
         cwd: repoDir,
         dryRun: true,
         threshold: 100,
@@ -101,9 +101,9 @@ describe('LiberateService', () => {
     });
 
     it('should call onProgress with triage, processing, and complete phases', async () => {
-      const events: ILiberateProgress[] = [];
+      const events: IExtractProgress[] = [];
 
-      await service.liberate({
+      await service.extract({
         cwd: repoDir,
         dryRun: true,
         threshold: 1,
@@ -131,9 +131,9 @@ describe('LiberateService', () => {
     });
 
     it('should emit triage and complete even with zero high-interest commits', async () => {
-      const events: ILiberateProgress[] = [];
+      const events: IExtractProgress[] = [];
 
-      await service.liberate({
+      await service.extract({
         cwd: repoDir,
         dryRun: true,
         threshold: 100,
@@ -148,11 +148,11 @@ describe('LiberateService', () => {
     });
   });
 
-  describe('liberate with trailers', () => {
+  describe('extract with trailers', () => {
     let trailerRepoDir: string;
 
     before(() => {
-      trailerRepoDir = mkdtempSync(join(tmpdir(), 'git-mem-liberate-trailer-'));
+      trailerRepoDir = mkdtempSync(join(tmpdir(), 'git-mem-extract-trailer-'));
       git(['init'], trailerRepoDir);
       git(['config', 'user.email', 'test@test.com'], trailerRepoDir);
       git(['config', 'user.name', 'Test User'], trailerRepoDir);
@@ -173,7 +173,7 @@ describe('LiberateService', () => {
       const msg = 'feat: add caching layer\n\nAI-Decision: Use Redis for caching\nAI-Confidence: high';
       git(['commit', '-m', msg], trailerRepoDir);
 
-      const result = await serviceWithTrailers.liberate({
+      const result = await serviceWithTrailers.extract({
         cwd: trailerRepoDir,
         dryRun: false,
         threshold: 1,
@@ -207,7 +207,7 @@ describe('LiberateService', () => {
       ].join('\n');
       git(['commit', '-m', msg], trailerRepoDir);
 
-      const result = await serviceWithTrailers.liberate({
+      const result = await serviceWithTrailers.extract({
         cwd: trailerRepoDir,
         dryRun: false,
         threshold: 1,
@@ -241,7 +241,7 @@ describe('LiberateService', () => {
       ].join('\n');
       git(['commit', '-m', msg], trailerRepoDir);
 
-      const result = await serviceWithTrailers.liberate({
+      const result = await serviceWithTrailers.extract({
         cwd: trailerRepoDir,
         dryRun: false,
         threshold: 1,
@@ -261,7 +261,7 @@ describe('LiberateService', () => {
       git(['commit', '-m', msg], trailerRepoDir);
 
       // Service without trailerService should still work (ignores trailers)
-      const result = await service.liberate({
+      const result = await service.extract({
         cwd: trailerRepoDir,
         dryRun: true,
         threshold: 1,

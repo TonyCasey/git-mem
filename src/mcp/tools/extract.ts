@@ -1,5 +1,5 @@
 /**
- * MCP Tool: git_mem_liberate
+ * MCP Tool: git_mem_extract
  *
  * Scan and annotate existing commit history with structured memory notes.
  */
@@ -8,9 +8,9 @@ import { z } from 'zod';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { createContainer } from '../../infrastructure/di';
 
-export function registerLiberateTool(server: McpServer): void {
+export function registerExtractTool(server: McpServer): void {
   server.tool(
-    'git_mem_liberate',
+    'git_mem_extract',
     'Scan commit history, score commits for interest, and extract decisions/gotchas/conventions as memories',
     {
       dry_run: z.boolean().optional().describe('Preview without writing notes (default: false)'),
@@ -20,12 +20,12 @@ export function registerLiberateTool(server: McpServer): void {
       enrich: z.boolean().optional().describe('Enable LLM enrichment (requires ANTHROPIC_API_KEY)'),
     },
     async (args) => {
-      const container = createContainer({ scope: 'mcp:liberate', enrich: args.enrich });
-      const { liberateService, llmClient, logger } = container.cradle;
+      const container = createContainer({ scope: 'mcp:extract', enrich: args.enrich });
+      const { extractService, llmClient, logger } = container.cradle;
       try {
         logger.info('Tool invoked', { dryRun: args.dry_run, enrich: args.enrich });
 
-        const result = await liberateService.liberate({
+        const result = await extractService.extract({
           dryRun: args.dry_run ?? false,
           since: args.since ? new Date(args.since) : undefined,
           maxCommits: args.max_commits,
@@ -77,7 +77,7 @@ export function registerLiberateTool(server: McpServer): void {
         return {
           content: [{
             type: 'text' as const,
-            text: `Error running liberate: ${err instanceof Error ? err.message : String(err)}`,
+            text: `Error running extract: ${err instanceof Error ? err.message : String(err)}`,
           }],
           isError: true,
         };

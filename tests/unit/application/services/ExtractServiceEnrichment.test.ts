@@ -4,11 +4,11 @@ import {
   truncateDiff,
   extractFileNames,
   mergeFacts,
-} from '../../../../src/application/services/LiberateService';
+} from '../../../../src/application/services/ExtractService';
 import type { IPatternMatch } from '../../../../src/infrastructure/services/patterns/HeuristicPatterns';
 import type { ILLMExtractedFact } from '../../../../src/domain/interfaces/ILLMClient';
 
-describe('LiberateService helpers', () => {
+describe('ExtractService helpers', () => {
   describe('truncateDiff', () => {
     it('should return diff unchanged if under limit', () => {
       const diff = 'line1\nline2\nline3';
