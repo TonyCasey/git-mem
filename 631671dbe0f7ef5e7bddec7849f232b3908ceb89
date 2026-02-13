@@ -1735,6 +1735,21 @@
       ],
       "createdAt": "2026-02-13T08:46:18.648Z",
       "updatedAt": "2026-02-13T08:46:18.648Z"
+    },
+    {
+      "id": "af39be32-9375-4c4b-9576-fb6a5e6fdeca",
+      "content": "- Conditional LLM client creation via options",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-13T08:46:18.670Z",
+      "updatedAt": "2026-02-13T08:46:18.670Z"
     }
   ]
 }
