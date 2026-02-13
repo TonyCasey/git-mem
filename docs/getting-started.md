@@ -56,15 +56,15 @@ Options:
 
 ```bash
 git mem extract --since 2024-01-01 --dry-run
-git mem extract --threshold 5 --max 100
-git mem extract --enrich --dry-run --max 10
+git mem extract --threshold 5 --commit-count 100
+git mem extract --enrich --dry-run --commit-count 10
 ```
 
 Scores commits by interest (conventional prefixes, decision keywords, diff size, PR merges), then extracts decisions/gotchas/conventions using heuristic patterns. Optionally enrich with LLM analysis for deeper insights.
 
 Options:
 - `--since <date>` — Start date (default: 90 days ago)
-- `--max <n>` — Max commits to process
+- `--commit-count <n>` — Max commits to process
 - `--dry-run` — Preview without writing
 - `--threshold <n>` — Interest score threshold (default: 3)
 - `--enrich` — Enable LLM enrichment (requires `ANTHROPIC_API_KEY`, see [Environment Variables](#environment-variables))
