@@ -2677,6 +2677,24 @@
       ],
       "createdAt": "2026-02-13T17:09:36.022Z",
       "updatedAt": "2026-02-13T17:09:36.022Z"
+    },
+    {
+      "id": "c6cacb16-6aa5-48b6-8b05-380521e608a9",
+      "content": "EventBus provides registeredEvents() method for introspection of registered event handlers.",
+      "type": "fact",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "event-bus",
+        "introspection",
+        "debugging"
+      ],
+      "createdAt": "2026-02-13T17:09:36.046Z",
+      "updatedAt": "2026-02-13T17:09:36.046Z"
     }
   ]
 }
