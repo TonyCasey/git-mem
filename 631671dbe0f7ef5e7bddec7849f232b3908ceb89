@@ -1750,6 +1750,21 @@
       ],
       "createdAt": "2026-02-13T08:46:18.670Z",
       "updatedAt": "2026-02-13T08:46:18.670Z"
+    },
+    {
+      "id": "af28a023-3c2b-4953-b4da-0c3a2f1769a2",
+      "content": "Co-Authored-By: Claude Opus 4",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-13T08:46:18.692Z",
+      "updatedAt": "2026-02-13T08:46:18.692Z"
     }
   ]
 }
