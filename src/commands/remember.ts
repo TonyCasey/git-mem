@@ -14,6 +14,7 @@ interface IRememberOptions {
   confidence?: string;
   lifecycle?: string;
   tags?: string;
+  noTrailers?: boolean;
 }
 
 export async function rememberCommand(text: string, options: IRememberOptions, logger?: ILogger): Promise<void> {
@@ -27,6 +28,7 @@ export async function rememberCommand(text: string, options: IRememberOptions, l
     confidence: (options.confidence || 'high') as ConfidenceLevel,
     lifecycle: (options.lifecycle || 'project') as MemoryLifecycle,
     tags: options.tags,
+    trailers: !options.noTrailers,
   });
 
   console.log(`Remembered: ${memory.content}`);
