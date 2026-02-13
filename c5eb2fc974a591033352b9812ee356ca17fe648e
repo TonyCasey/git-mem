@@ -592,6 +592,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.285Z",
       "updatedAt": "2026-02-13T17:09:50.285Z"
+    },
+    {
+      "id": "8dec7642-4ee7-4c71-9852-833b1931ed00",
+      "content": "The .git-mem/ directory is added to .gitignore to prevent log files from being committed to version control.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "gitignore",
+        "logging",
+        "version-control",
+        "directory-structure"
+      ],
+      "createdAt": "2026-02-13T17:09:50.305Z",
+      "updatedAt": "2026-02-13T17:09:50.305Z"
     }
   ]
 }
