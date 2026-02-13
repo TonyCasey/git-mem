@@ -49,6 +49,23 @@
       ],
       "createdAt": "2026-02-13T17:26:10.270Z",
       "updatedAt": "2026-02-13T17:26:10.270Z"
+    },
+    {
+      "id": "73e03801-80e7-4ad5-ba83-aa033683109b",
+      "content": "AI-Agent and AI-Model trailers now written by remember (CLI/MCP) and prepare-commit-msg hook v2",
+      "type": "decision",
+      "sha": "799f75068f83b4cbfb6e8f4edfc554968081102a",
+      "confidence": "high",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "trailers",
+        "git-hooks",
+        "showcase"
+      ],
+      "createdAt": "2026-02-13T17:30:46.953Z",
+      "updatedAt": "2026-02-13T17:30:46.953Z"
     }
   ]
 }
