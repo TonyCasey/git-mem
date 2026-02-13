@@ -516,6 +516,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.206Z",
       "updatedAt": "2026-02-13T17:09:50.206Z"
+    },
+    {
+      "id": "f1c43cbc-d6cf-4a68-a580-80c3d5505737",
+      "content": "LLM enrichment failures are logged as warnings but don't block heuristic results, implementing graceful degradation.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "llm",
+        "error-handling",
+        "graceful-degradation",
+        "liberate-service"
+      ],
+      "createdAt": "2026-02-13T17:09:50.225Z",
+      "updatedAt": "2026-02-13T17:09:50.225Z"
     }
   ]
 }
