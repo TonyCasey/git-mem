@@ -1525,6 +1525,21 @@
       ],
       "createdAt": "2026-02-13T08:36:10.898Z",
       "updatedAt": "2026-02-13T08:36:10.898Z"
+    },
+    {
+      "id": "68242822-84ac-4af5-a511-8c9143274698",
+      "content": "Co-Authored-By: Claude Opus 4",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-13T08:36:10.921Z",
+      "updatedAt": "2026-02-13T08:36:10.921Z"
     }
   ]
 }
