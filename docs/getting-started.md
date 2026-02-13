@@ -22,8 +22,10 @@ git-mem init
 5. Extracts knowledge from recent commits (if `ANTHROPIC_API_KEY` is set)
 
 ---
+
 ## Using Claude?
- All of the processes happen automatically through Claude's hook events.
+
+All of the processes happen automatically through Claude's hook events.
 
 | Hook | What it does |
 |------|-------------|
@@ -45,6 +47,7 @@ Settings are stored in `.git-mem.json`:
 ```
 
 ---
+
 ## How It Works
 
 git-mem stores knowledge in two ways:
@@ -53,7 +56,7 @@ git-mem stores knowledge in two ways:
 
 Memories are stored as JSON in git notes on `refs/notes/mem`. Each commit can have a note containing an array of memory entities:
 
-```
+```text
 refs/notes/mem
   └── <commit-sha> → { "memories": [{ id, content, type, confidence, tags, ... }] }
 ```
@@ -67,7 +70,7 @@ Notes are:
 
 When you `remember` on HEAD, git-mem also writes AI-* trailers directly into the commit message:
 
-```
+```text
 AI-Decision: JWT over sessions — stateless API, scales horizontally
 AI-Confidence: high
 AI-Memory-Id: 3bf31da6-86a6-43cc-a1db-2f99da187107
@@ -80,6 +83,7 @@ Trailers are:
 - **Only on new commits** — `extract` writes notes only (no history rewrite)
 
 ---
+
 ## Not using Claude?
 
 ### MCP Tools
@@ -107,7 +111,7 @@ git mem init -y --commit-count 50
 
 Options:
 - `-y, --yes` — Accept defaults without prompting
-- `--commit-count <n>` — Number of commits to extract (default: 30)
+- `--commit-count <n>` — Number of commits to extract (default: 100)
 - `--hooks` — Install prepare-commit-msg git hook
 - `--uninstall-hooks` — Remove the prepare-commit-msg git hook
 
@@ -130,6 +134,7 @@ Options:
 - `--confidence <level>` — `verified`, `high`, `medium`, `low` (default: `high`)
 - `--lifecycle <tier>` — `permanent`, `project`, `session` (default: `project`)
 - `--tags <tags>` — Comma-separated tags
+- `--no-trailers` — Skip writing AI-* trailers to the commit message
 
 ### recall
 
