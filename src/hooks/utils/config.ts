@@ -14,7 +14,7 @@ const DEFAULTS: IHookConfig = {
   hooks: {
     enabled: true,
     sessionStart: { enabled: true, memoryLimit: 20 },
-    sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
+    sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
     promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
   },
 };
@@ -31,6 +31,8 @@ export function loadHookConfig(cwd?: string): IHookConfig {
     const raw = JSON.parse(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
     const rawHooks = (raw.hooks ?? {}) as Partial<IHooksConfig>;
 
+    const rawStop = (rawHooks.sessionStop ?? {}) as Record<string, unknown>;
+
     return {
       hooks: {
         enabled: rawHooks.enabled ?? DEFAULTS.hooks.enabled,
@@ -40,7 +42,7 @@ export function loadHookConfig(cwd?: string): IHookConfig {
         },
         sessionStop: {
           ...DEFAULTS.hooks.sessionStop,
-          ...(rawHooks.sessionStop ?? {}),
+          ...rawStop,
         },
         promptSubmit: {
           ...DEFAULTS.hooks.promptSubmit,

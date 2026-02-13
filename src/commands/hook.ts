@@ -41,7 +41,7 @@ const CONFIG_KEY_MAP: Record<string, ConfigKey> = {
   'prompt-submit': 'promptSubmit',
 };
 
-/** Extra enabled check for session-stop (must also have autoLiberate). */
+/** Extra enabled check for session-stop (must also have autoExtract). */
 export function isEventEnabled(hooksConfig: IHooksConfig, eventName: string): boolean {
   if (!hooksConfig.enabled) return false;
 
@@ -51,8 +51,8 @@ export function isEventEnabled(hooksConfig: IHooksConfig, eventName: string): bo
   const section = hooksConfig[configKey];
   if (!section.enabled) return false;
 
-  // session-stop additionally requires autoLiberate
-  if (configKey === 'sessionStop' && 'autoLiberate' in section && !section.autoLiberate) {
+  // session-stop additionally requires autoExtract
+  if (configKey === 'sessionStop' && 'autoExtract' in section && !section.autoExtract) {
     return false;
   }
 

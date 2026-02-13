@@ -196,7 +196,7 @@ export function buildGitMemConfig(): Record<string, unknown> {
       },
       sessionStop: {
         enabled: true,
-        autoLiberate: true,
+        autoExtract: true,
         threshold: 3,
       },
       promptSubmit: {

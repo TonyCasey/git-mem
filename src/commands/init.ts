@@ -1,7 +1,7 @@
 /**
  * init command handler
  *
- * Unified setup: hooks, MCP config, .gitignore, .env check, and optional liberate.
+ * Unified setup: hooks, MCP config, .gitignore, .env check, and optional extract.
  * Replaces separate init-hooks and init-mcp commands.
  */
 
@@ -110,7 +110,7 @@ export function ensureEnvPlaceholder(cwd: string): void {
 
 // ── Main command ─────────────────────────────────────────────────────
 
-/** Run unified project setup: hooks, MCP config, .gitignore, .env, and optional liberate. */
+/** Run unified project setup: hooks, MCP config, .gitignore, .env, and optional extract. */
 export async function initCommand(options: IInitCommandOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init' });
   const cwd = process.cwd();
@@ -209,7 +209,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   ensureGitignoreEntries(cwd, ['.env', '.git-mem.json']);
   console.log('✓ Updated .gitignore');
 
-  // ── API key check & liberate ───────────────────────────────────
+  // ── API key check & extract ────────────────────────────────────
   console.log('\nChecking for ANTHROPIC_API_KEY in .env...\n');
 
   const apiKey = readEnvApiKey(cwd);
@@ -219,9 +219,9 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     console.log(`Extracting knowledge from ${commitCount} commits with LLM enrichment...`);
 
     const container = createContainer({ logger, scope: 'init', enrich: true });
-    const { liberateService } = container.cradle;
+    const { extractService } = container.cradle;
 
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       maxCommits: commitCount,
       enrich: true,
       onProgress: createStderrProgressHandler(),
@@ -237,6 +237,6 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     ensureEnvPlaceholder(cwd);
     console.log('✓ Added ANTHROPIC_API_KEY= to .env');
     console.log('→ Add your key to .env, then run:');
-    console.log(`  git-mem liberate --enrich --commit-count ${commitCount}`);
+    console.log(`  git-mem extract --enrich --commit-count ${commitCount}`);
   }
 }

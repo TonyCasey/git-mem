@@ -54,11 +54,11 @@ export class GitClientError extends GitMemError {
 }
 
 /**
- * Error thrown when liberate operations fail.
+ * Error thrown when extract operations fail.
  */
-export class LiberateError extends GitMemError {
+export class ExtractError extends GitMemError {
   constructor(message: string, data?: Record<string, unknown>) {
-    super(message, 'LIBERATE_ERROR', data);
-    this.name = 'LiberateError';
+    super(message, 'EXTRACT_ERROR', data);
+    this.name = 'ExtractError';
   }
 }

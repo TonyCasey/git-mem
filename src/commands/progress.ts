@@ -1,15 +1,15 @@
 /**
- * Shared stderr progress handler for liberate operations.
+ * Shared stderr progress handler for extract operations.
  */
 
-import type { ILiberateProgress } from '../application/interfaces/ILiberateService';
+import type { IExtractProgress } from '../application/interfaces/IExtractService';
 
 /**
- * Create a progress callback that writes liberate progress to stderr.
+ * Create a progress callback that writes extract progress to stderr.
  * Each progress update is written on its own line.
  */
-export function createStderrProgressHandler(): (p: ILiberateProgress) => void {
-  return (p: ILiberateProgress): void => {
+export function createStderrProgressHandler(): (p: IExtractProgress) => void {
+  return (p: IExtractProgress): void => {
     if (p.phase === 'triage') {
       process.stderr.write(`Found ${p.total} high-interest commits to analyze.\n`);
     } else if (p.phase === 'processing') {

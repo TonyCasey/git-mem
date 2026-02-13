@@ -29,7 +29,7 @@ import { createLLMClient } from '../llm/LLMClientFactory';
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
 import { ContextService } from '../../application/services/ContextService';
-import { LiberateService } from '../../application/services/LiberateService';
+import { ExtractService } from '../../application/services/ExtractService';
 import { GitTriageService } from '../../application/services/GitTriageService';
 
 // Application — hook services
@@ -96,7 +96,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     // If a param is renamed, wrap in asFunction (like triageService above).
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
-    liberateService: asClass(LiberateService).singleton(),
+    extractService: asClass(ExtractService).singleton(),
 
     // ── Hook services ─────────────────────────────────────────────
     memoryContextLoader: asClass(MemoryContextLoader).singleton(),

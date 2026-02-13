@@ -1,14 +1,14 @@
 /**
- * ILiberateService
+ * IExtractService
  *
  * Application service interface for annotating existing git history
  * with structured memory notes.
  */
 
 /**
- * Progress update emitted during liberate processing.
+ * Progress update emitted during extract processing.
  */
-export interface ILiberateProgress {
+export interface IExtractProgress {
   /** Current phase of processing. */
   readonly phase: 'triage' | 'processing' | 'complete';
   /** Current commit index (1-based during 'processing'; 0 for triage/complete). */
@@ -24,9 +24,9 @@ export interface ILiberateProgress {
 }
 
 /**
- * Options for liberate operation.
+ * Options for extract operation.
  */
-export interface ILiberateOptions {
+export interface IExtractOptions {
   /** Start date (default: 90 days ago). */
   readonly since?: Date;
   /** Maximum commits to process. */
@@ -40,13 +40,13 @@ export interface ILiberateOptions {
   /** Enable LLM enrichment (requires API key). */
   readonly enrich?: boolean;
   /** Optional progress callback for UI feedback. */
-  readonly onProgress?: (progress: ILiberateProgress) => void;
+  readonly onProgress?: (progress: IExtractProgress) => void;
 }
 
 /**
- * Annotated commit from liberate.
+ * Annotated commit from extract.
  */
-export interface ILiberateAnnotation {
+export interface IExtractAnnotation {
   /** Commit SHA. */
   readonly sha: string;
   /** Commit subject. */
@@ -62,7 +62,7 @@ export interface ILiberateAnnotation {
 }
 
 /**
- * Statistics for LLM enrichment during liberate.
+ * Statistics for LLM enrichment during extract.
  */
 export interface IEnrichmentStats {
   /** Commits successfully enriched by LLM. */
@@ -78,9 +78,9 @@ export interface IEnrichmentStats {
 }
 
 /**
- * Result of a liberate operation.
+ * Result of an extract operation.
  */
-export interface ILiberateResult {
+export interface IExtractResult {
   /** Total commits scanned. */
   readonly commitsScanned: number;
   /** Commits that received annotations. */
@@ -88,7 +88,7 @@ export interface ILiberateResult {
   /** Total facts extracted across all commits. */
   readonly factsExtracted: number;
   /** Individual annotations (for reporting). */
-  readonly annotations: readonly ILiberateAnnotation[];
+  readonly annotations: readonly IExtractAnnotation[];
   /** Whether this was a dry run. */
   readonly dryRun: boolean;
   /** Duration in milliseconds. */
@@ -98,13 +98,13 @@ export interface ILiberateResult {
 }
 
 /**
- * Liberate service interface.
+ * Extract service interface.
  */
-export interface ILiberateService {
+export interface IExtractService {
   /**
    * Annotate existing commit history with AI metadata.
-   * @param options - Liberate options.
-   * @returns Liberate results.
+   * @param options - Extract options.
+   * @returns Extract results.
    */
-  liberate(options?: ILiberateOptions): Promise<ILiberateResult>;
+  extract(options?: IExtractOptions): Promise<IExtractResult>;
 }
