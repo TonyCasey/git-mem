@@ -16,6 +16,8 @@ export function createStderrProgressHandler(): (p: ILiberateProgress) => void {
       const sha = p.sha.slice(0, 7);
       const subject = p.subject.length > 60 ? p.subject.slice(0, 57) + '...' : p.subject;
       process.stderr.write(`  [${p.current}/${p.total}] ${sha} ${subject}  (${p.factsExtracted} facts)\n`);
+    } else if (p.phase === 'complete') {
+      process.stderr.write(`Done — ${p.factsExtracted} facts extracted from ${p.total} commits.\n`);
     }
   };
 }
