@@ -106,12 +106,11 @@ The MCP server (`git-mem-mcp`) exposes git-mem to AI tools over stdio:
 
 ```bash
 git mem init
-git mem init -y --commit-count 50
+git mem init -y
 ```
 
 Options:
 - `-y, --yes` — Accept defaults without prompting
-- `--commit-count <n>` — Number of commits to extract (default: 100)
 - `--hooks` — Install prepare-commit-msg git hook
 - `--uninstall-hooks` — Remove the prepare-commit-msg git hook
 
