@@ -2605,6 +2605,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.924Z",
       "updatedAt": "2026-02-13T17:09:35.924Z"
+    },
+    {
+      "id": "856a9163-a98d-4a4a-bae0-f7a1098ddbe6",
+      "content": "ICradle interface in types.ts defines the typed container shape with all domain interface references for type safety.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "typescript",
+        "type-safety"
+      ],
+      "createdAt": "2026-02-13T17:09:35.948Z",
+      "updatedAt": "2026-02-13T17:09:35.948Z"
     }
   ]
 }
