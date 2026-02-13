@@ -242,7 +242,7 @@ describe('deepMergeGitMemConfig', () => {
     hooks: {
       enabled: true,
       sessionStart: { enabled: true, memoryLimit: 20 },
-      sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
+      sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
       promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
     },
   };
@@ -294,7 +294,7 @@ describe('deepMergeGitMemConfig', () => {
     const result = deepMergeGitMemConfig(existing, defaults);
     const hooks = result.hooks as Record<string, unknown>;
 
-    assert.deepEqual(hooks.sessionStop, { enabled: true, autoLiberate: true, threshold: 3 });
+    assert.deepEqual(hooks.sessionStop, { enabled: true, autoExtract: true, threshold: 3 });
     assert.deepEqual(hooks.promptSubmit, { enabled: false, recordPrompts: false, surfaceContext: true });
   });
 
@@ -345,7 +345,7 @@ describe('deepMergeGitMemConfig', () => {
   it('should deep-merge sub-objects keeping user values over defaults', () => {
     const existing = {
       hooks: {
-        sessionStop: { enabled: false, autoLiberate: false },
+        sessionStop: { enabled: false, autoExtract: false },
       },
     };
 
@@ -354,7 +354,7 @@ describe('deepMergeGitMemConfig', () => {
     const sessionStop = hooks.sessionStop as Record<string, unknown>;
 
     assert.equal(sessionStop.enabled, false);       // User value
-    assert.equal(sessionStop.autoLiberate, false);   // User value
+    assert.equal(sessionStop.autoExtract, false);   // User value
     assert.equal(sessionStop.threshold, 3);          // Default fills in
   });
 });

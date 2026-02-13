@@ -5,11 +5,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { SessionCaptureService } from '../../../../src/application/services/SessionCaptureService';
-import type { ILiberateService, ILiberateResult } from '../../../../src/application/interfaces/ILiberateService';
+import type { IExtractService, IExtractResult } from '../../../../src/application/interfaces/IExtractService';
 
-function createMockLiberateService(result: Partial<ILiberateResult> = {}): ILiberateService {
+function createMockExtractService(result: Partial<IExtractResult> = {}): IExtractService {
   return {
-    liberate: async () => ({
+    extract: async () => ({
       commitsScanned: 5,
       commitsAnnotated: 2,
       factsExtracted: 3,
@@ -22,10 +22,10 @@ function createMockLiberateService(result: Partial<ILiberateResult> = {}): ILibe
 }
 
 describe('SessionCaptureService', () => {
-  it('should delegate to liberateService with enrich false and dryRun false', async () => {
+  it('should delegate to extractService with enrich false and dryRun false', async () => {
     let capturedOptions: Record<string, unknown> | undefined;
-    const liberateService: ILiberateService = {
-      liberate: async (options) => {
+    const extractService: IExtractService = {
+      extract: async (options) => {
         capturedOptions = options as unknown as Record<string, unknown>;
         return {
           commitsScanned: 0,
@@ -38,7 +38,7 @@ describe('SessionCaptureService', () => {
       },
     };
 
-    const service = new SessionCaptureService(liberateService);
+    const service = new SessionCaptureService(extractService);
     await service.capture({ sessionId: 'test', cwd: '/tmp/repo' });
 
     assert.ok(capturedOptions);
@@ -49,12 +49,12 @@ describe('SessionCaptureService', () => {
   });
 
   it('should return structured result with facts extracted', async () => {
-    const liberateService = createMockLiberateService({
+    const extractService = createMockExtractService({
       commitsScanned: 10,
       factsExtracted: 4,
     });
 
-    const service = new SessionCaptureService(liberateService);
+    const service = new SessionCaptureService(extractService);
     const result = await service.capture({ sessionId: 'sess-1' });
 
     assert.equal(result.commitsScanned, 10);
@@ -64,24 +64,24 @@ describe('SessionCaptureService', () => {
   });
 
   it('should return summary with no memories message when none extracted', async () => {
-    const liberateService = createMockLiberateService({
+    const extractService = createMockExtractService({
       commitsScanned: 3,
       factsExtracted: 0,
     });
 
-    const service = new SessionCaptureService(liberateService);
+    const service = new SessionCaptureService(extractService);
     const result = await service.capture({ sessionId: 'sess-1' });
 
     assert.equal(result.memoriesExtracted, 0);
     assert.ok(result.summary.includes('no new memories'));
   });
 
-  it('should propagate errors from liberateService', async () => {
-    const liberateService: ILiberateService = {
-      liberate: async () => { throw new Error('git failed'); },
+  it('should propagate errors from extractService', async () => {
+    const extractService: IExtractService = {
+      extract: async () => { throw new Error('git failed'); },
     };
 
-    const service = new SessionCaptureService(liberateService);
+    const service = new SessionCaptureService(extractService);
 
     await assert.rejects(
       () => service.capture({ sessionId: 'sess-1' }),

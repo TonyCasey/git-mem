@@ -32,7 +32,7 @@ describe('loadHookConfig', () => {
     assert.equal(config.hooks.sessionStart.enabled, true);
     assert.equal(config.hooks.sessionStart.memoryLimit, 20);
     assert.equal(config.hooks.sessionStop.enabled, true);
-    assert.equal(config.hooks.sessionStop.autoLiberate, true);
+    assert.equal(config.hooks.sessionStop.autoExtract, true);
     assert.equal(config.hooks.sessionStop.threshold, 3);
     assert.equal(config.hooks.promptSubmit.enabled, false);
     assert.equal(config.hooks.promptSubmit.recordPrompts, false);

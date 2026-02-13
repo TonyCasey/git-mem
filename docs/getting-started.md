@@ -52,12 +52,12 @@ Options:
 - `--threshold <n>` — Min relevance score 0-1 (default: 0.1)
 - `--json` — Output as JSON
 
-### Liberate knowledge from history
+### Extract knowledge from history
 
 ```bash
-git mem liberate --since 2024-01-01 --dry-run
-git mem liberate --threshold 5 --max 100
-git mem liberate --enrich --dry-run --max 10
+git mem extract --since 2024-01-01 --dry-run
+git mem extract --threshold 5 --max 100
+git mem extract --enrich --dry-run --max 10
 ```
 
 Scores commits by interest (conventional prefixes, decision keywords, diff size, PR merges), then extracts decisions/gotchas/conventions using heuristic patterns. Optionally enrich with LLM analysis for deeper insights.
@@ -148,7 +148,7 @@ Or if using a local (non-global) install:
 | `git_mem_remember` | Store a memory (decision, gotcha, convention, fact) attached to a commit |
 | `git_mem_recall` | Search and retrieve stored memories |
 | `git_mem_context` | Find memories relevant to currently staged changes |
-| `git_mem_liberate` | Scan commit history, score commits, and extract patterns as memories |
+| `git_mem_extract` | Scan commit history, score commits, and extract patterns as memories |
 
 ## How It Works
 
@@ -202,16 +202,16 @@ This means memories are:
                          └─────────────────────────┘
 ```
 
-### How `liberate` frees knowledge from history
+### How `extract` captures knowledge from history
 
 ```text
 ┌──────────────────────┐
-│  git mem liberate     │
+│  git mem extract      │
 └────────┬─────────────┘
          │
          ▼
 ┌──────────────────────┐     ┌─────────────────────────┐
-│  LiberateService     │────▶│  GitTriageService        │
+│  ExtractService      │────▶│  GitTriageService        │
 │                      │     │  (score each commit by   │
 │                      │     │   conventional prefixes, │
 │                      │     │   decision keywords,     │
@@ -255,7 +255,7 @@ This means memories are:
 │  │ remember     │ │
 │  │ recall       │ │
 │  │ context      │ │
-│  │ liberate     │ │
+│  │ extract      │ │
 │  └──────────────┘ │
 └────────┬──────────┘
          │ Spawns fresh service
@@ -266,7 +266,7 @@ This means memories are:
 │  Services         │
 │  (MemoryService,  │
 │   ContextService, │
-│   LiberateService)│
+│   ExtractService) │
 └────────┬──────────┘
          │
          ▼
@@ -288,8 +288,8 @@ This means memories are:
 
 | Variable            | Required | Description                                                                                                              |
 |---------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| `ANTHROPIC_API_KEY` | Only for `--enrich` | Anthropic API key for LLM enrichment during liberate. Get one at [console.anthropic.com](https://console.anthropic.com/). |
-| `OPEN_API_KEY`      | Only for `--enrich` | Open API key for LLM enrichment during liberate.     |
+| `ANTHROPIC_API_KEY` | Only for `--enrich` | Anthropic API key for LLM enrichment during extract. Get one at [console.anthropic.com](https://console.anthropic.com/). |
+| `OPEN_API_KEY`      | Only for `--enrich` | Open API key for LLM enrichment during extract.     |
 
 Copy `.env.example` to `.env` and fill in values:
 
