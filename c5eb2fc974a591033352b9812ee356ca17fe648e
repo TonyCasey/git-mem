@@ -573,6 +573,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.265Z",
       "updatedAt": "2026-02-13T17:09:50.265Z"
+    },
+    {
+      "id": "c36ef8ca-7c2a-437e-b709-449b828297e8",
+      "content": "Log retention uses parseInt with NaN check to preserve 0 as a valid retentionDays value, preventing accidental deletion of all logs.",
+      "type": "gotcha",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "retention",
+        "parsing",
+        "edge-cases"
+      ],
+      "createdAt": "2026-02-13T17:09:50.285Z",
+      "updatedAt": "2026-02-13T17:09:50.285Z"
     }
   ]
 }
