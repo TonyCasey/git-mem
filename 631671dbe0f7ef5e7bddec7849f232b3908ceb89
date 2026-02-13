@@ -2140,6 +2140,21 @@
       ],
       "createdAt": "2026-02-13T11:05:55.462Z",
       "updatedAt": "2026-02-13T11:05:55.462Z"
+    },
+    {
+      "id": "8319f2e9-5e29-482b-ad78-b089f2272722",
+      "content": "manually constructing NotesService → MemoryRepository → Service chains",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-13T11:06:00.976Z",
+      "updatedAt": "2026-02-13T11:06:00.976Z"
     }
   ]
 }
