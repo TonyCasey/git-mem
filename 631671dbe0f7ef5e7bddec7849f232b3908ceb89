@@ -2659,6 +2659,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.997Z",
       "updatedAt": "2026-02-13T17:09:35.997Z"
+    },
+    {
+      "id": "9c15adf7-8884-4f10-9981-3cde40f75336",
+      "content": "Domain events are zero-dependency pure types (IEventBus, IEventHandler, IEventResult interfaces and HookEvent types).",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "domain-events",
+        "clean-architecture",
+        "zero-dependencies"
+      ],
+      "createdAt": "2026-02-13T17:09:36.022Z",
+      "updatedAt": "2026-02-13T17:09:36.022Z"
     }
   ]
 }
