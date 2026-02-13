@@ -1,12 +1,13 @@
 /**
  * prepare-commit-msg git hook
  *
- * Installs/uninstalls a git hook that injects AI-Agent trailers
- * into commit messages when an AI-assisted session is detected.
+ * Installs/uninstalls a git hook that injects AI-Agent and AI-Model
+ * trailers into commit messages when an AI-assisted session is detected.
  *
  * Detection heuristics (checked in order):
  *   - $GIT_MEM_AGENT env var (explicit, user-defined agent string)
  *   - $CLAUDE_CODE env var (Claude Code session)
+ *   - $GIT_MEM_MODEL env var (explicit, user-defined model string)
  *
  * The hook uses `git interpret-trailers` for proper formatting.
  */
@@ -15,8 +16,11 @@ import { existsSync, readFileSync, writeFileSync, renameSync, unlinkSync, chmodS
 import { join, resolve } from 'path';
 import { execFileSync } from 'child_process';
 
-/** Fingerprint comment used to detect our hook. */
-const HOOK_FINGERPRINT = '# git-mem:prepare-commit-msg v1';
+/** Prefix used to detect any version of our hook. */
+const HOOK_FINGERPRINT_PREFIX = '# git-mem:prepare-commit-msg';
+
+/** Full fingerprint with version — used for upgrade detection. */
+const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v2`;
 
 /**
  * The shell hook script.
@@ -24,7 +28,7 @@ const HOOK_FINGERPRINT = '# git-mem:prepare-commit-msg v1';
  */
 const HOOK_SCRIPT = `#!/bin/sh
 ${HOOK_FINGERPRINT}
-# Injects AI-Agent trailer when an AI-assisted session is detected.
+# Injects AI-Agent and AI-Model trailers when an AI-assisted session is detected.
 
 COMMIT_MSG_FILE="$1"
 COMMIT_SOURCE="$2"
@@ -42,14 +46,26 @@ elif [ -n "$CLAUDE_CODE" ]; then
   AGENT="Claude-Code"
 fi
 
+# Detect AI model
+MODEL=""
+if [ -n "$GIT_MEM_MODEL" ]; then
+  MODEL="$GIT_MEM_MODEL"
+fi
+
 # No agent detected — exit silently
 [ -z "$AGENT" ] && exit 0
 
 # Skip if AI-Agent trailer already present
 grep -q "^AI-Agent:" "$COMMIT_MSG_FILE" && exit 0
 
-# Append trailer using git's built-in formatter
+# Append agent trailer using git's built-in formatter
 git interpret-trailers --in-place --trailer "AI-Agent: $AGENT" "$COMMIT_MSG_FILE"
+
+# Append model trailer if detected
+if [ -n "$MODEL" ]; then
+  grep -q "^AI-Model:" "$COMMIT_MSG_FILE" ||
+    git interpret-trailers --in-place --trailer "AI-Model: $MODEL" "$COMMIT_MSG_FILE"
+fi
 `;
 
 /**
@@ -70,9 +86,18 @@ function findGitDir(cwd: string): string {
 }
 
 /**
- * Check if an existing hook file was installed by git-mem.
+ * Check if an existing hook file was installed by git-mem (any version).
  */
 function isGitMemHook(hookPath: string): boolean {
+  if (!existsSync(hookPath)) return false;
+  const content = readFileSync(hookPath, 'utf8');
+  return content.includes(HOOK_FINGERPRINT_PREFIX);
+}
+
+/**
+ * Check if an installed hook is the current version.
+ */
+function isCurrentVersion(hookPath: string): boolean {
   if (!existsSync(hookPath)) return false;
   const content = readFileSync(hookPath, 'utf8');
   return content.includes(HOOK_FINGERPRINT);
@@ -91,6 +116,7 @@ export interface IHookInstallResult {
  * Install the prepare-commit-msg hook.
  * Idempotent: re-running is safe.
  * Wraps existing non-git-mem hooks by renaming them to .user-backup.
+ * Upgrades outdated git-mem hooks in-place.
  */
 export function installHook(cwd?: string): IHookInstallResult {
   const gitDir = findGitDir(cwd || process.cwd());
@@ -98,9 +124,16 @@ export function installHook(cwd?: string): IHookInstallResult {
   const hookPath = join(hooksDir, 'prepare-commit-msg');
   const backupPath = join(hooksDir, 'prepare-commit-msg.user-backup');
 
-  // Already installed — idempotent
-  if (isGitMemHook(hookPath)) {
+  // Already installed and up-to-date — idempotent
+  if (isGitMemHook(hookPath) && isCurrentVersion(hookPath)) {
     return { installed: false, wrapped: false, hookPath };
+  }
+
+  // Outdated git-mem hook — upgrade in-place
+  if (isGitMemHook(hookPath) && !isCurrentVersion(hookPath)) {
+    writeFileSync(hookPath, HOOK_SCRIPT);
+    chmodSync(hookPath, 0o755);
+    return { installed: true, wrapped: false, hookPath };
   }
 
   let wrapped = false;

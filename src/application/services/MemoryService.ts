@@ -38,7 +38,7 @@ export class MemoryService implements IMemoryService {
         this.logger?.warn('Skipping trailer write for non-HEAD commit', { sha: targetSha });
       } else {
         try {
-          const trailers = this.buildTrailers(memory);
+          const trailers = this.buildTrailers(memory, options);
           this.trailerService.addTrailers(trailers, options?.cwd);
           this.logger?.info('Trailers written', { count: trailers.length, sha: memory.sha });
         } catch (err) {
@@ -62,7 +62,7 @@ export class MemoryService implements IMemoryService {
     return value.replace(/\r?\n+/g, ' ').trim();
   }
 
-  private buildTrailers(memory: IMemoryEntity): ITrailer[] {
+  private buildTrailers(memory: IMemoryEntity, options?: ICreateMemoryOptions): ITrailer[] {
     const trailers: ITrailer[] = [
       { key: MEMORY_TYPE_TO_TRAILER_KEY[memory.type], value: this.normalizeTrailerValue(memory.content) },
       { key: AI_TRAILER_KEYS.CONFIDENCE, value: memory.confidence },
@@ -71,6 +71,14 @@ export class MemoryService implements IMemoryService {
 
     if (memory.tags.length > 0) {
       trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: this.normalizeTrailerValue(memory.tags.join(', ')) });
+    }
+
+    if (options?.agent) {
+      trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: this.normalizeTrailerValue(options.agent) });
+    }
+
+    if (options?.model) {
+      trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: this.normalizeTrailerValue(options.model) });
     }
 
     return trailers;

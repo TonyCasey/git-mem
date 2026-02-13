@@ -22,6 +22,8 @@ export function registerRememberTool(server: McpServer): void {
       confidence: z.enum(['verified', 'high', 'medium', 'low']).optional().describe('Confidence level (default: high)'),
       tags: z.string().optional().describe('Comma-separated tags'),
       lifecycle: z.enum(['permanent', 'project', 'session']).optional().describe('Lifecycle tier (default: project)'),
+      agent: z.string().optional().describe('AI agent name (default: auto-detect from $GIT_MEM_AGENT / $CLAUDE_CODE)'),
+      model: z.string().optional().describe('AI model identifier (default: $GIT_MEM_MODEL)'),
       trailers: z.boolean().optional().describe('Write AI-* trailers to commit message (default: true)'),
     },
     async (args) => {
@@ -30,6 +32,14 @@ export function registerRememberTool(server: McpServer): void {
       try {
         logger.info('Tool invoked', { type: args.type || 'fact' });
 
+        // Resolve agent: explicit param > $GIT_MEM_AGENT > $CLAUDE_CODE heuristic
+        const agent = args.agent
+          || process.env.GIT_MEM_AGENT
+          || (process.env.CLAUDE_CODE ? 'Claude-Code' : undefined);
+
+        // Resolve model: explicit param > $GIT_MEM_MODEL
+        const model = args.model || process.env.GIT_MEM_MODEL || undefined;
+
         const memory = memoryService.remember(args.text, {
           sha: args.commit,
           type: (args.type || 'fact') as MemoryType,
@@ -37,6 +47,8 @@ export function registerRememberTool(server: McpServer): void {
           lifecycle: (args.lifecycle || 'project') as MemoryLifecycle,
           tags: args.tags,
           trailers: args.trailers,
+          agent,
+          model,
         });
 
         return {
