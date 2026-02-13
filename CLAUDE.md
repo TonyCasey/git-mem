@@ -32,15 +32,15 @@ Clean architecture with three layers. Dependencies point inward only: Infrastruc
 
 **Domain** (`src/domain/`) — Zero dependencies. Entities (`IMemoryEntity`), interfaces (`IMemoryRepository`, `INotesService`, `ITrailerService`, `IGitClient`), types (quality, lifecycle), errors (`GitMemError` hierarchy), and pure utils (deduplication).
 
-**Application** (`src/application/`) — Depends on domain only. Three services: `MemoryService` (remember/recall CRUD), `LiberateService` (scan git history, score commits, extract patterns), `ContextService` (match staged changes against stored memories).
+**Application** (`src/application/`) — Depends on domain only. Three services: `MemoryService` (remember/recall CRUD), `ExtractService` (scan git history, score commits, extract patterns), `ContextService` (match staged changes against stored memories).
 
 **Infrastructure** (`src/infrastructure/`) — Implements domain interfaces. `GitClient` wraps git CLI. `NotesService` reads/writes `refs/notes/mem`. `TrailerService` queries commit trailers. `MemoryRepository` persists `IMemoryEntity[]` as JSON in git notes. `HeuristicPatterns` provides regex-based extraction rules.
 
 **Entry points:**
-- `src/cli.ts` — Commander.js CLI with 6 commands (remember, recall, context, liberate, sync, init-mcp)
+- `src/cli.ts` — Commander.js CLI with 6 commands (remember, recall, context, extract, sync, init)
 - `src/mcp-server.ts` — MCP server over stdio; `src/mcp/server.ts` creates the server and registers 4 tools
 - `src/commands/` — CLI command handlers
-- `src/mcp/tools/` — MCP tool handlers (remember, recall, context, liberate)
+- `src/mcp/tools/` — MCP tool handlers (remember, recall, context, extract)
 
 **Bootstrapping pattern** — Awilix DI container (`src/infrastructure/di/`). `createContainer(options?)` wires all services; CLI commands and MCP tools resolve from `container.cradle`:
 
@@ -61,7 +61,7 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 
 ## Environment Variables
 
-- `ANTHROPIC_API_KEY` — Required only for `git mem liberate --enrich` (LLM enrichment). Without it, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
+- `ANTHROPIC_API_KEY` — Required only for `git mem extract --enrich` (LLM enrichment). Without it, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
 
 ## Key Technical Details
 

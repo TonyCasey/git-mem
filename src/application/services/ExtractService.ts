@@ -1,5 +1,5 @@
 /**
- * LiberateService
+ * ExtractService
  *
  * Application service that annotates existing git history with
  * structured memory notes by combining triage scoring with
@@ -7,12 +7,12 @@
  */
 
 import type {
-  ILiberateService,
-  ILiberateOptions,
-  ILiberateResult,
-  ILiberateAnnotation,
+  IExtractService,
+  IExtractOptions,
+  IExtractResult,
+  IExtractAnnotation,
   IEnrichmentStats,
-} from '../interfaces/ILiberateService';
+} from '../interfaces/IExtractService';
 import type { IGitTriageService } from '../../domain/interfaces/IGitTriageService';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
@@ -49,7 +49,7 @@ interface IUnifiedFact {
   readonly source: 'heuristic-extraction' | 'llm-enrichment' | 'commit-trailer';
 }
 
-export class LiberateService implements ILiberateService {
+export class ExtractService implements IExtractService {
   constructor(
     private readonly triageService: IGitTriageService,
     private readonly memoryRepository: IMemoryRepository,
@@ -59,12 +59,12 @@ export class LiberateService implements ILiberateService {
     private readonly trailerService?: ITrailerService,
   ) {}
 
-  async liberate(options?: ILiberateOptions): Promise<ILiberateResult> {
+  async extract(options?: IExtractOptions): Promise<IExtractResult> {
     const startTime = Date.now();
     const dryRun = options?.dryRun ?? false;
     const enrich = options?.enrich ?? false;
     const shouldEnrich = enrich && !!this.llmClient && !!this.gitClient;
-    this.logger?.info('Liberate started', { dryRun, enrich: shouldEnrich, maxCommits: options?.maxCommits });
+    this.logger?.info('Extract started', { dryRun, enrich: shouldEnrich, maxCommits: options?.maxCommits });
 
     // Run triage to find interesting commits
     const triageResult = await this.triageService.triage({
@@ -76,7 +76,7 @@ export class LiberateService implements ILiberateService {
       fetchAllStats: false,
     });
 
-    const annotations: ILiberateAnnotation[] = [];
+    const annotations: IExtractAnnotation[] = [];
     let totalFactsExtracted = 0;
     const enrichmentStats: IEnrichmentStats = {
       commitsEnriched: 0,
@@ -151,8 +151,8 @@ export class LiberateService implements ILiberateService {
       if (!dryRun) {
         for (const fact of mergedFacts) {
           const tags = fact.source === 'llm-enrichment'
-            ? ['liberate', 'llm-enrichment', ...fact.tags].join(', ')
-            : `liberate, ${fact.tags.join(', ')}`;
+            ? ['extract', 'llm-enrichment', ...fact.tags].join(', ')
+            : `extract, ${fact.tags.join(', ')}`;
 
           this.memoryRepository.create(fact.content, {
             sha: scored.commit.sha,
@@ -178,7 +178,7 @@ export class LiberateService implements ILiberateService {
 
     options?.onProgress?.({ phase: 'complete', current: highInterestTotal, total: highInterestTotal, sha: '', subject: '', factsExtracted: totalFactsExtracted });
 
-    const result: ILiberateResult = {
+    const result: IExtractResult = {
       commitsScanned: triageResult.totalCommits,
       commitsAnnotated: annotations.length,
       factsExtracted: totalFactsExtracted,
@@ -187,7 +187,7 @@ export class LiberateService implements ILiberateService {
       durationMs: Date.now() - startTime,
     };
 
-    this.logger?.info('Liberate complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted, durationMs: result.durationMs });
+    this.logger?.info('Extract complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted, durationMs: result.durationMs });
 
     if (enrich) {
       return { ...result, enrichment: enrichmentStats };

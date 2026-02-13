@@ -19,7 +19,7 @@ import type { ILLMClient } from '../../domain/interfaces/ILLMClient';
 import type { IEventBus } from '../../domain/interfaces/IEventBus';
 import type { IMemoryService } from '../../application/interfaces/IMemoryService';
 import type { IContextService } from '../../application/interfaces/IContextService';
-import type { ILiberateService } from '../../application/interfaces/ILiberateService';
+import type { IExtractService } from '../../application/interfaces/IExtractService';
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCaptureService';
@@ -39,7 +39,7 @@ export interface ICradle {
   // Application — core services
   memoryService: IMemoryService;
   contextService: IContextService;
-  liberateService: ILiberateService;
+  extractService: IExtractService;
 
   // Application — hook services
   memoryContextLoader: IMemoryContextLoader;
