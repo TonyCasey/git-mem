@@ -57,6 +57,20 @@ program
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
   .action((options) => extractCommand(options, logger));
 
+// Deprecated alias — will be removed in a future version
+program
+  .command('liberate')
+  .description('Deprecated: use "extract" instead')
+  .option('--since <date>', 'Start date (default: 90 days ago)')
+  .option('--commit-count <n>', 'Max commits to process')
+  .option('--dry-run', 'Preview without writing')
+  .option('--threshold <n>', 'Interest score threshold', '3')
+  .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
+  .action((options) => {
+    console.warn('Warning: "liberate" is deprecated, use "extract" instead.');
+    return extractCommand(options, logger);
+  });
+
 program
   .command('context')
   .description('Show memories relevant to staged changes')

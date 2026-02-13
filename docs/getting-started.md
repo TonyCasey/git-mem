@@ -289,7 +289,6 @@ This means memories are:
 | Variable            | Required | Description                                                                                                              |
 |---------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
 | `ANTHROPIC_API_KEY` | Only for `--enrich` | Anthropic API key for LLM enrichment during extract. Get one at [console.anthropic.com](https://console.anthropic.com/). |
-| `OPEN_API_KEY`      | Only for `--enrich` | Open API key for LLM enrichment during extract.     |
 
 Copy `.env.example` to `.env` and fill in values:
 
