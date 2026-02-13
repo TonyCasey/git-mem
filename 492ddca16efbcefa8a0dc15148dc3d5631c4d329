@@ -630,6 +630,21 @@
       ],
       "createdAt": "2026-02-13T09:54:38.363Z",
       "updatedAt": "2026-02-13T09:54:38.363Z"
+    },
+    {
+      "id": "c6f44c52-ad01-422b-9a91-8d4ffc5fa0ae",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-13T10:54:01.375Z",
+      "updatedAt": "2026-02-13T10:54:01.375Z"
     }
   ]
 }
