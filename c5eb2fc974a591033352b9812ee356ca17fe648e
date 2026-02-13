@@ -478,6 +478,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.166Z",
       "updatedAt": "2026-02-13T17:09:50.166Z"
+    },
+    {
+      "id": "4f668736-ca07-428e-a583-aa4c84ffc3f0",
+      "content": "The logging system uses daily file output with automatic log retention cleanup on first write to prevent disk space issues.",
+      "type": "fact",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "file-output",
+        "retention",
+        "cleanup"
+      ],
+      "createdAt": "2026-02-13T17:09:50.186Z",
+      "updatedAt": "2026-02-13T17:09:50.186Z"
     }
   ]
 }
