@@ -21,6 +21,7 @@ import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import { NotesService } from '../services/NotesService';
 import { GitClient } from '../git/GitClient';
 import { MemoryRepository } from '../repositories/MemoryRepository';
+import { TrailerService } from '../services/TrailerService';
 import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
@@ -55,6 +56,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     notesService: asClass(NotesService).singleton(),
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
+    trailerService: asClass(TrailerService).singleton(),
 
     eventBus: asFunction(() => {
       const bus = new EventBus(container.cradle.logger);
