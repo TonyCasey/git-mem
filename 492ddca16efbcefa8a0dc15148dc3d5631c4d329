@@ -495,6 +495,21 @@
       ],
       "createdAt": "2026-02-13T08:25:46.947Z",
       "updatedAt": "2026-02-13T08:25:46.947Z"
+    },
+    {
+      "id": "7cb4e3b3-0e2f-4c4b-946f-e8ae6c4c61f6",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-13T08:29:05.085Z",
+      "updatedAt": "2026-02-13T08:29:05.085Z"
     }
   ]
 }
