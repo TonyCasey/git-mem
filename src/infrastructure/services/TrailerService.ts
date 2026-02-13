@@ -92,6 +92,61 @@ export class TrailerService implements ITrailerService {
     }
   }
 
+  addTrailers(trailers: readonly ITrailer[], cwd?: string): void {
+    // Only operate on AI-* trailers to match readTrailers/parseTrailerBlock behavior.
+    const aiTrailers = trailers.filter(t => t.key.startsWith(AI_TRAILER_PREFIX));
+    if (aiTrailers.length === 0) return;
+
+    // Read existing trailers to avoid duplicates
+    const existing = this.readTrailers('HEAD', cwd);
+    const existingKeys = new Set(existing.map(t => `${t.key}:${t.value}`));
+    const newTrailers = aiTrailers.filter(t => !existingKeys.has(`${t.key}:${t.value}`));
+    if (newTrailers.length === 0) return;
+
+    // Get current commit message
+    const currentMessage = execFileSync(
+      'git',
+      ['log', '-1', '--format=%B', 'HEAD'],
+      { encoding: 'utf8', cwd, stdio: ['pipe', 'pipe', 'pipe'] }
+    ).trimEnd();
+
+    // Build amended message with new trailers
+    const amended = this.buildCommitMessage(currentMessage, newTrailers);
+
+    // Amend HEAD with the new message
+    execFileSync(
+      'git',
+      ['commit', '--amend', '--no-edit', '-m', amended],
+      { encoding: 'utf8', cwd, stdio: ['pipe', 'pipe', 'pipe'] }
+    );
+  }
+
+  buildCommitMessage(message: string, trailers: readonly ITrailer[]): string {
+    if (trailers.length === 0) return message;
+
+    const trailerBlock = this.formatTrailers(trailers);
+    const trimmed = message.trimEnd();
+
+    // Detect existing trailer block: lines after the last blank line
+    // must all match "Key: Value" format (git trailer convention).
+    if (this.hasTrailerBlock(trimmed)) {
+      return `${trimmed}\n${trailerBlock}\n`;
+    }
+
+    return `${trimmed}\n\n${trailerBlock}\n`;
+  }
+
+  private hasTrailerBlock(message: string): boolean {
+    const lastBlankIdx = message.lastIndexOf('\n\n');
+    if (lastBlankIdx === -1) return false;
+
+    const afterBlank = message.slice(lastBlankIdx + 2).trim();
+    if (!afterBlank) return false;
+
+    const lines = afterBlank.split('\n').filter(l => l.trim().length > 0);
+    return lines.length > 0 && lines.every(l => /^[\w-]+:\s/.test(l));
+  }
+
   private parseTrailerBlock(block: string): ITrailer[] {
     const trailers: ITrailer[] = [];
     const lines = block.split('\n');
