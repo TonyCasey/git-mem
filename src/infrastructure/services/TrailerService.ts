@@ -103,6 +103,17 @@ export class TrailerService implements ITrailerService {
     const newTrailers = aiTrailers.filter(t => !existingKeys.has(`${t.key}:${t.value}`));
     if (newTrailers.length === 0) return;
 
+    // Guard: refuse to amend if there are staged changes that would be
+    // silently included in the amended commit alongside trailer updates.
+    const staged = execFileSync(
+      'git',
+      ['diff', '--cached', '--name-only'],
+      { encoding: 'utf8', cwd, stdio: ['pipe', 'pipe', 'pipe'] }
+    ).trim();
+    if (staged) {
+      throw new Error('Refusing to amend commit: staged changes are present');
+    }
+
     // Get current commit message
     const currentMessage = execFileSync(
       'git',

@@ -11,23 +11,10 @@ import type { IMemoryRepository, IMemoryQueryOptions, IMemoryQueryResult } from 
 import type { IMemoryEntity, ICreateMemoryOptions, MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ITrailerService, ICommitTrailers } from '../../domain/interfaces/ITrailerService';
 import type { ITrailer } from '../../domain/entities/ITrailer';
-import { AI_TRAILER_KEYS, AI_TRAILER_PREFIX } from '../../domain/entities/ITrailer';
+import { AI_TRAILER_KEYS, AI_TRAILER_PREFIX, MEMORY_TYPE_TO_TRAILER_KEY, TRAILER_KEY_TO_MEMORY_TYPE } from '../../domain/entities/ITrailer';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
+import { isValidConfidence } from '../../domain/types/IMemoryQuality';
 import type { ILogger } from '../../domain/interfaces/ILogger';
-
-const MEMORY_TYPE_TO_TRAILER_KEY: Record<MemoryType, string> = {
-  decision: AI_TRAILER_KEYS.DECISION,
-  gotcha: AI_TRAILER_KEYS.GOTCHA,
-  convention: AI_TRAILER_KEYS.CONVENTION,
-  fact: AI_TRAILER_KEYS.FACT,
-};
-
-const TRAILER_KEY_TO_MEMORY_TYPE: Record<string, MemoryType> = {
-  [AI_TRAILER_KEYS.DECISION]: 'decision',
-  [AI_TRAILER_KEYS.GOTCHA]: 'gotcha',
-  [AI_TRAILER_KEYS.CONVENTION]: 'convention',
-  [AI_TRAILER_KEYS.FACT]: 'fact',
-};
 
 export class MemoryService implements IMemoryService {
   constructor(
@@ -42,31 +29,48 @@ export class MemoryService implements IMemoryService {
 
     // Dual-write: also add AI-* trailers to the commit (opt-out via trailers: false)
     if (options?.trailers !== false && this.trailerService) {
-      try {
-        const trailers = this.buildTrailers(memory);
-        this.trailerService.addTrailers(trailers, options?.cwd);
-        this.logger?.info('Trailers written', { count: trailers.length, sha: memory.sha });
-      } catch (err) {
-        // Trailer write failure is non-fatal (commit may be pushed already)
-        this.logger?.warn('Trailer write failed', {
-          error: err instanceof Error ? err.message : String(err),
-          sha: memory.sha,
-        });
+      // addTrailers amends HEAD — skip when targeting a commit that isn't HEAD.
+      // Allow both the literal string 'HEAD' and a resolved SHA that matches HEAD
+      // (callers like CLI/MCP tools often pass the resolved SHA).
+      const targetSha = options?.sha;
+      const isHeadTarget = !targetSha || targetSha === 'HEAD' || targetSha === memory.sha;
+      if (!isHeadTarget) {
+        this.logger?.warn('Skipping trailer write for non-HEAD commit', { sha: targetSha });
+      } else {
+        try {
+          const trailers = this.buildTrailers(memory);
+          this.trailerService.addTrailers(trailers, options?.cwd);
+          this.logger?.info('Trailers written', { count: trailers.length, sha: memory.sha });
+        } catch (err) {
+          // Trailer write failure is non-fatal (commit may be pushed already)
+          this.logger?.warn('Trailer write failed', {
+            error: err instanceof Error ? err.message : String(err),
+            sha: memory.sha,
+          });
+        }
       }
     }
 
     return memory;
   }
 
+  /**
+   * Sanitize a value for use as a git trailer.
+   * Trailers are single-line by convention; embedded newlines would break parsing.
+   */
+  private normalizeTrailerValue(value: string): string {
+    return value.replace(/\r?\n+/g, ' ').trim();
+  }
+
   private buildTrailers(memory: IMemoryEntity): ITrailer[] {
     const trailers: ITrailer[] = [
-      { key: MEMORY_TYPE_TO_TRAILER_KEY[memory.type], value: memory.content },
+      { key: MEMORY_TYPE_TO_TRAILER_KEY[memory.type], value: this.normalizeTrailerValue(memory.content) },
       { key: AI_TRAILER_KEYS.CONFIDENCE, value: memory.confidence },
       { key: AI_TRAILER_KEYS.MEMORY_ID, value: memory.id },
     ];
 
     if (memory.tags.length > 0) {
-      trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: memory.tags.join(', ') });
+      trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: this.normalizeTrailerValue(memory.tags.join(', ')) });
     }
 
     return trailers;
@@ -94,16 +98,21 @@ export class MemoryService implements IMemoryService {
     const limit = options?.limit ?? allMemories.length;
     const merged = allMemories.slice(0, limit);
 
+    // Total reflects the full match count: the notes repository may have paged
+    // its results (notesResult.total > notesResult.memories.length), so we use
+    // notesResult.total plus trailer-only results for accurate pagination semantics.
+    const total = notesResult.total + trailerMemories.length;
+
     this.logger?.info('Memory recall', {
       query: effectiveQuery,
       notesCount: notesResult.memories.length,
       trailerCount: trailerMemories.length,
-      total: allMemories.length,
+      total,
     });
 
     return {
       memories: merged,
-      total: allMemories.length,
+      total,
     };
   }
 
@@ -138,8 +147,8 @@ export class MemoryService implements IMemoryService {
           // Apply type filter
           if (options?.type && entity.type !== options.type) continue;
 
-          // Apply tag filter
-          if (options?.tag && !entity.tags.some(t => t.toLowerCase() === options.tag!.toLowerCase())) continue;
+          // Apply tag filter (case-sensitive, consistent with MemoryRepository)
+          if (options?.tag && !entity.tags.includes(options.tag)) continue;
 
           results.push(entity);
         }
@@ -166,18 +175,35 @@ export class MemoryService implements IMemoryService {
       .filter(t => t.key === AI_TRAILER_KEYS.MEMORY_ID)
       .map(t => t.value);
 
-    // Shared metadata from the commit's trailers
-    const confidence = (commit.trailers.find(t => t.key === AI_TRAILER_KEYS.CONFIDENCE)?.value || 'high') as ConfidenceLevel;
+    // Shared metadata from the commit's trailers.
+    //
+    // NOTE: AI-Confidence and AI-Tags are treated as *commit-level* metadata.
+    // All memory entities derived from this commit share the same values.
+    // This matches dual-write behavior where a single remember() call emits
+    // both rich JSON notes and lightweight commit trailers.
+    //
+    // Limitation: If someone manually adds multiple memory-type trailers with
+    // different intended confidences/tags in the same commit, we do not attempt
+    // per-memory metadata alignment. This is a known simplification.
+    const rawConfidence = commit.trailers.find(t => t.key === AI_TRAILER_KEYS.CONFIDENCE)?.value || 'high';
+    const confidence: ConfidenceLevel = isValidConfidence(rawConfidence) ? rawConfidence : 'high';
     const tagsStr = commit.trailers.find(t => t.key === AI_TRAILER_KEYS.TAGS)?.value;
     const tags: readonly string[] = tagsStr ? tagsStr.split(',').map(t => t.trim()) : [];
 
+    // NOTE: Trailer-sourced memories use current time as createdAt/updatedAt.
+    // Ideally we'd use the commit's author date, but that requires an extra
+    // git log call per commit. This is a known limitation — the commit SHA
+    // can be used to look up the actual date if needed.
+    const now = new Date().toISOString();
+
     for (let i = 0; i < typeTrailers.length; i++) {
       const typeTrailer = typeTrailers[i];
-      const type = TRAILER_KEY_TO_MEMORY_TYPE[typeTrailer.key];
+      const type = TRAILER_KEY_TO_MEMORY_TYPE[typeTrailer.key] as MemoryType;
       if (!type) continue;
 
-      // Pair with AI-Memory-Id by position, or generate synthetic ID
-      const id = memoryIds[i] || `trailer:${commit.sha}:${type}`;
+      // Pair with AI-Memory-Id by position, or generate synthetic ID.
+      // Index suffix ensures uniqueness when a commit has multiple same-type trailers.
+      const id = memoryIds[i] || `trailer:${commit.sha}:${type}:${i}`;
 
       entities.push({
         id,
@@ -188,8 +214,8 @@ export class MemoryService implements IMemoryService {
         source: 'commit-trailer',
         lifecycle: 'project',
         tags,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        createdAt: now,
+        updatedAt: now,
       });
     }
 

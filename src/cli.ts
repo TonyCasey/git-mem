@@ -8,6 +8,7 @@ import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initCommand } from './commands/init';
 import { hookCommand } from './commands/hook';
+import { trailersCommand } from './commands/trailers';
 import { createLogger } from './infrastructure/logging/factory';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -74,6 +75,16 @@ program
   .option('--push', 'Push only')
   .option('--pull', 'Pull only')
   .action((options) => syncCommand(options, logger));
+
+program
+  .command('trailers [sha]')
+  .description('Inspect AI-* trailers on commits')
+  .option('--query <key>', 'Search for trailer key across history (e.g. AI-Decision)')
+  .option('--since <date>', 'Filter commits after date (YYYY-MM-DD)')
+  .option('--keys', 'List all distinct AI-* trailer keys in the repo')
+  .option('-n, --limit <n>', 'Max commits to search')
+  .option('--json', 'Output as JSON')
+  .action((sha, options) => trailersCommand(sha, options, logger));
 
 program
   .command('hook <event>')
