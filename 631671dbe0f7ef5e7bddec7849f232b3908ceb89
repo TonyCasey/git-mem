@@ -2641,6 +2641,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.973Z",
       "updatedAt": "2026-02-13T17:09:35.973Z"
+    },
+    {
+      "id": "8ad4d9ee-f83b-421d-ab57-e181b96245ae",
+      "content": "Plain parameters must be used in asFunction registrations instead of destructuring for CLASSIC mode compatibility.",
+      "type": "gotcha",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "awilix",
+        "parameter-destructuring"
+      ],
+      "createdAt": "2026-02-13T17:09:35.997Z",
+      "updatedAt": "2026-02-13T17:09:35.997Z"
     }
   ]
 }
