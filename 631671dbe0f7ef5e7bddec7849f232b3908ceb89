@@ -2515,6 +2515,24 @@
       ],
       "createdAt": "2026-02-13T11:46:55.727Z",
       "updatedAt": "2026-02-13T11:46:55.727Z"
+    },
+    {
+      "id": "f5c443bf-7e4a-4f92-98c3-7b0cecfc29e9",
+      "content": "Awilix was chosen as the DI container because it is decorator-free, CommonJS-native, and lightweight at ~15KB.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "awilix",
+        "architecture"
+      ],
+      "createdAt": "2026-02-13T17:09:35.798Z",
+      "updatedAt": "2026-02-13T17:09:35.798Z"
     }
   ]
 }
