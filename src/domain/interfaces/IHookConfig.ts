@@ -18,8 +18,8 @@ export interface ISessionStartConfig {
 export interface ISessionStopConfig {
   readonly enabled: boolean;
   /** When false, session-stop hook exits without capturing. */
-  readonly autoLiberate: boolean;
-  /** Interest score threshold for liberate. Reserved — not yet wired to handler. */
+  readonly autoExtract: boolean;
+  /** Interest score threshold for extract. Reserved — not yet wired to handler. */
   readonly threshold: number;
 }
 

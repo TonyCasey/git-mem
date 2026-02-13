@@ -90,7 +90,7 @@ export function writeGitMemConfig(
     hooks: {
       enabled: true,
       sessionStart: { enabled: true, memoryLimit: 20 },
-      sessionStop: { enabled: true, autoLiberate: true, threshold: 3 },
+      sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
       promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
     },
   };

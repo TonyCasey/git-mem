@@ -45,7 +45,7 @@ describe('createContainer', () => {
       assert.ok(cradle.triageService);
       assert.ok(cradle.memoryService);
       assert.ok(cradle.contextService);
-      assert.ok(cradle.liberateService);
+      assert.ok(cradle.extractService);
       assert.ok(cradle.sessionCaptureService);
       assert.ok(cradle.memoryContextLoader);
       assert.ok(cradle.contextFormatter);

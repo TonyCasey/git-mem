@@ -3,7 +3,7 @@
  *
  * Exercises `git-mem hook session-stop` end-to-end against a real
  * git repo with conventional commits. Verifies memory capture via
- * SessionCaptureService → LiberateService pipeline.
+ * SessionCaptureService → ExtractService pipeline.
  */
 
 import { describe, it, before, after } from 'node:test';
@@ -28,7 +28,7 @@ describe('Integration: hook session-stop', () => {
     addCommit(repoDir, 'config.ts', 'export const DB_HOST = "localhost";', 'fix: database connection timeout handling');
     addCommit(repoDir, 'api.ts', 'export function getUsers() {}', 'feat: implement user API endpoints with pagination');
 
-    // Enable hooks with autoLiberate
+    // Enable hooks with autoExtract
     writeGitMemConfig(repoDir);
   });
 
