@@ -2551,6 +2551,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.848Z",
       "updatedAt": "2026-02-13T17:09:35.848Z"
+    },
+    {
+      "id": "f2502b64-305c-4039-a108-be937bba2caf",
+      "content": "DI container uses CLASSIC injection mode with explicit mapping for GitTriageService because constructor parameter is named 'git' instead of 'gitClient'.",
+      "type": "gotcha",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "awilix",
+        "parameter-naming"
+      ],
+      "createdAt": "2026-02-13T17:09:35.876Z",
+      "updatedAt": "2026-02-13T17:09:35.876Z"
     }
   ]
 }
