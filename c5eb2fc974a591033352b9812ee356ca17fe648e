@@ -497,6 +497,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.186Z",
       "updatedAt": "2026-02-13T17:09:50.186Z"
+    },
+    {
+      "id": "15f12641-a613-48fe-999f-ac40a5d711b5",
+      "content": "Default log directory is os.tmpdir() to avoid polluting working trees, but can be overridden for testing or specific deployments.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "file-output",
+        "directory-structure",
+        "temp-dir"
+      ],
+      "createdAt": "2026-02-13T17:09:50.206Z",
+      "updatedAt": "2026-02-13T17:09:50.206Z"
     }
   ]
 }
