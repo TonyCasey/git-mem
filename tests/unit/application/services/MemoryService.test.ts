@@ -165,6 +165,105 @@ describe('MemoryService', () => {
     });
   });
 
+  describe('unified recall (notes + trailers)', () => {
+    it('should find trailer-only memories via recall', () => {
+      // Create a commit with trailers added manually (no notes)
+      writeFileSync(join(repoDir, 'manual-trailer.txt'), 'manual');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: manual trailer\n\nAI-Decision: Use PostgreSQL for persistence\nAI-Confidence: high'], repoDir);
+
+      const result = serviceWithTrailers.recall('PostgreSQL', { cwd: repoDir });
+      assert.ok(result.memories.length >= 1);
+      const found = result.memories.find(m => m.content === 'Use PostgreSQL for persistence');
+      assert.ok(found);
+      assert.equal(found.type, 'decision');
+      assert.equal(found.source, 'commit-trailer');
+    });
+
+    it('should deduplicate when trailer has matching AI-Memory-Id in notes', () => {
+      // Create a commit and use dual-write (creates both notes and trailers)
+      writeFileSync(join(repoDir, 'dedup-test.txt'), 'dedup');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: dedup test'], repoDir);
+
+      const memory = serviceWithTrailers.remember('Dedup test memory', {
+        cwd: repoDir,
+        type: 'decision',
+      });
+
+      // recall should return the notes version, not duplicate with trailer
+      const result = serviceWithTrailers.recall('Dedup test', { cwd: repoDir });
+      const matches = result.memories.filter(m => m.content === 'Dedup test memory');
+      assert.equal(matches.length, 1);
+      assert.equal(matches[0].id, memory.id);
+      // Notes source (user-explicit), not commit-trailer
+      assert.notEqual(matches[0].source, 'commit-trailer');
+    });
+
+    it('should include manually-added trailers with no AI-Memory-Id', () => {
+      writeFileSync(join(repoDir, 'no-memid.txt'), 'no-memid');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'fix: manual gotcha\n\nAI-Gotcha: Always check for null tokens'], repoDir);
+
+      const result = serviceWithTrailers.recall('null tokens', { cwd: repoDir });
+      const found = result.memories.find(m => m.content === 'Always check for null tokens');
+      assert.ok(found);
+      assert.equal(found.type, 'gotcha');
+      assert.equal(found.source, 'commit-trailer');
+      // Synthetic ID since no AI-Memory-Id
+      assert.ok(found.id.startsWith('trailer:'));
+    });
+
+    it('should set source to commit-trailer for trailer-sourced memories', () => {
+      writeFileSync(join(repoDir, 'source-test.txt'), 'source');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'docs: convention\n\nAI-Convention: Always use kebab-case for files'], repoDir);
+
+      const result = serviceWithTrailers.recall('kebab-case', { cwd: repoDir });
+      const found = result.memories.find(m => m.content === 'Always use kebab-case for files');
+      assert.ok(found);
+      assert.equal(found.source, 'commit-trailer');
+      assert.equal(found.type, 'convention');
+    });
+
+    it('should respect type filter for trailer memories', () => {
+      writeFileSync(join(repoDir, 'type-filter.txt'), 'type-filter');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: type filter\n\nAI-Fact: TypeScript is great'], repoDir);
+
+      // Query without type filter should find it
+      const allResult = serviceWithTrailers.recall('TypeScript', { cwd: repoDir });
+      assert.ok(allResult.memories.find(m => m.content === 'TypeScript is great'));
+
+      // Query with wrong type filter should not find it
+      const filtered = serviceWithTrailers.recall('TypeScript', { cwd: repoDir, type: 'decision' });
+      assert.ok(!filtered.memories.find(m => m.content === 'TypeScript is great'));
+    });
+
+    it('should not include trailer memories when trailerService is not injected', () => {
+      // Create a manual trailer commit
+      writeFileSync(join(repoDir, 'no-svc-recall.txt'), 'no-svc');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: no svc recall\n\nAI-Decision: Use bun for testing'], repoDir);
+
+      // service (without trailerService) should only return notes
+      const result = service.recall('bun for testing', { cwd: repoDir });
+      const found = result.memories.find(m => m.content === 'Use bun for testing');
+      assert.equal(found, undefined);
+    });
+
+    it('should parse tags from AI-Tags trailer', () => {
+      writeFileSync(join(repoDir, 'tags-recall.txt'), 'tags-recall');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: tagged\n\nAI-Decision: Use Redis\nAI-Tags: cache, performance'], repoDir);
+
+      const result = serviceWithTrailers.recall('Redis', { cwd: repoDir });
+      const found = result.memories.find(m => m.content === 'Use Redis');
+      assert.ok(found);
+      assert.deepEqual(found.tags, ['cache', 'performance']);
+    });
+  });
+
   describe('get', () => {
     it('should retrieve a memory by id', () => {
       const created = service.remember('Test get by id', {
