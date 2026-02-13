@@ -15,12 +15,22 @@ interface IRememberOptions {
   lifecycle?: string;
   tags?: string;
   noTrailers?: boolean;
+  agent?: string;
+  model?: string;
 }
 
 export async function rememberCommand(text: string, options: IRememberOptions, logger?: ILogger): Promise<void> {
   const container = createContainer({ logger, scope: 'remember' });
   const { memoryService, logger: log } = container.cradle;
   log.info('Command invoked', { type: options.type || 'fact' });
+
+  // Resolve agent: explicit flag > $GIT_MEM_AGENT > $CLAUDE_CODE heuristic
+  const agent = options.agent
+    || process.env.GIT_MEM_AGENT
+    || (process.env.CLAUDE_CODE ? 'Claude-Code' : undefined);
+
+  // Resolve model: explicit flag > $GIT_MEM_MODEL
+  const model = options.model || process.env.GIT_MEM_MODEL || undefined;
 
   const memory = memoryService.remember(text, {
     sha: options.commit,
@@ -29,6 +39,8 @@ export async function rememberCommand(text: string, options: IRememberOptions, l
     lifecycle: (options.lifecycle || 'project') as MemoryLifecycle,
     tags: options.tags,
     trailers: !options.noTrailers,
+    agent,
+    model,
   });
 
   console.log(`Remembered: ${memory.content}`);

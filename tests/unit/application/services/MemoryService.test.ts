@@ -153,6 +153,38 @@ describe('MemoryService', () => {
       const trailers = trailerService.readTrailers('HEAD', repoDir);
       assert.ok(!trailers.find(t => t.key === 'AI-Tags'));
     });
+
+    it('should write AI-Agent and AI-Model trailers when provided', () => {
+      writeFileSync(join(repoDir, 'agent-model.txt'), 'agent-model');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: agent model test'], repoDir);
+
+      serviceWithTrailers.remember('Memory with agent and model', {
+        cwd: repoDir,
+        type: 'fact',
+        agent: 'Claude-Code',
+        model: 'claude-opus-4-6',
+      });
+
+      const trailers = trailerService.readTrailers('HEAD', repoDir);
+      assert.ok(trailers.find(t => t.key === 'AI-Agent' && t.value === 'Claude-Code'));
+      assert.ok(trailers.find(t => t.key === 'AI-Model' && t.value === 'claude-opus-4-6'));
+    });
+
+    it('should not write AI-Agent or AI-Model trailers when not provided', () => {
+      writeFileSync(join(repoDir, 'no-agent-model.txt'), 'no-agent');
+      git(['add', '.'], repoDir);
+      git(['commit', '-m', 'feat: no agent model test'], repoDir);
+
+      serviceWithTrailers.remember('Memory without agent', {
+        cwd: repoDir,
+        type: 'fact',
+      });
+
+      const trailers = trailerService.readTrailers('HEAD', repoDir);
+      assert.ok(!trailers.find(t => t.key === 'AI-Agent'));
+      assert.ok(!trailers.find(t => t.key === 'AI-Model'));
+    });
   });
 
   describe('recall', () => {
