@@ -18,12 +18,15 @@ import {
   deepMergeGitMemConfig,
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
+import { installHook, uninstallHook } from '../hooks/prepare-commit-msg';
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
 
 interface IInitCommandOptions {
   yes?: boolean;
   commitCount?: string;
+  hooks?: boolean;
+  uninstallHooks?: boolean;
 }
 
 // ── Pure helpers (exported for testing) ──────────────────────────────
@@ -112,7 +115,18 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   const log = logger?.child({ command: 'init' });
   const cwd = process.cwd();
 
-  log?.info('Command invoked', { yes: options.yes, commitCount: options.commitCount });
+  log?.info('Command invoked', { yes: options.yes, commitCount: options.commitCount, hooks: options.hooks, uninstallHooks: options.uninstallHooks });
+
+  // ── Git hook uninstall (early exit) ─────────────────────────────
+  if (options.uninstallHooks) {
+    const removed = uninstallHook(cwd);
+    if (removed) {
+      console.log('✓ Removed prepare-commit-msg hook');
+    } else {
+      console.log('No git-mem prepare-commit-msg hook found.');
+    }
+    return;
+  }
 
   // ── Prompts (skipped with --yes) ───────────────────────────────
   let commitCount = options.commitCount ? parseInt(options.commitCount, 10) : 100;
@@ -169,6 +183,16 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     const mergedGitMemConfig = deepMergeGitMemConfig(existingGitMemConfig, buildGitMemConfig());
     writeFileSync(gitMemConfigPath, JSON.stringify(mergedGitMemConfig, null, 2) + '\n');
     console.log('✓ Created .git-mem.json');
+  }
+
+  // ── Git hook (prepare-commit-msg) ─────────────────────────────
+  if (options.hooks) {
+    const hookResult = installHook(cwd);
+    if (hookResult.installed) {
+      console.log(`✓ Installed prepare-commit-msg hook${hookResult.wrapped ? ' (wrapped existing hook)' : ''}`);
+    } else {
+      console.log('✓ prepare-commit-msg hook already installed (skipped)');
+    }
   }
 
   // ── MCP config (skip if already exists) ────────────────────────
