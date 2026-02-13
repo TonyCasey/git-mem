@@ -104,6 +104,21 @@
       ],
       "createdAt": "2026-02-13T11:43:03.232Z",
       "updatedAt": "2026-02-13T11:43:03.232Z"
+    },
+    {
+      "id": "f7275cac-ad9f-427b-8b33-115881c4d2e3",
+      "content": "for backward compatibility",
+      "type": "gotcha",
+      "sha": "b5c349f0f175c9295ea011f2bfda5c15ec75a92f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:careful"
+      ],
+      "createdAt": "2026-02-13T11:46:55.753Z",
+      "updatedAt": "2026-02-13T11:46:55.753Z"
     }
   ]
 }
