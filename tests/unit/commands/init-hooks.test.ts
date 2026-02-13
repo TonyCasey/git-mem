@@ -342,6 +342,36 @@ describe('deepMergeGitMemConfig', () => {
     assert.equal(sessionStart.memoryLimit, 20); // Default fills in
   });
 
+  it('should migrate autoLiberate to autoExtract in existing config', () => {
+    const existing = {
+      hooks: {
+        sessionStop: { enabled: true, autoLiberate: true, threshold: 5 },
+      },
+    };
+
+    const result = deepMergeGitMemConfig(existing, defaults);
+    const hooks = result.hooks as Record<string, unknown>;
+    const sessionStop = hooks.sessionStop as Record<string, unknown>;
+
+    assert.equal(sessionStop.autoExtract, true);
+    assert.equal(sessionStop.autoLiberate, undefined); // Migrated away
+    assert.equal(sessionStop.threshold, 5);
+  });
+
+  it('should not override explicit autoExtract with autoLiberate', () => {
+    const existing = {
+      hooks: {
+        sessionStop: { enabled: true, autoExtract: false, autoLiberate: true },
+      },
+    };
+
+    const result = deepMergeGitMemConfig(existing, defaults);
+    const hooks = result.hooks as Record<string, unknown>;
+    const sessionStop = hooks.sessionStop as Record<string, unknown>;
+
+    assert.equal(sessionStop.autoExtract, false); // Explicit autoExtract wins
+  });
+
   it('should deep-merge sub-objects keeping user values over defaults', () => {
     const existing = {
       hooks: {
