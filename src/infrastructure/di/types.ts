@@ -23,6 +23,7 @@ import type { IExtractService } from '../../application/interfaces/IExtractServi
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCaptureService';
+import type { ITrailerService } from '../../domain/interfaces/ITrailerService';
 
 export interface ICradle {
   // Infrastructure
@@ -30,6 +31,7 @@ export interface ICradle {
   notesService: INotesService;
   gitClient: IGitClient;
   memoryRepository: IMemoryRepository;
+  trailerService: ITrailerService;
   triageService: IGitTriageService;
   llmClient: ILLMClient | null;
   eventBus: IEventBus;
