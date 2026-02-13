@@ -74,6 +74,21 @@
       ],
       "createdAt": "2026-02-13T11:13:01.657Z",
       "updatedAt": "2026-02-13T11:13:01.657Z"
+    },
+    {
+      "id": "8cfe7cd1-d5dc-45d3-b1d6-d07b758b69d8",
+      "content": "for backward compatibility",
+      "type": "gotcha",
+      "sha": "b5c349f0f175c9295ea011f2bfda5c15ec75a92f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:careful"
+      ],
+      "createdAt": "2026-02-13T11:35:48.406Z",
+      "updatedAt": "2026-02-13T11:35:48.406Z"
     }
   ]
 }
