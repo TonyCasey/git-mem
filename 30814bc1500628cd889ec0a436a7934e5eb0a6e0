@@ -225,6 +225,25 @@
       ],
       "createdAt": "2026-02-13T17:10:00.429Z",
       "updatedAt": "2026-02-13T17:10:00.429Z"
+    },
+    {
+      "id": "dee5c195-44e1-4660-87f6-64a8ebc0b1ef",
+      "content": "The codebase follows a pattern where CLI commands have corresponding MCP tools with matching names (e.g., 'liberate' command has 'git_mem_liberate' MCP tool).",
+      "type": "convention",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "mcp",
+        "cli",
+        "naming-patterns",
+        "api-design"
+      ],
+      "createdAt": "2026-02-13T17:10:00.452Z",
+      "updatedAt": "2026-02-13T17:10:00.452Z"
     }
   ]
 }
