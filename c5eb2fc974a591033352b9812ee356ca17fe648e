@@ -535,6 +535,25 @@
       ],
       "createdAt": "2026-02-13T17:09:50.225Z",
       "updatedAt": "2026-02-13T17:09:50.225Z"
+    },
+    {
+      "id": "c5ec29ef-cda0-4867-9ab9-29e700b16673",
+      "content": "Memory operations log key metadata like ID, type, SHA, and query parameters to aid in debugging and audit trails.",
+      "type": "convention",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "memory-service",
+        "audit-trail",
+        "debugging"
+      ],
+      "createdAt": "2026-02-13T17:09:50.246Z",
+      "updatedAt": "2026-02-13T17:09:50.246Z"
     }
   ]
 }
