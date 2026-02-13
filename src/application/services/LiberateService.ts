@@ -23,7 +23,8 @@ import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractWords, jaccardSimilarity } from '../../domain/utils/deduplication';
-import { AI_TRAILER_KEYS } from '../../domain/entities/ITrailer';
+import { AI_TRAILER_KEYS, TRAILER_KEY_TO_MEMORY_TYPE } from '../../domain/entities/ITrailer';
+import { isValidConfidence } from '../../domain/types/IMemoryQuality';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 
 /** Maximum diff length sent to LLM (chars). Truncated at line boundary. */
@@ -31,14 +32,6 @@ const MAX_DIFF_LENGTH = 15_000;
 
 /** Jaccard similarity threshold for deduplication between heuristic and LLM facts. */
 const DEDUP_THRESHOLD = 0.7;
-
-/** Trailer key → MemoryType mapping. */
-const TRAILER_KEY_TO_MEMORY_TYPE: Record<string, MemoryType> = {
-  [AI_TRAILER_KEYS.DECISION]: 'decision',
-  [AI_TRAILER_KEYS.GOTCHA]: 'gotcha',
-  [AI_TRAILER_KEYS.CONVENTION]: 'convention',
-  [AI_TRAILER_KEYS.FACT]: 'fact',
-};
 
 /** Uniform fact shape for merging heuristic, LLM, and trailer results. */
 interface IUnifiedFact {
@@ -204,12 +197,13 @@ export class LiberateService implements ILiberateService {
       if (trailers.length === 0) return [];
 
       const facts: IUnifiedFact[] = [];
-      const confidence = (trailers.find(t => t.key === AI_TRAILER_KEYS.CONFIDENCE)?.value || 'high') as ConfidenceLevel;
+      const rawConfidence = trailers.find(t => t.key === AI_TRAILER_KEYS.CONFIDENCE)?.value || 'high';
+      const confidence: ConfidenceLevel = isValidConfidence(rawConfidence) ? rawConfidence : 'high';
       const tagsStr = trailers.find(t => t.key === AI_TRAILER_KEYS.TAGS)?.value;
       const tags: string[] = tagsStr ? tagsStr.split(',').map(t => t.trim()) : [];
 
       for (const trailer of trailers) {
-        const type = TRAILER_KEY_TO_MEMORY_TYPE[trailer.key];
+        const type = TRAILER_KEY_TO_MEMORY_TYPE[trailer.key] as MemoryType | undefined;
         if (!type) continue;
 
         facts.push({

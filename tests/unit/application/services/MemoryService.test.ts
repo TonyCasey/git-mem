@@ -100,7 +100,7 @@ describe('MemoryService', () => {
       git(['commit', '-m', 'feat: no trailer test'], repoDir);
       const shaBefore = git(['rev-parse', 'HEAD'], repoDir);
 
-      serviceWithTrailers.remember('No trailer for this', {
+      const memory = serviceWithTrailers.remember('No trailer for this', {
         cwd: repoDir,
         type: 'fact',
         trailers: false,
@@ -109,6 +109,9 @@ describe('MemoryService', () => {
       // SHA unchanged means commit was not amended
       const shaAfter = git(['rev-parse', 'HEAD'], repoDir);
       assert.equal(shaBefore, shaAfter);
+      // Memory should still be created in notes even without trailers
+      assert.ok(memory.id);
+      assert.equal(memory.content, 'No trailer for this');
     });
 
     it('should not fail when trailerService is not injected', () => {
@@ -261,6 +264,38 @@ describe('MemoryService', () => {
       const found = result.memories.find(m => m.content === 'Use Redis');
       assert.ok(found);
       assert.deepEqual(found.tags, ['cache', 'performance']);
+    });
+
+    it('should handle invalid AI-Confidence trailer values gracefully', () => {
+      writeFileSync(join(repoDir, 'invalid-conf.txt'), 'invalid-conf');
+      git(['add', '.'], repoDir);
+      git(
+        ['commit', '-m', 'feat: invalid confidence\n\nAI-Fact: Confidence parsing should be robust\nAI-Confidence: very-high'],
+        repoDir,
+      );
+
+      const result = serviceWithTrailers.recall('Confidence parsing', { cwd: repoDir });
+      const found = result.memories.find(m => m.content === 'Confidence parsing should be robust');
+      assert.ok(found);
+      // Invalid 'very-high' should fall back to 'high'
+      assert.equal(found.confidence, 'high');
+    });
+
+    it('should generate unique synthetic IDs for multiple same-type trailers', () => {
+      writeFileSync(join(repoDir, 'multi-type.txt'), 'multi');
+      git(['add', '.'], repoDir);
+      git(
+        ['commit', '-m', 'feat: multiple decisions\n\nAI-Decision: Use Redis\nAI-Decision: Use PostgreSQL'],
+        repoDir,
+      );
+
+      const result = serviceWithTrailers.recall('', { cwd: repoDir });
+      const redis = result.memories.find(m => m.content === 'Use Redis' && m.source === 'commit-trailer');
+      const postgres = result.memories.find(m => m.content === 'Use PostgreSQL' && m.source === 'commit-trailer');
+      assert.ok(redis);
+      assert.ok(postgres);
+      // Synthetic IDs must be different
+      assert.notEqual(redis.id, postgres.id);
     });
   });
 
