@@ -19,7 +19,7 @@ import {
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
 import { createContainer } from '../infrastructure/di';
-import { createStderrProgressHandler, liberateWithProgress } from './progress';
+import { createStderrProgressHandler } from './progress';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -107,6 +107,7 @@ export function ensureEnvPlaceholder(cwd: string): void {
 
 // ── Main command ─────────────────────────────────────────────────────
 
+/** Run unified project setup: hooks, MCP config, .gitignore, .env, and optional liberate. */
 export async function initCommand(options: IInitCommandOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init' });
   const cwd = process.cwd();
@@ -191,21 +192,16 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   if (apiKey) {
     process.env.ANTHROPIC_API_KEY = apiKey;
-    console.log(`Liberating knowledge from ${commitCount} commits with LLM enrichment...`);
+    console.log(`Extracting knowledge from ${commitCount} commits with LLM enrichment...`);
 
     const container = createContainer({ logger, scope: 'init', enrich: true });
     const { liberateService } = container.cradle;
 
-    const onProgress = createStderrProgressHandler();
-
-    const result = await liberateWithProgress(
-      () => liberateService.liberate({
-        maxCommits: commitCount,
-        enrich: true,
-        onProgress,
-      }),
-      onProgress,
-    );
+    const result = await liberateService.liberate({
+      maxCommits: commitCount,
+      enrich: true,
+      onProgress: createStderrProgressHandler(),
+    });
 
     console.log(
       `Commits scanned: ${result.commitsScanned}  |  ` +
