@@ -187,6 +187,25 @@
       ],
       "createdAt": "2026-02-12T23:27:40.143Z",
       "updatedAt": "2026-02-12T23:27:40.143Z"
+    },
+    {
+      "id": "e0076784-7a5f-4163-8e07-0eaec1ab8bca",
+      "content": "The tool was renamed from 'retrofit' to 'liberate' to better reflect its purpose of freeing knowledge locked in git history, emphasizing the liberation of contextual information rather than just retrofitting.",
+      "type": "decision",
+      "sha": "30814bc1500628cd889ec0a436a7934e5eb0a6e0",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "naming",
+        "branding",
+        "cli",
+        "terminology"
+      ],
+      "createdAt": "2026-02-13T17:10:00.374Z",
+      "updatedAt": "2026-02-13T17:10:00.374Z"
     }
   ]
 }
