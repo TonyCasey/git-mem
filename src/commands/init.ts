@@ -129,10 +129,10 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   }
 
   // ── Prompts (skipped with --yes) ───────────────────────────────
-  let commitCount = options.commitCount ? parseInt(options.commitCount, 10) : 100;
+  let commitCount = options.commitCount ? parseInt(options.commitCount, 10) : 30;
   if (!Number.isFinite(commitCount) || commitCount <= 0) {
-    console.log(`Invalid --commit-count value: "${options.commitCount}". Using default (100).`);
-    commitCount = 100;
+    console.log(`Invalid --commit-count value: "${options.commitCount}". Using default (30).`);
+    commitCount = 30;
   }
   let claudeIntegration = true;
 

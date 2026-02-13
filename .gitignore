@@ -98,3 +98,6 @@ dist/
 .git-mem/
 
 .dev/*/**
+
+# git-mem
+.git-mem.json
