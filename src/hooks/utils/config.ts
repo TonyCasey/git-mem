@@ -31,12 +31,7 @@ export function loadHookConfig(cwd?: string): IHookConfig {
     const raw = JSON.parse(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
     const rawHooks = (raw.hooks ?? {}) as Partial<IHooksConfig>;
 
-    // Backward compat: migrate autoLiberate → autoExtract
     const rawStop = (rawHooks.sessionStop ?? {}) as Record<string, unknown>;
-    if (rawStop.autoExtract === undefined && rawStop.autoLiberate !== undefined) {
-      rawStop.autoExtract = rawStop.autoLiberate;
-      delete rawStop.autoLiberate;
-    }
 
     return {
       hooks: {
