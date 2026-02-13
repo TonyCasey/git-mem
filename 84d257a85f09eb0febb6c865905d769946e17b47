@@ -1,0 +1,16 @@
+{
+  "memories": [
+    {
+      "id": "a0b9475f-6014-477e-ad81-584f7c72fd61",
+      "content": "Changed initial commit count",
+      "type": "fact",
+      "sha": "HEAD",
+      "confidence": "high",
+      "source": "user-explicit",
+      "lifecycle": "project",
+      "tags": [],
+      "createdAt": "2026-02-13T14:29:13.667Z",
+      "updatedAt": "2026-02-13T14:29:13.667Z"
+    }
+  ]
+}
