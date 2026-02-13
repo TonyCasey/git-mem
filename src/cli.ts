@@ -26,6 +26,8 @@ program
   .description('Set up git-mem: hooks, MCP config, .gitignore, and liberate history')
   .option('-y, --yes', 'Accept defaults without prompting')
   .option('--commit-count <n>', 'Number of commits to liberate', '100')
+  .option('--hooks', 'Install prepare-commit-msg git hook for AI-Agent trailers')
+  .option('--uninstall-hooks', 'Remove the prepare-commit-msg git hook')
   .action((options) => initCommand(options, logger));
 
 program
