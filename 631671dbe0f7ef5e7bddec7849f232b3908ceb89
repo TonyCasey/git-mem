@@ -1405,6 +1405,21 @@
       ],
       "createdAt": "2026-02-13T08:30:33.985Z",
       "updatedAt": "2026-02-13T08:30:33.985Z"
+    },
+    {
+      "id": "eb63bca3-1c29-42ee-83eb-547a83de015d",
+      "content": "the current no-require-imports rule, causing CI lint failure",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-13T08:30:34.010Z",
+      "updatedAt": "2026-02-13T08:30:34.010Z"
     }
   ]
 }
