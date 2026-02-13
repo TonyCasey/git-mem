@@ -2470,6 +2470,21 @@
       ],
       "createdAt": "2026-02-13T11:46:55.646Z",
       "updatedAt": "2026-02-13T11:46:55.646Z"
+    },
+    {
+      "id": "4b972375-b423-40e9-a274-75a20113df23",
+      "content": "destructuring (codex-connector feedback)",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-13T11:46:55.671Z",
+      "updatedAt": "2026-02-13T11:46:55.671Z"
     }
   ]
 }
