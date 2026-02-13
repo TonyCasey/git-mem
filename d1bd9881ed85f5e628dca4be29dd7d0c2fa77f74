@@ -677,6 +677,21 @@
       ],
       "createdAt": "2026-02-13T10:54:01.394Z",
       "updatedAt": "2026-02-13T10:54:01.394Z"
+    },
+    {
+      "id": "38850351-ca38-41b8-ac6a-d912e9de257b",
+      "content": "shallow spread. Deep-merge",
+      "type": "decision",
+      "sha": "d1bd9881ed85f5e628dca4be29dd7d0c2fa77f74",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-13T11:05:55.528Z",
+      "updatedAt": "2026-02-13T11:05:55.528Z"
     }
   ]
 }
