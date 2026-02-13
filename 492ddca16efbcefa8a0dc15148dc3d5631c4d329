@@ -510,6 +510,21 @@
       ],
       "createdAt": "2026-02-13T08:29:05.085Z",
       "updatedAt": "2026-02-13T08:29:05.085Z"
+    },
+    {
+      "id": "35ba2430-a1c1-40bb-8207-71e3095bf3f2",
+      "content": "duplicate headers on re-run",
+      "type": "convention",
+      "sha": "492ddca16efbcefa8a0dc15148dc3d5631c4d329",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "liberate",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-13T08:30:34.103Z",
+      "updatedAt": "2026-02-13T08:30:34.103Z"
     }
   ]
 }
