@@ -89,34 +89,6 @@ describe('loadHookConfig', () => {
     assert.equal(config.hooks.enabled, false);
   });
 
-  it('should migrate autoLiberate to autoExtract for backward compat', () => {
-    const testDir = createTestDir();
-    writeFileSync(join(testDir, '.git-mem.json'), JSON.stringify({
-      hooks: {
-        sessionStop: { enabled: true, autoLiberate: true, threshold: 5 },
-      },
-    }));
-
-    const config = loadHookConfig(testDir);
-
-    assert.equal(config.hooks.sessionStop.autoExtract, true);
-    assert.equal(config.hooks.sessionStop.threshold, 5);
-  });
-
-  it('should prefer autoExtract over autoLiberate when both present', () => {
-    const testDir = createTestDir();
-    writeFileSync(join(testDir, '.git-mem.json'), JSON.stringify({
-      hooks: {
-        sessionStop: { enabled: true, autoExtract: false, autoLiberate: true },
-      },
-    }));
-
-    const config = loadHookConfig(testDir);
-
-    // autoExtract is explicit — should not be overridden by autoLiberate
-    assert.equal(config.hooks.sessionStop.autoExtract, false);
-  });
-
   it('should use process.cwd() when no cwd provided', () => {
     // This should not throw — just returns defaults if no .git-mem.json
     const config = loadHookConfig();

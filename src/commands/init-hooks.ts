@@ -109,16 +109,6 @@ export function deepMergeGitMemConfig(
   const existingHooks = (existing.hooks ?? {}) as Record<string, unknown>;
   const defaultHooks = (defaults.hooks ?? {}) as Record<string, unknown>;
 
-  // Backward compat: migrate autoLiberate → autoExtract in sessionStop
-  const existingStop = existingHooks.sessionStop;
-  if (typeof existingStop === 'object' && existingStop !== null && !Array.isArray(existingStop)) {
-    const stop = existingStop as Record<string, unknown>;
-    if (stop.autoExtract === undefined && stop.autoLiberate !== undefined) {
-      stop.autoExtract = stop.autoLiberate;
-      delete stop.autoLiberate;
-    }
-  }
-
   const mergedHooks: Record<string, unknown> = {};
 
   // Merge each default key
