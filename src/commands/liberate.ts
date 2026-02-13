@@ -14,6 +14,7 @@ interface ILiberateCommandOptions {
   enrich?: boolean;
 }
 
+/** Scan git history, score commits for interest, and extract memories. */
 export async function liberateCommand(options: ILiberateCommandOptions, logger?: ILogger): Promise<void> {
   const container = createContainer({ logger, scope: 'liberate', enrich: options.enrich });
   const { liberateService, llmClient, logger: log } = container.cradle;
