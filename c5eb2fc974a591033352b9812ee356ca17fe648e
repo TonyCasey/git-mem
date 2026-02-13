@@ -423,6 +423,25 @@
       ],
       "createdAt": "2026-02-12T23:27:30.495Z",
       "updatedAt": "2026-02-12T23:27:30.495Z"
+    },
+    {
+      "id": "6fd7180a-47e7-4e91-ae39-21f8d6857a1f",
+      "content": "The logging infrastructure uses a domain-driven design with ILogger interface in the domain layer, concrete implementations in infrastructure, and optional logger parameters injected into services.",
+      "type": "decision",
+      "sha": "c5eb2fc974a591033352b9812ee356ca17fe648e",
+      "confidence": "high",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "logging",
+        "domain-driven-design",
+        "dependency-injection",
+        "architecture"
+      ],
+      "createdAt": "2026-02-13T17:09:50.093Z",
+      "updatedAt": "2026-02-13T17:09:50.093Z"
     }
   ]
 }
