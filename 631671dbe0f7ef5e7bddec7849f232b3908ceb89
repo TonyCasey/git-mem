@@ -2623,6 +2623,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.948Z",
       "updatedAt": "2026-02-13T17:09:35.948Z"
+    },
+    {
+      "id": "2ce0d1d2-d70c-4bdc-8e61-f6ca74e4130f",
+      "content": "DI container replaced 72 lines of duplicated manual service wiring code across 8 entry points (CLI commands and MCP tools).",
+      "type": "fact",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "refactoring",
+        "code-duplication",
+        "dependency-injection"
+      ],
+      "createdAt": "2026-02-13T17:09:35.973Z",
+      "updatedAt": "2026-02-13T17:09:35.973Z"
     }
   ]
 }
