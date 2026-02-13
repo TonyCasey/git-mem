@@ -51,7 +51,12 @@ export function trailersCommand(sha: string | undefined, options: ITrailersOptio
 
   // --query: search for a specific trailer key across history
   if (options.query) {
-    const maxCount = options.limit ? parseInt(options.limit, 10) : undefined;
+    const maxCount = options.limit ? Number(options.limit) : undefined;
+    if (options.limit && (!Number.isInteger(maxCount) || (maxCount as number) <= 0)) {
+      console.error(`Invalid --limit "${options.limit}". Expected a positive integer.`);
+      process.exitCode = 1;
+      return;
+    }
     const commits = trailerService.queryTrailers(options.query, { since: options.since, maxCount });
 
     if (commits.length === 0) {

@@ -29,7 +29,7 @@ ${HOOK_FINGERPRINT}
 COMMIT_MSG_FILE="$1"
 COMMIT_SOURCE="$2"
 
-# Skip merge/squash/amend commits
+# Skip merge/squash commits (git does not pass "amend" as a commit source)
 case "$COMMIT_SOURCE" in
   merge|squash) exit 0 ;;
 esac
@@ -107,13 +107,23 @@ export function installHook(cwd?: string): IHookInstallResult {
 
   // Existing non-git-mem hook — wrap it
   if (existsSync(hookPath)) {
+    // Guard: don't overwrite an existing backup from a failed previous install
+    if (existsSync(backupPath)) {
+      throw new Error(
+        `Backup hook already exists at ${backupPath}. ` +
+        'Remove it manually or run --uninstall-hooks first.',
+      );
+    }
     renameSync(hookPath, backupPath);
     wrapped = true;
 
-    // Create a wrapper that calls the user's hook first, then ours
+    // Create a wrapper that calls the user's hook first, then ours.
+    // Uses a path relative to the hook's directory so it survives repo moves.
     const wrapperScript = HOOK_SCRIPT.replace(
       '#!/bin/sh',
-      `#!/bin/sh\n# Wrapped existing hook — original saved as prepare-commit-msg.user-backup\nif [ -x "${backupPath}" ]; then\n  "${backupPath}" "$@" || exit $?\nfi`,
+      '#!/bin/sh\n# Wrapped existing hook — original saved as prepare-commit-msg.user-backup\n' +
+      'BACKUP_HOOK="$(dirname "$0")/prepare-commit-msg.user-backup"\n' +
+      'if [ -x "$BACKUP_HOOK" ]; then\n  "$BACKUP_HOOK" "$@" || exit $?\nfi',
     );
     writeFileSync(hookPath, wrapperScript);
   } else {
