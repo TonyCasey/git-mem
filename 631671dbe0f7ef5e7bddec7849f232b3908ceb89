@@ -2569,6 +2569,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.876Z",
       "updatedAt": "2026-02-13T17:09:35.876Z"
+    },
+    {
+      "id": "4ae1671b-5770-4322-8421-e0d8110871e5",
+      "content": "All DI container registrations are singletons within container scope, with logger scoping via options.scope using child() pattern.",
+      "type": "convention",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "singleton-pattern",
+        "logging"
+      ],
+      "createdAt": "2026-02-13T17:09:35.901Z",
+      "updatedAt": "2026-02-13T17:09:35.901Z"
     }
   ]
 }
