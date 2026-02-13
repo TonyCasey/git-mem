@@ -2587,6 +2587,24 @@
       ],
       "createdAt": "2026-02-13T17:09:35.901Z",
       "updatedAt": "2026-02-13T17:09:35.901Z"
+    },
+    {
+      "id": "66b7c3e2-0964-4087-9bd4-a080bc836f4a",
+      "content": "LLM client creation in DI container is conditional via options.enrich flag to avoid requiring API keys when not needed.",
+      "type": "decision",
+      "sha": "631671dbe0f7ef5e7bddec7849f232b3908ceb89",
+      "confidence": "verified",
+      "source": "llm-enrichment",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "llm-enrichment",
+        "dependency-injection",
+        "llm-client",
+        "conditional-creation"
+      ],
+      "createdAt": "2026-02-13T17:09:35.924Z",
+      "updatedAt": "2026-02-13T17:09:35.924Z"
     }
   ]
 }
