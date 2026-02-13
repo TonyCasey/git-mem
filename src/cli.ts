@@ -24,9 +24,10 @@ program
 
 program
   .command('init')
-  .description('Set up git-mem: hooks, MCP config, .gitignore, and extract from history')
+  .description('Set up git-mem: hooks, MCP config, .gitignore')
   .option('-y, --yes', 'Accept defaults without prompting')
-  .option('--commit-count <n>', 'Number of commits to extract', '100')
+  .option('--extract', 'Also extract knowledge from commit history')
+  .option('--commit-count <n>', 'Number of commits to extract (with --extract)', '100')
   .option('--hooks', 'Install prepare-commit-msg git hook for AI-Agent trailers')
   .option('--uninstall-hooks', 'Remove the prepare-commit-msg git hook')
   .action((options) => initCommand(options, logger));
@@ -39,8 +40,8 @@ program
   .option('--confidence <level>', 'Confidence: verified, high, medium, low', 'high')
   .option('--lifecycle <tier>', 'Lifecycle: permanent, project, session', 'project')
   .option('--tags <tags>', 'Comma-separated tags')
-  .option('--agent <name>', 'AI agent name (default: auto-detect from $GIT_MEM_AGENT / $CLAUDE_CODE)')
-  .option('--model <name>', 'AI model identifier (default: $GIT_MEM_MODEL)')
+  .option('--agent <name>', 'AI agent name (default: auto-detect from $GIT_MEM_AGENT / $CLAUDECODE)')
+  .option('--model <name>', 'AI model identifier (default: $GIT_MEM_MODEL / $ANTHROPIC_MODEL)')
   .option('--no-trailers', 'Skip writing AI-* trailers to the commit message')
   .action((text, options) => rememberCommand(text, options, logger));
 

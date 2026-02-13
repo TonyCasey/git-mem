@@ -6,8 +6,10 @@
  *
  * Detection heuristics (checked in order):
  *   - $GIT_MEM_AGENT env var (explicit, user-defined agent string)
- *   - $CLAUDE_CODE env var (Claude Code session)
+ *   - $CLAUDECODE env var (Claude Code session — includes version)
+ *   - $CLAUDE_CODE env var (legacy fallback)
  *   - $GIT_MEM_MODEL env var (explicit, user-defined model string)
+ *   - $ANTHROPIC_MODEL env var (set by Claude Code)
  *
  * The hook uses `git interpret-trailers` for proper formatting.
  */
@@ -20,7 +22,7 @@ import { execFileSync } from 'child_process';
 const HOOK_FINGERPRINT_PREFIX = '# git-mem:prepare-commit-msg';
 
 /** Full fingerprint with version — used for upgrade detection. */
-const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v2`;
+const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v3`;
 
 /**
  * The shell hook script.
@@ -42,6 +44,15 @@ esac
 AGENT=""
 if [ -n "$GIT_MEM_AGENT" ]; then
   AGENT="$GIT_MEM_AGENT"
+elif [ -n "$CLAUDECODE" ]; then
+  # Get Claude Code version for the agent string
+  CC_VERSION=""
+  CC_VERSION=$(CLAUDECODE= claude --version 2>/dev/null | head -1 | awk '{print $1}') || true
+  if [ -n "$CC_VERSION" ]; then
+    AGENT="Claude-Code/$CC_VERSION"
+  else
+    AGENT="Claude-Code"
+  fi
 elif [ -n "$CLAUDE_CODE" ]; then
   AGENT="Claude-Code"
 fi
@@ -50,6 +61,8 @@ fi
 MODEL=""
 if [ -n "$GIT_MEM_MODEL" ]; then
   MODEL="$GIT_MEM_MODEL"
+elif [ -n "$ANTHROPIC_MODEL" ]; then
+  MODEL="$ANTHROPIC_MODEL"
 fi
 
 # No agent detected — exit silently

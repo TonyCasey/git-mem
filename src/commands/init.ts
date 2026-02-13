@@ -27,6 +27,7 @@ interface IInitCommandOptions {
   commitCount?: string;
   hooks?: boolean;
   uninstallHooks?: boolean;
+  extract?: boolean;
 }
 
 // ── Pure helpers (exported for testing) ──────────────────────────────
@@ -137,20 +138,25 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   let claudeIntegration = true;
 
   if (!options.yes) {
-    const response = await prompts([
-      {
+    const promptList: prompts.PromptObject[] = [];
+
+    if (options.extract) {
+      promptList.push({
         type: 'number',
         name: 'commitCount',
-        message: 'How many commits to free?',
+        message: 'How many commits to extract?',
         initial: commitCount,
-      },
-      {
-        type: 'confirm',
-        name: 'claudeIntegration',
-        message: 'Integrate with Claude Code?',
-        initial: true,
-      },
-    ], {
+      });
+    }
+
+    promptList.push({
+      type: 'confirm',
+      name: 'claudeIntegration',
+      message: 'Integrate with Claude Code?',
+      initial: true,
+    });
+
+    const response = await prompts(promptList, {
       onCancel: () => {
         console.log('\nSetup cancelled.');
         process.exit(0);
@@ -210,33 +216,38 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   console.log('✓ Updated .gitignore');
 
   // ── API key check & extract ────────────────────────────────────
-  console.log('\nChecking for ANTHROPIC_API_KEY in .env...\n');
+  if (options.extract) {
+    console.log('\nChecking for ANTHROPIC_API_KEY in .env...\n');
 
-  const apiKey = readEnvApiKey(cwd);
+    const apiKey = readEnvApiKey(cwd);
 
-  if (apiKey) {
-    process.env.ANTHROPIC_API_KEY = apiKey;
-    console.log(`Extracting knowledge from ${commitCount} commits with LLM enrichment...`);
+    if (apiKey) {
+      process.env.ANTHROPIC_API_KEY = apiKey;
+      console.log(`Extracting knowledge from ${commitCount} commits with LLM enrichment...`);
 
-    const container = createContainer({ logger, scope: 'init', enrich: true });
-    const { extractService } = container.cradle;
+      const container = createContainer({ logger, scope: 'init', enrich: true });
+      const { extractService } = container.cradle;
 
-    const result = await extractService.extract({
-      maxCommits: commitCount,
-      enrich: true,
-      onProgress: createStderrProgressHandler(),
-    });
+      const result = await extractService.extract({
+        maxCommits: commitCount,
+        enrich: true,
+        onProgress: createStderrProgressHandler(),
+      });
 
-    console.log(
-      `Commits scanned: ${result.commitsScanned}  |  ` +
-      `Annotated: ${result.commitsAnnotated}  |  ` +
-      `Facts: ${result.factsExtracted}  |  ` +
-      `Duration: ${result.durationMs}ms`,
-    );
+      console.log(
+        `Commits scanned: ${result.commitsScanned}  |  ` +
+        `Annotated: ${result.commitsAnnotated}  |  ` +
+        `Facts: ${result.factsExtracted}  |  ` +
+        `Duration: ${result.durationMs}ms`,
+      );
+    } else {
+      ensureEnvPlaceholder(cwd);
+      console.log('✓ Added ANTHROPIC_API_KEY= to .env');
+      console.log('→ Add your key to .env, then run:');
+      console.log(`  git-mem extract --enrich --commit-count ${commitCount}`);
+    }
   } else {
-    ensureEnvPlaceholder(cwd);
-    console.log('✓ Added ANTHROPIC_API_KEY= to .env');
-    console.log('→ Add your key to .env, then run:');
-    console.log(`  git-mem extract --enrich --commit-count ${commitCount}`);
+    console.log('\nTo extract knowledge from commit history, run:');
+    console.log(`  git-mem extract --commit-count ${commitCount}`);
   }
 }
