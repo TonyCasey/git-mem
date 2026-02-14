@@ -42,7 +42,7 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
       // 1. Read the commit message file
       const message = readFileSync(event.commitMsgPath, 'utf8');
 
-      // 2. Check if full analysis already done (AI-Memory-Id is unique to commit-msg)
+      // 2. Check if full analysis already done (AI-Memory-Id indicates commit-msg hook has run)
       if (message.includes('AI-Memory-Id:')) {
         this.logger.debug('Full analysis already done, skipping');
         return { handler: 'CommitMsgHandler', success: true };

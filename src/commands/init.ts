@@ -6,6 +6,7 @@
  */
 
 import { existsSync, readFileSync, writeFileSync, appendFileSync, mkdirSync } from 'fs';
+import { execFileSync } from 'child_process';
 import { join } from 'path';
 import prompts from 'prompts';
 import type { ILogger } from '../domain/interfaces/ILogger';
@@ -73,6 +74,49 @@ export function ensureGitignoreEntries(cwd: string, entries: string[]): void {
   }
 
   appendFileSync(gitignorePath, append);
+}
+
+/**
+ * Configure git to push notes automatically with regular pushes.
+ * Adds refs/notes/* to existing push refspecs, preserving any user-configured refspecs.
+ * Idempotent - safe to call multiple times.
+ */
+export function configureNotesPush(cwd: string): void {
+  let existingRefspecs: string[] = [];
+
+  try {
+    // Get existing push refspecs
+    const existing = execFileSync('git', ['config', '--local', '--get-all', 'remote.origin.push'], {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim();
+
+    if (existing) {
+      existingRefspecs = existing.split('\n').filter(Boolean);
+    }
+
+    // Already has notes configured - nothing to do
+    if (existingRefspecs.some((ref) => ref.includes('refs/notes'))) {
+      return;
+    }
+  } catch {
+    // Config doesn't exist yet, proceed to set it
+  }
+
+  // If no existing refspecs, add heads first
+  if (existingRefspecs.length === 0) {
+    execFileSync('git', ['config', '--local', 'remote.origin.push', '+refs/heads/*:refs/heads/*'], {
+      cwd,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+  }
+
+  // Add notes refspec (preserves existing refspecs)
+  execFileSync('git', ['config', '--local', '--add', 'remote.origin.push', '+refs/notes/*:refs/notes/*'], {
+    cwd,
+    stdio: ['pipe', 'pipe', 'pipe'],
+  });
 }
 
 /**
@@ -234,6 +278,10 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     } else {
       console.log('✓ post-commit hook already installed (skipped)');
     }
+
+    // Configure git to push notes automatically with regular pushes
+    configureNotesPush(cwd);
+    console.log('✓ Configured git to push notes with commits');
   }
 
   // ── MCP config (skip if already exists) ────────────────────────

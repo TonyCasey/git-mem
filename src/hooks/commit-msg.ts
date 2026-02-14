@@ -32,7 +32,7 @@ COMMIT_MSG_FILE="$1"
 # Skip if no commit message file
 [ -z "$COMMIT_MSG_FILE" ] && exit 0
 
-# Skip if full analysis already done (AI-Memory-Id is unique to commit-msg analysis)
+# Skip if full analysis already done (AI-Memory-Id indicates commit-msg hook has run)
 grep -q "^AI-Memory-Id:" "$COMMIT_MSG_FILE" && exit 0
 
 # Escape values for safe JSON inclusion (handles quotes, backslashes)
