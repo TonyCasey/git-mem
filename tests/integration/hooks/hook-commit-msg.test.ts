@@ -534,7 +534,7 @@ Because REST conventions make the API predictable.`;
       assert.ok(modifiedMsg.includes('AI-Decision:'), 'Should detect decision from "because"');
     });
 
-    it('should handle merge commit message', () => {
+    it('should skip merge commit message', () => {
       process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
 
       const commitMsg = `Merge branch 'feature/auth' into main
@@ -551,19 +551,17 @@ Because REST conventions make the API predictable.`;
 
       assert.equal(result.status, 0);
 
-      // Should add basic trailers even for merge commits
+      // Should NOT add trailers to merge commits
       const modifiedMsg = readFileSync(msgPath, 'utf8');
-      assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should add trailers to merge commit');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip merge commits');
     });
 
-    it('should handle amend commit message', () => {
+    it('should skip merge pull request commit', () => {
       process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
 
-      // Simulating an amend - the message file may have existing content from previous commit
-      const commitMsg = `feat: original feature
+      const commitMsg = `Merge pull request #123 from feature/auth
 
-# This is an amended commit
-Previously: fix typo`;
+Add authentication feature`;
 
       const msgPath = createCommitMsgFile(repoDir, commitMsg);
 
@@ -575,7 +573,144 @@ Previously: fix typo`;
       assert.equal(result.status, 0);
 
       const modifiedMsg = readFileSync(msgPath, 'utf8');
-      assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should add trailers to amended commit');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip merge PR commits');
+    });
+
+    it('should skip fixup! commits', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      const commitMsg = 'fixup! feat: original commit';
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip fixup commits');
+    });
+
+    it('should skip squash! commits', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      const commitMsg = 'squash! feat: original commit';
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip squash commits');
+    });
+
+    it('should skip amend! commits', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      const commitMsg = 'amend! feat: original commit';
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip amend! commits');
+    });
+
+    it('should skip revert commits', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      const commitMsg = `Revert "feat: add problematic feature"
+
+This reverts commit abc1234.`;
+
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should skip revert commits');
+    });
+
+    it('should handle regular amend (git commit --amend)', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      // Regular amend - message doesn't start with "amend!"
+      // Just modifying a previous commit message
+      const commitMsg = `feat: original feature (amended)
+
+Updated the implementation details.`;
+
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      // Regular amends should still get trailers
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should add trailers to regular amended commit');
+    });
+
+    it('should handle unicode and emoji in commit message', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      const commitMsg = 'feat: add 日本語 support 🎉\n\nThis adds internationalization because users need 多言語 support.';
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(modifiedMsg.includes('🎉'), 'Should preserve emoji');
+      assert.ok(modifiedMsg.includes('日本語'), 'Should preserve unicode');
+      assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should add trailers');
+    });
+
+    it('should handle very long commit message', () => {
+      process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
+
+      // Create a long commit message (> 1000 chars)
+      const longBody = 'This is a detailed explanation. '.repeat(50);
+      const commitMsg = `feat: add comprehensive feature\n\n${longBody}\n\nBecause this decision will help with scaling.`;
+      const msgPath = createCommitMsgFile(repoDir, commitMsg);
+
+      const result = runHook('commit-msg', {
+        commit_msg_path: msgPath,
+        cwd: repoDir,
+      });
+
+      assert.equal(result.status, 0);
+
+      const modifiedMsg = readFileSync(msgPath, 'utf8');
+      assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should handle long messages');
+      // Content should be truncated in trailers (200 char limit in buildTrailers)
+      const decisionMatch = modifiedMsg.match(/AI-Decision: (.+)/);
+      if (decisionMatch) {
+        assert.ok(decisionMatch[1].length <= 200, 'Trailer content should be truncated to 200 chars');
+      }
     });
   });
 });
