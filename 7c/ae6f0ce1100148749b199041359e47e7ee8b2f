@@ -839,6 +839,21 @@
       ],
       "createdAt": "2026-02-14T19:11:32.745Z",
       "updatedAt": "2026-02-14T19:11:32.745Z"
+    },
+    {
+      "id": "2fd7ba93-e944-4bc4-ae8d-34a1b97c8c42",
+      "content": "→ major version bump (x",
+      "type": "gotcha",
+      "sha": "7cae6f0ce1100148749b199041359e47e7ee8b2f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:breaking-change"
+      ],
+      "createdAt": "2026-02-14T19:21:55.110Z",
+      "updatedAt": "2026-02-14T19:21:55.110Z"
     }
   ]
 }
