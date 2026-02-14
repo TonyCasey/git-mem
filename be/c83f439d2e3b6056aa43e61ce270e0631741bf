@@ -1,7 +1,30 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-14T19:15:53.446Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-14T19:15:53.446Z"
+      }
+    },
+    {
+      "id": "e34a836a-ef91-43ca-9000-7da5f6344490",
+      "content": "migrate config from JSON to YAML (GIT-89). - Update config.ts to read from .git-mem/.git-mem.yaml",
+      "type": "decision",
+      "sha": "bec83f439d2e3b6056aa43e61ce270e0631741bf",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "hooks",
+        "utils",
+        "tests",
+        "integration",
+        "unit"
+      ],
+      "createdAt": "2026-02-14T19:21:55.228Z",
+      "updatedAt": "2026-02-14T19:21:55.228Z"
+    }
+  ]
 }
