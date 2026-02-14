@@ -554,6 +554,21 @@
       ],
       "createdAt": "2026-02-14T14:56:18.720Z",
       "updatedAt": "2026-02-14T14:56:18.720Z"
+    },
+    {
+      "id": "779f868e-4fe7-4e5a-a18a-97d9bbb84c88",
+      "content": "matching types from infrastructure to domain layer",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T14:56:18.739Z",
+      "updatedAt": "2026-02-14T14:56:18.739Z"
     }
   ]
 }
