@@ -279,6 +279,20 @@
       ],
       "createdAt": "2026-02-14T09:50:19.299Z",
       "updatedAt": "2026-02-14T09:50:19.299Z"
+    },
+    {
+      "id": "5c4d79b1-90e6-49b0-8a85-fc755e7cc8ce",
+      "content": "Changed initial commit count",
+      "type": "fact",
+      "sha": "7363ee5bfac981a4818e73369f182f11ed983fa3",
+      "confidence": "high",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract"
+      ],
+      "createdAt": "2026-02-14T09:51:47.802Z",
+      "updatedAt": "2026-02-14T09:51:47.802Z"
     }
   ]
 }
