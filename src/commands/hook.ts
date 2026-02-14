@@ -25,6 +25,8 @@ export interface IHookInput {
   cwd?: string;
   hook_event_name?: string;
   sha?: string;
+  /** Path to commit message file (for commit-msg hook). */
+  commit_msg_path?: string;
 }
 
 /** Map CLI event names to internal event bus types. */
@@ -33,15 +35,17 @@ export const EVENT_MAP: Record<string, HookEventType> = {
   'session-stop': 'session:stop',
   'prompt-submit': 'prompt:submit',
   'post-commit': 'git:commit',
+  'commit-msg': 'git:commit-msg',
 };
 
 /** Map CLI event names to the config section that controls them. */
-type ConfigKey = 'sessionStart' | 'sessionStop' | 'promptSubmit' | 'postCommit';
+type ConfigKey = 'sessionStart' | 'sessionStop' | 'promptSubmit' | 'postCommit' | 'commitMsg';
 const CONFIG_KEY_MAP: Record<string, ConfigKey> = {
   'session-start': 'sessionStart',
   'session-stop': 'sessionStop',
   'prompt-submit': 'promptSubmit',
   'post-commit': 'postCommit',
+  'commit-msg': 'commitMsg',
 };
 
 /** Extra enabled check for session-stop (must also have autoExtract). */
@@ -78,6 +82,12 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
       return { type: 'prompt:submit', ...base, prompt: input.prompt ?? '' };
     case 'git:commit':
       return { type: 'git:commit', sha: input.sha ?? 'HEAD', cwd: base.cwd };
+    case 'git:commit-msg':
+      return {
+        type: 'git:commit-msg',
+        commitMsgPath: input.commit_msg_path ?? '',
+        cwd: base.cwd,
+      };
     default: {
       const exhaustiveCheck: never = eventType;
       throw new Error(`Unhandled HookEventType in buildEvent: ${exhaustiveCheck as string}`);
@@ -91,6 +101,7 @@ const STDERR_LABELS: Record<HookEventType, { success: string; prefix: string }> 
   'session:stop': { success: 'Session capture complete.', prefix: 'Session capture complete' },
   'prompt:submit': { success: 'Prompt context loaded.', prefix: 'Prompt context loaded' },
   'git:commit': { success: 'Session note written.', prefix: 'Session note' },
+  'git:commit-msg': { success: 'AI trailers added.', prefix: 'AI trailers' },
 };
 
 export async function hookCommand(eventName: string, _logger?: ILogger): Promise<void> {

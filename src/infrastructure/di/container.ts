@@ -31,6 +31,7 @@ import { MemoryService } from '../../application/services/MemoryService';
 import { ContextService } from '../../application/services/ContextService';
 import { ExtractService } from '../../application/services/ExtractService';
 import { GitTriageService } from '../../application/services/GitTriageService';
+import { CommitAnalyzer } from '../../application/services/CommitAnalyzer';
 
 // Application — hook services
 import { MemoryContextLoader } from '../../application/services/MemoryContextLoader';
@@ -40,6 +41,7 @@ import { SessionStartHandler } from '../../application/handlers/SessionStartHand
 import { SessionStopHandler } from '../../application/handlers/SessionStopHandler';
 import { PromptSubmitHandler } from '../../application/handlers/PromptSubmitHandler';
 import { PostCommitHandler } from '../../application/handlers/PostCommitHandler';
+import { CommitMsgHandler } from '../../application/handlers/CommitMsgHandler';
 
 export function createContainer(options?: IContainerOptions): AwilixContainer<ICradle> {
   const container = createAwilixContainer<ICradle>({
@@ -81,6 +83,11 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.notesService,
         container.cradle.logger,
       ));
+      bus.on('git:commit-msg', new CommitMsgHandler(
+        container.cradle.commitAnalyzer,
+        container.cradle.gitClient,
+        container.cradle.logger,
+      ));
 
       return bus;
     }).singleton(),
@@ -102,6 +109,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
     extractService: asClass(ExtractService).singleton(),
+    commitAnalyzer: asClass(CommitAnalyzer).singleton(),
 
     // ── Hook services ─────────────────────────────────────────────
     memoryContextLoader: asClass(MemoryContextLoader).singleton(),
