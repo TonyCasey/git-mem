@@ -39,4 +39,3 @@ See the [Getting Started Guide](./docs/getting-started.md) for full CLI and MCP 
 ## License
 
 MIT
-# Test
