@@ -5,7 +5,7 @@
  * and send JSON-RPC requests through stdio.
  */
 
-import { spawn, execFileSync, ChildProcess } from 'child_process';
+import { spawn, execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
@@ -162,6 +162,7 @@ export function mcpSession(cwd: string, requests: object[]): Promise<IMcpRespons
         ...requests[i],
       }) + '\n');
     }
+    proc.stdin.end();
   });
 }
 
