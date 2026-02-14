@@ -1,5 +1,5 @@
 /**
- * Integration test: Liberate flow
+ * Integration test: Extract flow
  *
  * Tests scanning existing commit history, extracting facts via
  * heuristic patterns, and writing them as git notes.
@@ -11,7 +11,7 @@ import { execFileSync } from 'child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { LiberateService } from '../../src/application/services/LiberateService';
+import { ExtractService } from '../../src/application/services/ExtractService';
 import { GitTriageService } from '../../src/application/services/GitTriageService';
 import { MemoryRepository } from '../../src/infrastructure/repositories/MemoryRepository';
 import { NotesService } from '../../src/infrastructure/services/NotesService';
@@ -21,13 +21,13 @@ function git(args: string[], cwd: string): string {
   return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
 }
 
-describe('Integration: Liberate', () => {
+describe('Integration: Extract', () => {
   let repoDir: string;
-  let liberateService: LiberateService;
+  let extractService: ExtractService;
   let notesService: NotesService;
 
   before(() => {
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-integ-liberate-'));
+    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-integ-extract-'));
 
     git(['init'], repoDir);
     git(['config', 'user.email', 'test@test.com'], repoDir);
@@ -57,7 +57,7 @@ describe('Integration: Liberate', () => {
     const triageService = new GitTriageService(gitClient);
     notesService = new NotesService();
     const memoryRepo = new MemoryRepository(notesService);
-    liberateService = new LiberateService(triageService, memoryRepo);
+    extractService = new ExtractService(triageService, memoryRepo);
   });
 
   after(() => {
@@ -65,7 +65,7 @@ describe('Integration: Liberate', () => {
   });
 
   it('should identify interesting commits in dry-run mode', async () => {
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -82,7 +82,7 @@ describe('Integration: Liberate', () => {
   });
 
   it('should write notes when not in dry-run mode', async () => {
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       dryRun: false,
       threshold: 1,
       cwd: repoDir,
@@ -109,13 +109,13 @@ describe('Integration: Liberate', () => {
         assert.ok(memory.content, 'Memory should have content');
         assert.ok(memory.type, 'Memory should have type');
         assert.equal(memory.source, 'heuristic-extraction');
-        assert.ok(memory.tags.includes('liberate'));
+        assert.ok(memory.tags.includes('extract'));
       }
     }
   });
 
   it('should extract correct fact types from commit messages', async () => {
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       dryRun: true,
       threshold: 1,
       cwd: repoDir,
@@ -131,7 +131,7 @@ describe('Integration: Liberate', () => {
   });
 
   it('should respect maxCommits option', async () => {
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       dryRun: true,
       threshold: 1,
       maxCommits: 2,

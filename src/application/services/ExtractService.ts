@@ -1,5 +1,5 @@
 /**
- * LiberateService
+ * ExtractService
  *
  * Application service that annotates existing git history with
  * structured memory notes by combining triage scoring with
@@ -7,21 +7,24 @@
  */
 
 import type {
-  ILiberateService,
-  ILiberateOptions,
-  ILiberateResult,
-  ILiberateAnnotation,
+  IExtractService,
+  IExtractOptions,
+  IExtractResult,
+  IExtractAnnotation,
   IEnrichmentStats,
-} from '../interfaces/ILiberateService';
+} from '../interfaces/IExtractService';
 import type { IGitTriageService } from '../../domain/interfaces/IGitTriageService';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IGitClient } from '../../domain/interfaces/IGitClient';
+import type { ITrailerService } from '../../domain/interfaces/ITrailerService';
 import type { ILLMClient, ILLMExtractedFact } from '../../domain/interfaces/ILLMClient';
 import type { MemoryType } from '../../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
 import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { extractWords, jaccardSimilarity } from '../../domain/utils/deduplication';
+import { AI_TRAILER_KEYS, TRAILER_KEY_TO_MEMORY_TYPE } from '../../domain/entities/ITrailer';
+import { isValidConfidence } from '../../domain/types/IMemoryQuality';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 
 /** Maximum diff length sent to LLM (chars). Truncated at line boundary. */
@@ -30,30 +33,31 @@ const MAX_DIFF_LENGTH = 15_000;
 /** Jaccard similarity threshold for deduplication between heuristic and LLM facts. */
 const DEDUP_THRESHOLD = 0.7;
 
-/** Uniform fact shape for merging heuristic and LLM results. */
+/** Uniform fact shape for merging heuristic, LLM, and trailer results. */
 interface IUnifiedFact {
   readonly content: string;
   readonly type: MemoryType;
   readonly confidence: ConfidenceLevel;
   readonly tags: readonly string[];
-  readonly source: 'heuristic-extraction' | 'llm-enrichment';
+  readonly source: 'heuristic-extraction' | 'llm-enrichment' | 'commit-trailer';
 }
 
-export class LiberateService implements ILiberateService {
+export class ExtractService implements IExtractService {
   constructor(
     private readonly triageService: IGitTriageService,
     private readonly memoryRepository: IMemoryRepository,
     private readonly gitClient?: IGitClient,
     private readonly llmClient?: ILLMClient,
     private readonly logger?: ILogger,
+    private readonly trailerService?: ITrailerService,
   ) {}
 
-  async liberate(options?: ILiberateOptions): Promise<ILiberateResult> {
+  async extract(options?: IExtractOptions): Promise<IExtractResult> {
     const startTime = Date.now();
     const dryRun = options?.dryRun ?? false;
     const enrich = options?.enrich ?? false;
     const shouldEnrich = enrich && !!this.llmClient && !!this.gitClient;
-    this.logger?.info('Liberate started', { dryRun, enrich: shouldEnrich, maxCommits: options?.maxCommits });
+    this.logger?.info('Extract started', { dryRun, enrich: shouldEnrich, maxCommits: options?.maxCommits });
 
     // Run triage to find interesting commits
     const triageResult = await this.triageService.triage({
@@ -65,7 +69,7 @@ export class LiberateService implements ILiberateService {
       fetchAllStats: false,
     });
 
-    const annotations: ILiberateAnnotation[] = [];
+    const annotations: IExtractAnnotation[] = [];
     let totalFactsExtracted = 0;
     const enrichmentStats: IEnrichmentStats = {
       commitsEnriched: 0,
@@ -77,10 +81,25 @@ export class LiberateService implements ILiberateService {
 
     this.logger?.debug('Triage complete', { total: triageResult.totalCommits, highInterest: triageResult.highInterest.length });
 
+    const highInterestTotal = triageResult.highInterest.length;
+    options?.onProgress?.({ phase: 'triage', current: 0, total: highInterestTotal, sha: '', subject: '', factsExtracted: 0 });
+
     // Process each high-interest commit
+    let commitIndex = 0;
     for (const scored of triageResult.highInterest) {
+      commitIndex++;
+      options?.onProgress?.({ phase: 'processing', current: commitIndex, total: highInterestTotal, sha: scored.commit.sha, subject: scored.commit.subject, factsExtracted: totalFactsExtracted });
+
+      // Read existing AI-* trailers from this commit (authoritative, high-confidence)
+      const trailerFacts = this.extractTrailerFacts(scored.commit.sha, options?.cwd);
+      const trailerTypes = new Set(trailerFacts.map(f => f.type));
+
+      // Heuristic extraction — skip types already covered by trailers
       const text = `${scored.commit.subject}\n${scored.commit.body}`.trim();
-      const heuristicMatches = extractPatternMatches(text);
+      const allHeuristicMatches = extractPatternMatches(text);
+      const heuristicMatches = trailerTypes.size > 0
+        ? allHeuristicMatches.filter(m => !trailerTypes.has(m.factType))
+        : allHeuristicMatches;
 
       // LLM enrichment (if enabled)
       let llmFacts: ILLMExtractedFact[] = [];
@@ -115,8 +134,8 @@ export class LiberateService implements ILiberateService {
         }
       }
 
-      // Merge heuristic + LLM facts with deduplication
-      const mergedFacts = mergeFacts(heuristicMatches, llmFacts);
+      // Merge trailer + heuristic + LLM facts with deduplication
+      const mergedFacts = [...trailerFacts, ...mergeFacts(heuristicMatches, llmFacts)];
 
       if (mergedFacts.length === 0) continue;
 
@@ -125,8 +144,8 @@ export class LiberateService implements ILiberateService {
       if (!dryRun) {
         for (const fact of mergedFacts) {
           const tags = fact.source === 'llm-enrichment'
-            ? ['liberate', 'llm-enrichment', ...fact.tags].join(', ')
-            : `liberate, ${fact.tags.join(', ')}`;
+            ? ['extract', 'llm-enrichment', ...fact.tags].join(', ')
+            : `extract, ${fact.tags.join(', ')}`;
 
           this.memoryRepository.create(fact.content, {
             sha: scored.commit.sha,
@@ -150,7 +169,9 @@ export class LiberateService implements ILiberateService {
       });
     }
 
-    const result: ILiberateResult = {
+    options?.onProgress?.({ phase: 'complete', current: highInterestTotal, total: highInterestTotal, sha: '', subject: '', factsExtracted: totalFactsExtracted });
+
+    const result: IExtractResult = {
       commitsScanned: triageResult.totalCommits,
       commitsAnnotated: annotations.length,
       factsExtracted: totalFactsExtracted,
@@ -159,13 +180,45 @@ export class LiberateService implements ILiberateService {
       durationMs: Date.now() - startTime,
     };
 
-    this.logger?.info('Liberate complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted, durationMs: result.durationMs });
+    this.logger?.info('Extract complete', { scanned: result.commitsScanned, annotated: result.commitsAnnotated, facts: result.factsExtracted, durationMs: result.durationMs });
 
     if (enrich) {
       return { ...result, enrichment: enrichmentStats };
     }
 
     return result;
+  }
+
+  private extractTrailerFacts(sha: string, cwd?: string): IUnifiedFact[] {
+    if (!this.trailerService) return [];
+
+    try {
+      const trailers = this.trailerService.readTrailers(sha, cwd);
+      if (trailers.length === 0) return [];
+
+      const facts: IUnifiedFact[] = [];
+      const rawConfidence = trailers.find(t => t.key === AI_TRAILER_KEYS.CONFIDENCE)?.value || 'high';
+      const confidence: ConfidenceLevel = isValidConfidence(rawConfidence) ? rawConfidence : 'high';
+      const tagsStr = trailers.find(t => t.key === AI_TRAILER_KEYS.TAGS)?.value;
+      const tags: string[] = tagsStr ? tagsStr.split(',').map(t => t.trim()) : [];
+
+      for (const trailer of trailers) {
+        const type = TRAILER_KEY_TO_MEMORY_TYPE[trailer.key] as MemoryType | undefined;
+        if (!type) continue;
+
+        facts.push({
+          content: trailer.value,
+          type,
+          confidence,
+          tags,
+          source: 'commit-trailer',
+        });
+      }
+
+      return facts;
+    } catch {
+      return [];
+    }
   }
 }
 

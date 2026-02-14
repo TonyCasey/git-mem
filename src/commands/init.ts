@@ -1,7 +1,7 @@
 /**
  * init command handler
  *
- * Unified setup: hooks, MCP config, .gitignore, .env check, and optional liberate.
+ * Unified setup: hooks, MCP config, .gitignore, .env check, and optional extract.
  * Replaces separate init-hooks and init-mcp commands.
  */
 
@@ -18,11 +18,16 @@ import {
   deepMergeGitMemConfig,
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
+import { installHook, uninstallHook } from '../hooks/prepare-commit-msg';
 import { createContainer } from '../infrastructure/di';
+import { createStderrProgressHandler } from './progress';
 
 interface IInitCommandOptions {
   yes?: boolean;
-  commitCount?: string;
+  hooks?: boolean;
+  uninstallHooks?: boolean;
+  extract?: boolean;
+  commitCount?: number;
 }
 
 // ── Pure helpers (exported for testing) ──────────────────────────────
@@ -106,33 +111,58 @@ export function ensureEnvPlaceholder(cwd: string): void {
 
 // ── Main command ─────────────────────────────────────────────────────
 
+/** Run unified project setup: hooks, MCP config, .gitignore, and .env. */
 export async function initCommand(options: IInitCommandOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init' });
   const cwd = process.cwd();
 
-  log?.info('Command invoked', { yes: options.yes, commitCount: options.commitCount });
+  log?.info('Command invoked', { yes: options.yes, hooks: options.hooks, uninstallHooks: options.uninstallHooks });
+
+  // ── Git hook uninstall (early exit) ─────────────────────────────
+  if (options.uninstallHooks) {
+    const removed = uninstallHook(cwd);
+    if (removed) {
+      console.log('✓ Removed prepare-commit-msg hook');
+    } else {
+      console.log('No git-mem prepare-commit-msg hook found.');
+    }
+    return;
+  }
 
   // ── Prompts (skipped with --yes) ───────────────────────────────
-  let commitCount = options.commitCount ? parseInt(options.commitCount, 10) : 100;
-  if (!Number.isFinite(commitCount) || commitCount <= 0) {
-    console.log(`Invalid --commit-count value: "${options.commitCount}". Using default (100).`);
-    commitCount = 100;
-  }
   let claudeIntegration = true;
+  let runExtract = options.extract ?? false;
+  let commitCount = options.commitCount ?? 10;
+
+  // Validate commitCount (parseInt returns NaN for invalid input)
+  if (Number.isNaN(commitCount) || commitCount < 1) {
+    commitCount = 10;
+  }
 
   if (!options.yes) {
     const response = await prompts([
-      {
-        type: 'number',
-        name: 'commitCount',
-        message: 'How many commits to free?',
-        initial: commitCount,
-      },
       {
         type: 'confirm',
         name: 'claudeIntegration',
         message: 'Integrate with Claude Code?',
         initial: true,
+      },
+      {
+        type: 'confirm',
+        name: 'runExtract',
+        message: 'Extract knowledge from commit history?',
+        initial: false,
+      },
+      {
+        type: (prev) => prev ? 'select' : null,
+        name: 'commitCount',
+        message: 'How many commits to extract?',
+        choices: [
+          { title: '10', value: 10 },
+          { title: '30', value: 30 },
+          { title: '50', value: 50 },
+        ],
+        initial: 0,
       },
     ], {
       onCancel: () => {
@@ -141,8 +171,9 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
       },
     });
 
-    commitCount = response.commitCount ?? commitCount;
     claudeIntegration = response.claudeIntegration ?? true;
+    runExtract = response.runExtract ?? false;
+    commitCount = response.commitCount ?? 10;
   }
 
   // ── Claude Code hooks ──────────────────────────────────────────
@@ -169,6 +200,16 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     console.log('✓ Created .git-mem.json');
   }
 
+  // ── Git hook (prepare-commit-msg) ─────────────────────────────
+  if (options.hooks) {
+    const hookResult = installHook(cwd);
+    if (hookResult.installed) {
+      console.log(`✓ Installed prepare-commit-msg hook${hookResult.wrapped ? ' (wrapped existing hook)' : ''}`);
+    } else {
+      console.log('✓ prepare-commit-msg hook already installed (skipped)');
+    }
+  }
+
   // ── MCP config (skip if already exists) ────────────────────────
   const mcpPath = join(cwd, '.mcp.json');
   if (existsSync(mcpPath)) {
@@ -183,21 +224,29 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   ensureGitignoreEntries(cwd, ['.env', '.git-mem.json']);
   console.log('✓ Updated .gitignore');
 
-  // ── API key check & liberate ───────────────────────────────────
-  console.log('\nChecking for ANTHROPIC_API_KEY in .env...\n');
+  // ── .env placeholder ──────────────────────────────────────────
+  ensureEnvPlaceholder(cwd);
+  console.log('✓ Ensured ANTHROPIC_API_KEY placeholder in .env');
 
-  const apiKey = readEnvApiKey(cwd);
+  // ── Extract from history ─────────────────────────────────────
+  if (runExtract) {
+    const apiKey = readEnvApiKey(cwd);
+    const enrich = !!apiKey;
 
-  if (apiKey) {
-    process.env.ANTHROPIC_API_KEY = apiKey;
-    console.log(`Liberating knowledge from ${commitCount} commits with LLM enrichment...`);
+    if (enrich) {
+      process.env.ANTHROPIC_API_KEY = apiKey;
+      console.log(`\nExtracting knowledge from ${commitCount} commits with LLM enrichment...`);
+    } else {
+      console.log(`\nExtracting knowledge from ${commitCount} commits (heuristic only)...`);
+    }
 
-    const container = createContainer({ logger, scope: 'init', enrich: true });
-    const { liberateService } = container.cradle;
+    const container = createContainer({ logger, scope: 'init', enrich });
+    const { extractService } = container.cradle;
 
-    const result = await liberateService.liberate({
+    const result = await extractService.extract({
       maxCommits: commitCount,
-      enrich: true,
+      enrich,
+      onProgress: createStderrProgressHandler(),
     });
 
     console.log(
@@ -206,10 +255,10 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
       `Facts: ${result.factsExtracted}  |  ` +
       `Duration: ${result.durationMs}ms`,
     );
-  } else {
-    ensureEnvPlaceholder(cwd);
-    console.log('✓ Added ANTHROPIC_API_KEY= to .env');
-    console.log('→ Add your key to .env, then run:');
-    console.log(`  git-mem liberate --enrich --commit-count ${commitCount}`);
+
+    if (!enrich) {
+      console.log('\nFor a deeper AI summary of each commit, add your ANTHROPIC_API_KEY to .env and run:');
+      console.log('  git-mem extract --enrich');
+    }
   }
 }

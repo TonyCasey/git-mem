@@ -3,11 +3,12 @@
 import { Command } from 'commander';
 import { rememberCommand } from './commands/remember';
 import { recallCommand } from './commands/recall';
-import { liberateCommand } from './commands/liberate';
+import { extractCommand } from './commands/extract';
 import { syncCommand } from './commands/sync';
 import { contextCommand } from './commands/context';
 import { initCommand } from './commands/init';
 import { hookCommand } from './commands/hook';
+import { trailersCommand } from './commands/trailers';
 import { createLogger } from './infrastructure/logging/factory';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -23,9 +24,12 @@ program
 
 program
   .command('init')
-  .description('Set up git-mem: hooks, MCP config, .gitignore, and liberate history')
+  .description('Set up git-mem: hooks, MCP config, .gitignore')
   .option('-y, --yes', 'Accept defaults without prompting')
-  .option('--commit-count <n>', 'Number of commits to liberate', '100')
+  .option('--hooks', 'Install prepare-commit-msg git hook for AI-Agent trailers')
+  .option('--uninstall-hooks', 'Remove the prepare-commit-msg git hook')
+  .option('--extract', 'Extract knowledge from commit history (use with --yes)')
+  .option('--commit-count <n>', 'Number of commits to extract (default: 10)', parseInt)
   .action((options) => initCommand(options, logger));
 
 program
@@ -36,6 +40,9 @@ program
   .option('--confidence <level>', 'Confidence: verified, high, medium, low', 'high')
   .option('--lifecycle <tier>', 'Lifecycle: permanent, project, session', 'project')
   .option('--tags <tags>', 'Comma-separated tags')
+  .option('--agent <name>', 'AI agent name (default: auto-detect from $GIT_MEM_AGENT / $CLAUDECODE)')
+  .option('--model <name>', 'AI model identifier (default: $GIT_MEM_MODEL / $ANTHROPIC_MODEL)')
+  .option('--no-trailers', 'Skip writing AI-* trailers to the commit message')
   .action((text, options) => rememberCommand(text, options, logger));
 
 program
@@ -48,14 +55,14 @@ program
   .action((query, options) => recallCommand(query, options, logger));
 
 program
-  .command('liberate')
-  .description('Liberate knowledge from existing commit history')
+  .command('extract')
+  .description('Extract knowledge from existing commit history')
   .option('--since <date>', 'Start date (default: 90 days ago)')
   .option('--commit-count <n>', 'Max commits to process')
   .option('--dry-run', 'Preview without writing')
   .option('--threshold <n>', 'Interest score threshold', '3')
   .option('--enrich', 'Enable LLM enrichment (requires ANTHROPIC_API_KEY)')
-  .action((options) => liberateCommand(options, logger));
+  .action((options) => extractCommand(options, logger));
 
 program
   .command('context')
@@ -71,6 +78,16 @@ program
   .option('--push', 'Push only')
   .option('--pull', 'Pull only')
   .action((options) => syncCommand(options, logger));
+
+program
+  .command('trailers [sha]')
+  .description('Inspect AI-* trailers on commits')
+  .option('--query <key>', 'Search for trailer key across history (e.g. AI-Decision)')
+  .option('--since <date>', 'Filter commits after date (YYYY-MM-DD)')
+  .option('--keys', 'List all distinct AI-* trailer keys in the repo')
+  .option('-n, --limit <n>', 'Max commits to search')
+  .option('--json', 'Output as JSON')
+  .action((sha, options) => trailersCommand(sha, options, logger));
 
 program
   .command('hook <event>')

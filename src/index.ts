@@ -107,7 +107,7 @@ export {
   NotesError,
   MemoryError,
   GitClientError,
-  LiberateError,
+  ExtractError,
 } from './domain/errors/GitMemError';
 
 export { LLMError } from './domain/errors/LLMError';
@@ -130,17 +130,17 @@ export {
 } from './application/interfaces/IContextService';
 
 export {
-  ILiberateService,
-  ILiberateOptions,
-  ILiberateAnnotation,
+  IExtractService,
+  IExtractOptions,
+  IExtractAnnotation,
   IEnrichmentStats,
-  ILiberateResult,
-} from './application/interfaces/ILiberateService';
+  IExtractResult,
+} from './application/interfaces/IExtractService';
 
 // Application — Services
 export { MemoryService } from './application/services/MemoryService';
 export { ContextService } from './application/services/ContextService';
-export { LiberateService } from './application/services/LiberateService';
+export { ExtractService } from './application/services/ExtractService';
 export { GitTriageService } from './application/services/GitTriageService';
 
 // Infrastructure — Git

@@ -84,6 +84,7 @@ fabric.properties
 node_modules/
 dist/
 *.tgz
+releases/
 
 # Environment
 .env
@@ -98,3 +99,6 @@ dist/
 .git-mem/
 
 .dev/*/**
+
+# git-mem
+.git-mem.json

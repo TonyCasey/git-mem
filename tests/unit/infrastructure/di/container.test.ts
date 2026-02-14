@@ -41,11 +41,12 @@ describe('createContainer', () => {
       assert.ok(cradle.notesService);
       assert.ok(cradle.gitClient);
       assert.ok(cradle.memoryRepository);
+      assert.ok(cradle.trailerService);
       assert.ok(cradle.eventBus);
       assert.ok(cradle.triageService);
       assert.ok(cradle.memoryService);
       assert.ok(cradle.contextService);
-      assert.ok(cradle.liberateService);
+      assert.ok(cradle.extractService);
       assert.ok(cradle.sessionCaptureService);
       assert.ok(cradle.memoryContextLoader);
       assert.ok(cradle.contextFormatter);
@@ -159,6 +160,24 @@ describe('createContainer', () => {
       const container = createContainer();
       const events = container.cradle.eventBus.registeredEvents();
       assert.ok(events.includes('prompt:submit'));
+    });
+  });
+
+  describe('trailerService', () => {
+    it('should resolve with expected interface', () => {
+      const container = createContainer();
+      const { trailerService } = container.cradle;
+
+      assert.equal(typeof trailerService.readTrailers, 'function');
+      assert.equal(typeof trailerService.formatTrailers, 'function');
+      assert.equal(typeof trailerService.queryTrailers, 'function');
+      assert.equal(typeof trailerService.addTrailers, 'function');
+      assert.equal(typeof trailerService.buildCommitMessage, 'function');
+    });
+
+    it('should return singleton within container scope', () => {
+      const container = createContainer();
+      assert.equal(container.cradle.trailerService, container.cradle.trailerService);
     });
   });
 

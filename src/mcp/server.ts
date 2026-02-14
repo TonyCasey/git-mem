@@ -8,7 +8,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { registerRememberTool } from './tools/remember';
 import { registerRecallTool } from './tools/recall';
 import { registerContextTool } from './tools/context';
-import { registerLiberateTool } from './tools/liberate';
+import { registerExtractTool } from './tools/extract';
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -19,7 +19,7 @@ export function createServer(): McpServer {
   registerRememberTool(server);
   registerRecallTool(server);
   registerContextTool(server);
-  registerLiberateTool(server);
+  registerExtractTool(server);
 
   return server;
 }

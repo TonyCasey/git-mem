@@ -1,7 +1,7 @@
 /**
- * Integration test: MCP git_mem_liberate tool
+ * Integration test: MCP git_mem_extract tool
  *
- * Tests the liberate tool end-to-end by spawning the server as a subprocess
+ * Tests the extract tool end-to-end by spawning the server as a subprocess
  * and sending JSON-RPC requests through stdio.
  */
 
@@ -88,11 +88,11 @@ function mcpSession(cwd: string, requests: object[]): Promise<object[]> {
   });
 }
 
-describe('Integration: MCP Tool — liberate', () => {
+describe('Integration: MCP Tool — extract', () => {
   let repoDir: string;
 
   before(() => {
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-mcp-liberate-'));
+    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-mcp-extract-'));
     git(['init'], repoDir);
     git(['config', 'user.email', 'test@test.com'], repoDir);
     git(['config', 'user.name', 'Test User'], repoDir);
@@ -111,11 +111,11 @@ describe('Integration: MCP Tool — liberate', () => {
     rmSync(repoDir, { recursive: true, force: true });
   });
 
-  it('should run liberate in dry-run mode via MCP', async () => {
+  it('should run extract in dry-run mode via MCP', async () => {
     const responses = await mcpSession(repoDir, [{
       method: 'tools/call',
       params: {
-        name: 'git_mem_liberate',
+        name: 'git_mem_extract',
         arguments: { dry_run: true },
       },
     }]);
@@ -137,11 +137,11 @@ describe('Integration: MCP Tool — liberate', () => {
     }
   });
 
-  it('should run liberate and write notes via MCP', async () => {
+  it('should run extract and write notes via MCP', async () => {
     const responses = await mcpSession(repoDir, [{
       method: 'tools/call',
       params: {
-        name: 'git_mem_liberate',
+        name: 'git_mem_extract',
         arguments: { dry_run: false },
       },
     }]);
@@ -151,7 +151,7 @@ describe('Integration: MCP Tool — liberate', () => {
     assert.ok(!result.result.isError, 'Should not be an error');
   });
 
-  it('should list git_mem_liberate in tools list', async () => {
+  it('should list git_mem_extract in tools list', async () => {
     const responses = await mcpSession(repoDir, [{
       method: 'tools/list',
       params: {},
@@ -159,6 +159,6 @@ describe('Integration: MCP Tool — liberate', () => {
 
     const result = responses[1] as any;
     const toolNames = result.result.tools.map((t: any) => t.name);
-    assert.ok(toolNames.includes('git_mem_liberate'), 'Should list liberate tool');
+    assert.ok(toolNames.includes('git_mem_extract'), 'Should list extract tool');
   });
 });

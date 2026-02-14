@@ -3,6 +3,7 @@
  */
 
 import { createContainer } from '../infrastructure/di';
+import { resolveAgent, resolveModel } from '../infrastructure/detect-agent';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../domain/types/IMemoryLifecycle';
@@ -14,6 +15,9 @@ interface IRememberOptions {
   confidence?: string;
   lifecycle?: string;
   tags?: string;
+  noTrailers?: boolean;
+  agent?: string;
+  model?: string;
 }
 
 export async function rememberCommand(text: string, options: IRememberOptions, logger?: ILogger): Promise<void> {
@@ -21,12 +25,18 @@ export async function rememberCommand(text: string, options: IRememberOptions, l
   const { memoryService, logger: log } = container.cradle;
   log.info('Command invoked', { type: options.type || 'fact' });
 
+  const agent = resolveAgent(options.agent);
+  const model = resolveModel(options.model);
+
   const memory = memoryService.remember(text, {
     sha: options.commit,
     type: (options.type || 'fact') as MemoryType,
     confidence: (options.confidence || 'high') as ConfidenceLevel,
     lifecycle: (options.lifecycle || 'project') as MemoryLifecycle,
     tags: options.tags,
+    trailers: !options.noTrailers,
+    agent,
+    model,
   });
 
   console.log(`Remembered: ${memory.content}`);

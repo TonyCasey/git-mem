@@ -21,6 +21,7 @@ import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import { NotesService } from '../services/NotesService';
 import { GitClient } from '../git/GitClient';
 import { MemoryRepository } from '../repositories/MemoryRepository';
+import { TrailerService } from '../services/TrailerService';
 import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
@@ -28,7 +29,7 @@ import { createLLMClient } from '../llm/LLMClientFactory';
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
 import { ContextService } from '../../application/services/ContextService';
-import { LiberateService } from '../../application/services/LiberateService';
+import { ExtractService } from '../../application/services/ExtractService';
 import { GitTriageService } from '../../application/services/GitTriageService';
 
 // Application — hook services
@@ -55,6 +56,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     notesService: asClass(NotesService).singleton(),
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
+    trailerService: asClass(TrailerService).singleton(),
 
     eventBus: asFunction(() => {
       const bus = new EventBus(container.cradle.logger);
@@ -94,7 +96,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     // If a param is renamed, wrap in asFunction (like triageService above).
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
-    liberateService: asClass(LiberateService).singleton(),
+    extractService: asClass(ExtractService).singleton(),
 
     // ── Hook services ─────────────────────────────────────────────
     memoryContextLoader: asClass(MemoryContextLoader).singleton(),

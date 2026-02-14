@@ -69,6 +69,12 @@ export interface ICreateMemoryOptions {
   readonly source?: SourceType;
   /** Working directory. */
   readonly cwd?: string;
+  /** Write AI-* trailers to the commit message (default: true). */
+  readonly trailers?: boolean;
+  /** AI agent name (e.g. 'Claude-Code'). */
+  readonly agent?: string;
+  /** AI model identifier (e.g. 'claude-opus-4-6'). */
+  readonly model?: string;
 }
 
 /**

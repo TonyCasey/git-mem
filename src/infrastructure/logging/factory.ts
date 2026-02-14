@@ -1,5 +1,5 @@
-import * as os from 'node:os';
 import * as path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { ILogger, ILoggerOptions, LogLevel } from '../../domain/interfaces/ILogger';
 import { Logger } from './Logger';
 import { NullLogger } from './NullLogger';
@@ -10,8 +10,20 @@ function isValidLogLevel(value: string): value is LogLevel {
   return VALID_LEVELS.includes(value as LogLevel);
 }
 
+function getGitRoot(): string | null {
+  try {
+    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
 export function defaultLogDir(): string {
-  return path.join(os.homedir(), '.git-mem', 'logs');
+  const base = getGitRoot() ?? process.cwd();
+  return path.join(base, '.git-mem', 'logs');
 }
 
 export function loadLoggerOptions(): ILoggerOptions {
