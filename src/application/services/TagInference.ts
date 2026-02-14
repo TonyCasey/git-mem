@@ -7,7 +7,7 @@
  * - Pattern matches
  */
 
-import type { IPatternMatch } from '../../infrastructure/services/patterns/HeuristicPatterns';
+import type { IPatternMatch } from '../../domain/types/IPatternMatch';
 
 /**
  * Known domain keywords that indicate meaningful tags.

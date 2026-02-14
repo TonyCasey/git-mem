@@ -5,10 +5,18 @@
  * PR descriptions, and review comments without requiring LLM calls.
  */
 
-/**
- * Fact types extractable by heuristic patterns.
- */
-export type HeuristicFactType = 'decision' | 'gotcha' | 'convention';
+// Re-export domain types for backward compatibility
+export type {
+  HeuristicFactType,
+  ConfidenceLevel,
+  IPatternMatch,
+} from '../../../domain/types/IPatternMatch';
+
+import type {
+  HeuristicFactType,
+  ConfidenceLevel,
+  IPatternMatch,
+} from '../../../domain/types/IPatternMatch';
 
 /**
  * Pattern definition with associated fact type and confidence.
@@ -206,22 +214,6 @@ export const ALL_PATTERNS: readonly IPatternDefinition[] = [
   ...GOTCHA_PATTERNS,
   ...CONVENTION_PATTERNS,
 ];
-
-/**
- * Match result from pattern extraction.
- */
-export interface IPatternMatch {
-  /** The extracted text content. */
-  readonly text: string;
-  /** The fact type. */
-  readonly factType: HeuristicFactType;
-  /** The pattern name that matched. */
-  readonly patternName: string;
-  /** Confidence level. */
-  readonly confidence: 'high' | 'medium' | 'low';
-  /** Start position in source text. */
-  readonly startIndex: number;
-}
 
 /**
  * Extract all pattern matches from text.

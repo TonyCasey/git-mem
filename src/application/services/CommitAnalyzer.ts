@@ -18,10 +18,8 @@ import type {
   ICommitAnalysis,
   IConventionalCommit,
 } from '../interfaces/ICommitAnalyzer';
-import {
-  extractPatternMatches,
-  type IPatternMatch,
-} from '../../infrastructure/services/patterns/HeuristicPatterns';
+import type { IPatternMatch } from '../../domain/types/IPatternMatch';
+import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { inferTags } from './TagInference';
 
 /**
