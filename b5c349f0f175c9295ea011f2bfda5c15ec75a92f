@@ -284,6 +284,21 @@
       ],
       "createdAt": "2026-02-14T08:58:18.686Z",
       "updatedAt": "2026-02-14T08:58:18.686Z"
+    },
+    {
+      "id": "4af5454e-2607-43f9-9a02-247c60398210",
+      "content": "for backward compatibility",
+      "type": "gotcha",
+      "sha": "b5c349f0f175c9295ea011f2bfda5c15ec75a92f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:careful"
+      ],
+      "createdAt": "2026-02-14T09:14:28.680Z",
+      "updatedAt": "2026-02-14T09:14:28.680Z"
     }
   ]
 }
