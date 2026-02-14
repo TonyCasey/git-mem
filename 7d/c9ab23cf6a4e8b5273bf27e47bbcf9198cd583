@@ -5684,6 +5684,21 @@
       ],
       "createdAt": "2026-02-14T23:44:17.176Z",
       "updatedAt": "2026-02-14T23:44:17.176Z"
+    },
+    {
+      "id": "8006e99a-8009-4c67-94b1-070bcebf58b4",
+      "content": "just the first one found",
+      "type": "decision",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-14T23:44:17.199Z",
+      "updatedAt": "2026-02-14T23:44:17.199Z"
     }
   ]
 }
