@@ -14,7 +14,6 @@ export type {
 
 import type {
   HeuristicFactType,
-  ConfidenceLevel,
   IPatternMatch,
 } from '../../../domain/types/IPatternMatch';
 
