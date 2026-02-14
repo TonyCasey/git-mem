@@ -1,7 +1,34 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-14T18:23:31.871Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-14T18:23:31.871Z"
+      }
+    },
+    {
+      "id": "54533ed3-25d7-4a0a-9f59-4e4505fa1ebb",
+      "content": "add LLM enrichment to commit-msg hook (GIT-87). When enabled, the commit-msg hook now uses Claude to generate richer",
+      "type": "decision",
+      "sha": "819e64a7e4364ab1f79e4bd760a7cc01f2c1f4fb",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "application",
+        "handlers",
+        "domain",
+        "entities",
+        "hooks",
+        "utils",
+        "infrastructure",
+        "tests",
+        "unit"
+      ],
+      "createdAt": "2026-02-14T18:24:10.813Z",
+      "updatedAt": "2026-02-14T18:24:10.813Z"
+    }
+  ]
 }
