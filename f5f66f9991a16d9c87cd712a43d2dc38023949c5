@@ -66,6 +66,26 @@
       ],
       "createdAt": "2026-02-14T17:53:18.515Z",
       "updatedAt": "2026-02-14T17:53:18.515Z"
+    },
+    {
+      "id": "f3fe132e-cddb-4b4b-8c6b-fcdd96a6ed28",
+      "content": "handle edge cases in commit-msg hook (GIT-85). Skip analysis for special commit types:",
+      "type": "decision",
+      "sha": "f5f66f9991a16d9c87cd712a43d2dc38023949c5",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "application",
+        "handlers",
+        "hooks",
+        "tests",
+        "integration",
+        "unit"
+      ],
+      "createdAt": "2026-02-14T17:56:11.549Z",
+      "updatedAt": "2026-02-14T17:56:11.549Z"
     }
   ]
 }
