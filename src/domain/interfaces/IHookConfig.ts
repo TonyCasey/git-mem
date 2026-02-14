@@ -31,11 +31,16 @@ export interface IPromptSubmitConfig {
   readonly surfaceContext: boolean;
 }
 
+export interface IPostCommitConfig {
+  readonly enabled: boolean;
+}
+
 export interface IHooksConfig {
   readonly enabled: boolean;
   readonly sessionStart: ISessionStartConfig;
   readonly sessionStop: ISessionStopConfig;
   readonly promptSubmit: IPromptSubmitConfig;
+  readonly postCommit: IPostCommitConfig;
 }
 
 export interface IHookConfig {

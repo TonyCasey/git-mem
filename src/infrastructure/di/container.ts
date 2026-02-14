@@ -39,6 +39,7 @@ import { SessionCaptureService } from '../../application/services/SessionCapture
 import { SessionStartHandler } from '../../application/handlers/SessionStartHandler';
 import { SessionStopHandler } from '../../application/handlers/SessionStopHandler';
 import { PromptSubmitHandler } from '../../application/handlers/PromptSubmitHandler';
+import { PostCommitHandler } from '../../application/handlers/PostCommitHandler';
 
 export function createContainer(options?: IContainerOptions): AwilixContainer<ICradle> {
   const container = createAwilixContainer<ICradle>({
@@ -74,6 +75,10 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
       bus.on('prompt:submit', new PromptSubmitHandler(
         container.cradle.memoryContextLoader,
         container.cradle.contextFormatter,
+        container.cradle.logger,
+      ));
+      bus.on('git:commit', new PostCommitHandler(
+        container.cradle.notesService,
         container.cradle.logger,
       ));
 

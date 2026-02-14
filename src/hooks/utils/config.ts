@@ -16,6 +16,7 @@ const DEFAULTS: IHookConfig = {
     sessionStart: { enabled: true, memoryLimit: 20 },
     sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
     promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
+    postCommit: { enabled: true },
   },
 };
 
@@ -47,6 +48,10 @@ export function loadHookConfig(cwd?: string): IHookConfig {
         promptSubmit: {
           ...DEFAULTS.hooks.promptSubmit,
           ...(rawHooks.promptSubmit ?? {}),
+        },
+        postCommit: {
+          ...DEFAULTS.hooks.postCommit,
+          ...(rawHooks.postCommit ?? {}),
         },
       },
     };
