@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "273d9120-5075-424f-9ac7-3ef1b1265177",
+      "content": "guard YAML parsing against null values",
+      "type": "gotcha",
+      "sha": "18df63ae02c19bf25844d25069fb9870af3efbca",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-14T22:49:02.185Z",
+      "updatedAt": "2026-02-14T22:49:02.185Z"
+    }
+  ]
+}
