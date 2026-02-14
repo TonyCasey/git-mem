@@ -95,7 +95,17 @@ export class CommitAnalyzer implements ICommitAnalyzer {
   parseConventionalCommit(message: string): IConventionalCommit {
     const lines = message.split('\n');
     const firstLine = lines[0] || '';
-    const body = lines.slice(1).join('\n').trim();
+
+    // Body is everything after the first blank line (per conventional commit spec)
+    let body = '';
+    if (lines.length > 1) {
+      const rest = lines.slice(1);
+      const firstBlankIndex = rest.findIndex((line) => line.trim() === '');
+
+      if (firstBlankIndex !== -1) {
+        body = rest.slice(firstBlankIndex + 1).join('\n').trim();
+      }
+    }
 
     const match = firstLine.match(CONVENTIONAL_COMMIT_REGEX);
 
