@@ -232,10 +232,13 @@ describe('hook integration — commit message modification', () => {
     writeFileSync(join(repoDir, 'test2.txt'), 'world');
     git(['add', '.'], repoDir);
 
+    const env = { ...process.env, CLAUDECODE: '1' };
+    delete env.GIT_MEM_AGENT;
+
     execFileSync('git', ['commit', '-m', 'fix: another commit'], {
       encoding: 'utf8',
       cwd: repoDir,
-      env: { ...process.env, CLAUDECODE: '1', GIT_MEM_AGENT: '' },
+      env,
     });
 
     const message = git(['log', '-1', '--format=%B'], repoDir);

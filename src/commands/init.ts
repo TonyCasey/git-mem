@@ -26,6 +26,8 @@ interface IInitCommandOptions {
   yes?: boolean;
   hooks?: boolean;
   uninstallHooks?: boolean;
+  extract?: boolean;
+  commitCount?: number;
 }
 
 // ── Pure helpers (exported for testing) ──────────────────────────────
@@ -129,8 +131,8 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   // ── Prompts (skipped with --yes) ───────────────────────────────
   let claudeIntegration = true;
-  let runExtract = false;
-  let commitCount = 10;
+  let runExtract = options.extract ?? false;
+  let commitCount = options.commitCount ?? 10;
 
   if (!options.yes) {
     const response = await prompts([
