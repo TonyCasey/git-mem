@@ -3434,6 +3434,21 @@
       ],
       "createdAt": "2026-02-14T18:39:36.303Z",
       "updatedAt": "2026-02-14T18:39:36.303Z"
+    },
+    {
+      "id": "0fcefebc-945c-4320-9f52-afb952a1ec37",
+      "content": "rather than just the first one found",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T18:39:36.323Z",
+      "updatedAt": "2026-02-14T18:39:36.323Z"
     }
   ]
 }
