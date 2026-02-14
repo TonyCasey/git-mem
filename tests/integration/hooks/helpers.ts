@@ -53,7 +53,8 @@ export function runCli(args: string[], opts?: { cwd?: string; input?: string }):
   };
 }
 
-function git(args: string[], cwd: string): string {
+/** Helper to run git commands. */
+export function git(args: string[], cwd: string): string {
   return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
 }
 

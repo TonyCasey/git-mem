@@ -146,7 +146,12 @@ export function uninstallPostCommitHook(cwd?: string): boolean {
     return false;
   }
 
-  unlinkSync(hookPath);
+  try {
+    unlinkSync(hookPath);
+  } catch (err: unknown) {
+    if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err;
+    // File was already removed — proceed to restore backup if needed
+  }
 
   // Restore user's original hook if it was wrapped
   if (existsSync(backupPath)) {

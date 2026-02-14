@@ -14,7 +14,12 @@ const PROJECT_ROOT = resolve(__dirname, '../../..');
 const SERVER_PATH = resolve(PROJECT_ROOT, 'src/mcp-server.ts');
 
 // Use tsx binary from project node_modules — works even when cwd is a temp dir
-const TSX_BIN = resolve(PROJECT_ROOT, 'node_modules/.bin/tsx');
+// On Windows, spawn() needs the .cmd wrapper; on Unix, use the shell script
+const TSX_BIN = resolve(
+  PROJECT_ROOT,
+  'node_modules/.bin',
+  process.platform === 'win32' ? 'tsx.cmd' : 'tsx',
+);
 
 export interface IMcpResponse {
   jsonrpc: string;
@@ -95,9 +100,11 @@ export function mcpSession(cwd: string, requests: object[]): Promise<IMcpRespons
 
     proc.stdout.on('data', (data: Buffer) => {
       stdout += data.toString();
-      const lines = stdout.split('\n').filter(Boolean);
+      const lines = stdout.split('\n');
+      // Keep the last partial line for the next chunk
+      stdout = lines.pop() ?? '';
 
-      for (const line of lines) {
+      for (const line of lines.filter(Boolean)) {
         try {
           const parsed = JSON.parse(line) as IMcpResponse;
           if (parsed.id !== undefined) {
@@ -107,8 +114,6 @@ export function mcpSession(cwd: string, requests: object[]): Promise<IMcpRespons
           // Incomplete line, skip
         }
       }
-      // Clear processed lines
-      stdout = '';
 
       if (responses.length >= expectedResponses && !resolved) {
         resolved = true;

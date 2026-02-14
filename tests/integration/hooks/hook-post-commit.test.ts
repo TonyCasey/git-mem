@@ -7,18 +7,15 @@
 
 import { describe, it, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'child_process';
+import { execFileSync } from 'child_process';  // Used by readNote()
 import {
   runHook,
   createTestRepo,
   writeGitMemConfig,
   cleanupRepo,
   addCommit,
+  git,
 } from './helpers';
-
-function git(args: string[], cwd: string): string {
-  return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
-}
 
 function readNote(sha: string, cwd: string): string | null {
   try {
@@ -52,7 +49,14 @@ describe('Integration: hook post-commit', () => {
   });
 
   afterEach(() => {
-    process.env = originalEnv;
+    // Remove keys that were added during the test
+    for (const key of Object.keys(process.env)) {
+      if (!(key in originalEnv)) {
+        delete process.env[key];
+      }
+    }
+    // Restore original values
+    Object.assign(process.env, originalEnv);
   });
 
   describe('when agent is detected', () => {

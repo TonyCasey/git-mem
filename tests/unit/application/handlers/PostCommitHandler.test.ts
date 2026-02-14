@@ -33,11 +33,14 @@ function createMockLogger(): ILogger & { logs: Array<{ level: string; msg: strin
   const logs: Array<{ level: string; msg: string; data?: unknown }> = [];
   return {
     logs,
-    child: () => createMockLogger(),
-    debug: (msg: string, data?: unknown) => logs.push({ level: 'debug', msg, data }),
-    info: (msg: string, data?: unknown) => logs.push({ level: 'info', msg, data }),
-    warn: (msg: string, data?: unknown) => logs.push({ level: 'warn', msg, data }),
-    error: (msg: string, data?: unknown) => logs.push({ level: 'error', msg, data }),
+    child: (_bindings: Record<string, unknown>) => createMockLogger(),
+    trace: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'trace', msg: message, data: context }),
+    debug: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'debug', msg: message, data: context }),
+    info: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'info', msg: message, data: context }),
+    warn: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'warn', msg: message, data: context }),
+    error: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'error', msg: message, data: context }),
+    fatal: (message: string, context?: Record<string, unknown>) => logs.push({ level: 'fatal', msg: message, data: context }),
+    isLevelEnabled: () => true,
   };
 }
 
