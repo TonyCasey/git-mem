@@ -162,11 +162,17 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
         filesChanged: stagedFiles,
       });
 
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
       const timeoutPromise = new Promise<null>((resolve) => {
-        setTimeout(() => resolve(null), timeoutMs);
+        timeoutId = setTimeout(() => resolve(null), timeoutMs);
       });
 
       const result = await Promise.race([enrichmentPromise, timeoutPromise]);
+
+      // Clear timeout if enrichment completed first
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
 
       if (result === null) {
         this.logger.warn('LLM enrichment timed out', { timeoutMs });
@@ -284,15 +290,17 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
       // Use confidence from LLM
       trailers.push({ key: AI_TRAILER_KEYS.CONFIDENCE, value: bestFact.confidence });
 
-      // Merge tags from all facts
-      const allTags = new Set<string>();
-      for (const fact of facts) {
-        for (const tag of fact.tags) {
-          allTags.add(tag);
+      // Merge tags from all facts (respect inferTags setting)
+      if (config.inferTags) {
+        const allTags = new Set<string>();
+        for (const fact of facts) {
+          for (const tag of fact.tags) {
+            allTags.add(tag);
+          }
         }
-      }
-      if (allTags.size > 0) {
-        trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: [...allTags].join(', ') });
+        if (allTags.size > 0) {
+          trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: [...allTags].join(', ') });
+        }
       }
     }
 
@@ -328,6 +336,7 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
       high: 3,
       medium: 2,
       low: 1,
+      uncertain: 0,
     };
 
     return [...facts].sort((a, b) => {

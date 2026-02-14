@@ -73,11 +73,14 @@ function createMockGitClient(): IGitClient {
 
 function createMockLogger(): ILogger {
   return {
+    trace: () => {},
     debug: () => {},
     info: () => {},
     warn: () => {},
     error: () => {},
+    fatal: () => {},
     child: () => createMockLogger(),
+    isLevelEnabled: () => true,
   };
 }
 
@@ -412,6 +415,36 @@ describe('CommitMsgHandler', () => {
         assert.equal(result.success, true);
         const content = readFileSync(msgPath, 'utf8');
         assert.ok(content.includes('AI-Source: heuristic'));
+      } finally {
+        cleanupTestRepo();
+      }
+    });
+
+    it('should not include tags when inferTags is false', async () => {
+      const dir = setupTestRepo();
+      const msgPath = join(dir, 'COMMIT_EDITMSG');
+      writeFileSync(msgPath, 'feat: add auth\n');
+
+      const facts: ILLMExtractedFact[] = [
+        { content: 'Using JWT', type: 'decision', confidence: 'high', tags: ['auth', 'jwt'] },
+      ];
+
+      try {
+        const handler = new CommitMsgHandler(
+          createMockCommitAnalyzer(),
+          createMockGitClient(),
+          createMockLogger(),
+          createMockAgentResolver(),
+          createMockConfigLoader({ enrich: true, inferTags: false }),
+          createMockLLMClient({ facts }),
+        );
+
+        const result = await handler.handle(createEvent({ commitMsgPath: msgPath, cwd: dir }));
+
+        assert.equal(result.success, true);
+        const content = readFileSync(msgPath, 'utf8');
+        assert.ok(content.includes('AI-Source: llm-enrichment'));
+        assert.ok(!content.includes('AI-Tags:')); // Tags should NOT be present
       } finally {
         cleanupTestRepo();
       }

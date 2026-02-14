@@ -100,6 +100,13 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     }).singleton(),
 
     llmClient: asFunction(() => {
+      // When enrich is explicitly false, do not create LLM client.
+      // When enrich is true or not specified, attempt to create it.
+      // This allows hooks to use LLM enrichment without explicit opt-in,
+      // while still respecting explicit enrich:false from CLI commands.
+      if (options?.enrich === false) {
+        return null;
+      }
       return createLLMClient() ?? null;
     }).singleton(),
 
