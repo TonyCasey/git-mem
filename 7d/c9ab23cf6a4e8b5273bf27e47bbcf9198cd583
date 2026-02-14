@@ -3794,6 +3794,21 @@
       ],
       "createdAt": "2026-02-14T18:55:28.166Z",
       "updatedAt": "2026-02-14T18:55:28.166Z"
+    },
+    {
+      "id": "0396cbbb-5a84-4ad9-9e87-87cdb29ca13a",
+      "content": "just the first one found",
+      "type": "decision",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-14T18:55:28.187Z",
+      "updatedAt": "2026-02-14T18:55:28.187Z"
     }
   ]
 }
