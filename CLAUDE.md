@@ -32,32 +32,36 @@ Clean architecture with three layers. Dependencies point inward only: Infrastruc
 
 **Domain** (`src/domain/`) — Zero dependencies. Entities (`IMemoryEntity`), interfaces (`IMemoryRepository`, `INotesService`, `ITrailerService`, `IGitClient`), types (quality, lifecycle), errors (`GitMemError` hierarchy), and pure utils (deduplication).
 
-**Application** (`src/application/`) — Depends on domain only. Three services: `MemoryService` (remember/recall CRUD), `ExtractService` (scan git history, score commits, extract patterns), `ContextService` (match staged changes against stored memories).
+**Application** (`src/application/`) — Depends on domain only. Core services: `MemoryService` (remember/recall CRUD), `ExtractService` (scan git history, score commits, extract patterns), `ContextService` (match staged changes against stored memories). Hook services: `MemoryContextLoader` (loads memories with limits), `ContextFormatter` (formats memories as markdown), `SessionCaptureService` (24h rolling commit scan via ExtractService). Three event handlers: `SessionStartHandler`, `SessionStopHandler`, `PromptSubmitHandler`.
 
-**Infrastructure** (`src/infrastructure/`) — Implements domain interfaces. `GitClient` wraps git CLI. `NotesService` reads/writes `refs/notes/mem`. `TrailerService` queries commit trailers. `MemoryRepository` persists `IMemoryEntity[]` as JSON in git notes. `HeuristicPatterns` provides regex-based extraction rules.
+**Infrastructure** (`src/infrastructure/`) — Implements domain interfaces. `GitClient` wraps git CLI. `NotesService` reads/writes `refs/notes/mem`. `TrailerService` queries commit trailers. `MemoryRepository` persists `IMemoryEntity[]` as JSON in git notes. `HeuristicPatterns` provides regex-based extraction rules. `EventBus` provides pub/sub event dispatch with error isolation (failing handlers don't crash the hook).
 
 **Entry points:**
 - `src/cli.ts` — Commander.js CLI with 6 commands (remember, recall, context, extract, sync, init)
 - `src/mcp-server.ts` — MCP server over stdio; `src/mcp/server.ts` creates the server and registers 4 tools
+- `src/commands/hook.ts` — Unified hook entry point: reads stdin JSON, loads config, emits typed event via EventBus
+- `src/commands/init.ts` — Interactive setup: hooks, MCP config, .gitignore, initial extract
 - `src/commands/` — CLI command handlers
 - `src/mcp/tools/` — MCP tool handlers (remember, recall, context, extract)
 
-**Bootstrapping pattern** — Awilix DI container (`src/infrastructure/di/`). `createContainer(options?)` wires all services; CLI commands and MCP tools resolve from `container.cradle`:
+**Bootstrapping pattern** — Awilix DI container (`src/infrastructure/di/`). `createContainer(options?)` wires all services; CLI commands, MCP tools, and hooks resolve from `container.cradle`:
 
 ```typescript
 const container = createContainer({ logger, scope: 'remember' });
 const { memoryService } = container.cradle;
 ```
 
-Uses `InjectionMode.CLASSIC` (matches constructor parameter names to registration names). `ICradle` in `types.ts` defines the typed container shape with all interface references.
+Uses `InjectionMode.CLASSIC` (matches constructor parameter names to registration names). `ICradle` in `types.ts` defines the typed container shape with all interface references. The container also registers the `EventBus` with three hook handlers (`session:start`, `session:stop`, `prompt:submit`) wired during creation.
+
+**Hook event flow:** `git-mem hook <event>` → `readStdin()` → `loadHookConfig()` → `createContainer()` → `eventBus.emit(typedEvent)` → handlers return `IEventResult[]` → output to stdout (context), summary to stderr. Hooks have a 10s hard timeout and never throw — failures are caught and reported silently.
 
 ## Testing
 
 Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript, not Jest. Tests import `describe`, `it`, `before`, `after` from `node:test` and assertions from `node:assert/strict`.
 
-**Unit tests** (`tests/unit/`) — Mock dependencies manually (no framework). 57 tests.
+**Unit tests** (`tests/unit/`) — Mock dependencies manually (no framework). 265 tests.
 
-**Integration tests** (`tests/integration/`) — Create real temporary git repos in `os.tmpdir()`, run actual git commands, clean up in `after()`. All services instantiated against real repos. 32 tests.
+**Integration tests** (`tests/integration/`) — Create real temporary git repos in `os.tmpdir()`, run actual git commands, clean up in `after()`. Hook integration tests (`tests/integration/hooks/`) spawn `git-mem hook <event>` as child processes via `tsx` binary. 46 tests.
 
 ## Environment Variables
 
@@ -71,6 +75,10 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 - **`cwd` parameter**: Must be threaded through all service calls when operating on a repo that isn't the current working directory
 - **Commit triage**: Weighted scoring based on conventional prefixes, decision keywords, diff size, PR merges
 - **TypeScript config**: Relaxed strict mode for development (`strict: false` in tsconfig.json)
+- **Hook config**: `.git-mem.json` at project root, loaded by `src/hooks/utils/config.ts`. Never throws — returns defaults on error
+- **Hook stdin**: `src/hooks/utils/stdin.ts` reads JSON from stdin. Returns `{}` on TTY or parse error — hooks must never crash
+- **EventBus error isolation**: Handler exceptions are caught and returned as failed `IEventResult[]` — one failing handler doesn't block others
+- **Hook timeout**: 10s hard limit via `setupShutdown()` — hooks must never hang Claude Code
 - Interfaces prefixed with `I` (enforced by ESLint)
 - No `any` in production code (ESLint error); relaxed to warn in test files
 

@@ -1,6 +1,6 @@
 {
   "name": "git-mem",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Git-native memory layer for AI coding tools. Store decisions, context, and knowledge directly in your git repository using commit trailers and git notes.",
   "bin": {
     "git-mem": "dist/cli.js",
