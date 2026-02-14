@@ -706,10 +706,10 @@ Updated the implementation details.`;
 
       const modifiedMsg = readFileSync(msgPath, 'utf8');
       assert.ok(modifiedMsg.includes('AI-Agent:'), 'Should handle long messages');
-      // Content should be truncated in trailers
+      // Content should be truncated in trailers (200 char limit in buildTrailers)
       const decisionMatch = modifiedMsg.match(/AI-Decision: (.+)/);
       if (decisionMatch) {
-        assert.ok(decisionMatch[1].length <= 250, 'Trailer content should be truncated');
+        assert.ok(decisionMatch[1].length <= 200, 'Trailer content should be truncated to 200 chars');
       }
     });
   });

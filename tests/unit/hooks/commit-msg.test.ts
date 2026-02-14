@@ -102,7 +102,7 @@ describe('installCommitMsgHook', () => {
       assert.equal(result.wrapped, false);
 
       const content = readFileSync(hookPath, 'utf8');
-      assert.ok(content.includes('git-mem:commit-msg v4'), 'Should be upgraded to v3');
+      assert.ok(content.includes('git-mem:commit-msg v4'), 'Should be upgraded to v4');
       assert.ok(content.includes('git-mem hook commit-msg'), 'Should include git-mem command');
 
       // Second install should be idempotent
