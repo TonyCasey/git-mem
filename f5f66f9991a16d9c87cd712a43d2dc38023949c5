@@ -1,7 +1,31 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-14T17:48:29.052Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-14T17:48:29.052Z"
+      }
+    },
+    {
+      "id": "01212b86-4c51-44ab-a034-fd56e302f76c",
+      "content": "handle edge cases in commit-msg hook (GIT-85). Skip analysis for special commit types:",
+      "type": "decision",
+      "sha": "f5f66f9991a16d9c87cd712a43d2dc38023949c5",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "application",
+        "handlers",
+        "hooks",
+        "tests",
+        "integration",
+        "unit"
+      ],
+      "createdAt": "2026-02-14T17:51:50.841Z",
+      "updatedAt": "2026-02-14T17:51:50.841Z"
+    }
+  ]
 }
