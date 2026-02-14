@@ -10,6 +10,8 @@
  *   git-mem hook prompt-submit
  */
 
+import { join } from 'path';
+import { config as loadEnv } from 'dotenv';
 import { createContainer } from '../infrastructure/di';
 import { readStdin } from '../hooks/utils/stdin';
 import { setupShutdown } from '../hooks/utils/shutdown';
@@ -120,7 +122,12 @@ export async function hookCommand(eventName: string, _logger?: ILogger): Promise
 
   try {
     const input = await readStdin<IHookInput>();
-    const config = loadHookConfig(input.cwd);
+    const cwd = input.cwd ?? process.cwd();
+
+    // Load .env from repository root for API keys (e.g., ANTHROPIC_API_KEY)
+    loadEnv({ path: join(cwd, '.env'), quiet: true });
+
+    const config = loadHookConfig(cwd);
 
     if (!isEventEnabled(config.hooks, eventName)) {
       clearTimeout(timer);
