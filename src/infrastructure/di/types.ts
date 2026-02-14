@@ -20,10 +20,13 @@ import type { IEventBus } from '../../domain/interfaces/IEventBus';
 import type { IMemoryService } from '../../application/interfaces/IMemoryService';
 import type { IContextService } from '../../application/interfaces/IContextService';
 import type { IExtractService } from '../../application/interfaces/IExtractService';
+import type { ICommitAnalyzer } from '../../application/interfaces/ICommitAnalyzer';
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCaptureService';
 import type { ITrailerService } from '../../domain/interfaces/ITrailerService';
+import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
+import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
 
 export interface ICradle {
   // Infrastructure
@@ -35,11 +38,14 @@ export interface ICradle {
   triageService: IGitTriageService;
   llmClient: ILLMClient | null;
   eventBus: IEventBus;
+  agentResolver: IAgentResolver;
+  hookConfigLoader: IHookConfigLoader;
 
   // Application — core services
   memoryService: IMemoryService;
   contextService: IContextService;
   extractService: IExtractService;
+  commitAnalyzer: ICommitAnalyzer;
 
   // Application — hook services
   memoryContextLoader: IMemoryContextLoader;

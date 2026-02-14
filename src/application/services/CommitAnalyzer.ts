@@ -1,0 +1,247 @@
+/**
+ * CommitAnalyzer
+ *
+ * Analyzes commit messages to extract memory metadata:
+ * - Memory type (decision, gotcha, convention, fact)
+ * - Content text
+ * - Confidence level
+ * - Tags (from scope, paths, patterns)
+ *
+ * Uses HeuristicPatterns for pattern extraction and
+ * conventional commit parsing for type inference.
+ */
+
+import type { MemoryType } from '../../domain/entities/IMemoryEntity';
+import type { ConfidenceLevel } from '../../domain/types/IMemoryQuality';
+import type {
+  ICommitAnalyzer,
+  ICommitAnalysis,
+  IConventionalCommit,
+} from '../interfaces/ICommitAnalyzer';
+import type {
+  IPatternMatch,
+  ConfidenceLevel as PatternConfidence,
+} from '../../domain/types/IPatternMatch';
+import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
+import { inferTags } from './TagInference';
+
+/**
+ * Confidence level ranking for sorting (higher = better).
+ */
+const CONFIDENCE_RANK: Readonly<Record<PatternConfidence, number>> = {
+  high: 3,
+  medium: 2,
+  low: 1,
+};
+
+/**
+ * Sort patterns by confidence level (high > medium > low).
+ * Preserves original order for ties (stable sort).
+ */
+function sortByConfidence(patterns: IPatternMatch[]): IPatternMatch[] {
+  return [...patterns].sort((a, b) => {
+    return CONFIDENCE_RANK[b.confidence] - CONFIDENCE_RANK[a.confidence];
+  });
+}
+
+/**
+ * Conventional commit regex.
+ * Matches: type(scope)!: description
+ * Groups: type, scope (optional), breaking (optional), description
+ */
+const CONVENTIONAL_COMMIT_REGEX =
+  /^(?<type>[a-z]+)(?:\((?<scope>[^)]+)\))?(?<breaking>!)?:\s*(?<description>.+)/i;
+
+/**
+ * Map conventional commit types to memory types.
+ * Priority 2 inference (after explicit pattern matches).
+ */
+const CONVENTIONAL_TYPE_MAP: Readonly<Record<string, MemoryType>> = {
+  feat: 'decision',
+  feature: 'decision',
+  fix: 'gotcha',
+  bugfix: 'gotcha',
+  hotfix: 'gotcha',
+  refactor: 'convention',
+  style: 'convention',
+  docs: 'fact',
+  chore: 'fact',
+  build: 'fact',
+  ci: 'fact',
+  test: 'fact',
+  perf: 'decision',
+};
+
+export class CommitAnalyzer implements ICommitAnalyzer {
+  /**
+   * Analyze a commit message to extract memory metadata.
+   */
+  analyze(message: string, stagedFiles: readonly string[]): ICommitAnalysis {
+    if (!message || message.trim().length === 0) {
+      return this.emptyAnalysis();
+    }
+
+    // 1. Parse conventional commit format
+    const conventional = this.parseConventionalCommit(message);
+
+    // 2. Extract patterns using HeuristicPatterns
+    const patterns = extractPatternMatches(message);
+
+    // 3. Infer memory type (patterns take priority)
+    const { type, patternName, content } = this.inferMemoryType(
+      patterns,
+      conventional,
+      message
+    );
+
+    // 4. Calculate confidence
+    const confidence = this.calculateConfidence(patterns, conventional, type);
+
+    // 5. Infer tags
+    const tags = inferTags(conventional.scope, stagedFiles, patterns);
+
+    return {
+      type,
+      content,
+      confidence,
+      tags,
+      conventionalType: conventional.type,
+      scope: conventional.scope,
+      patternName,
+    };
+  }
+
+  /**
+   * Parse a commit message into conventional commit components.
+   */
+  parseConventionalCommit(message: string): IConventionalCommit {
+    const lines = message.split('\n');
+    const firstLine = lines[0] || '';
+
+    // Body is everything after the first blank line (per conventional commit spec)
+    let body = '';
+    if (lines.length > 1) {
+      const rest = lines.slice(1);
+      const firstBlankIndex = rest.findIndex((line) => line.trim() === '');
+
+      if (firstBlankIndex !== -1) {
+        body = rest.slice(firstBlankIndex + 1).join('\n').trim();
+      }
+    }
+
+    const match = firstLine.match(CONVENTIONAL_COMMIT_REGEX);
+
+    if (!match?.groups) {
+      return {
+        type: null,
+        scope: null,
+        breaking: false,
+        description: firstLine,
+        body,
+      };
+    }
+
+    return {
+      type: match.groups.type?.toLowerCase() ?? null,
+      scope: match.groups.scope ?? null,
+      breaking: match.groups.breaking === '!',
+      description: match.groups.description ?? '',
+      body,
+    };
+  }
+
+  /**
+   * Infer memory type from patterns and conventional commit type.
+   */
+  private inferMemoryType(
+    patterns: IPatternMatch[],
+    conventional: IConventionalCommit,
+    _fullMessage: string
+  ): { type: MemoryType | null; patternName: string | null; content: string | null } {
+    // Priority 1: Explicit pattern match (decision/gotcha/convention patterns)
+    // Sort by confidence to select the highest-confidence match
+    if (patterns.length > 0) {
+      const sortedPatterns = sortByConfidence(patterns);
+      const bestPattern = sortedPatterns[0];
+      return {
+        type: bestPattern.factType,
+        patternName: bestPattern.patternName,
+        content: bestPattern.text,
+      };
+    }
+
+    // Priority 2: Conventional commit type mapping
+    if (conventional.type) {
+      const mappedType = CONVENTIONAL_TYPE_MAP[conventional.type];
+      if (mappedType) {
+        // For conventional commits without pattern matches, use description + body
+        const content = conventional.body
+          ? `${conventional.description}. ${conventional.body.split('\n')[0]}`
+          : conventional.description;
+
+        return {
+          type: mappedType,
+          patternName: `conventional:${conventional.type}`,
+          content,
+        };
+      }
+    }
+
+    // No type detected
+    return { type: null, patternName: null, content: null };
+  }
+
+  /**
+   * Calculate confidence based on match quality.
+   */
+  private calculateConfidence(
+    patterns: IPatternMatch[],
+    conventional: IConventionalCommit,
+    detectedType: MemoryType | null
+  ): ConfidenceLevel {
+    // If we have explicit patterns, use the confidence of the best pattern
+    // (sorted by confidence level). Prefer the pattern matching the detected type.
+    if (patterns.length > 0) {
+      const sortedPatterns = sortByConfidence(patterns);
+      const patternForDetectedType =
+        detectedType != null
+          ? sortedPatterns.find((p) => p.factType === detectedType)
+          : undefined;
+
+      const sourcePattern = patternForDetectedType ?? sortedPatterns[0];
+      return sourcePattern.confidence as ConfidenceLevel;
+    }
+
+    // Conventional commit inference
+    if (conventional.type && detectedType) {
+      // Breaking changes are high confidence
+      if (conventional.breaking) return 'high';
+
+      // feat/fix are well-established patterns
+      if (conventional.type === 'feat' || conventional.type === 'fix') {
+        return 'medium';
+      }
+
+      // Other types are lower confidence
+      return 'low';
+    }
+
+    // No type detected
+    return 'low';
+  }
+
+  /**
+   * Return an empty analysis result.
+   */
+  private emptyAnalysis(): ICommitAnalysis {
+    return {
+      type: null,
+      content: null,
+      confidence: 'low',
+      tags: [],
+      conventionalType: null,
+      scope: null,
+      patternName: null,
+    };
+  }
+}

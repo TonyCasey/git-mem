@@ -42,8 +42,22 @@ export interface IGitCommitEvent {
   readonly cwd: string;
 }
 
+/** Event emitted by commit-msg hook to analyze and add trailers. */
+export interface ICommitMsgEvent {
+  readonly type: 'git:commit-msg';
+  /** Path to the commit message file. */
+  readonly commitMsgPath: string;
+  /** Working directory of the repository. */
+  readonly cwd: string;
+}
+
 /** Union of all hook events. */
-export type HookEvent = ISessionStartEvent | ISessionStopEvent | IPromptSubmitEvent | IGitCommitEvent;
+export type HookEvent =
+  | ISessionStartEvent
+  | ISessionStopEvent
+  | IPromptSubmitEvent
+  | IGitCommitEvent
+  | ICommitMsgEvent;
 
 /** String literal union of all hook event types. */
 export type HookEventType = HookEvent['type'];

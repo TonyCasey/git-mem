@@ -35,12 +35,25 @@ export interface IPostCommitConfig {
   readonly enabled: boolean;
 }
 
+export interface ICommitMsgConfig {
+  readonly enabled: boolean;
+  /** Auto-analyze commit message and add AI trailers. */
+  readonly autoAnalyze: boolean;
+  /** Infer tags from file paths and scope. */
+  readonly inferTags: boolean;
+  /** Require a memory type to be detected (skip if none found). */
+  readonly requireType: boolean;
+  /** Default memory lifecycle. */
+  readonly defaultLifecycle: 'permanent' | 'project' | 'session';
+}
+
 export interface IHooksConfig {
   readonly enabled: boolean;
   readonly sessionStart: ISessionStartConfig;
   readonly sessionStop: ISessionStopConfig;
   readonly promptSubmit: IPromptSubmitConfig;
   readonly postCommit: IPostCommitConfig;
+  readonly commitMsg: ICommitMsgConfig;
 }
 
 export interface IHookConfig {

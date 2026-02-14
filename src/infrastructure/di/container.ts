@@ -25,12 +25,15 @@ import { TrailerService } from '../services/TrailerService';
 import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
+import { AgentResolver } from '../services/AgentResolver';
+import { HookConfigLoader } from '../services/HookConfigLoader';
 
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
 import { ContextService } from '../../application/services/ContextService';
 import { ExtractService } from '../../application/services/ExtractService';
 import { GitTriageService } from '../../application/services/GitTriageService';
+import { CommitAnalyzer } from '../../application/services/CommitAnalyzer';
 
 // Application — hook services
 import { MemoryContextLoader } from '../../application/services/MemoryContextLoader';
@@ -40,6 +43,7 @@ import { SessionStartHandler } from '../../application/handlers/SessionStartHand
 import { SessionStopHandler } from '../../application/handlers/SessionStopHandler';
 import { PromptSubmitHandler } from '../../application/handlers/PromptSubmitHandler';
 import { PostCommitHandler } from '../../application/handlers/PostCommitHandler';
+import { CommitMsgHandler } from '../../application/handlers/CommitMsgHandler';
 
 export function createContainer(options?: IContainerOptions): AwilixContainer<ICradle> {
   const container = createAwilixContainer<ICradle>({
@@ -58,6 +62,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
     trailerService: asClass(TrailerService).singleton(),
+    agentResolver: asClass(AgentResolver).singleton(),
+    hookConfigLoader: asClass(HookConfigLoader).singleton(),
 
     eventBus: asFunction(() => {
       const bus = new EventBus(container.cradle.logger);
@@ -81,6 +87,13 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.notesService,
         container.cradle.logger,
       ));
+      bus.on('git:commit-msg', new CommitMsgHandler(
+        container.cradle.commitAnalyzer,
+        container.cradle.gitClient,
+        container.cradle.logger,
+        container.cradle.agentResolver,
+        container.cradle.hookConfigLoader,
+      ));
 
       return bus;
     }).singleton(),
@@ -102,6 +115,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     memoryService: asClass(MemoryService).singleton(),
     contextService: asClass(ContextService).singleton(),
     extractService: asClass(ExtractService).singleton(),
+    commitAnalyzer: asClass(CommitAnalyzer).singleton(),
 
     // ── Hook services ─────────────────────────────────────────────
     memoryContextLoader: asClass(MemoryContextLoader).singleton(),

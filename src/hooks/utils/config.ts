@@ -17,6 +17,13 @@ const DEFAULTS: IHookConfig = {
     sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
     promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
     postCommit: { enabled: true },
+    commitMsg: {
+      enabled: true,
+      autoAnalyze: true,
+      inferTags: true,
+      requireType: false,
+      defaultLifecycle: 'project',
+    },
   },
 };
 
@@ -52,6 +59,10 @@ export function loadHookConfig(cwd?: string): IHookConfig {
         postCommit: {
           ...DEFAULTS.hooks.postCommit,
           ...(rawHooks.postCommit ?? {}),
+        },
+        commitMsg: {
+          ...DEFAULTS.hooks.commitMsg,
+          ...(rawHooks.commitMsg ?? {}),
         },
       },
     };

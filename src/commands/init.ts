@@ -20,6 +20,7 @@ import {
 import { buildMcpConfig } from './init-mcp';
 import { installHook, uninstallHook } from '../hooks/prepare-commit-msg';
 import { installPostCommitHook, uninstallPostCommitHook } from '../hooks/post-commit';
+import { installCommitMsgHook, uninstallCommitMsgHook } from '../hooks/commit-msg';
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
 
@@ -123,6 +124,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   if (options.uninstallHooks) {
     const removedPrepare = uninstallHook(cwd);
     const removedPost = uninstallPostCommitHook(cwd);
+    const removedCommitMsg = uninstallCommitMsgHook(cwd);
 
     if (removedPrepare) {
       console.log('✓ Removed prepare-commit-msg hook');
@@ -130,7 +132,10 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     if (removedPost) {
       console.log('✓ Removed post-commit hook');
     }
-    if (!removedPrepare && !removedPost) {
+    if (removedCommitMsg) {
+      console.log('✓ Removed commit-msg hook');
+    }
+    if (!removedPrepare && !removedPost && !removedCommitMsg) {
       console.log('No git-mem hooks found.');
     }
     return;
@@ -207,13 +212,20 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     console.log('✓ Created .git-mem.json');
   }
 
-  // ── Git hooks (prepare-commit-msg + post-commit) ─────────────────
+  // ── Git hooks (prepare-commit-msg, commit-msg, post-commit) ─────
   if (options.hooks) {
     const prepareResult = installHook(cwd);
     if (prepareResult.installed) {
       console.log(`✓ Installed prepare-commit-msg hook${prepareResult.wrapped ? ' (wrapped existing hook)' : ''}`);
     } else {
       console.log('✓ prepare-commit-msg hook already installed (skipped)');
+    }
+
+    const commitMsgResult = installCommitMsgHook(cwd);
+    if (commitMsgResult.installed) {
+      console.log(`✓ Installed commit-msg hook${commitMsgResult.wrapped ? ' (wrapped existing hook)' : ''}`);
+    } else {
+      console.log('✓ commit-msg hook already installed (skipped)');
     }
 
     const postResult = installPostCommitHook(cwd);
