@@ -4094,6 +4094,21 @@
       ],
       "createdAt": "2026-02-14T18:58:42.952Z",
       "updatedAt": "2026-02-14T18:58:42.952Z"
+    },
+    {
+      "id": "144ab964-b2e0-4e5a-b0c1-ef4c45999254",
+      "content": "always using patterns[0]",
+      "type": "decision",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-14T19:03:42.410Z",
+      "updatedAt": "2026-02-14T19:03:42.410Z"
     }
   ]
 }
