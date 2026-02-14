@@ -2909,6 +2909,21 @@
       ],
       "createdAt": "2026-02-14T18:19:19.724Z",
       "updatedAt": "2026-02-14T18:19:19.724Z"
+    },
+    {
+      "id": "e033a4f4-e8f6-40ce-b134-f95a11661a07",
+      "content": "rather than just the first one found",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T18:19:19.746Z",
+      "updatedAt": "2026-02-14T18:19:19.746Z"
     }
   ]
 }
