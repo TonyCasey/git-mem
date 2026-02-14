@@ -57,6 +57,23 @@
       ],
       "createdAt": "2026-02-14T23:06:19.785Z",
       "updatedAt": "2026-02-14T23:06:19.785Z"
+    },
+    {
+      "id": "fd03d064-eef9-426e-b5f9-6ebfa083bc5a",
+      "content": "the LLM API calls were timing out at the 5 second default",
+      "type": "decision",
+      "sha": "bcab2bce434426cb34cf24d3291221269438d9dc",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "hooks",
+        "utils",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-14T23:14:22.847Z",
+      "updatedAt": "2026-02-14T23:14:22.847Z"
     }
   ]
 }
