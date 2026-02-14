@@ -6359,6 +6359,21 @@
       ],
       "createdAt": "2026-02-14T23:59:34.577Z",
       "updatedAt": "2026-02-14T23:59:34.577Z"
+    },
+    {
+      "id": "7d231674-837a-4af0-af35-18dd5e981f2e",
+      "content": "actually used for type inference",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T23:59:34.600Z",
+      "updatedAt": "2026-02-14T23:59:34.600Z"
     }
   ]
 }
