@@ -374,6 +374,21 @@
       ],
       "createdAt": "2026-02-14T17:53:18.617Z",
       "updatedAt": "2026-02-14T17:53:18.617Z"
+    },
+    {
+      "id": "2cc93cbb-15cb-4a80-bb0a-f9ab1518ee63",
+      "content": "users need to know about the new commit-msg hook feature that automatically adds AI trailers",
+      "type": "decision",
+      "sha": "884c964615e4594a2f21d277d583e3068dfdd8af",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-14T17:56:11.575Z",
+      "updatedAt": "2026-02-14T17:56:11.575Z"
     }
   ]
 }
