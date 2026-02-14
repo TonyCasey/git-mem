@@ -55,7 +55,7 @@ If `.claude/settings.json` already exists (e.g. with other tools' hooks), git-me
 
 ### How It Works
 
-```
+```text
 Claude Code starts session
   → git-mem hook session-start
   → Loads stored memories into Claude's context
@@ -134,7 +134,7 @@ This registers `git-mem-mcp` with 4 tools: `remember`, `recall`, `context`, `lib
 
 ## Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────┐
 │  Entry Points                               │
 │  ┌─────┐  ┌─────────┐  ┌────────────────┐  │
@@ -152,7 +152,7 @@ This registers `git-mem-mcp` with 4 tools: `remember`, `recall`, `context`, `lib
 │  │          Application Layer             │ │
 │  │  MemoryService  LiberateService        │ │
 │  │  ContextService SessionCaptureService  │ │
-│  │  EventBus + Handlers                   │ │
+│  │  SessionStartHandler PromptSubmitHandler│ │
 │  └─────────────────────┬──────────────────┘ │
 │                        │                    │
 │  ┌─────────────────────┴──────────────────┐ │
