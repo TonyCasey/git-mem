@@ -78,30 +78,41 @@ export function ensureGitignoreEntries(cwd: string, entries: string[]): void {
 
 /**
  * Configure git to push notes automatically with regular pushes.
- * Sets remote.origin.push to include refs/notes/* alongside refs/heads/*.
+ * Adds refs/notes/* to existing push refspecs, preserving any user-configured refspecs.
  * Idempotent - safe to call multiple times.
  */
 export function configureNotesPush(cwd: string): void {
+  let existingRefspecs: string[] = [];
+
   try {
-    // Check if notes push is already configured
+    // Get existing push refspecs
     const existing = execFileSync('git', ['config', '--local', '--get-all', 'remote.origin.push'], {
       cwd,
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
     }).trim();
 
-    if (existing.includes('refs/notes')) {
-      return; // Already configured
+    if (existing) {
+      existingRefspecs = existing.split('\n').filter(Boolean);
+    }
+
+    // Already has notes configured - nothing to do
+    if (existingRefspecs.some((ref) => ref.includes('refs/notes'))) {
+      return;
     }
   } catch {
     // Config doesn't exist yet, proceed to set it
   }
 
-  // Set push refspecs: heads and notes
-  execFileSync('git', ['config', '--local', 'remote.origin.push', '+refs/heads/*:refs/heads/*'], {
-    cwd,
-    stdio: ['pipe', 'pipe', 'pipe'],
-  });
+  // If no existing refspecs, add heads first
+  if (existingRefspecs.length === 0) {
+    execFileSync('git', ['config', '--local', 'remote.origin.push', '+refs/heads/*:refs/heads/*'], {
+      cwd,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+  }
+
+  // Add notes refspec (preserves existing refspecs)
   execFileSync('git', ['config', '--local', '--add', 'remote.origin.push', '+refs/notes/*:refs/notes/*'], {
     cwd,
     stdio: ['pipe', 'pipe', 'pipe'],
