@@ -46,22 +46,32 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
         return { handler: 'CommitMsgHandler', success: true };
       }
 
-      // 3. Get staged files
-      const stagedFiles = this.gitClient.diffStagedNames(event.cwd);
+      // 3. Check autoAnalyze config - if false, only add basic Agent/Model trailers
+      if (!config.autoAnalyze) {
+        this.logger.debug('autoAnalyze is false, adding only Agent/Model trailers');
+        const basicTrailers = this.buildBasicTrailers();
+        await this.appendTrailers(event.commitMsgPath, basicTrailers, event.cwd);
+        return { handler: 'CommitMsgHandler', success: true };
+      }
 
-      // 4. Analyze the commit message
+      // 4. Get staged files (only if inferTags is enabled)
+      const stagedFiles = config.inferTags
+        ? this.gitClient.diffStagedNames(event.cwd)
+        : [];
+
+      // 5. Analyze the commit message
       const analysis = this.commitAnalyzer.analyze(message, stagedFiles);
 
-      // 5. Check requireType config - skip if no type detected and requireType is true
+      // 6. Check requireType config - skip if no type detected and requireType is true
       if (config.requireType && !analysis.type) {
         this.logger.debug('No memory type detected and requireType is true, skipping');
         return { handler: 'CommitMsgHandler', success: true };
       }
 
-      // 6. Build trailers
+      // 7. Build trailers (skip tags if inferTags is false)
       const trailers = this.buildTrailers(analysis, config);
 
-      // 7. Append trailers to the commit message using git interpret-trailers
+      // 8. Append trailers to the commit message using git interpret-trailers
       await this.appendTrailers(event.commitMsgPath, trailers, event.cwd);
 
       this.logger.info('Commit message analyzed and trailers added', {
@@ -83,6 +93,24 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
         error: error instanceof Error ? error : new Error(String(error)),
       };
     }
+  }
+
+  /**
+   * Build basic AI-Agent and AI-Model trailers only (when autoAnalyze is false).
+   */
+  private buildBasicTrailers(): ITrailer[] {
+    const trailers: ITrailer[] = [];
+    const agent = resolveAgent();
+    const model = resolveModel();
+
+    if (agent) {
+      trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
+    }
+    if (model) {
+      trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: model });
+    }
+
+    return trailers;
   }
 
   /**
@@ -118,8 +146,8 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
     // Add confidence
     trailers.push({ key: AI_TRAILER_KEYS.CONFIDENCE, value: analysis.confidence });
 
-    // Add tags if we have any
-    if (analysis.tags.length > 0) {
+    // Add tags if we have any and inferTags is enabled
+    if (config.inferTags && analysis.tags.length > 0) {
       trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: analysis.tags.join(', ') });
     }
 
