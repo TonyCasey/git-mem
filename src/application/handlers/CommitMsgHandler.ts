@@ -20,21 +20,23 @@ import {
   AI_TRAILER_KEYS,
   MEMORY_TYPE_TO_TRAILER_KEY,
 } from '../../domain/entities/ITrailer';
-import { resolveAgent, resolveModel } from '../../infrastructure/detect-agent';
-import { loadHookConfig } from '../../hooks/utils/config';
+import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
+import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
 import type { ICommitMsgConfig } from '../../domain/interfaces/IHookConfig';
 
 export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
   constructor(
     private readonly commitAnalyzer: ICommitAnalyzer,
     private readonly gitClient: IGitClient,
-    private readonly logger: ILogger
+    private readonly logger: ILogger,
+    private readonly agentResolver: IAgentResolver,
+    private readonly configLoader: IHookConfigLoader
   ) {}
 
   async handle(event: ICommitMsgEvent): Promise<IEventResult> {
     try {
-      // 0. Load config
-      const hookConfig = loadHookConfig(event.cwd);
+      // 0. Load config via injected loader
+      const hookConfig = this.configLoader.loadConfig(event.cwd);
       const config = hookConfig.hooks.commitMsg;
 
       // 1. Read the commit message file
@@ -100,8 +102,8 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
    */
   private buildBasicTrailers(): ITrailer[] {
     const trailers: ITrailer[] = [];
-    const agent = resolveAgent();
-    const model = resolveModel();
+    const agent = this.agentResolver.resolveAgent();
+    const model = this.agentResolver.resolveModel();
 
     if (agent) {
       trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
@@ -122,9 +124,9 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
   ): ITrailer[] {
     const trailers: ITrailer[] = [];
 
-    // Always add Agent and Model
-    const agent = resolveAgent();
-    const model = resolveModel();
+    // Always add Agent and Model via injected resolver
+    const agent = this.agentResolver.resolveAgent();
+    const model = this.agentResolver.resolveModel();
 
     if (agent) {
       trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });

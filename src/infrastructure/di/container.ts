@@ -25,6 +25,8 @@ import { TrailerService } from '../services/TrailerService';
 import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
+import { AgentResolver } from '../services/AgentResolver';
+import { HookConfigLoader } from '../services/HookConfigLoader';
 
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
@@ -60,6 +62,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
     trailerService: asClass(TrailerService).singleton(),
+    agentResolver: asClass(AgentResolver).singleton(),
+    hookConfigLoader: asClass(HookConfigLoader).singleton(),
 
     eventBus: asFunction(() => {
       const bus = new EventBus(container.cradle.logger);
@@ -87,6 +91,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.commitAnalyzer,
         container.cradle.gitClient,
         container.cradle.logger,
+        container.cradle.agentResolver,
+        container.cradle.hookConfigLoader,
       ));
 
       return bus;
