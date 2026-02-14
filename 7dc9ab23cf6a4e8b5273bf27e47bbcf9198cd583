@@ -1979,6 +1979,21 @@
       ],
       "createdAt": "2026-02-14T17:56:11.418Z",
       "updatedAt": "2026-02-14T17:56:11.418Z"
+    },
+    {
+      "id": "7d457773-31dc-45ed-b6ac-0155989bec16",
+      "content": "using patterns[0]",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:always"
+      ],
+      "createdAt": "2026-02-14T17:56:11.440Z",
+      "updatedAt": "2026-02-14T17:56:11.440Z"
     }
   ]
 }
