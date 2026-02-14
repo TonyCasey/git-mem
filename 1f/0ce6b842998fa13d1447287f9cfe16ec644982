@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "4fa33250-7703-4fa9-a89b-c8b36a48dbf0",
+      "content": "address PR review comments (GIT-85)",
+      "type": "gotcha",
+      "sha": "1f0ce6b842998fa13d1447287f9cfe16ec644982",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-14T17:59:14.974Z",
+      "updatedAt": "2026-02-14T17:59:14.974Z"
+    }
+  ]
+}
