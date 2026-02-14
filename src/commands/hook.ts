@@ -10,6 +10,9 @@
  *   git-mem hook prompt-submit
  */
 
+import { join } from 'path';
+import { execFileSync } from 'child_process';
+import { config as loadEnv } from 'dotenv';
 import { createContainer } from '../infrastructure/di';
 import { readStdin } from '../hooks/utils/stdin';
 import { setupShutdown } from '../hooks/utils/shutdown';
@@ -100,6 +103,22 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
   }
 }
 
+/**
+ * Find git repository root from a working directory.
+ * Returns cwd if git command fails (graceful fallback).
+ */
+function findGitRoot(cwd: string): string {
+  try {
+    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim();
+  } catch {
+    return cwd;
+  }
+}
+
 /** Stderr labels per event for user-facing messages. */
 const STDERR_LABELS: Record<HookEventType, { success: string; prefix: string }> = {
   'session:start': { success: 'Memory loaded.', prefix: 'Memory loaded' },
@@ -120,7 +139,13 @@ export async function hookCommand(eventName: string, _logger?: ILogger): Promise
 
   try {
     const input = await readStdin<IHookInput>();
-    const config = loadHookConfig(input.cwd);
+    const cwd = input.cwd ?? process.cwd();
+    const repoRoot = findGitRoot(cwd);
+
+    // Load .env from repository root for API keys (e.g., ANTHROPIC_API_KEY)
+    loadEnv({ path: join(repoRoot, '.env'), quiet: true });
+
+    const config = loadHookConfig(repoRoot);
 
     if (!isEventEnabled(config.hooks, eventName)) {
       clearTimeout(timer);
