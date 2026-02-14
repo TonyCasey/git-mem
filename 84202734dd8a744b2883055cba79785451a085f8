@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "6d467423-1b87-4b33-8d98-b0b8c0717db0",
+      "content": "on every AI-assisted commit",
+      "type": "gotcha",
+      "sha": "84202734dd8a744b2883055cba79785451a085f8",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:note"
+      ],
+      "createdAt": "2026-02-14T10:18:14.579Z",
+      "updatedAt": "2026-02-14T10:18:14.579Z"
+    }
+  ]
+}
