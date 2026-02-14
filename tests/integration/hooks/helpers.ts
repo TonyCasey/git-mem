@@ -84,7 +84,7 @@ export function addCommit(dir: string, filename: string, content: string, messag
 /** Write .git-mem.json into a directory with optional per-hook overrides. */
 export function writeGitMemConfig(
   dir: string,
-  overrides?: Partial<Record<'enabled' | 'sessionStart' | 'sessionStop' | 'promptSubmit', unknown>>,
+  overrides?: Partial<Record<'enabled' | 'sessionStart' | 'sessionStop' | 'promptSubmit' | 'postCommit', unknown>>,
 ): void {
   const defaults = {
     hooks: {
@@ -92,6 +92,7 @@ export function writeGitMemConfig(
       sessionStart: { enabled: true, memoryLimit: 20 },
       sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
       promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
+      postCommit: { enabled: true },
     },
   };
 
@@ -106,6 +107,7 @@ export function writeGitMemConfig(
       sessionStart: { ...defaults.hooks.sessionStart, ...(overrides.sessionStart as object) },
       sessionStop: { ...defaults.hooks.sessionStop, ...(overrides.sessionStop as object) },
       promptSubmit: { ...defaults.hooks.promptSubmit, ...(overrides.promptSubmit as object) },
+      postCommit: { ...defaults.hooks.postCommit, ...(overrides.postCommit as object) },
     },
   };
   writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(merged, null, 2) + '\n');

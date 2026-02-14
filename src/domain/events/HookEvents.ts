@@ -33,8 +33,17 @@ export interface IPromptSubmitEvent {
   readonly cwd: string;
 }
 
+/** Event emitted after a git commit is created. */
+export interface IGitCommitEvent {
+  readonly type: 'git:commit';
+  /** The commit SHA. */
+  readonly sha: string;
+  /** Working directory of the repository. */
+  readonly cwd: string;
+}
+
 /** Union of all hook events. */
-export type HookEvent = ISessionStartEvent | ISessionStopEvent | IPromptSubmitEvent;
+export type HookEvent = ISessionStartEvent | ISessionStopEvent | IPromptSubmitEvent | IGitCommitEvent;
 
 /** String literal union of all hook event types. */
 export type HookEventType = HookEvent['type'];

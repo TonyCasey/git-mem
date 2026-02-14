@@ -19,6 +19,7 @@ import {
 } from './init-hooks';
 import { buildMcpConfig } from './init-mcp';
 import { installHook, uninstallHook } from '../hooks/prepare-commit-msg';
+import { installPostCommitHook, uninstallPostCommitHook } from '../hooks/post-commit';
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
 
@@ -120,11 +121,17 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   // ── Git hook uninstall (early exit) ─────────────────────────────
   if (options.uninstallHooks) {
-    const removed = uninstallHook(cwd);
-    if (removed) {
+    const removedPrepare = uninstallHook(cwd);
+    const removedPost = uninstallPostCommitHook(cwd);
+
+    if (removedPrepare) {
       console.log('✓ Removed prepare-commit-msg hook');
-    } else {
-      console.log('No git-mem prepare-commit-msg hook found.');
+    }
+    if (removedPost) {
+      console.log('✓ Removed post-commit hook');
+    }
+    if (!removedPrepare && !removedPost) {
+      console.log('No git-mem hooks found.');
     }
     return;
   }
@@ -200,13 +207,20 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     console.log('✓ Created .git-mem.json');
   }
 
-  // ── Git hook (prepare-commit-msg) ─────────────────────────────
+  // ── Git hooks (prepare-commit-msg + post-commit) ─────────────────
   if (options.hooks) {
-    const hookResult = installHook(cwd);
-    if (hookResult.installed) {
-      console.log(`✓ Installed prepare-commit-msg hook${hookResult.wrapped ? ' (wrapped existing hook)' : ''}`);
+    const prepareResult = installHook(cwd);
+    if (prepareResult.installed) {
+      console.log(`✓ Installed prepare-commit-msg hook${prepareResult.wrapped ? ' (wrapped existing hook)' : ''}`);
     } else {
       console.log('✓ prepare-commit-msg hook already installed (skipped)');
+    }
+
+    const postResult = installPostCommitHook(cwd);
+    if (postResult.installed) {
+      console.log(`✓ Installed post-commit hook${postResult.wrapped ? ' (wrapped existing hook)' : ''}`);
+    } else {
+      console.log('✓ post-commit hook already installed (skipped)');
     }
   }
 

@@ -204,6 +204,9 @@ export function buildGitMemConfig(): Record<string, unknown> {
         recordPrompts: false,
         surfaceContext: true,
       },
+      postCommit: {
+        enabled: true,
+      },
     },
   };
 }
