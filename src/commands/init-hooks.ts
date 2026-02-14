@@ -3,16 +3,18 @@
  *
  * Generates Claude Code hook configuration files:
  * - .claude/settings.json (or ~/.claude/settings.json for user scope)
- * - .git-mem.json (hook-specific config)
+ * - .git-mem/.git-mem.yaml (hook-specific config)
  *
  * Preserves existing non-git-mem hooks in settings.json and
- * user customizations in .git-mem.json on re-runs.
+ * user customizations in .git-mem/.git-mem.yaml on re-runs.
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, rmSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
+import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import type { ILogger } from '../domain/interfaces/ILogger';
+import { getConfigPath, getConfigDir } from '../hooks/utils/config';
 
 interface IInitHooksOptions {
   yes?: boolean;
@@ -95,7 +97,7 @@ export function removeGitMemHooks(hooks: Record<string, unknown>): Record<string
   return cleaned;
 }
 
-// ── .git-mem.json deep merge ─────────────────────────────────────────
+// ── .git-mem.yaml deep merge ─────────────────────────────────────────
 
 /**
  * Deep-merge git-mem config so user customizations win over defaults.
@@ -217,7 +219,9 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   const log = logger?.child({ command: 'init-hooks' });
   const scope = options.scope ?? 'project';
   const settingsPath = getSettingsPath(scope);
-  const gitMemConfigPath = join(process.cwd(), '.git-mem.json');
+  const cwd = process.cwd();
+  const configDir = getConfigDir(cwd);
+  const configPath = getConfigPath(cwd);
 
   log?.info('Command invoked', { scope, remove: options.remove });
 
@@ -240,9 +244,9 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
       }
     }
 
-    if (existsSync(gitMemConfigPath)) {
-      unlinkSync(gitMemConfigPath);
-      console.log('Removed .git-mem.json');
+    if (existsSync(configDir)) {
+      rmSync(configDir, { recursive: true, force: true });
+      console.log('Removed .git-mem/ directory');
     }
 
     console.log('\nHooks removed.');
@@ -266,14 +270,17 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n');
   console.log(`Written ${settingsPath}`);
 
-  // Deep-merge into existing .git-mem.json (preserves user customizations)
-  const existingGitMemConfig = existsSync(gitMemConfigPath)
-    ? (() => { try { return JSON.parse(readFileSync(gitMemConfigPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
+  // Deep-merge into existing .git-mem/.git-mem.yaml (preserves user customizations)
+  if (!existsSync(configDir)) {
+    mkdirSync(configDir, { recursive: true });
+  }
+  const existingGitMemConfig = existsSync(configPath)
+    ? (() => { try { return parseYaml(readFileSync(configPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
     : {};
   const newGitMemConfig = buildGitMemConfig();
   const mergedGitMemConfig = deepMergeGitMemConfig(existingGitMemConfig, newGitMemConfig);
-  writeFileSync(gitMemConfigPath, JSON.stringify(mergedGitMemConfig, null, 2) + '\n');
-  console.log('Written .git-mem.json');
+  writeFileSync(configPath, stringifyYaml(mergedGitMemConfig));
+  console.log('Written .git-mem/.git-mem.yaml');
 
   console.log('\nHooks configured:');
   console.log('  SessionStart     — Load memories into Claude context on startup');
@@ -283,5 +290,5 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   console.log('\nNext steps:');
   console.log('  1. Start Claude Code in this repo: claude');
   console.log('  2. Memories will load automatically on session start');
-  console.log('  3. Adjust settings in .git-mem.json');
+  console.log('  3. Adjust settings in .git-mem/.git-mem.yaml');
 }
