@@ -51,7 +51,7 @@ const DEFAULTS: IHookConfig = {
       requireType: false,
       defaultLifecycle: 'project',
       enrich: true,
-      enrichTimeout: 5000,
+      enrichTimeout: 8000,
     },
   },
 };
