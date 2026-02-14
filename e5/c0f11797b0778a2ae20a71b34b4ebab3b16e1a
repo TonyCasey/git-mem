@@ -22,6 +22,22 @@
       ],
       "createdAt": "2026-02-14T20:35:51.971Z",
       "updatedAt": "2026-02-14T20:35:51.971Z"
+    },
+    {
+      "id": "48c044bc-50c6-434b-8417-4232dcb22182",
+      "content": "update init-hooks.ts to write YAML config (GIT-91). - Create .git-mem/ directory if it doesn't exist",
+      "type": "decision",
+      "sha": "e5c0f11797b0778a2ae20a71b34b4ebab3b16e1a",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "commands",
+        "typescript"
+      ],
+      "createdAt": "2026-02-14T20:47:38.407Z",
+      "updatedAt": "2026-02-14T20:47:38.407Z"
     }
   ]
 }
