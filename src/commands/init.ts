@@ -253,9 +253,17 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     if (!existsSync(configDir)) {
       mkdirSync(configDir, { recursive: true });
     }
-    const existingGitMemConfig = existsSync(configPath)
-      ? (() => { try { return parseYaml(readFileSync(configPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
-      : {};
+    const existingGitMemConfig = (() => {
+      if (!existsSync(configPath)) return {};
+      try {
+        const parsed = parseYaml(readFileSync(configPath, 'utf8'));
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+          ? (parsed as Record<string, unknown>)
+          : {};
+      } catch {
+        return {};
+      }
+    })();
     const mergedGitMemConfig = deepMergeGitMemConfig(existingGitMemConfig, buildGitMemConfig());
     writeFileSync(configPath, stringifyYaml(mergedGitMemConfig));
     console.log('✓ Created .git-mem/.git-mem.yaml');
