@@ -1,7 +1,27 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-14T15:12:51.788Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-14T15:12:51.788Z"
+      }
+    },
+    {
+      "id": "159a456e-d942-4130-a9df-df7fc495e5ad",
+      "content": "auto-configure git to push notes with commits. git-mem init now configures remote.origin.push to include refs/notes/*",
+      "type": "decision",
+      "sha": "8e87265dfcaa0afa4c6882112ed17df6c43af02a",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "commands",
+        "typescript"
+      ],
+      "createdAt": "2026-02-14T15:13:03.376Z",
+      "updatedAt": "2026-02-14T15:13:03.376Z"
+    }
+  ]
 }
