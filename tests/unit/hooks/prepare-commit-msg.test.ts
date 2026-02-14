@@ -39,7 +39,7 @@ describe('installHook', () => {
 
     const content = readFileSync(result.hookPath, 'utf8');
     assert.ok(content.includes('#!/bin/sh'));
-    assert.ok(content.includes('git-mem:prepare-commit-msg v2'));
+    assert.ok(content.includes('git-mem:prepare-commit-msg v3'));
     assert.ok(content.includes('git interpret-trailers'));
     assert.ok(content.includes('AI-Agent'));
   });
@@ -75,24 +75,24 @@ describe('installHook', () => {
 
       // Installed hook should contain both fingerprint and wrapper reference
       const content = readFileSync(hookPath, 'utf8');
-      assert.ok(content.includes('git-mem:prepare-commit-msg v2'));
+      assert.ok(content.includes('git-mem:prepare-commit-msg v3'));
       assert.ok(content.includes('user-backup'));
     } finally {
       rmSync(freshRepo, { recursive: true, force: true });
     }
   });
 
-  it('should upgrade v1 hook to v2 on reinstall', () => {
+  it('should upgrade older hook to v3 on reinstall', () => {
     const freshRepo = mkdtempSync(join(tmpdir(), 'git-mem-hook-upgrade-'));
     git(['init'], freshRepo);
 
     const hooksDir = join(freshRepo, '.git', 'hooks');
     const hookPath = join(hooksDir, 'prepare-commit-msg');
 
-    // Write a v1 hook (old fingerprint, no AI-Model support)
-    const v1Hook = '#!/bin/sh\n# git-mem:prepare-commit-msg v1\n# Old hook without AI-Model\nexit 0\n';
+    // Write a v2 hook (old fingerprint, no CLAUDECODE/ANTHROPIC_MODEL support)
+    const v2Hook = '#!/bin/sh\n# git-mem:prepare-commit-msg v2\n# Old hook without auto-detect\nexit 0\n';
     mkdirSync(hooksDir, { recursive: true });
-    writeFileSync(hookPath, v1Hook);
+    writeFileSync(hookPath, v2Hook);
     chmodSync(hookPath, 0o755);
 
     try {
@@ -103,8 +103,9 @@ describe('installHook', () => {
       assert.equal(result.wrapped, false);
 
       const content = readFileSync(hookPath, 'utf8');
-      assert.ok(content.includes('git-mem:prepare-commit-msg v2'), 'Should be upgraded to v2');
-      assert.ok(content.includes('AI-Model'), 'Should include AI-Model support');
+      assert.ok(content.includes('git-mem:prepare-commit-msg v3'), 'Should be upgraded to v3');
+      assert.ok(content.includes('CLAUDECODE'), 'Should include CLAUDECODE detection');
+      assert.ok(content.includes('ANTHROPIC_MODEL'), 'Should include ANTHROPIC_MODEL detection');
 
       // Second install should be idempotent
       const result2 = installHook(freshRepo);
@@ -227,14 +228,35 @@ describe('hook integration — commit message modification', () => {
     assert.ok(message.includes('AI-Agent: TestAgent/1.0'), `Expected AI-Agent trailer in: ${message}`);
   });
 
-  it('should add AI-Agent trailer when CLAUDE_CODE is set', () => {
+  it('should add AI-Agent trailer with version when CLAUDECODE is set', () => {
     writeFileSync(join(repoDir, 'test2.txt'), 'world');
     git(['add', '.'], repoDir);
+
+    const env = { ...process.env, CLAUDECODE: '1' };
+    delete env.GIT_MEM_AGENT;
 
     execFileSync('git', ['commit', '-m', 'fix: another commit'], {
       encoding: 'utf8',
       cwd: repoDir,
-      env: { ...process.env, CLAUDE_CODE: '1', GIT_MEM_AGENT: '' },
+      env,
+    });
+
+    const message = git(['log', '-1', '--format=%B'], repoDir);
+    // Should contain Claude-Code (with or without version depending on claude binary availability)
+    assert.ok(message.includes('AI-Agent: Claude-Code'), `Expected Claude-Code trailer in: ${message}`);
+  });
+
+  it('should add AI-Agent trailer with legacy CLAUDE_CODE env var', () => {
+    writeFileSync(join(repoDir, 'test2b.txt'), 'legacy');
+    git(['add', '.'], repoDir);
+
+    const env = { ...process.env, CLAUDE_CODE: '1', GIT_MEM_AGENT: '' };
+    delete env.CLAUDECODE;
+
+    execFileSync('git', ['commit', '-m', 'fix: legacy env var'], {
+      encoding: 'utf8',
+      cwd: repoDir,
+      env,
     });
 
     const message = git(['log', '-1', '--format=%B'], repoDir);
@@ -249,6 +271,7 @@ describe('hook integration — commit message modification', () => {
     const cleanEnv = { ...process.env };
     delete cleanEnv.GIT_MEM_AGENT;
     delete cleanEnv.CLAUDE_CODE;
+    delete cleanEnv.CLAUDECODE;
 
     execFileSync('git', ['commit', '-m', 'chore: plain commit'], {
       encoding: 'utf8',
@@ -291,12 +314,30 @@ describe('hook integration — commit message modification', () => {
     assert.ok(message.includes('AI-Model: claude-opus-4-6'), `Expected AI-Model trailer in: ${message}`);
   });
 
-  it('should not add AI-Model trailer when GIT_MEM_MODEL is not set', () => {
+  it('should auto-detect AI-Model from ANTHROPIC_MODEL env var', () => {
+    writeFileSync(join(repoDir, 'anthropic-model.txt'), 'auto-model');
+    git(['add', '.'], repoDir);
+
+    const env = { ...process.env, GIT_MEM_AGENT: 'TestAgent', ANTHROPIC_MODEL: 'claude-sonnet-4-5' };
+    delete env.GIT_MEM_MODEL;
+
+    execFileSync('git', ['commit', '-m', 'feat: anthropic model auto-detect'], {
+      encoding: 'utf8',
+      cwd: repoDir,
+      env,
+    });
+
+    const message = git(['log', '-1', '--format=%B'], repoDir);
+    assert.ok(message.includes('AI-Model: claude-sonnet-4-5'), `Expected AI-Model trailer in: ${message}`);
+  });
+
+  it('should not add AI-Model trailer when no model env vars are set', () => {
     writeFileSync(join(repoDir, 'no-model.txt'), 'no-model');
     git(['add', '.'], repoDir);
 
     const cleanEnv = { ...process.env, GIT_MEM_AGENT: 'TestAgent' };
     delete cleanEnv.GIT_MEM_MODEL;
+    delete cleanEnv.ANTHROPIC_MODEL;
 
     execFileSync('git', ['commit', '-m', 'feat: no model test'], {
       encoding: 'utf8',

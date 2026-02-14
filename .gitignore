@@ -84,6 +84,7 @@ fabric.properties
 node_modules/
 dist/
 *.tgz
+releases/
 
 # Environment
 .env

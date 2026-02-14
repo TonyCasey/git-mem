@@ -3,6 +3,7 @@
  */
 
 import { createContainer } from '../infrastructure/di';
+import { resolveAgent, resolveModel } from '../infrastructure/detect-agent';
 import type { MemoryType } from '../domain/entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../domain/types/IMemoryQuality';
 import type { MemoryLifecycle } from '../domain/types/IMemoryLifecycle';
@@ -24,13 +25,8 @@ export async function rememberCommand(text: string, options: IRememberOptions, l
   const { memoryService, logger: log } = container.cradle;
   log.info('Command invoked', { type: options.type || 'fact' });
 
-  // Resolve agent: explicit flag > $GIT_MEM_AGENT > $CLAUDE_CODE heuristic
-  const agent = options.agent
-    || process.env.GIT_MEM_AGENT
-    || (process.env.CLAUDE_CODE ? 'Claude-Code' : undefined);
-
-  // Resolve model: explicit flag > $GIT_MEM_MODEL
-  const model = options.model || process.env.GIT_MEM_MODEL || undefined;
+  const agent = resolveAgent(options.agent);
+  const model = resolveModel(options.model);
 
   const memory = memoryService.remember(text, {
     sha: options.commit,
