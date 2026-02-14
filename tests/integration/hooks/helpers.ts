@@ -6,9 +6,11 @@
  */
 
 import { spawnSync, execFileSync } from 'child_process';
-import { mkdtempSync, writeFileSync, rmSync } from 'fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'fs';
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
+import { stringify as stringifyYaml } from 'yaml';
+import { CONFIG_DIR, CONFIG_FILE } from '../../../src/hooks/utils/config';
 
 const PROJECT_ROOT = resolve(__dirname, '../../..');
 const CLI_PATH = resolve(PROJECT_ROOT, 'src/cli.ts');
@@ -82,7 +84,7 @@ export function addCommit(dir: string, filename: string, content: string, messag
   return git(['rev-parse', 'HEAD'], dir);
 }
 
-/** Write .git-mem.json into a directory with optional per-hook overrides. */
+/** Write .git-mem/.git-mem.yaml into a directory with optional per-hook overrides. */
 export function writeGitMemConfig(
   dir: string,
   overrides?: Partial<Record<'enabled' | 'sessionStart' | 'sessionStop' | 'promptSubmit' | 'postCommit', unknown>>,
@@ -97,8 +99,11 @@ export function writeGitMemConfig(
     },
   };
 
+  const configDir = join(dir, CONFIG_DIR);
+  mkdirSync(configDir, { recursive: true });
+
   if (!overrides) {
-    writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(defaults, null, 2) + '\n');
+    writeFileSync(join(configDir, CONFIG_FILE), stringifyYaml(defaults));
     return;
   }
 
@@ -111,7 +116,7 @@ export function writeGitMemConfig(
       postCommit: { ...defaults.hooks.postCommit, ...(overrides.postCommit as object) },
     },
   };
-  writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(merged, null, 2) + '\n');
+  writeFileSync(join(configDir, CONFIG_FILE), stringifyYaml(merged));
 }
 
 /** Remove a temp directory. */
