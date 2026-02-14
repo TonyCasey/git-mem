@@ -90,6 +90,27 @@
       ],
       "createdAt": "2026-02-14T18:57:31.953Z",
       "updatedAt": "2026-02-14T18:57:31.953Z"
+    },
+    {
+      "id": "43e9024a-32a3-482c-9af3-0d3fff520dd5",
+      "content": "The project uses dotenv for loading environment variables from .env files, specifically for hooks functionality.",
+      "type": "decision",
+      "sha": "0ed28acd457a3e337ebc5475a3a35266e0bb53bf",
+      "confidence": "verified",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "dotenv",
+        "environment-variables",
+        "hooks",
+        "configuration",
+        "cli-tool",
+        "package-structure",
+        "binary"
+      ],
+      "createdAt": "2026-02-14T18:58:43.088Z",
+      "updatedAt": "2026-02-14T18:58:43.088Z"
     }
   ]
 }
