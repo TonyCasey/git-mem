@@ -29,6 +29,29 @@
       ],
       "createdAt": "2026-02-14T18:24:10.813Z",
       "updatedAt": "2026-02-14T18:24:10.813Z"
+    },
+    {
+      "id": "09413290-fded-4359-aa54-84d32b4006ab",
+      "content": "add LLM enrichment to commit-msg hook (GIT-87). When enabled, the commit-msg hook now uses Claude to generate richer",
+      "type": "decision",
+      "sha": "819e64a7e4364ab1f79e4bd760a7cc01f2c1f4fb",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "application",
+        "handlers",
+        "domain",
+        "entities",
+        "hooks",
+        "utils",
+        "infrastructure",
+        "tests",
+        "unit"
+      ],
+      "createdAt": "2026-02-14T18:32:34.190Z",
+      "updatedAt": "2026-02-14T18:32:34.190Z"
     }
   ]
 }
