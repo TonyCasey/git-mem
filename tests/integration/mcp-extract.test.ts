@@ -7,95 +7,16 @@
 
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn, execFileSync } from 'child_process';
-import { mkdtempSync, writeFileSync, rmSync } from 'fs';
+import { writeFileSync } from 'fs';
 import { join } from 'path';
-import { tmpdir } from 'os';
-
-const SERVER_PATH = join(__dirname, '..', '..', 'dist', 'mcp-server.js');
-
-function git(args: string[], cwd: string): string {
-  return execFileSync('git', args, { encoding: 'utf8', cwd }).trim();
-}
-
-function mcpSession(cwd: string, requests: object[]): Promise<object[]> {
-  return new Promise((resolve, reject) => {
-    const proc = spawn('node', [SERVER_PATH], {
-      stdio: ['pipe', 'pipe', 'pipe'],
-      cwd,
-    });
-
-    let stdout = '';
-    const responses: object[] = [];
-    const expectedResponses = 1 + requests.length;
-
-    proc.stdout.on('data', (data: Buffer) => {
-      stdout += data.toString();
-      const lines = stdout.split('\n').filter(Boolean);
-
-      for (const line of lines) {
-        try {
-          const parsed = JSON.parse(line);
-          if (parsed.id !== undefined) {
-            responses.push(parsed);
-          }
-        } catch {
-          // Incomplete line
-        }
-      }
-      stdout = '';
-
-      if (responses.length >= expectedResponses) {
-        proc.kill();
-        resolve(responses);
-      }
-    });
-
-    proc.on('error', reject);
-
-    const timeout = setTimeout(() => {
-      proc.kill();
-      reject(new Error(`MCP session timed out. Got ${responses.length}/${expectedResponses} responses`));
-    }, 10000);
-
-    proc.on('close', () => {
-      clearTimeout(timeout);
-    });
-
-    proc.stdin.write(JSON.stringify({
-      jsonrpc: '2.0',
-      id: 1,
-      method: 'initialize',
-      params: {
-        protocolVersion: '2024-11-05',
-        capabilities: {},
-        clientInfo: { name: 'test', version: '1.0' },
-      },
-    }) + '\n');
-
-    proc.stdin.write(JSON.stringify({
-      jsonrpc: '2.0',
-      method: 'notifications/initialized',
-    }) + '\n');
-
-    for (let i = 0; i < requests.length; i++) {
-      proc.stdin.write(JSON.stringify({
-        jsonrpc: '2.0',
-        id: i + 2,
-        ...requests[i],
-      }) + '\n');
-    }
-  });
-}
+import { mcpSession, git, createTestRepo, cleanupRepo } from './mcp/helpers';
 
 describe('Integration: MCP Tool — extract', () => {
   let repoDir: string;
 
   before(() => {
-    repoDir = mkdtempSync(join(tmpdir(), 'git-mem-mcp-extract-'));
-    git(['init'], repoDir);
-    git(['config', 'user.email', 'test@test.com'], repoDir);
-    git(['config', 'user.name', 'Test User'], repoDir);
+    const repo = createTestRepo('git-mem-mcp-extract-');
+    repoDir = repo.dir;
 
     // Create commits with heuristic-extractable patterns
     writeFileSync(join(repoDir, 'auth.ts'), 'export function login() {}');
@@ -108,7 +29,7 @@ describe('Integration: MCP Tool — extract', () => {
   });
 
   after(() => {
-    rmSync(repoDir, { recursive: true, force: true });
+    cleanupRepo(repoDir);
   });
 
   it('should run extract in dry-run mode via MCP', async () => {
