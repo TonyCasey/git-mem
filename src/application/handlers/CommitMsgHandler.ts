@@ -51,7 +51,7 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
       // 3. Check autoAnalyze config - if false, only add basic Agent/Model trailers
       if (!config.autoAnalyze) {
         this.logger.debug('autoAnalyze is false, adding only Agent/Model trailers');
-        const basicTrailers = this.buildBasicTrailers();
+        const basicTrailers = this.buildBasicTrailers(message);
         await this.appendTrailers(event.commitMsgPath, basicTrailers, event.cwd);
         return { handler: 'CommitMsgHandler', success: true };
       }
@@ -70,8 +70,8 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
         return { handler: 'CommitMsgHandler', success: true };
       }
 
-      // 7. Build trailers (skip tags if inferTags is false)
-      const trailers = this.buildTrailers(analysis, config);
+      // 7. Build trailers (skip Agent/Model if already present from prepare-commit-msg)
+      const trailers = this.buildTrailers(analysis, config, message);
 
       // 8. Append trailers to the commit message using git interpret-trailers
       await this.appendTrailers(event.commitMsgPath, trailers, event.cwd);
@@ -99,17 +99,24 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
 
   /**
    * Build basic AI-Agent and AI-Model trailers only (when autoAnalyze is false).
+   * Skips if already present from prepare-commit-msg.
    */
-  private buildBasicTrailers(): ITrailer[] {
+  private buildBasicTrailers(existingMessage: string): ITrailer[] {
     const trailers: ITrailer[] = [];
-    const agent = this.agentResolver.resolveAgent();
-    const model = this.agentResolver.resolveModel();
+    const hasAgent = existingMessage.includes('AI-Agent:');
+    const hasModel = existingMessage.includes('AI-Model:');
 
-    if (agent) {
-      trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
+    if (!hasAgent) {
+      const agent = this.agentResolver.resolveAgent();
+      if (agent) {
+        trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
+      }
     }
-    if (model) {
-      trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: model });
+    if (!hasModel) {
+      const model = this.agentResolver.resolveModel();
+      if (model) {
+        trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: model });
+      }
     }
 
     return trailers;
@@ -117,22 +124,30 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
 
   /**
    * Build all AI-* trailers from the analysis result.
+   * Skips Agent/Model if they already exist (from prepare-commit-msg).
    */
   private buildTrailers(
     analysis: ReturnType<ICommitAnalyzer['analyze']>,
-    config: ICommitMsgConfig
+    config: ICommitMsgConfig,
+    existingMessage: string
   ): ITrailer[] {
     const trailers: ITrailer[] = [];
 
-    // Always add Agent and Model via injected resolver
-    const agent = this.agentResolver.resolveAgent();
-    const model = this.agentResolver.resolveModel();
+    // Only add Agent and Model if not already present (prepare-commit-msg may have added them)
+    const hasAgent = existingMessage.includes('AI-Agent:');
+    const hasModel = existingMessage.includes('AI-Model:');
 
-    if (agent) {
-      trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
+    if (!hasAgent) {
+      const agent = this.agentResolver.resolveAgent();
+      if (agent) {
+        trailers.push({ key: AI_TRAILER_KEYS.AGENT, value: agent });
+      }
     }
-    if (model) {
-      trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: model });
+    if (!hasModel) {
+      const model = this.agentResolver.resolveModel();
+      if (model) {
+        trailers.push({ key: AI_TRAILER_KEYS.MODEL, value: model });
+      }
     }
 
     // Add type-specific trailer if we detected a type
