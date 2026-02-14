@@ -1,7 +1,7 @@
 /**
  * IHookConfig
  *
- * Type definitions for .git-mem.json hook configuration.
+ * Type definitions for .git-mem/.git-mem.yaml hook configuration.
  * Read by hook entry points to control per-hook behaviour.
  */
 
