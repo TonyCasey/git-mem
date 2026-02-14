@@ -449,6 +449,21 @@
       ],
       "createdAt": "2026-02-14T17:53:18.266Z",
       "updatedAt": "2026-02-14T17:53:18.266Z"
+    },
+    {
+      "id": "3235dfa2-f28a-443e-b8b9-408a11f0bb1a",
+      "content": "on every AI-assisted commit",
+      "type": "gotcha",
+      "sha": "84202734dd8a744b2883055cba79785451a085f8",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:note"
+      ],
+      "createdAt": "2026-02-14T17:56:11.291Z",
+      "updatedAt": "2026-02-14T17:56:11.291Z"
     }
   ]
 }
