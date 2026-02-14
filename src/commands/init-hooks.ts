@@ -274,9 +274,17 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   if (!existsSync(configDir)) {
     mkdirSync(configDir, { recursive: true });
   }
-  const existingGitMemConfig = existsSync(configPath)
-    ? (() => { try { return parseYaml(readFileSync(configPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
-    : {};
+  const existingGitMemConfig = (() => {
+    if (!existsSync(configPath)) return {};
+    try {
+      const parsed = parseYaml(readFileSync(configPath, 'utf8'));
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+        ? (parsed as Record<string, unknown>)
+        : {};
+    } catch {
+      return {};
+    }
+  })();
   const newGitMemConfig = buildGitMemConfig();
   const mergedGitMemConfig = deepMergeGitMemConfig(existingGitMemConfig, newGitMemConfig);
   writeFileSync(configPath, stringifyYaml(mergedGitMemConfig));
