@@ -10,6 +10,7 @@ import { describe, it, before, after, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { writeFileSync, readFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
+import { stringify as stringifyYaml } from 'yaml';
 import {
   runHook,
   createTestRepo,
@@ -17,9 +18,10 @@ import {
   cleanupRepo,
   git,
 } from './helpers';
+import { CONFIG_DIR, CONFIG_FILE } from '../../../src/hooks/utils/config';
 
 /**
- * Write a commit-msg config to .git-mem.json.
+ * Write a commit-msg config to .git-mem/.git-mem.yaml.
  * Extends the default config with commitMsg settings.
  */
 function writeCommitMsgConfig(
@@ -49,7 +51,9 @@ function writeCommitMsgConfig(
       },
     },
   };
-  writeFileSync(join(dir, '.git-mem.json'), JSON.stringify(config, null, 2) + '\n');
+  const configDir = join(dir, CONFIG_DIR);
+  mkdirSync(configDir, { recursive: true });
+  writeFileSync(join(configDir, CONFIG_FILE), stringifyYaml(config));
 }
 
 /**

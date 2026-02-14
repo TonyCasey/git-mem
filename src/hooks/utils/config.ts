@@ -1,14 +1,41 @@
 /**
  * Hook configuration reader.
  *
- * Reads .git-mem.json from the working directory and returns
+ * Reads .git-mem/.git-mem.yaml from the working directory and returns
  * typed hook configuration with sensible defaults.
  * Never throws — returns defaults on missing file or parse errors.
  */
 
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { parse as parseYaml } from 'yaml';
 import type { IHookConfig, IHooksConfig } from '../../domain/interfaces/IHookConfig';
+
+/** Directory containing git-mem configuration */
+export const CONFIG_DIR = '.git-mem';
+
+/** Config file name */
+export const CONFIG_FILE = '.git-mem.yaml';
+
+/**
+ * Get the full path to the config file.
+ * @param cwd - Working directory (defaults to process.cwd())
+ * @returns Absolute path to .git-mem/.git-mem.yaml
+ */
+export function getConfigPath(cwd?: string): string {
+  const dir = cwd ?? process.cwd();
+  return join(dir, CONFIG_DIR, CONFIG_FILE);
+}
+
+/**
+ * Get the path to the config directory.
+ * @param cwd - Working directory (defaults to process.cwd())
+ * @returns Absolute path to .git-mem/
+ */
+export function getConfigDir(cwd?: string): string {
+  const dir = cwd ?? process.cwd();
+  return join(dir, CONFIG_DIR);
+}
 
 const DEFAULTS: IHookConfig = {
   hooks: {
@@ -30,15 +57,14 @@ const DEFAULTS: IHookConfig = {
 };
 
 export function loadHookConfig(cwd?: string): IHookConfig {
-  const dir = cwd ?? process.cwd();
-  const configPath = join(dir, '.git-mem.json');
+  const configPath = getConfigPath(cwd);
 
   if (!existsSync(configPath)) {
     return DEFAULTS;
   }
 
   try {
-    const raw = JSON.parse(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
+    const raw = parseYaml(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
     const rawHooks = (raw.hooks ?? {}) as Partial<IHooksConfig>;
 
     const rawStop = (rawHooks.sessionStop ?? {}) as Record<string, unknown>;
