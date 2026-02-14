@@ -1,7 +1,27 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-14T19:17:34.102Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-14T19:17:34.102Z"
+      }
+    },
+    {
+      "id": "c3648516-5796-438f-a662-ace6e15b09b1",
+      "content": "update init.ts to write YAML config (GIT-90). - Create .git-mem/ directory if it doesn't exist",
+      "type": "decision",
+      "sha": "7a87611de02882de531c7342ae41f151229a52c8",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "commands",
+        "typescript"
+      ],
+      "createdAt": "2026-02-14T19:21:55.203Z",
+      "updatedAt": "2026-02-14T19:21:55.203Z"
+    }
+  ]
 }
