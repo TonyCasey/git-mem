@@ -1094,6 +1094,21 @@
       ],
       "createdAt": "2026-02-14T15:11:15.881Z",
       "updatedAt": "2026-02-14T15:11:15.881Z"
+    },
+    {
+      "id": "de0a08b3-4a52-492b-84a6-11cf9db4c596",
+      "content": "that matches the detected",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T15:11:15.906Z",
+      "updatedAt": "2026-02-14T15:11:15.906Z"
     }
   ]
 }
