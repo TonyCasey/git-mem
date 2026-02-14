@@ -9,6 +9,7 @@ import { existsSync, readFileSync, writeFileSync, appendFileSync, mkdirSync } fr
 import { execFileSync } from 'child_process';
 import { join } from 'path';
 import prompts from 'prompts';
+import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import type { ILogger } from '../domain/interfaces/ILogger';
 import {
   getSettingsPath,
@@ -24,6 +25,7 @@ import { installPostCommitHook, uninstallPostCommitHook } from '../hooks/post-co
 import { installCommitMsgHook, uninstallCommitMsgHook } from '../hooks/commit-msg';
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
+import { getConfigPath, getConfigDir } from '../hooks/utils/config';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -245,14 +247,26 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n');
     console.log(`✓ Created ${settingsPath}`);
 
-    // .git-mem.json
-    const gitMemConfigPath = join(cwd, '.git-mem.json');
-    const existingGitMemConfig = existsSync(gitMemConfigPath)
-      ? (() => { try { return JSON.parse(readFileSync(gitMemConfigPath, 'utf8')) as Record<string, unknown>; } catch { return {}; } })()
-      : {};
+    // .git-mem/.git-mem.yaml
+    const configDir = getConfigDir(cwd);
+    const configPath = getConfigPath(cwd);
+    if (!existsSync(configDir)) {
+      mkdirSync(configDir, { recursive: true });
+    }
+    const existingGitMemConfig = (() => {
+      if (!existsSync(configPath)) return {};
+      try {
+        const parsed = parseYaml(readFileSync(configPath, 'utf8'));
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+          ? (parsed as Record<string, unknown>)
+          : {};
+      } catch {
+        return {};
+      }
+    })();
     const mergedGitMemConfig = deepMergeGitMemConfig(existingGitMemConfig, buildGitMemConfig());
-    writeFileSync(gitMemConfigPath, JSON.stringify(mergedGitMemConfig, null, 2) + '\n');
-    console.log('✓ Created .git-mem.json');
+    writeFileSync(configPath, stringifyYaml(mergedGitMemConfig));
+    console.log('✓ Created .git-mem/.git-mem.yaml');
   }
 
   // ── Git hooks (prepare-commit-msg, commit-msg, post-commit) ─────
@@ -295,7 +309,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   }
 
   // ── .gitignore ─────────────────────────────────────────────────
-  ensureGitignoreEntries(cwd, ['.env', '.git-mem.json']);
+  ensureGitignoreEntries(cwd, ['.env', '.git-mem/']);
   console.log('✓ Updated .gitignore');
 
   // ── .env placeholder ──────────────────────────────────────────
