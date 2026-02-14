@@ -18,9 +18,31 @@ import type {
   ICommitAnalysis,
   IConventionalCommit,
 } from '../interfaces/ICommitAnalyzer';
-import type { IPatternMatch } from '../../domain/types/IPatternMatch';
+import type {
+  IPatternMatch,
+  ConfidenceLevel as PatternConfidence,
+} from '../../domain/types/IPatternMatch';
 import { extractPatternMatches } from '../../infrastructure/services/patterns/HeuristicPatterns';
 import { inferTags } from './TagInference';
+
+/**
+ * Confidence level ranking for sorting (higher = better).
+ */
+const CONFIDENCE_RANK: Readonly<Record<PatternConfidence, number>> = {
+  high: 3,
+  medium: 2,
+  low: 1,
+};
+
+/**
+ * Sort patterns by confidence level (high > medium > low).
+ * Preserves original order for ties (stable sort).
+ */
+function sortByConfidence(patterns: IPatternMatch[]): IPatternMatch[] {
+  return [...patterns].sort((a, b) => {
+    return CONFIDENCE_RANK[b.confidence] - CONFIDENCE_RANK[a.confidence];
+  });
+}
 
 /**
  * Conventional commit regex.
@@ -137,8 +159,10 @@ export class CommitAnalyzer implements ICommitAnalyzer {
     _fullMessage: string
   ): { type: MemoryType | null; patternName: string | null; content: string | null } {
     // Priority 1: Explicit pattern match (decision/gotcha/convention patterns)
+    // Sort by confidence to select the highest-confidence match
     if (patterns.length > 0) {
-      const bestPattern = patterns[0];
+      const sortedPatterns = sortByConfidence(patterns);
+      const bestPattern = sortedPatterns[0];
       return {
         type: bestPattern.factType,
         patternName: bestPattern.patternName,
@@ -175,16 +199,16 @@ export class CommitAnalyzer implements ICommitAnalyzer {
     conventional: IConventionalCommit,
     detectedType: MemoryType | null
   ): ConfidenceLevel {
-    // If we have explicit patterns, use the confidence of the pattern
-    // that corresponds to the detected type (if any). This ensures that
-    // confidence aligns with the pattern actually used to infer the type.
+    // If we have explicit patterns, use the confidence of the best pattern
+    // (sorted by confidence level). Prefer the pattern matching the detected type.
     if (patterns.length > 0) {
+      const sortedPatterns = sortByConfidence(patterns);
       const patternForDetectedType =
         detectedType != null
-          ? patterns.find((p) => p.factType === detectedType)
+          ? sortedPatterns.find((p) => p.factType === detectedType)
           : undefined;
 
-      const sourcePattern = patternForDetectedType ?? patterns[0];
+      const sourcePattern = patternForDetectedType ?? sortedPatterns[0];
       return sourcePattern.confidence as ConfidenceLevel;
     }
 
