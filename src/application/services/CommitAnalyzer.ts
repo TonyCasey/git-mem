@@ -165,9 +165,17 @@ export class CommitAnalyzer implements ICommitAnalyzer {
     conventional: IConventionalCommit,
     detectedType: MemoryType | null
   ): ConfidenceLevel {
-    // If we have explicit patterns, use their confidence
+    // If we have explicit patterns, use the confidence of the pattern
+    // that corresponds to the detected type (if any). This ensures that
+    // confidence aligns with the pattern actually used to infer the type.
     if (patterns.length > 0) {
-      return patterns[0].confidence as ConfidenceLevel;
+      const patternForDetectedType =
+        detectedType != null
+          ? patterns.find((p) => p.factType === detectedType)
+          : undefined;
+
+      const sourcePattern = patternForDetectedType ?? patterns[0];
+      return sourcePattern.confidence as ConfidenceLevel;
     }
 
     // Conventional commit inference
