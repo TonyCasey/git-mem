@@ -74,6 +74,21 @@
       ],
       "createdAt": "2026-02-14T18:55:28.371Z",
       "updatedAt": "2026-02-14T18:55:28.371Z"
+    },
+    {
+      "id": "e672b85f-ab73-47bc-9f5d-b9431819f1e8",
+      "content": "address PR review feedback (GIT-87)",
+      "type": "gotcha",
+      "sha": "b70d0248d8a2e0ed3e54214c3935d9cc70a2d96a",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-14T18:57:31.842Z",
+      "updatedAt": "2026-02-14T18:57:31.842Z"
     }
   ]
 }
