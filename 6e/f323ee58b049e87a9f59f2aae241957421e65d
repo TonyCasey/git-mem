@@ -46,6 +46,26 @@
       ],
       "createdAt": "2026-02-14T19:21:55.254Z",
       "updatedAt": "2026-02-14T19:21:55.254Z"
+    },
+    {
+      "id": "93d6dc87-9255-4ccf-b3fb-72bf54c08bfa",
+      "content": "The project is migrating configuration from a JSON format (.git-mem.json) to YAML format (.git-mem/.git-mem.yaml), requiring the yaml npm package for parsing and stringifying.",
+      "type": "decision",
+      "sha": "6ef323ee58b049e87a9f59f2aae241957421e65d",
+      "confidence": "verified",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "configuration",
+        "yaml",
+        "migration",
+        "file-format",
+        "directory-structure",
+        "file-organization"
+      ],
+      "createdAt": "2026-02-14T20:35:52.049Z",
+      "updatedAt": "2026-02-14T20:35:52.049Z"
     }
   ]
 }
