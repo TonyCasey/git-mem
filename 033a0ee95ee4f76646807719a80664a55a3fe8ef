@@ -584,6 +584,21 @@
       ],
       "createdAt": "2026-02-14T13:25:04.845Z",
       "updatedAt": "2026-02-14T13:25:04.845Z"
+    },
+    {
+      "id": "084965f4-6b04-43be-b003-e0738e4af24f",
+      "content": "in prepare-commit-msg tests",
+      "type": "convention",
+      "sha": "033a0ee95ee4f76646807719a80664a55a3fe8ef",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-14T13:26:46.525Z",
+      "updatedAt": "2026-02-14T13:26:46.525Z"
     }
   ]
 }
