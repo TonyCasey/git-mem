@@ -31,6 +31,22 @@
       ],
       "createdAt": "2026-02-14T19:08:21.233Z",
       "updatedAt": "2026-02-14T19:08:21.233Z"
+    },
+    {
+      "id": "1ace7148-0555-4812-8794-16172f504f17",
+      "content": "use git root for .env loading, not cwd (GIT-94). AI-Agent: Claude-Code/2.1.42",
+      "type": "gotcha",
+      "sha": "8f3e399d5d1740279805e64b8e5ce60d38c9df6c",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "commands",
+        "typescript"
+      ],
+      "createdAt": "2026-02-14T19:11:32.844Z",
+      "updatedAt": "2026-02-14T19:11:32.844Z"
     }
   ]
 }
