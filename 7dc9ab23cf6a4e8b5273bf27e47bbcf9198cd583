@@ -929,6 +929,21 @@
       ],
       "createdAt": "2026-02-14T15:08:55.788Z",
       "updatedAt": "2026-02-14T15:08:55.788Z"
+    },
+    {
+      "id": "79fdf39e-003f-477a-868a-0e16a095fab1",
+      "content": "using patterns[0]",
+      "type": "convention",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:always"
+      ],
+      "createdAt": "2026-02-14T15:08:55.807Z",
+      "updatedAt": "2026-02-14T15:08:55.807Z"
     }
   ]
 }
