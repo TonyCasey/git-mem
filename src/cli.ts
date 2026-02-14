@@ -26,8 +26,7 @@ program
   .command('init')
   .description('Set up git-mem: hooks, MCP config, .gitignore')
   .option('-y, --yes', 'Accept defaults without prompting')
-  .option('--hooks', 'Install prepare-commit-msg git hook for AI-Agent trailers')
-  .option('--uninstall-hooks', 'Remove the prepare-commit-msg git hook')
+  .option('--uninstall-hooks', 'Remove all git-mem hooks')
   .option('--extract', 'Extract knowledge from commit history (use with --yes)')
   .option('--commit-count <n>', 'Number of commits to extract (default: 10)', parseInt)
   .action((options) => initCommand(options, logger));

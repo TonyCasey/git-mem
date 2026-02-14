@@ -278,10 +278,10 @@ describe('Integration: hook commit-msg', () => {
   });
 
   describe('skip conditions', () => {
-    it('should skip if AI-Agent trailer already exists', () => {
+    it('should skip if AI-Memory-Id trailer already exists (full analysis done)', () => {
       process.env.GIT_MEM_AGENT = 'TestAgent/2.0';
 
-      const commitMsg = 'feat: something\n\nAI-Agent: ExistingAgent/1.0';
+      const commitMsg = 'feat: something\n\nAI-Memory-Id: abc12345';
       const msgPath = createCommitMsgFile(repoDir, commitMsg);
 
       const result = runHook('commit-msg', {
@@ -291,10 +291,10 @@ describe('Integration: hook commit-msg', () => {
 
       assert.equal(result.status, 0);
 
-      // Message should be unchanged
+      // Message should be unchanged - no new trailers added
       const modifiedMsg = readFileSync(msgPath, 'utf8');
-      assert.ok(!modifiedMsg.includes('TestAgent'), 'Should not add duplicate trailers');
-      assert.ok(modifiedMsg.includes('ExistingAgent'), 'Should preserve existing trailers');
+      assert.ok(!modifiedMsg.includes('AI-Agent:'), 'Should not add trailers when already analyzed');
+      assert.ok(modifiedMsg.includes('AI-Memory-Id: abc12345'), 'Should preserve existing trailers');
     });
 
     it('should exit successfully without changes when no agent detected', () => {

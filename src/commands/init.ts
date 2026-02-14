@@ -26,7 +26,6 @@ import { createStderrProgressHandler } from './progress';
 
 interface IInitCommandOptions {
   yes?: boolean;
-  hooks?: boolean;
   uninstallHooks?: boolean;
   extract?: boolean;
   commitCount?: number;
@@ -118,7 +117,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   const log = logger?.child({ command: 'init' });
   const cwd = process.cwd();
 
-  log?.info('Command invoked', { yes: options.yes, hooks: options.hooks, uninstallHooks: options.uninstallHooks });
+  log?.info('Command invoked', { yes: options.yes, uninstallHooks: options.uninstallHooks });
 
   // ── Git hook uninstall (early exit) ─────────────────────────────
   if (options.uninstallHooks) {
@@ -213,7 +212,8 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   }
 
   // ── Git hooks (prepare-commit-msg, commit-msg, post-commit) ─────
-  if (options.hooks) {
+  // Always install hooks during init (core functionality)
+  {
     const prepareResult = installHook(cwd);
     if (prepareResult.installed) {
       console.log(`✓ Installed prepare-commit-msg hook${prepareResult.wrapped ? ' (wrapped existing hook)' : ''}`);

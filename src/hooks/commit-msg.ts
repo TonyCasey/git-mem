@@ -17,7 +17,7 @@ import { execFileSync } from 'child_process';
 const HOOK_FINGERPRINT_PREFIX = '# git-mem:commit-msg';
 
 /** Full fingerprint with version — used for upgrade detection. */
-const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v2`;
+const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v3`;
 
 /**
  * The shell hook script.
@@ -32,8 +32,8 @@ COMMIT_MSG_FILE="$1"
 # Skip if no commit message file
 [ -z "$COMMIT_MSG_FILE" ] && exit 0
 
-# Skip if AI trailers already exist (likely from prepare-commit-msg or manual)
-grep -q "^AI-Agent:" "$COMMIT_MSG_FILE" && exit 0
+# Skip if full analysis already done (AI-Memory-Id is unique to commit-msg analysis)
+grep -q "^AI-Memory-Id:" "$COMMIT_MSG_FILE" && exit 0
 
 # Escape values for safe JSON inclusion (handles quotes, backslashes)
 COMMIT_MSG_FILE_ESC=$(printf '%s' "$COMMIT_MSG_FILE" | sed 's/\\\\/\\\\\\\\/g; s/"/\\\\"/g')
