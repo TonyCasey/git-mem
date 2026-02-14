@@ -21,6 +21,8 @@ import {
   MEMORY_TYPE_TO_TRAILER_KEY,
 } from '../../domain/entities/ITrailer';
 import { resolveAgent, resolveModel } from '../../infrastructure/detect-agent';
+import { loadHookConfig } from '../../hooks/utils/config';
+import type { ICommitMsgConfig } from '../../domain/interfaces/IHookConfig';
 
 export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
   constructor(
@@ -31,19 +33,35 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
 
   async handle(event: ICommitMsgEvent): Promise<IEventResult> {
     try {
+      // 0. Load config
+      const hookConfig = loadHookConfig(event.cwd);
+      const config = hookConfig.hooks.commitMsg;
+
       // 1. Read the commit message file
       const message = readFileSync(event.commitMsgPath, 'utf8');
 
-      // 2. Get staged files
+      // 2. Check if AI-Agent trailer already exists (avoid duplicates from prepare-commit-msg)
+      if (message.includes('AI-Agent:')) {
+        this.logger.debug('AI trailers already present, skipping analysis');
+        return { handler: 'CommitMsgHandler', success: true };
+      }
+
+      // 3. Get staged files
       const stagedFiles = this.gitClient.diffStagedNames(event.cwd);
 
-      // 3. Analyze the commit message
+      // 4. Analyze the commit message
       const analysis = this.commitAnalyzer.analyze(message, stagedFiles);
 
-      // 4. Build trailers
-      const trailers = this.buildTrailers(analysis);
+      // 5. Check requireType config - skip if no type detected and requireType is true
+      if (config.requireType && !analysis.type) {
+        this.logger.debug('No memory type detected and requireType is true, skipping');
+        return { handler: 'CommitMsgHandler', success: true };
+      }
 
-      // 5. Append trailers to the commit message using git interpret-trailers
+      // 6. Build trailers
+      const trailers = this.buildTrailers(analysis, config);
+
+      // 7. Append trailers to the commit message using git interpret-trailers
       await this.appendTrailers(event.commitMsgPath, trailers, event.cwd);
 
       this.logger.info('Commit message analyzed and trailers added', {
@@ -70,7 +88,10 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
   /**
    * Build all AI-* trailers from the analysis result.
    */
-  private buildTrailers(analysis: ReturnType<ICommitAnalyzer['analyze']>): ITrailer[] {
+  private buildTrailers(
+    analysis: ReturnType<ICommitAnalyzer['analyze']>,
+    config: ICommitMsgConfig
+  ): ITrailer[] {
     const trailers: ITrailer[] = [];
 
     // Always add Agent and Model
@@ -102,8 +123,8 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
       trailers.push({ key: AI_TRAILER_KEYS.TAGS, value: analysis.tags.join(', ') });
     }
 
-    // Add lifecycle (default to project)
-    trailers.push({ key: AI_TRAILER_KEYS.LIFECYCLE, value: 'project' });
+    // Add lifecycle from config
+    trailers.push({ key: AI_TRAILER_KEYS.LIFECYCLE, value: config.defaultLifecycle });
 
     // Add memory ID for tracking
     trailers.push({ key: AI_TRAILER_KEYS.MEMORY_ID, value: this.generateMemoryId() });
