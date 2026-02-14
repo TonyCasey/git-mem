@@ -93,13 +93,14 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.logger,
         container.cradle.agentResolver,
         container.cradle.hookConfigLoader,
+        container.cradle.llmClient,
       ));
 
       return bus;
     }).singleton(),
 
     llmClient: asFunction(() => {
-      return options?.enrich ? (createLLMClient() ?? null) : null;
+      return createLLMClient() ?? null;
     }).singleton(),
 
     // ── Application services ─────────────────────────────────────

@@ -34,6 +34,7 @@ export const AI_TRAILER_KEYS = {
   MEMORY_ID: 'AI-Memory-Id',
   AGENT: 'AI-Agent',
   MODEL: 'AI-Model',
+  SOURCE: 'AI-Source',
 } as const;
 
 /**
