@@ -33,7 +33,7 @@ COMMIT_MSG_FILE="$1"
 [ -z "$COMMIT_MSG_FILE" ] && exit 0
 
 # Skip if AI trailers already exist (likely from prepare-commit-msg or manual)
-grep -q "^AI-Confidence:" "$COMMIT_MSG_FILE" && exit 0
+grep -q "^AI-Agent:" "$COMMIT_MSG_FILE" && exit 0
 
 # Run git-mem commit-msg analyzer
 # Pass commit message file path via JSON stdin

@@ -82,12 +82,17 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
       return { type: 'prompt:submit', ...base, prompt: input.prompt ?? '' };
     case 'git:commit':
       return { type: 'git:commit', sha: input.sha ?? 'HEAD', cwd: base.cwd };
-    case 'git:commit-msg':
+    case 'git:commit-msg': {
+      const commitMsgPath = input.commit_msg_path ?? '';
+      if (!commitMsgPath) {
+        throw new Error('commit_msg_path is required for git:commit-msg event');
+      }
       return {
         type: 'git:commit-msg',
-        commitMsgPath: input.commit_msg_path ?? '',
+        commitMsgPath,
         cwd: base.cwd,
       };
+    }
     default: {
       const exhaustiveCheck: never = eventType;
       throw new Error(`Unhandled HookEventType in buildEvent: ${exhaustiveCheck as string}`);
