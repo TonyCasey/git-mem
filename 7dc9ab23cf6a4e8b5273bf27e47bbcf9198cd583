@@ -2009,6 +2009,21 @@
       ],
       "createdAt": "2026-02-14T17:59:14.754Z",
       "updatedAt": "2026-02-14T17:59:14.754Z"
+    },
+    {
+      "id": "ecf015b9-a48f-4a9b-b1f5-8bcd299e85f6",
+      "content": "just the first one found",
+      "type": "decision",
+      "sha": "7dc9ab23cf6a4e8b5273bf27e47bbcf9198cd583",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-14T17:59:14.773Z",
+      "updatedAt": "2026-02-14T17:59:14.773Z"
     }
   ]
 }
