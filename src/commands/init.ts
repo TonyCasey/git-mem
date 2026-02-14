@@ -134,6 +134,11 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
   let runExtract = options.extract ?? false;
   let commitCount = options.commitCount ?? 10;
 
+  // Validate commitCount (parseInt returns NaN for invalid input)
+  if (Number.isNaN(commitCount) || commitCount < 1) {
+    commitCount = 10;
+  }
+
   if (!options.yes) {
     const response = await prompts([
       {
