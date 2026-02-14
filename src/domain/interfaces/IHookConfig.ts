@@ -45,6 +45,10 @@ export interface ICommitMsgConfig {
   readonly requireType: boolean;
   /** Default memory lifecycle. */
   readonly defaultLifecycle: 'permanent' | 'project' | 'session';
+  /** Enable LLM enrichment for richer trailer content. Requires ANTHROPIC_API_KEY. */
+  readonly enrich: boolean;
+  /** Timeout in ms for LLM enrichment call. Default: 5000. */
+  readonly enrichTimeout: number;
 }
 
 export interface IHooksConfig {

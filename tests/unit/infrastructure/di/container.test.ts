@@ -120,7 +120,9 @@ describe('createContainer', () => {
       assert.equal(container.cradle.llmClient, null);
     });
 
-    it('should return null when enrich is not specified', () => {
+    it('should attempt to create LLM client when enrich is not specified', () => {
+      // Without ANTHROPIC_API_KEY, createLLMClient() returns null
+      // This allows hooks to use LLM enrichment without explicit opt-in
       const container = createContainer();
       assert.equal(container.cradle.llmClient, null);
     });
@@ -128,7 +130,6 @@ describe('createContainer', () => {
     it('should attempt to create LLM client when enrich is true', () => {
       // Without ANTHROPIC_API_KEY, createLLMClient() returns null
       const container = createContainer({ enrich: true });
-      // Should still be null since no API key is set in test env
       assert.equal(container.cradle.llmClient, null);
     });
   });

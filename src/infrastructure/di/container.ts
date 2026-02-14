@@ -93,13 +93,21 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.logger,
         container.cradle.agentResolver,
         container.cradle.hookConfigLoader,
+        container.cradle.llmClient,
       ));
 
       return bus;
     }).singleton(),
 
     llmClient: asFunction(() => {
-      return options?.enrich ? (createLLMClient() ?? null) : null;
+      // When enrich is explicitly false, do not create LLM client.
+      // When enrich is true or not specified, attempt to create it.
+      // This allows hooks to use LLM enrichment without explicit opt-in,
+      // while still respecting explicit enrich:false from CLI commands.
+      if (options?.enrich === false) {
+        return null;
+      }
+      return createLLMClient() ?? null;
     }).singleton(),
 
     // ── Application services ─────────────────────────────────────
