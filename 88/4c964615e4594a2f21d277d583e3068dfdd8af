@@ -2594,6 +2594,21 @@
       ],
       "createdAt": "2026-02-14T22:49:02.321Z",
       "updatedAt": "2026-02-14T22:49:02.321Z"
+    },
+    {
+      "id": "39af3b01-0827-4620-89ba-3cda9e6de112",
+      "content": "prevent duplicate Agent/Model trailers",
+      "type": "gotcha",
+      "sha": "884c964615e4594a2f21d277d583e3068dfdd8af",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-14T22:49:02.343Z",
+      "updatedAt": "2026-02-14T22:49:02.343Z"
     }
   ]
 }
