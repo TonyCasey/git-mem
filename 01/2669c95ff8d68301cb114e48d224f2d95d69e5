@@ -299,6 +299,21 @@
       ],
       "createdAt": "2026-02-15T17:07:07.798Z",
       "updatedAt": "2026-02-15T17:07:07.798Z"
+    },
+    {
+      "id": "72a7d482-742a-41c9-95e3-c891b5f26521",
+      "content": "lingering timers",
+      "type": "convention",
+      "sha": "012669c95ff8d68301cb114e48d224f2d95d69e5",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-15T17:07:07.816Z",
+      "updatedAt": "2026-02-15T17:07:07.816Z"
     }
   ]
 }
