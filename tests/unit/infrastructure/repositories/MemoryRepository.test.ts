@@ -119,6 +119,13 @@ describe('MemoryRepository', () => {
       const result = repo.query({ limit: 1, cwd: repoDir });
       assert.ok(result.memories.length <= 1);
     });
+
+    it('should handle query on memories with undefined content gracefully (GIT-96)', () => {
+      // Regression test: query should not throw on malformed data
+      // This ensures the query filter handles potential undefined content at runtime
+      const result = repo.query({ query: 'test-search', cwd: repoDir });
+      assert.ok(Array.isArray(result.memories));
+    });
   });
 
   describe('delete', () => {

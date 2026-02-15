@@ -209,6 +209,9 @@ export class MemoryService implements IMemoryService {
       const type = TRAILER_KEY_TO_MEMORY_TYPE[typeTrailer.key] as MemoryType;
       if (!type) continue;
 
+      // Skip trailers with empty or undefined values
+      if (!typeTrailer.value) continue;
+
       // Pair with AI-Memory-Id by position, or generate synthetic ID.
       // Index suffix ensures uniqueness when a commit has multiple same-type trailers.
       const id = memoryIds[i] || `trailer:${commit.sha}:${type}:${i}`;
@@ -232,8 +235,8 @@ export class MemoryService implements IMemoryService {
 
   private matchesQuery(entity: IMemoryEntity, query: string): boolean {
     const lower = query.toLowerCase();
-    return entity.content.toLowerCase().includes(lower) ||
-      entity.tags.some(t => t.toLowerCase().includes(lower));
+    return (entity.content?.toLowerCase().includes(lower) ?? false) ||
+      (entity.tags?.some(t => t?.toLowerCase().includes(lower)) ?? false);
   }
 
   get(id: string, cwd?: string): IMemoryEntity | null {

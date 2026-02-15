@@ -96,8 +96,8 @@ export class MemoryRepository implements IMemoryRepository {
     if (options?.query) {
       const q = options.query.toLowerCase();
       filtered = filtered.filter(m =>
-        m.content.toLowerCase().includes(q) ||
-        m.tags.some(t => t.toLowerCase().includes(q))
+        (m.content?.toLowerCase().includes(q) ?? false) ||
+        (m.tags?.some(t => t?.toLowerCase().includes(q)) ?? false)
       );
     }
 

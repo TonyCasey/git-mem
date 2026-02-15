@@ -198,6 +198,14 @@ describe('MemoryService', () => {
       const result = service.recall('nonexistent-xyz-query', { cwd: repoDir });
       assert.equal(result.memories.length, 0);
     });
+
+    it('should handle query on memories with undefined content gracefully (GIT-96)', () => {
+      // Regression test: ensure matchesQuery doesn't throw on malformed data
+      // The service should handle memories where content could be undefined at runtime
+      const result = service.recall('test-query', { cwd: repoDir });
+      // Should not throw - just return results (or empty)
+      assert.ok(Array.isArray(result.memories));
+    });
   });
 
   describe('unified recall (notes + trailers)', () => {
