@@ -17,7 +17,7 @@ import { execFileSync } from 'child_process';
 const HOOK_FINGERPRINT_PREFIX = '# git-mem:commit-msg';
 
 /** Full fingerprint with version — used for upgrade detection. */
-const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v4`;
+const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v5`;
 
 /**
  * The shell hook script.
@@ -44,13 +44,12 @@ head -1 "$COMMIT_MSG_FILE" | grep -qiE "^(fixup|squash|amend)! " && exit 0
 # Skip revert commits (auto-generated)
 head -1 "$COMMIT_MSG_FILE" | grep -qiE '^Revert "' && exit 0
 
-# Escape values for safe JSON inclusion (handles quotes, backslashes)
+# Escape value for safe JSON inclusion (handles quotes, backslashes)
 COMMIT_MSG_FILE_ESC=$(printf '%s' "$COMMIT_MSG_FILE" | sed 's/\\\\/\\\\\\\\/g; s/"/\\\\"/g')
-CWD_ESC=$(pwd | sed 's/\\\\/\\\\\\\\/g; s/"/\\\\"/g')
 
 # Run git-mem commit-msg analyzer
 # Pass commit message file path via JSON stdin
-echo "{\\"commit_msg_path\\": \\"$COMMIT_MSG_FILE_ESC\\", \\"cwd\\": \\"$CWD_ESC\\"}" | \\
+echo "{\\"commit_msg_path\\": \\"$COMMIT_MSG_FILE_ESC\\"}" | \\
   git-mem hook commit-msg 2>/dev/null || true
 
 exit 0
