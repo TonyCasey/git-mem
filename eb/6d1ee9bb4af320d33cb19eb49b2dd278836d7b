@@ -44,6 +44,25 @@
       ],
       "createdAt": "2026-02-15T00:47:51.325Z",
       "updatedAt": "2026-02-15T00:47:51.325Z"
+    },
+    {
+      "id": "d2139b72-7552-4313-b150-0de8d98853e7",
+      "content": "add IIntentExtractor interface and config fields (GIT-97). - Add IIntentExtractor interface for keyword extraction from prompts",
+      "type": "decision",
+      "sha": "eb6d1ee9bb4af320d33cb19eb49b2dd278836d7b",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "domain",
+        "hooks",
+        "utils",
+        "tests",
+        "unit"
+      ],
+      "createdAt": "2026-02-15T00:50:36.764Z",
+      "updatedAt": "2026-02-15T00:50:36.764Z"
     }
   ]
 }
