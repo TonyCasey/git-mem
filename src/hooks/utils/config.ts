@@ -50,6 +50,7 @@ const DEFAULTS: IHookConfig = {
       intentTimeout: 3000,
       minWords: 5,
       memoryLimit: 20,
+      includeCommitMessages: true,
     },
     postCommit: { enabled: true },
     commitMsg: {

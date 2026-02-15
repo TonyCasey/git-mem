@@ -192,4 +192,12 @@ export interface IGitClient {
    * @returns Array of file paths.
    */
   diffStagedNames(cwd?: string): string[];
+
+  /**
+   * Get commit messages for multiple SHAs in a single batch call.
+   * @param shas - Array of commit SHAs.
+   * @param cwd - Working directory.
+   * @returns Map of SHA to commit message (subject + body).
+   */
+  getCommitMessages(shas: readonly string[], cwd?: string): Map<string, { subject: string; body: string }>;
 }

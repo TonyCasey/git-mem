@@ -4,18 +4,22 @@
  * Loads and filters memories for hook context injection.
  * Delegates to IMemoryRepository for general loads and
  * IMemoryService for query-based searches (notes + trailers).
+ * Optionally fetches commit messages for loaded memories.
  */
 
-import type { IMemoryContextLoader, IMemoryContextOptions, IMemoryContextResult } from '../../domain/interfaces/IMemoryContextLoader';
+import type { IMemoryContextLoader, IMemoryContextOptions, IMemoryContextResult, ICommitMessage } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IMemoryRepository } from '../../domain/interfaces/IMemoryRepository';
 import type { IMemoryService } from '../interfaces/IMemoryService';
+import type { IGitClient } from '../../domain/interfaces/IGitClient';
 import type { ILogger } from '../../domain/interfaces/ILogger';
+import type { IMemoryEntity } from '../../domain/entities/IMemoryEntity';
 
 export class MemoryContextLoader implements IMemoryContextLoader {
   constructor(
     private readonly memoryRepository: IMemoryRepository,
     private readonly logger?: ILogger,
     private readonly memoryService?: IMemoryService,
+    private readonly gitClient?: IGitClient,
   ) {}
 
   load(options?: IMemoryContextOptions): IMemoryContextResult {
@@ -37,16 +41,26 @@ export class MemoryContextLoader implements IMemoryContextLoader {
       cwd: options?.cwd,
     });
 
+    const memories = result.memories as readonly IMemoryEntity[];
+
+    // Fetch commit messages if requested
+    let commitMessages: ReadonlyMap<string, ICommitMessage> | undefined;
+    if (options?.includeCommitMessages && this.gitClient && memories.length > 0) {
+      commitMessages = this.fetchCommitMessages(memories, options.cwd);
+    }
+
     this.logger?.debug('Memories loaded for context', {
       total,
-      filtered: result.memories.length,
+      filtered: memories.length,
       limit: options?.limit,
+      hasCommitMessages: !!commitMessages,
     });
 
     return {
-      memories: result.memories as readonly import('../../domain/entities/IMemoryEntity').IMemoryEntity[],
+      memories,
       total,
-      filtered: result.memories.length,
+      filtered: memories.length,
+      commitMessages,
     };
   }
 
@@ -76,5 +90,31 @@ export class MemoryContextLoader implements IMemoryContextLoader {
       total,
       filtered: result.memories.length,
     };
+  }
+
+  /**
+   * Fetch commit messages for all memories in a single batch call.
+   */
+  private fetchCommitMessages(
+    memories: readonly IMemoryEntity[],
+    cwd?: string,
+  ): ReadonlyMap<string, ICommitMessage> {
+    // Collect unique SHAs from memories
+    const shas = [...new Set(memories.map(m => m.sha).filter(Boolean))];
+
+    if (shas.length === 0 || !this.gitClient) {
+      return new Map();
+    }
+
+    try {
+      const messages = this.gitClient.getCommitMessages(shas, cwd);
+      this.logger?.debug('Fetched commit messages', { count: messages.size });
+      return messages;
+    } catch (error) {
+      this.logger?.warn('Failed to fetch commit messages', {
+        error: error instanceof Error ? error.message : String(error),
+      });
+      return new Map();
+    }
   }
 }

@@ -6,6 +6,7 @@
  */
 
 import type { IMemoryEntity } from '../entities/IMemoryEntity';
+import type { ICommitMessage } from './IMemoryContextLoader';
 
 export interface IFormatOptions {
   /** How the session was triggered (e.g., 'startup', 'resume'). */
@@ -14,6 +15,8 @@ export interface IFormatOptions {
   readonly includeStats?: boolean;
   /** Maximum output length in characters. */
   readonly maxLength?: number;
+  /** Commit messages keyed by SHA, to include with memories. */
+  readonly commitMessages?: ReadonlyMap<string, ICommitMessage>;
 }
 
 export interface IContextFormatter {
