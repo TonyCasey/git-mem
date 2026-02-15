@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "40a83366-d5e7-4449-bc36-eba9d5387e27",
+      "content": "dumping all memories,",
+      "type": "decision",
+      "sha": "cc1a71bb04ad6fa38b314c3dd8a73c4b1056e5e6",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-15T01:14:47.380Z",
+      "updatedAt": "2026-02-15T01:14:47.380Z"
+    }
+  ]
+}
