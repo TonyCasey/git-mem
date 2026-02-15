@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **YAML configuration** — `.git-mem.yaml` replaces `.git-mem.json`:
   - Config now lives in `.git-mem/` directory
   - Cleaner, more readable format
-  - Backwards compatible migration from JSON
+  - Backwards-compatible migration from JSON
 - **LLM enrichment in hooks** — commit-msg hook can use LLM to enhance memory extraction:
   - Loads `.env` for `ANTHROPIC_API_KEY`
   - Configurable timeout (default 8s)

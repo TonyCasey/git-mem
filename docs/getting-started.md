@@ -12,7 +12,7 @@ git-mem init
 
 That's it. Every commit now includes AI metadata:
 
-```
+```text
 feat: add user authentication
 
 AI-Agent: claude-code

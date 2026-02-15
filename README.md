@@ -12,14 +12,13 @@ git-mem adds AI metadata to every commit automatically — no workflow changes, 
 
 Every commit gets AI trailers:
 
-```
+```text
 feat: add user authentication
 
 AI-Agent: claude-code
 AI-Model: claude-sonnet-4-5-20250929
 AI-Decision: JWT over sessions — stateless API, scales horizontally
 AI-Context: [pattern/middleware, entity/auth-module]
-
 ```
 
 That's it. Your git history now tracks AI contributions.
