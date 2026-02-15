@@ -23,6 +23,23 @@
       ],
       "createdAt": "2026-02-15T00:38:12.624Z",
       "updatedAt": "2026-02-15T00:38:12.624Z"
+    },
+    {
+      "id": "11ead6a2-8788-47bf-96d3-257dc196e5bc",
+      "content": "implement IntentExtractor service (GIT-98). - Add IntentExtractor class in infrastructure/llm that extracts",
+      "type": "decision",
+      "sha": "8ec41d0e4c2163b1dbce8840fc5a99b03bf0eca5",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "infrastructure",
+        "llm",
+        "typescript"
+      ],
+      "createdAt": "2026-02-15T00:47:51.299Z",
+      "updatedAt": "2026-02-15T00:47:51.299Z"
     }
   ]
 }
