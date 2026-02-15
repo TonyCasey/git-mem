@@ -91,6 +91,13 @@ export class OllamaLLMClient extends BaseLLMClient {
     } catch (error) {
       if (error instanceof LLMError) throw error;
 
+      // Specific timeout detection from AbortController
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new LLMError(
+          `Ollama API request timed out after ${this.timeout}ms`,
+        );
+      }
+
       // Friendly message for connection errors
       if (error instanceof TypeError && (error as NodeJS.ErrnoException).cause) {
         const cause = (error as NodeJS.ErrnoException).cause as NodeJS.ErrnoException;
