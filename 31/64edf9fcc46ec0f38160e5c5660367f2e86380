@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "1faadea0-9b09-4658-beb2-d4cbb300b30f",
+      "content": "and word count logic",
+      "type": "convention",
+      "sha": "3164edf9fcc46ec0f38160e5c5660367f2e86380",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-15T01:14:47.340Z",
+      "updatedAt": "2026-02-15T01:14:47.340Z"
+    }
+  ]
+}
