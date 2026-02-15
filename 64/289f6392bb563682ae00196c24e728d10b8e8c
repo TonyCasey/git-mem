@@ -884,6 +884,21 @@
       ],
       "createdAt": "2026-02-15T00:47:51.512Z",
       "updatedAt": "2026-02-15T00:47:51.512Z"
+    },
+    {
+      "id": "3dbd7abc-205b-4dfa-862c-a74f7040a785",
+      "content": "Hook configuration files are now located in a",
+      "type": "convention",
+      "sha": "64289f6392bb563682ae00196c24e728d10b8e8c",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-15T00:47:51.532Z",
+      "updatedAt": "2026-02-15T00:47:51.532Z"
     }
   ]
 }
