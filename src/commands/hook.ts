@@ -11,12 +11,12 @@
  */
 
 import { join } from 'path';
-import { execFileSync } from 'child_process';
 import { config as loadEnv } from 'dotenv';
 import { createContainer } from '../infrastructure/di';
 import { readStdin } from '../hooks/utils/stdin';
 import { setupShutdown } from '../hooks/utils/shutdown';
 import { loadHookConfig } from '../hooks/utils/config';
+import { resolveGitRoot } from '../infrastructure/git/resolveGitRoot';
 import type { ILogger } from '../domain/interfaces/ILogger';
 import type { IHooksConfig } from '../domain/interfaces/IHookConfig';
 import type { HookEvent, HookEventType } from '../domain/events/HookEvents';
@@ -108,15 +108,7 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
  * Returns cwd if git command fails (graceful fallback).
  */
 function findGitRoot(cwd: string): string {
-  try {
-    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
-      cwd,
-      encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    }).trim();
-  } catch {
-    return cwd;
-  }
+  return resolveGitRoot(cwd);
 }
 
 /** Stderr labels per event for user-facing messages. */

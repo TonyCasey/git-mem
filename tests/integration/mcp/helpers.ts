@@ -36,6 +36,7 @@ export function sendMcpRequest(request: object): Promise<IMcpResponse> {
   return new Promise((resolve, reject) => {
     const proc = spawn(TSX_BIN, [SERVER_PATH], {
       stdio: ['pipe', 'pipe', 'pipe'],
+      shell: process.platform === 'win32',
     });
 
     let stdout = '';
@@ -90,6 +91,7 @@ export function mcpSession(cwd: string, requests: object[]): Promise<IMcpRespons
     const proc = spawn(TSX_BIN, [SERVER_PATH], {
       stdio: ['pipe', 'pipe', 'pipe'],
       cwd,
+      shell: process.platform === 'win32',
     });
 
     let stdout = '';
@@ -192,7 +194,17 @@ export function createTestRepo(prefix = 'git-mem-mcp-'): { dir: string; sha: str
   return { dir, sha };
 }
 
-/** Remove a temp directory. */
+/** Remove a temp directory. Silently ignores EPERM on Windows where killed processes may still hold file locks. */
 export function cleanupRepo(dir: string): void {
-  rmSync(dir, { recursive: true, force: true });
+  try {
+    rmSync(dir, { recursive: true, force: true, maxRetries: 3, retryDelay: 500 });
+  } catch (err) {
+    const code = (err as NodeJS.ErrnoException).code;
+    if (process.platform === 'win32' && code === 'EPERM') {
+      // On Windows, killed shell processes may still hold .git lock files briefly.
+      // Temp dirs will be cleaned up by the OS eventually.
+      return;
+    }
+    throw err;
+  }
 }

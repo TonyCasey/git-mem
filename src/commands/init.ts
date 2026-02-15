@@ -26,6 +26,7 @@ import { installCommitMsgHook, uninstallCommitMsgHook } from '../hooks/commit-ms
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
 import { getConfigPath, getConfigDir } from '../hooks/utils/config';
+import { resolveGitRoot } from '../infrastructure/git/resolveGitRoot';
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -161,7 +162,7 @@ export function ensureEnvPlaceholder(cwd: string): void {
 /** Run unified project setup: hooks, MCP config, .gitignore, and .env. */
 export async function initCommand(options: IInitCommandOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init' });
-  const cwd = process.cwd();
+  const cwd = resolveGitRoot();
 
   log?.info('Command invoked', { yes: options.yes, uninstallHooks: options.uninstallHooks });
 
@@ -235,7 +236,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   // ── Claude Code hooks ──────────────────────────────────────────
   if (claudeIntegration) {
-    const settingsPath = getSettingsPath('project');
+    const settingsPath = getSettingsPath('project', cwd);
     const settingsDir = join(settingsPath, '..');
     if (!existsSync(settingsDir)) {
       mkdirSync(settingsDir, { recursive: true });

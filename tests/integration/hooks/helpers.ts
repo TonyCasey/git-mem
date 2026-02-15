@@ -16,7 +16,12 @@ const PROJECT_ROOT = resolve(__dirname, '../../..');
 const CLI_PATH = resolve(PROJECT_ROOT, 'src/cli.ts');
 
 // Use tsx binary from project node_modules — works even when cwd is a temp dir
-const TSX_BIN = resolve(PROJECT_ROOT, 'node_modules/.bin/tsx');
+// On Windows, spawnSync() needs the .cmd wrapper; on Unix, use the shell script
+const TSX_BIN = resolve(
+  PROJECT_ROOT,
+  'node_modules/.bin',
+  process.platform === 'win32' ? 'tsx.cmd' : 'tsx',
+);
 
 export interface IRunResult {
   stdout: string;
@@ -30,6 +35,7 @@ export function runHook(eventName: string, input: Record<string, unknown>): IRun
     input: JSON.stringify(input),
     encoding: 'utf8',
     timeout: 15_000,
+    shell: process.platform === 'win32',
   });
 
   return {
@@ -46,6 +52,7 @@ export function runCli(args: string[], opts?: { cwd?: string; input?: string }):
     cwd: opts?.cwd,
     encoding: 'utf8',
     timeout: 15_000,
+    shell: process.platform === 'win32',
   });
 
   return {

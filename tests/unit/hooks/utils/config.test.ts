@@ -41,12 +41,12 @@ describe('config', () => {
     it('should return path to .git-mem/.git-mem.yaml', () => {
       const testDir = '/some/dir';
       const result = getConfigPath(testDir);
-      assert.equal(result, '/some/dir/.git-mem/.git-mem.yaml');
+      assert.equal(result, join('/some/dir', '.git-mem', '.git-mem.yaml'));
     });
 
     it('should use process.cwd() when no cwd provided', () => {
       const result = getConfigPath();
-      assert.ok(result.endsWith('.git-mem/.git-mem.yaml'));
+      assert.ok(result.endsWith(join('.git-mem', '.git-mem.yaml')));
     });
   });
 
@@ -54,7 +54,7 @@ describe('config', () => {
     it('should return path to .git-mem directory', () => {
       const testDir = '/some/dir';
       const result = getConfigDir(testDir);
-      assert.equal(result, '/some/dir/.git-mem');
+      assert.equal(result, join('/some/dir', '.git-mem'));
     });
 
     it('should use process.cwd() when no cwd provided', () => {
