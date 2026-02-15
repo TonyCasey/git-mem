@@ -5,7 +5,7 @@
  * Contains provider-agnostic logic: message building, response parsing,
  * fact validation, and enrichCommit orchestration.
  *
- * Concrete providers implement only `callAPI()` and `callComplete()`.
+ * Concrete providers implement only `callAPI()`; this base class provides the default `complete()` implementation from `ILLMCaller`.
  */
 
 import type {

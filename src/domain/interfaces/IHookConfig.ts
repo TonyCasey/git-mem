@@ -55,7 +55,7 @@ export interface ICommitMsgConfig {
   readonly requireType: boolean;
   /** Default memory lifecycle. */
   readonly defaultLifecycle: 'permanent' | 'project' | 'session';
-  /** Enable LLM enrichment for richer trailer content. Requires an LLM provider API key. */
+  /** Enable LLM enrichment for richer trailer content. Requires a configured LLM provider (e.g., ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY, or OLLAMA_HOST). */
   readonly enrich: boolean;
   /** Timeout in ms for LLM enrichment call. Default: 8000. Must be under hook timeout (10s). */
   readonly enrichTimeout: number;

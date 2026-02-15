@@ -122,7 +122,7 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
       }
       try {
         return new IntentExtractor({
-          caller: client as unknown as import('../../domain/interfaces/ILLMCaller').ILLMCaller,
+          caller: client,
           logger: container.cradle.logger,
         });
       } catch {

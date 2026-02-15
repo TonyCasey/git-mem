@@ -7,6 +7,7 @@
 
 import type { MemoryType } from '../entities/IMemoryEntity';
 import type { ConfidenceLevel } from '../types/IMemoryQuality';
+import type { ILLMCaller } from './ILLMCaller';
 
 /**
  * Input to an LLM enrichment call for a single commit.
@@ -53,8 +54,9 @@ export interface ILLMEnrichmentResult {
 
 /**
  * Provider-agnostic LLM client interface.
+ * Extends ILLMCaller for simple text completions (used by IntentExtractor).
  */
-export interface ILLMClient {
+export interface ILLMClient extends ILLMCaller {
   /**
    * Extract structured memories from a commit's message and diff.
    * @param input - Commit data and diff to analyze.
