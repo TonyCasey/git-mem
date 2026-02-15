@@ -122,11 +122,15 @@ export class CommitMsgHandler implements IEventHandler<ICommitMsgEvent> {
         success: true,
       };
     } catch (error) {
-      this.logger.error('Failed to process commit-msg hook', { error });
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger.error('Failed to process commit-msg hook', {
+        error: err.message,
+        stack: err.stack,
+      });
       return {
         handler: 'CommitMsgHandler',
         success: false,
-        error: error instanceof Error ? error : new Error(String(error)),
+        error: err,
       };
     }
   }

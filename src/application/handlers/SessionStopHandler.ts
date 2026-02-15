@@ -40,11 +40,15 @@ export class SessionStopHandler implements ISessionStopHandler {
         output: result.summary,
       };
     } catch (error) {
-      this.logger?.error('Session stop handler failed', { error });
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger?.error('Session stop handler failed', {
+        error: err.message,
+        stack: err.stack,
+      });
       return {
         handler: 'SessionStopHandler',
         success: false,
-        error: error instanceof Error ? error : new Error(String(error)),
+        error: err,
       };
     }
   }

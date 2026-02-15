@@ -81,11 +81,15 @@ export class PostCommitHandler implements IPostCommitHandler {
         success: true,
       };
     } catch (error) {
-      this.logger?.error('Post-commit handler failed', { error });
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger?.error('Post-commit handler failed', {
+        error: err.message,
+        stack: err.stack,
+      });
       return {
         handler: 'PostCommitHandler',
         success: false,
-        error: error instanceof Error ? error : new Error(String(error)),
+        error: err,
       };
     }
   }

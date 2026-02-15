@@ -53,11 +53,15 @@ export class SessionStartHandler implements ISessionStartHandler {
         output,
       };
     } catch (error) {
-      this.logger?.error('Session start handler failed', { error });
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.logger?.error('Session start handler failed', {
+        error: err.message,
+        stack: err.stack,
+      });
       return {
         handler: 'SessionStartHandler',
         success: false,
-        error: error instanceof Error ? error : new Error(String(error)),
+        error: err,
       };
     }
   }
