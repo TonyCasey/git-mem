@@ -74,9 +74,13 @@ describe('config', () => {
       assert.equal(config.hooks.sessionStop.enabled, true);
       assert.equal(config.hooks.sessionStop.autoExtract, true);
       assert.equal(config.hooks.sessionStop.threshold, 3);
-      assert.equal(config.hooks.promptSubmit.enabled, false);
+      assert.equal(config.hooks.promptSubmit.enabled, true);
       assert.equal(config.hooks.promptSubmit.recordPrompts, false);
       assert.equal(config.hooks.promptSubmit.surfaceContext, true);
+      assert.equal(config.hooks.promptSubmit.extractIntent, true);
+      assert.equal(config.hooks.promptSubmit.intentTimeout, 3000);
+      assert.equal(config.hooks.promptSubmit.minWords, 5);
+      assert.equal(config.hooks.promptSubmit.memoryLimit, 20);
     });
 
     it('should read and merge config from .git-mem/.git-mem.yaml', () => {

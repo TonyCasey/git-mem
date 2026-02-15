@@ -27,8 +27,16 @@ export interface IPromptSubmitConfig {
   readonly enabled: boolean;
   /** Whether to record prompts as memories. Reserved — not yet wired to handler. */
   readonly recordPrompts: boolean;
-  /** Whether to surface context memories per prompt. Reserved — not yet wired to handler. */
+  /** Whether to surface context memories per prompt. */
   readonly surfaceContext: boolean;
+  /** Enable LLM-based intent extraction for smarter memory retrieval. */
+  readonly extractIntent: boolean;
+  /** Timeout in ms for intent extraction LLM call. Default: 3000. Must be under hook timeout (10s). */
+  readonly intentTimeout: number;
+  /** Minimum word count to trigger intent extraction. Default: 5. */
+  readonly minWords: number;
+  /** Maximum memories to return. Default: 20. */
+  readonly memoryLimit: number;
 }
 
 export interface IPostCommitConfig {

@@ -42,7 +42,15 @@ const DEFAULTS: IHookConfig = {
     enabled: true,
     sessionStart: { enabled: true, memoryLimit: 20 },
     sessionStop: { enabled: true, autoExtract: true, threshold: 3 },
-    promptSubmit: { enabled: false, recordPrompts: false, surfaceContext: true },
+    promptSubmit: {
+      enabled: true,
+      recordPrompts: false,
+      surfaceContext: true,
+      extractIntent: true,
+      intentTimeout: 3000,
+      minWords: 5,
+      memoryLimit: 20,
+    },
     postCommit: { enabled: true },
     commitMsg: {
       enabled: true,
