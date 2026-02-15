@@ -28,6 +28,7 @@ import type { ITrailerService } from '../../domain/interfaces/ITrailerService';
 import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
 import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
 import type { IIntentExtractor } from '../../domain/interfaces/IIntentExtractor';
+import type { ILLMConfig } from '../../domain/interfaces/IHookConfig';
 
 export interface ICradle {
   // Infrastructure
@@ -64,4 +65,6 @@ export interface IContainerOptions {
   enrich?: boolean;
   /** Scope label for child logger (e.g., 'remember', 'mcp:recall'). */
   scope?: string;
+  /** LLM provider configuration from hook config or CLI options. */
+  llm?: ILLMConfig;
 }

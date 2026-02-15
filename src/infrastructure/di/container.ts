@@ -110,18 +110,19 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
       if (options?.enrich === false) {
         return null;
       }
-      return createLLMClient() ?? null;
+      return createLLMClient(options?.llm) ?? null;
     }).singleton(),
 
     intentExtractor: asFunction(() => {
-      // Intent extraction requires an API key. Return null for graceful degradation.
-      const apiKey = process.env.ANTHROPIC_API_KEY;
-      if (!apiKey) {
+      // Intent extraction uses the LLM client as ILLMCaller.
+      // If no LLM client is available, return null for graceful degradation.
+      const client = container.cradle.llmClient;
+      if (!client) {
         return null;
       }
       try {
         return new IntentExtractor({
-          apiKey,
+          caller: client,
           logger: container.cradle.logger,
         });
       } catch {

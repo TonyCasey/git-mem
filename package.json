@@ -49,6 +49,14 @@
     "prompts": "^2.4.2",
     "yaml": "^2.8.2"
   },
+  "peerDependencies": {
+    "openai": ">=4.0.0",
+    "@google/generative-ai": ">=0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": { "optional": true },
+    "@google/generative-ai": { "optional": true }
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",

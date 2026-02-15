@@ -65,7 +65,23 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 
 ## Environment Variables
 
-- `ANTHROPIC_API_KEY` — Required only for `git mem extract --enrich` (LLM enrichment). Without it, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
+- `ANTHROPIC_API_KEY` — Anthropic (Claude) API key for LLM enrichment and intent extraction.
+- `OPENAI_API_KEY` — OpenAI API key (requires `npm install openai`).
+- `GOOGLE_API_KEY` / `GEMINI_API_KEY` — Google Gemini API key (requires `npm install @google/generative-ai`).
+- `OLLAMA_HOST` — Ollama server URL (default: `http://localhost:11434`). No extra package needed.
+- `GIT_MEM_LLM_PROVIDER` — Force a specific provider: `anthropic`, `openai`, `gemini`, or `ollama`. Auto-detected from API keys if omitted.
+
+Only one provider is needed. Without any LLM key, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
+
+**LLM config in `.git-mem/.git-mem.yaml`:**
+
+```yaml
+llm:
+  provider: openai       # auto-detected if omitted
+  model: gpt-4o          # provider default if omitted
+  intentModel: gpt-4o-mini
+  baseUrl: http://localhost:11434  # for ollama
+```
 
 ## Key Technical Details
 

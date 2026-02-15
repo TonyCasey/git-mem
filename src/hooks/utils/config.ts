@@ -9,7 +9,7 @@
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { parse as parseYaml } from 'yaml';
-import type { IHookConfig, IHooksConfig } from '../../domain/interfaces/IHookConfig';
+import type { IHookConfig, IHooksConfig, ILLMConfig, LLMProvider } from '../../domain/interfaces/IHookConfig';
 
 /** Directory containing git-mem configuration */
 export const CONFIG_DIR = '.git-mem';
@@ -78,7 +78,7 @@ export function loadHookConfig(cwd?: string): IHookConfig {
 
     const rawStop = (rawHooks.sessionStop ?? {}) as Record<string, unknown>;
 
-    return {
+    const result: IHookConfig = {
       hooks: {
         enabled: rawHooks.enabled ?? DEFAULTS.hooks.enabled,
         sessionStart: {
@@ -103,7 +103,30 @@ export function loadHookConfig(cwd?: string): IHookConfig {
         },
       },
     };
+
+    // Parse llm section if present
+    const rawLlm = raw.llm as Record<string, unknown> | undefined;
+    if (rawLlm && typeof rawLlm === 'object') {
+      const llmConfig: ILLMConfig = {
+        ...(isValidProvider(rawLlm.provider) ? { provider: rawLlm.provider } : {}),
+        ...(typeof rawLlm.model === 'string' ? { model: rawLlm.model } : {}),
+        ...(typeof rawLlm.intentModel === 'string' ? { intentModel: rawLlm.intentModel } : {}),
+        ...(typeof rawLlm.baseUrl === 'string' ? { baseUrl: rawLlm.baseUrl } : {}),
+      };
+      // Only attach if at least one field was parsed
+      if (Object.keys(llmConfig).length > 0) {
+        return { ...result, llm: llmConfig };
+      }
+    }
+
+    return result;
   } catch {
     return DEFAULTS;
   }
+}
+
+const VALID_PROVIDERS: readonly LLMProvider[] = ['anthropic', 'openai', 'gemini', 'ollama'];
+
+function isValidProvider(value: unknown): value is LLMProvider {
+  return typeof value === 'string' && VALID_PROVIDERS.includes(value as LLMProvider);
 }

@@ -55,7 +55,7 @@ export interface ICommitMsgConfig {
   readonly requireType: boolean;
   /** Default memory lifecycle. */
   readonly defaultLifecycle: 'permanent' | 'project' | 'session';
-  /** Enable LLM enrichment for richer trailer content. Requires ANTHROPIC_API_KEY. */
+  /** Enable LLM enrichment for richer trailer content. Requires a configured LLM provider (e.g., ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY, or OLLAMA_HOST). */
   readonly enrich: boolean;
   /** Timeout in ms for LLM enrichment call. Default: 8000. Must be under hook timeout (10s). */
   readonly enrichTimeout: number;
@@ -70,6 +70,21 @@ export interface IHooksConfig {
   readonly commitMsg: ICommitMsgConfig;
 }
 
+/** Supported LLM providers. */
+export type LLMProvider = 'anthropic' | 'openai' | 'gemini' | 'ollama';
+
+export interface ILLMConfig {
+  /** Explicit provider selection. Auto-detected from env if omitted. */
+  readonly provider?: LLMProvider;
+  /** Model for enrichment. Provider default if omitted. */
+  readonly model?: string;
+  /** Lighter model for intent extraction. Reserved — not yet wired to handler. */
+  readonly intentModel?: string;
+  /** Base URL override (e.g., for Ollama). */
+  readonly baseUrl?: string;
+}
+
 export interface IHookConfig {
   readonly hooks: IHooksConfig;
+  readonly llm?: ILLMConfig;
 }

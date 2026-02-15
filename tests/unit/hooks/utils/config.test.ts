@@ -162,5 +162,73 @@ describe('config', () => {
       assert.equal(config.hooks.commitMsg.autoAnalyze, true);
       assert.equal(config.hooks.commitMsg.inferTags, true);
     });
+
+    it('should parse llm configuration section', () => {
+      const testDir = createTestDir();
+      writeConfig(testDir, {
+        hooks: { enabled: true },
+        llm: {
+          provider: 'openai',
+          model: 'gpt-4o',
+          intentModel: 'gpt-4o-mini',
+          baseUrl: 'http://localhost:11434',
+        },
+      });
+
+      const config = loadHookConfig(testDir);
+
+      assert.ok(config.llm);
+      assert.equal(config.llm!.provider, 'openai');
+      assert.equal(config.llm!.model, 'gpt-4o');
+      assert.equal(config.llm!.intentModel, 'gpt-4o-mini');
+      assert.equal(config.llm!.baseUrl, 'http://localhost:11434');
+    });
+
+    it('should accept all valid providers in llm config', () => {
+      for (const provider of ['anthropic', 'openai', 'gemini', 'ollama']) {
+        const testDir = createTestDir();
+        writeConfig(testDir, {
+          hooks: { enabled: true },
+          llm: { provider },
+        });
+
+        const config = loadHookConfig(testDir);
+        assert.ok(config.llm, `llm should be present for provider ${provider}`);
+        assert.equal(config.llm!.provider, provider);
+      }
+    });
+
+    it('should ignore invalid provider in llm config', () => {
+      const testDir = createTestDir();
+      writeConfig(testDir, {
+        hooks: { enabled: true },
+        llm: { provider: 'invalid-provider' },
+      });
+
+      const config = loadHookConfig(testDir);
+      // No valid fields parsed, so llm should not be attached
+      assert.equal(config.llm, undefined);
+    });
+
+    it('should not include llm when section is absent', () => {
+      const testDir = createTestDir();
+      writeConfig(testDir, { hooks: { enabled: true } });
+
+      const config = loadHookConfig(testDir);
+      assert.equal(config.llm, undefined);
+    });
+
+    it('should parse partial llm config (only model)', () => {
+      const testDir = createTestDir();
+      writeConfig(testDir, {
+        hooks: { enabled: true },
+        llm: { model: 'custom-model' },
+      });
+
+      const config = loadHookConfig(testDir);
+      assert.ok(config.llm);
+      assert.equal(config.llm!.model, 'custom-model');
+      assert.equal(config.llm!.provider, undefined);
+    });
   });
 });
