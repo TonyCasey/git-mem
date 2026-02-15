@@ -198,8 +198,13 @@ export function createTestRepo(prefix = 'git-mem-mcp-'): { dir: string; sha: str
 export function cleanupRepo(dir: string): void {
   try {
     rmSync(dir, { recursive: true, force: true, maxRetries: 3, retryDelay: 500 });
-  } catch {
-    // On Windows, killed shell processes may still hold .git lock files briefly.
-    // Temp dirs will be cleaned up by the OS eventually.
+  } catch (err) {
+    const code = (err as NodeJS.ErrnoException).code;
+    if (process.platform === 'win32' && code === 'EPERM') {
+      // On Windows, killed shell processes may still hold .git lock files briefly.
+      // Temp dirs will be cleaned up by the OS eventually.
+      return;
+    }
+    throw err;
   }
 }

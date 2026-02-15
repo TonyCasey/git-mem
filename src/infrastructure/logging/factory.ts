@@ -1,25 +1,13 @@
 import * as path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { ILogger, ILoggerOptions, LogLevel } from '../../domain/interfaces/ILogger';
 import { Logger } from './Logger';
 import { NullLogger } from './NullLogger';
+import { getGitRoot } from '../git/resolveGitRoot';
 
 const VALID_LEVELS: readonly LogLevel[] = ['trace', 'debug', 'info', 'warn', 'error', 'fatal'];
 
 function isValidLogLevel(value: string): value is LogLevel {
   return VALID_LEVELS.includes(value as LogLevel);
-}
-
-function getGitRoot(): string | null {
-  try {
-    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
-      encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    }).trim();
-    return path.resolve(root);
-  } catch {
-    return null;
-  }
 }
 
 export function defaultLogDir(): string {

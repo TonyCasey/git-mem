@@ -10,28 +10,12 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, rmSync } from 'fs';
-import { execFileSync } from 'child_process';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { homedir } from 'os';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import type { ILogger } from '../domain/interfaces/ILogger';
 import { getConfigPath, getConfigDir } from '../hooks/utils/config';
-
-/**
- * Resolve the git repository root directory.
- * Falls back to process.cwd() if not inside a git repo.
- */
-function resolveGitRoot(): string {
-  try {
-    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
-      encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    }).trim();
-    return resolve(root);
-  } catch {
-    return process.cwd();
-  }
-}
+import { resolveGitRoot } from '../infrastructure/git/resolveGitRoot';
 
 interface IInitHooksOptions {
   yes?: boolean;
