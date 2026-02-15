@@ -272,4 +272,72 @@ export class GitClient implements IGitClient {
       return [];
     }
   }
+
+  getCommitMessages(shas: readonly string[], cwd?: string): Map<string, { subject: string; body: string }> {
+    const result = new Map<string, { subject: string; body: string }>();
+
+    if (shas.length === 0) return result;
+
+    // Deduplicate SHAs
+    const uniqueShas = [...new Set(shas)];
+
+    // Use git log with specific SHAs to fetch all at once
+    // Format: SHA<FS>subject<FS>body<RS>
+    const format = ['%H', '%s', '%b'].join(GitClient.FIELD_SEP);
+
+    try {
+      // We use --no-walk to avoid following parents, just show the specified commits
+      const output = execFileSync(
+        'git',
+        [
+          'log',
+          '--no-walk',
+          `--format=${GitClient.RECORD_SEP}${format}`,
+          ...uniqueShas,
+        ],
+        {
+          encoding: 'utf8',
+          cwd,
+          stdio: ['pipe', 'pipe', 'pipe'],
+          maxBuffer: 10 * 1024 * 1024,
+        }
+      ).trim();
+
+      if (!output) return result;
+
+      const records = output.split(GitClient.RECORD_SEP).filter(r => r.trim());
+      for (const record of records) {
+        const fields = record.split(GitClient.FIELD_SEP);
+        const sha = fields[0] || '';
+        const subject = fields[1] || '';
+        const body = (fields[2] || '').trim();
+
+        if (sha) {
+          result.set(sha, { subject, body });
+        }
+      }
+    } catch {
+      // If batch fails, try individual lookups as fallback
+      for (const sha of uniqueShas) {
+        try {
+          const output = execFileSync(
+            'git',
+            ['log', '-1', `--format=%s${GitClient.FIELD_SEP}%b`, sha],
+            {
+              encoding: 'utf8',
+              cwd,
+              stdio: ['pipe', 'pipe', 'pipe'],
+            }
+          ).trim();
+
+          const [subject, body] = output.split(GitClient.FIELD_SEP);
+          result.set(sha, { subject: subject || '', body: (body || '').trim() });
+        } catch {
+          // Skip commits that can't be found
+        }
+      }
+    }
+
+    return result;
+  }
 }

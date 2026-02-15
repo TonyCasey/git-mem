@@ -56,6 +56,23 @@ export class ContextFormatter implements IContextFormatter {
       for (const item of items) {
         const date = item.createdAt.slice(0, 10); // YYYY-MM-DD
         sections.push(`- ${item.content} (${date})`);
+
+        // Include commit message if available
+        if (options?.commitMessages && item.sha) {
+          const commit = options.commitMessages.get(item.sha);
+          if (commit) {
+            sections.push(`  > Commit: ${commit.subject}`);
+            if (commit.body) {
+              // Indent body lines and limit length
+              const bodyLines = commit.body.split('\n').slice(0, 3); // Max 3 lines
+              for (const line of bodyLines) {
+                if (line.trim()) {
+                  sections.push(`  > ${line.trim()}`);
+                }
+              }
+            }
+          }
+        }
       }
       sections.push('');
     }

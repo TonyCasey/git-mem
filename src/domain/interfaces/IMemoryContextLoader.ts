@@ -16,6 +16,14 @@ export interface IMemoryContextOptions {
   readonly tags?: string[];
   /** Working directory for git operations. */
   readonly cwd?: string;
+  /** Include commit message bodies with memories. */
+  readonly includeCommitMessages?: boolean;
+}
+
+/** Commit message data. */
+export interface ICommitMessage {
+  readonly subject: string;
+  readonly body: string;
 }
 
 export interface IMemoryContextResult {
@@ -25,6 +33,8 @@ export interface IMemoryContextResult {
   readonly total: number;
   /** Number returned after filtering. */
   readonly filtered: number;
+  /** Commit messages keyed by SHA. Present when includeCommitMessages is true. */
+  readonly commitMessages?: ReadonlyMap<string, ICommitMessage>;
 }
 
 export interface IMemoryContextLoader {

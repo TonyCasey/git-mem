@@ -8,6 +8,7 @@
  * from the prompt and queries memories with those keywords.
  * Falls back to loading recent memories if extraction is skipped
  * or no keywords are found.
+ * Optionally includes commit message bodies for additional context.
  */
 
 import type { IPromptSubmitHandler } from '../interfaces/IPromptSubmitHandler';
@@ -44,6 +45,7 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
         memoryLimit: 20,
         minWords: 5,
         intentTimeout: 3000,
+        includeCommitMessages: true,
       };
 
       // Early exit if context surfacing is disabled
@@ -55,6 +57,9 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
           output: '',
         };
       }
+
+      // Determine includeCommitMessages setting
+      const includeCommitMessages = promptConfig.includeCommitMessages ?? true;
 
       // Try intent extraction if enabled
       let result: IMemoryContextResult;
@@ -79,6 +84,7 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
           result = this.memoryContextLoader.load({
             cwd: event.cwd,
             limit: promptConfig.memoryLimit,
+            includeCommitMessages,
           });
         }
       } else {
@@ -86,6 +92,7 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
         result = this.memoryContextLoader.load({
           cwd: event.cwd,
           limit: promptConfig.memoryLimit,
+          includeCommitMessages,
         });
       }
 
@@ -98,11 +105,14 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
         };
       }
 
-      const output = this.contextFormatter.format(result.memories);
+      const output = this.contextFormatter.format(result.memories, {
+        commitMessages: result.commitMessages,
+      });
 
       this.logger?.info('Memories loaded for prompt context', {
         total: result.total,
         filtered: result.filtered,
+        hasCommitMessages: !!result.commitMessages,
       });
 
       return {
