@@ -216,6 +216,36 @@
       ],
       "createdAt": "2026-02-15T17:19:23.104Z",
       "updatedAt": "2026-02-15T17:19:23.104Z"
+    },
+    {
+      "id": "7121071f-5f40-4892-a539-b359d3021db5",
+      "content": "The `git mem init` command creates a complete configuration file that includes all hook settings by default, enabling promptSubmit by default with full intent extraction capabilities.",
+      "type": "decision",
+      "sha": "720533faa549aaaa70eec3a2da2c655ce1904ae2",
+      "confidence": "verified",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "init-command",
+        "git-hooks",
+        "configuration",
+        "default-settings",
+        "commit-msg",
+        "timeout",
+        "ai-processing",
+        "performance",
+        "intent-extraction",
+        "prompt-submit",
+        "validation",
+        "memory-limit",
+        "context",
+        "auto-analyze",
+        "tags",
+        "lifecycle"
+      ],
+      "createdAt": "2026-02-15T18:07:05.399Z",
+      "updatedAt": "2026-02-15T18:07:05.399Z"
     }
   ]
 }
