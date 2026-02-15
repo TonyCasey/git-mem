@@ -81,11 +81,29 @@ export function ensureGitignoreEntries(cwd: string, entries: string[]): void {
 
 /**
  * Configure git to push notes automatically with regular pushes.
- * Adds refs/notes/* to existing push refspecs, preserving any user-configured refspecs.
+ * Adds refs/notes/* only when custom push refspecs already exist.
+ * This avoids overriding git's default push behavior in repos that
+ * rely on implicit push semantics (no remote.origin.push configured).
  * Idempotent - safe to call multiple times.
  */
-export function configureNotesPush(cwd: string): void {
+export type NotesPushConfigStatus =
+  | 'configured'
+  | 'already-configured'
+  | 'skipped-no-custom-push'
+  | 'skipped-no-origin';
+
+export function configureNotesPush(cwd: string): { status: NotesPushConfigStatus } {
   let existingRefspecs: string[] = [];
+
+  try {
+    execFileSync('git', ['remote', 'get-url', 'origin'], {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+  } catch {
+    return { status: 'skipped-no-origin' };
+  }
 
   try {
     // Get existing push refspecs
@@ -101,18 +119,16 @@ export function configureNotesPush(cwd: string): void {
 
     // Already has notes configured - nothing to do
     if (existingRefspecs.some((ref) => ref.includes('refs/notes'))) {
-      return;
+      return { status: 'already-configured' };
     }
   } catch {
-    // Config doesn't exist yet, proceed to set it
+    // Config doesn't exist yet
   }
 
-  // If no existing refspecs, add heads first
+  // Without explicit push refspecs, adding one would override default
+  // git push behavior (often current/upstream branch).
   if (existingRefspecs.length === 0) {
-    execFileSync('git', ['config', '--local', 'remote.origin.push', '+refs/heads/*:refs/heads/*'], {
-      cwd,
-      stdio: ['pipe', 'pipe', 'pipe'],
-    });
+    return { status: 'skipped-no-custom-push' };
   }
 
   // Add notes refspec (preserves existing refspecs)
@@ -120,6 +136,8 @@ export function configureNotesPush(cwd: string): void {
     cwd,
     stdio: ['pipe', 'pipe', 'pipe'],
   });
+
+  return { status: 'configured' };
 }
 
 /**
@@ -295,8 +313,17 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
     }
 
     // Configure git to push notes automatically with regular pushes
-    configureNotesPush(cwd);
-    console.log('✓ Configured git to push notes with commits');
+    const notesPush = configureNotesPush(cwd);
+    if (notesPush.status === 'configured') {
+      console.log('✓ Configured git to push notes with commits');
+    } else if (notesPush.status === 'already-configured') {
+      console.log('✓ Notes push already configured (skipped)');
+    } else if (notesPush.status === 'skipped-no-custom-push') {
+      console.log('i Skipped notes push auto-config to preserve default git push behavior');
+      console.log('  Use `git-mem sync --push` to publish notes, or add a custom remote.origin.push refspec.');
+    } else {
+      console.log('i No origin remote found; skipped notes push configuration');
+    }
   }
 
   // ── MCP config (skip if already exists) ────────────────────────

@@ -7,15 +7,35 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync } from 'fs';
+import { mkdtempSync, writeFileSync, readFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { rmSync } from 'fs';
+import { execFileSync } from 'child_process';
 import {
   ensureGitignoreEntries,
+  configureNotesPush,
   readEnvApiKey,
   ensureEnvPlaceholder,
 } from '../../../src/commands/init';
+
+function git(args: string[], cwd: string): string {
+  return execFileSync('git', args, {
+    cwd,
+    encoding: 'utf8',
+    stdio: ['pipe', 'pipe', 'pipe'],
+  }).trim();
+}
+
+function getPushRefspecs(cwd: string): string[] {
+  try {
+    const output = git(['config', '--local', '--get-all', 'remote.origin.push'], cwd);
+    if (!output) return [];
+    return output.split('\n').filter(Boolean);
+  } catch {
+    return [];
+  }
+}
 
 // ── ensureGitignoreEntries ───────────────────────────────────────────
 
@@ -268,6 +288,85 @@ describe('ensureEnvPlaceholder', () => {
       assert.ok(lines.some((l: string) => l === 'ANTHROPIC_API_KEY='));
     } finally {
       rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
+
+// ── configureNotesPush ────────────────────────────────────────────────
+
+describe('configureNotesPush', () => {
+  it('should skip when origin remote is not configured', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'git-mem-notes-push-'));
+    try {
+      git(['init'], dir);
+      const result = configureNotesPush(dir);
+      assert.equal(result.status, 'skipped-no-origin');
+      assert.deepEqual(getPushRefspecs(dir), []);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('should skip when no custom remote.origin.push refspec exists', () => {
+    const base = mkdtempSync(join(tmpdir(), 'git-mem-notes-push-'));
+    const dir = join(base, 'repo');
+    const remote = join(base, 'remote.git');
+    try {
+      mkdirSync(dir, { recursive: true });
+      git(['init'], dir);
+      git(['init', '--bare', remote], base);
+      git(['remote', 'add', 'origin', remote], dir);
+
+      const result = configureNotesPush(dir);
+      assert.equal(result.status, 'skipped-no-custom-push');
+      assert.deepEqual(getPushRefspecs(dir), []);
+    } finally {
+      rmSync(base, { recursive: true, force: true });
+    }
+  });
+
+  it('should append notes refspec when custom push refspec exists', () => {
+    const base = mkdtempSync(join(tmpdir(), 'git-mem-notes-push-'));
+    const dir = join(base, 'repo');
+    const remote = join(base, 'remote.git');
+    try {
+      mkdirSync(dir, { recursive: true });
+      git(['init'], dir);
+      git(['init', '--bare', remote], base);
+      git(['remote', 'add', 'origin', remote], dir);
+      git(['config', '--local', 'remote.origin.push', 'refs/heads/main:refs/heads/main'], dir);
+
+      const result = configureNotesPush(dir);
+      assert.equal(result.status, 'configured');
+
+      const refspecs = getPushRefspecs(dir);
+      assert.ok(refspecs.includes('refs/heads/main:refs/heads/main'));
+      assert.ok(refspecs.includes('+refs/notes/*:refs/notes/*'));
+    } finally {
+      rmSync(base, { recursive: true, force: true });
+    }
+  });
+
+  it('should be idempotent when notes refspec already exists', () => {
+    const base = mkdtempSync(join(tmpdir(), 'git-mem-notes-push-'));
+    const dir = join(base, 'repo');
+    const remote = join(base, 'remote.git');
+    try {
+      mkdirSync(dir, { recursive: true });
+      git(['init'], dir);
+      git(['init', '--bare', remote], base);
+      git(['remote', 'add', 'origin', remote], dir);
+      git(['config', '--local', '--add', 'remote.origin.push', 'refs/heads/main:refs/heads/main'], dir);
+      git(['config', '--local', '--add', 'remote.origin.push', '+refs/notes/*:refs/notes/*'], dir);
+
+      const result = configureNotesPush(dir);
+      assert.equal(result.status, 'already-configured');
+
+      const refspecs = getPushRefspecs(dir);
+      const notesRefs = refspecs.filter((ref) => ref === '+refs/notes/*:refs/notes/*');
+      assert.equal(notesRefs.length, 1);
+    } finally {
+      rmSync(base, { recursive: true, force: true });
     }
   });
 });
