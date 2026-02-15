@@ -307,7 +307,8 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   console.log('\nHooks configured:');
   console.log('  SessionStart     — Load memories into Claude context on startup');
   console.log('  Stop             — Capture memories from session commits on exit');
-  console.log('  UserPromptSubmit — Surface relevant memories per prompt (disabled by default)');
+  console.log('  UserPromptSubmit — Surface relevant memories per prompt');
+  console.log('  CommitMsg        — Analyze commits and add AI trailers');
 
   console.log('\nNext steps:');
   console.log('  1. Start Claude Code in this repo: claude');
