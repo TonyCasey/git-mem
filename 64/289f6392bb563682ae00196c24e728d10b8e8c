@@ -1079,6 +1079,21 @@
       ],
       "createdAt": "2026-02-15T09:36:04.272Z",
       "updatedAt": "2026-02-15T09:36:04.272Z"
+    },
+    {
+      "id": "026590bb-c2cf-410a-9328-617d0172f5ad",
+      "content": "being a single file at the root level",
+      "type": "decision",
+      "sha": "64289f6392bb563682ae00196c24e728d10b8e8c",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-15T09:40:36.810Z",
+      "updatedAt": "2026-02-15T09:40:36.810Z"
     }
   ]
 }
