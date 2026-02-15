@@ -314,6 +314,21 @@
       ],
       "createdAt": "2026-02-15T17:19:23.135Z",
       "updatedAt": "2026-02-15T17:19:23.135Z"
+    },
+    {
+      "id": "69a20a93-ad36-4190-8109-20477ed939b0",
+      "content": "AI-Lifecycle: project",
+      "type": "convention",
+      "sha": "3164edf9fcc46ec0f38160e5c5660367f2e86380",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-15T17:19:23.155Z",
+      "updatedAt": "2026-02-15T17:19:23.155Z"
     }
   ]
 }
