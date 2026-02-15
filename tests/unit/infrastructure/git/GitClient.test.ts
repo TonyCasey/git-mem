@@ -1,7 +1,7 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'child_process';
-import { mkdtempSync, rmSync } from 'fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { GitClient } from '../../../../src/infrastructure/git/GitClient';
@@ -24,12 +24,12 @@ describe('GitClient', () => {
     git(['config', 'user.name', 'Test User'], repoDir);
 
     // Create initial commit
-    execFileSync('touch', ['file1.txt'], { cwd: repoDir });
+    writeFileSync(join(repoDir, 'file1.txt'), '');
     git(['add', '.'], repoDir);
     git(['commit', '-m', 'feat: initial commit\n\nThis is the body of the commit.'], repoDir);
 
     // Create second commit
-    execFileSync('touch', ['file2.txt'], { cwd: repoDir });
+    writeFileSync(join(repoDir, 'file2.txt'), '');
     git(['add', '.'], repoDir);
     git(['commit', '-m', 'fix: second commit'], repoDir);
 

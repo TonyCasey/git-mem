@@ -8,7 +8,7 @@
 import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'child_process';
-import { mkdtempSync, writeFileSync, rmSync } from 'fs';
+import { mkdtempSync, writeFileSync, rmSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { MemoryService } from '../../src/application/services/MemoryService';
@@ -32,7 +32,7 @@ describe('Integration: Sync', () => {
 
     // Create bare remote repo
     bareDir = join(base, 'remote.git');
-    execFileSync('mkdir', ['-p', bareDir]);
+    mkdirSync(bareDir, { recursive: true });
     git(['init', '--bare'], bareDir);
 
     // Clone as "local"
