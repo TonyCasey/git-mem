@@ -40,6 +40,23 @@
       ],
       "createdAt": "2026-02-15T00:47:51.439Z",
       "updatedAt": "2026-02-15T00:47:51.439Z"
+    },
+    {
+      "id": "f1bc75af-f451-4faf-89a0-22e40e7de950",
+      "content": "add loadWithQuery to MemoryContextLoader (GIT-100). - Add loadWithQuery method to IMemoryContextLoader interface",
+      "type": "decision",
+      "sha": "4d4c570693621c7b12e18099e06a1805744c9e99",
+      "confidence": "medium",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "application",
+        "services",
+        "domain"
+      ],
+      "createdAt": "2026-02-15T00:50:36.890Z",
+      "updatedAt": "2026-02-15T00:50:36.890Z"
     }
   ]
 }
