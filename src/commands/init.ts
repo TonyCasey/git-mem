@@ -7,7 +7,7 @@
 
 import { existsSync, readFileSync, writeFileSync, appendFileSync, mkdirSync } from 'fs';
 import { execFileSync } from 'child_process';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import prompts from 'prompts';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import type { ILogger } from '../domain/interfaces/ILogger';
@@ -26,6 +26,22 @@ import { installCommitMsgHook, uninstallCommitMsgHook } from '../hooks/commit-ms
 import { createContainer } from '../infrastructure/di';
 import { createStderrProgressHandler } from './progress';
 import { getConfigPath, getConfigDir } from '../hooks/utils/config';
+
+/**
+ * Resolve the git repository root directory.
+ * Falls back to process.cwd() if not inside a git repo.
+ */
+function resolveGitRoot(): string {
+  try {
+    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim();
+    return resolve(root);
+  } catch {
+    return process.cwd();
+  }
+}
 
 interface IInitCommandOptions {
   yes?: boolean;
@@ -161,7 +177,7 @@ export function ensureEnvPlaceholder(cwd: string): void {
 /** Run unified project setup: hooks, MCP config, .gitignore, and .env. */
 export async function initCommand(options: IInitCommandOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init' });
-  const cwd = process.cwd();
+  const cwd = resolveGitRoot();
 
   log?.info('Command invoked', { yes: options.yes, uninstallHooks: options.uninstallHooks });
 
@@ -235,7 +251,7 @@ export async function initCommand(options: IInitCommandOptions, logger?: ILogger
 
   // ── Claude Code hooks ──────────────────────────────────────────
   if (claudeIntegration) {
-    const settingsPath = getSettingsPath('project');
+    const settingsPath = getSettingsPath('project', cwd);
     const settingsDir = join(settingsPath, '..');
     if (!existsSync(settingsDir)) {
       mkdirSync(settingsDir, { recursive: true });

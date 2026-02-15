@@ -10,11 +10,28 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync, rmSync } from 'fs';
-import { join } from 'path';
+import { execFileSync } from 'child_process';
+import { join, resolve } from 'path';
 import { homedir } from 'os';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import type { ILogger } from '../domain/interfaces/ILogger';
 import { getConfigPath, getConfigDir } from '../hooks/utils/config';
+
+/**
+ * Resolve the git repository root directory.
+ * Falls back to process.cwd() if not inside a git repo.
+ */
+function resolveGitRoot(): string {
+  try {
+    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'pipe'],
+    }).trim();
+    return resolve(root);
+  } catch {
+    return process.cwd();
+  }
+}
 
 interface IInitHooksOptions {
   yes?: boolean;
@@ -147,11 +164,11 @@ export function deepMergeGitMemConfig(
 
 // ── Config builders ──────────────────────────────────────────────────
 
-export function getSettingsPath(scope: string): string {
+export function getSettingsPath(scope: string, cwd?: string): string {
   if (scope === 'user') {
     return join(homedir(), '.claude', 'settings.json');
   }
-  return join(process.cwd(), '.claude', 'settings.json');
+  return join(cwd ?? process.cwd(), '.claude', 'settings.json');
 }
 
 export function readExistingSettings(path: string): Record<string, unknown> {
@@ -232,8 +249,8 @@ export function buildGitMemConfig(): Record<string, unknown> {
 export async function initHooksCommand(options: IInitHooksOptions, logger?: ILogger): Promise<void> {
   const log = logger?.child({ command: 'init-hooks' });
   const scope = options.scope ?? 'project';
-  const settingsPath = getSettingsPath(scope);
-  const cwd = process.cwd();
+  const cwd = resolveGitRoot();
+  const settingsPath = getSettingsPath(scope, cwd);
   const configDir = getConfigDir(cwd);
   const configPath = getConfigPath(cwd);
 

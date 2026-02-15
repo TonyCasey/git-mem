@@ -10,7 +10,7 @@
  *   git-mem hook prompt-submit
  */
 
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { execFileSync } from 'child_process';
 import { config as loadEnv } from 'dotenv';
 import { createContainer } from '../infrastructure/di';
@@ -109,11 +109,12 @@ export function buildEvent(eventType: HookEventType, input: IHookInput): HookEve
  */
 function findGitRoot(cwd: string): string {
   try {
-    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
+    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
       cwd,
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
     }).trim();
+    return resolve(root);
   } catch {
     return cwd;
   }

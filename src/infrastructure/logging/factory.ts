@@ -12,10 +12,11 @@ function isValidLogLevel(value: string): value is LogLevel {
 
 function getGitRoot(): string | null {
   try {
-    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
+    const root = execFileSync('git', ['rev-parse', '--show-toplevel'], {
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
     }).trim();
+    return path.resolve(root);
   } catch {
     return null;
   }
