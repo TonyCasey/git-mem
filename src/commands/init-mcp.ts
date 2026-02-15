@@ -33,11 +33,6 @@ export function isGloballyInstalled(): boolean {
 }
 
 export function resolveLocalMcpServerPath(cwd?: string): string {
-  const runtimePath = join(__dirname, '..', 'mcp-server.js');
-  if (existsSync(runtimePath)) {
-    return runtimePath;
-  }
-
   const projectRoot = cwd ?? process.cwd();
   const distPath = join(projectRoot, 'dist', 'mcp-server.js');
   if (existsSync(distPath)) {
@@ -49,8 +44,15 @@ export function resolveLocalMcpServerPath(cwd?: string): string {
     return sourcePath;
   }
 
-  // Fallback for unusual setups where no expected path is present yet.
-  return runtimePath;
+  const runtimePath = join(__dirname, '..', 'mcp-server.js');
+  if (existsSync(runtimePath)) {
+    return runtimePath;
+  }
+
+  throw new Error(
+    'Could not locate MCP server entrypoint. ' +
+    'Expected one of: dist/mcp-server.js, src/mcp-server.ts, or bundled mcp-server.js.',
+  );
 }
 
 export function buildMcpConfig(options?: IBuildMcpConfigOptions): object {
@@ -70,8 +72,8 @@ export function buildMcpConfig(options?: IBuildMcpConfigOptions): object {
   return {
     mcpServers: {
       'git-mem': {
-        command: isTypeScriptEntry ? 'npx' : 'node',
-        args: isTypeScriptEntry ? ['tsx', serverPath] : [serverPath],
+        command: 'node',
+        args: isTypeScriptEntry ? ['--import', 'tsx', serverPath] : [serverPath],
       },
     },
   };

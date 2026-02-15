@@ -46,8 +46,8 @@ describe('buildMcpConfig', () => {
 
       const config = buildMcpConfig({ global: false, cwd: dir }) as IMcpConfig;
 
-      assert.equal(config.mcpServers['git-mem'].command, 'npx');
-      assert.deepEqual(config.mcpServers['git-mem'].args, ['tsx', join(srcDir, 'mcp-server.ts')]);
+      assert.equal(config.mcpServers['git-mem'].command, 'node');
+      assert.deepEqual(config.mcpServers['git-mem'].args, ['--import', 'tsx', join(srcDir, 'mcp-server.ts')]);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
@@ -80,6 +80,18 @@ describe('resolveLocalMcpServerPath', () => {
 
       const resolved = resolveLocalMcpServerPath(dir);
       assert.equal(resolved, expected);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('should throw when no local or runtime entrypoint is found', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'git-mem-init-mcp-'));
+    try {
+      assert.throws(
+        () => resolveLocalMcpServerPath(dir),
+        /Could not locate MCP server entrypoint/,
+      );
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
