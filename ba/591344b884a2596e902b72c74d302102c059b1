@@ -449,6 +449,21 @@
       ],
       "createdAt": "2026-02-15T18:11:16.185Z",
       "updatedAt": "2026-02-15T18:11:16.185Z"
+    },
+    {
+      "id": "a2f13364-d497-46cd-8d8e-1cdefc494035",
+      "content": "the LLM API calls were timing out at the 5 second default",
+      "type": "decision",
+      "sha": "ba591344b884a2596e902b72c74d302102c059b1",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-15T18:14:12.189Z",
+      "updatedAt": "2026-02-15T18:14:12.189Z"
     }
   ]
 }
