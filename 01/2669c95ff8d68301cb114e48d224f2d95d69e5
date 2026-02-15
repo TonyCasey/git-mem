@@ -449,6 +449,21 @@
       ],
       "createdAt": "2026-02-15T17:17:35.586Z",
       "updatedAt": "2026-02-15T17:17:35.586Z"
+    },
+    {
+      "id": "666047c8-72ab-4f0c-ad53-e04a3e6a81bd",
+      "content": "generic Error for consistency with",
+      "type": "decision",
+      "sha": "012669c95ff8d68301cb114e48d224f2d95d69e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-15T17:19:23.041Z",
+      "updatedAt": "2026-02-15T17:19:23.041Z"
     }
   ]
 }
