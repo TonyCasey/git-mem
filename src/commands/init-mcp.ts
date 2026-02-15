@@ -15,6 +15,11 @@ interface IInitMcpOptions {
   global?: boolean;
 }
 
+interface IBuildMcpConfigOptions {
+  global?: boolean;
+  cwd?: string;
+}
+
 export function isGloballyInstalled(): boolean {
   try {
     execFileSync('which', ['git-mem-mcp'], {
@@ -27,8 +32,30 @@ export function isGloballyInstalled(): boolean {
   }
 }
 
-export function buildMcpConfig(options?: { global?: boolean }): object {
-  if (options?.global || isGloballyInstalled()) {
+export function resolveLocalMcpServerPath(cwd?: string): string {
+  const runtimePath = join(__dirname, '..', 'mcp-server.js');
+  if (existsSync(runtimePath)) {
+    return runtimePath;
+  }
+
+  const projectRoot = cwd ?? process.cwd();
+  const distPath = join(projectRoot, 'dist', 'mcp-server.js');
+  if (existsSync(distPath)) {
+    return distPath;
+  }
+
+  const sourcePath = join(projectRoot, 'src', 'mcp-server.ts');
+  if (existsSync(sourcePath)) {
+    return sourcePath;
+  }
+
+  // Fallback for unusual setups where no expected path is present yet.
+  return runtimePath;
+}
+
+export function buildMcpConfig(options?: IBuildMcpConfigOptions): object {
+  const useGlobal = options?.global === true || (options?.global !== false && isGloballyInstalled());
+  if (useGlobal) {
     return {
       mcpServers: {
         'git-mem': {
@@ -38,12 +65,13 @@ export function buildMcpConfig(options?: { global?: boolean }): object {
     };
   }
 
-  const serverPath = join(__dirname, '..', 'mcp-server.js');
+  const serverPath = resolveLocalMcpServerPath(options?.cwd);
+  const isTypeScriptEntry = serverPath.endsWith('.ts');
   return {
     mcpServers: {
       'git-mem': {
-        command: 'node',
-        args: [serverPath],
+        command: isTypeScriptEntry ? 'npx' : 'node',
+        args: isTypeScriptEntry ? ['tsx', serverPath] : [serverPath],
       },
     },
   };
