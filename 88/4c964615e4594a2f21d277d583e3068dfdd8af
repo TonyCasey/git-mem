@@ -4829,6 +4829,21 @@
       ],
       "createdAt": "2026-02-15T17:12:52.132Z",
       "updatedAt": "2026-02-15T17:12:52.132Z"
+    },
+    {
+      "id": "6f73de38-9f19-4904-a0eb-18cc30d099b2",
+      "content": "both hooks need to run: prepare-commit-msg adds basic trailers,",
+      "type": "decision",
+      "sha": "884c964615e4594a2f21d277d583e3068dfdd8af",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-15T17:12:52.153Z",
+      "updatedAt": "2026-02-15T17:12:52.153Z"
     }
   ]
 }
