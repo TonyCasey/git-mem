@@ -9,9 +9,6 @@ import { BaseLLMClient } from './BaseLLMClient';
 import type { IAPICallResult } from './BaseLLMClient';
 import { LLMError } from '../../domain/errors/LLMError';
 
-// OpenAI SDK is an optional peer dependency — no static import.
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-
 export interface IOpenAILLMClientOptions {
   /** OpenAI API key. Falls back to OPENAI_API_KEY env var. */
   readonly apiKey?: string;

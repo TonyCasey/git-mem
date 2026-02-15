@@ -74,6 +74,7 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 Only one provider is needed. Without any LLM key, `--enrich` falls back to heuristic extraction with a warning. See `.env.example`.
 
 **LLM config in `.git-mem/.git-mem.yaml`:**
+
 ```yaml
 llm:
   provider: openai       # auto-detected if omitted

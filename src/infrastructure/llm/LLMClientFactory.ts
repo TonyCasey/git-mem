@@ -35,12 +35,16 @@ export function createLLMClient(options?: ILLMClientFactoryOptions): ILLMClient 
     case 'anthropic': {
       const apiKey = options?.apiKey || process.env.ANTHROPIC_API_KEY;
       if (!apiKey) return null;
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const { AnthropicLLMClient } = require('./AnthropicLLMClient');
-      return new AnthropicLLMClient({
-        apiKey,
-        model: options?.model,
-      });
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const { AnthropicLLMClient } = require('./AnthropicLLMClient');
+        return new AnthropicLLMClient({
+          apiKey,
+          model: options?.model,
+        });
+      } catch {
+        return null;
+      }
     }
 
     case 'openai': {

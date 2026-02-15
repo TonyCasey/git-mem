@@ -78,7 +78,7 @@ export interface ILLMConfig {
   readonly provider?: LLMProvider;
   /** Model for enrichment. Provider default if omitted. */
   readonly model?: string;
-  /** Lighter model for intent extraction. Falls back to model if omitted. */
+  /** Lighter model for intent extraction. Reserved — not yet wired to handler. */
   readonly intentModel?: string;
   /** Base URL override (e.g., for Ollama). */
   readonly baseUrl?: string;

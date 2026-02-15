@@ -156,19 +156,18 @@ describe('LLMClientFactory', () => {
       assert.ok(client instanceof AnthropicLLMClient);
     });
 
-    it('should return null for openai without SDK installed', () => {
+    it('should handle openai provider gracefully', () => {
       clearAllEnv();
       process.env.OPENAI_API_KEY = 'sk-test';
-      // The openai SDK is not a dependency, so require will fail
-      // and the factory should return null gracefully
+      // Returns a client if openai SDK is installed, null if construction fails.
+      // The test verifies it doesn't throw.
       const client = createLLMClient({ provider: 'openai', apiKey: 'sk-test' });
-      // Could be null if SDK not installed, or an instance if it is
-      // The test verifies it doesn't throw
       assert.ok(client === null || typeof client.enrichCommit === 'function');
     });
 
-    it('should return null for gemini without SDK installed', () => {
+    it('should handle gemini provider gracefully', () => {
       clearAllEnv();
+      // Returns a client if @google/generative-ai is installed, null if construction fails.
       const client = createLLMClient({ provider: 'gemini', apiKey: 'AIza-test' });
       assert.ok(client === null || typeof client.enrichCommit === 'function');
     });
