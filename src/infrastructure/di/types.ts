@@ -64,4 +64,6 @@ export interface IContainerOptions {
   enrich?: boolean;
   /** Scope label for child logger (e.g., 'remember', 'mcp:recall'). */
   scope?: string;
+  /** LLM provider configuration from hook config or CLI options. */
+  llm?: import('../../domain/interfaces/IHookConfig').ILLMConfig;
 }
