@@ -4889,6 +4889,21 @@
       ],
       "createdAt": "2026-02-15T17:17:35.912Z",
       "updatedAt": "2026-02-15T17:17:35.912Z"
+    },
+    {
+      "id": "7691d9ac-b9a5-4032-8619-3e6a9a284bb0",
+      "content": "it automatically adds AI trailers",
+      "type": "decision",
+      "sha": "884c964615e4594a2f21d277d583e3068dfdd8af",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-15T17:17:35.933Z",
+      "updatedAt": "2026-02-15T17:17:35.933Z"
     }
   ]
 }
