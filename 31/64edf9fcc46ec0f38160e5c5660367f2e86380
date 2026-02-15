@@ -269,6 +269,21 @@
       ],
       "createdAt": "2026-02-15T17:12:51.856Z",
       "updatedAt": "2026-02-15T17:12:51.856Z"
+    },
+    {
+      "id": "68287691-1eb8-4a21-83a9-c4edac67b9e3",
+      "content": "and word count logic",
+      "type": "convention",
+      "sha": "3164edf9fcc46ec0f38160e5c5660367f2e86380",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-15T17:17:35.646Z",
+      "updatedAt": "2026-02-15T17:17:35.646Z"
     }
   ]
 }
