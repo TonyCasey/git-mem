@@ -39,8 +39,10 @@ describe('installCommitMsgHook', () => {
 
     const content = readFileSync(result.hookPath, 'utf8');
     assert.ok(content.includes('#!/bin/sh'));
-    assert.ok(content.includes('git-mem:commit-msg v4'));
+    assert.ok(content.includes('git-mem:commit-msg v6'));
     assert.ok(content.includes('git-mem hook commit-msg'));
+    assert.ok(content.includes('\\"cwd\\"'));
+    assert.ok(content.includes('git rev-parse --show-toplevel'));
   });
 
   it('should be idempotent — second install is a no-op', () => {
@@ -74,7 +76,7 @@ describe('installCommitMsgHook', () => {
 
       // Installed hook should contain both fingerprint and wrapper reference
       const content = readFileSync(hookPath, 'utf8');
-      assert.ok(content.includes('git-mem:commit-msg v4'));
+      assert.ok(content.includes('git-mem:commit-msg v6'));
       assert.ok(content.includes('user-backup'));
     } finally {
       rmSync(freshRepo, { recursive: true, force: true });
@@ -102,7 +104,7 @@ describe('installCommitMsgHook', () => {
       assert.equal(result.wrapped, false);
 
       const content = readFileSync(hookPath, 'utf8');
-      assert.ok(content.includes('git-mem:commit-msg v4'), 'Should be upgraded to v4');
+      assert.ok(content.includes('git-mem:commit-msg v6'), 'Should be upgraded to v6');
       assert.ok(content.includes('git-mem hook commit-msg'), 'Should include git-mem command');
 
       // Second install should be idempotent

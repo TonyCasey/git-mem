@@ -111,6 +111,22 @@ function findGitRoot(cwd: string): string {
   return resolveGitRoot(cwd);
 }
 
+/**
+ * Normalize hook cwd values across shell environments.
+ * On Windows Git Bash/MSYS may pass "/c/path" which Node cannot use as cwd.
+ */
+export function normalizeHookCwd(cwd: string, platform: NodeJS.Platform = process.platform): string {
+  if (platform !== 'win32') return cwd;
+
+  const msysDrivePath = /^\/([a-zA-Z])(?:\/(.*))?$/;
+  const match = cwd.match(msysDrivePath);
+  if (!match) return cwd;
+
+  const drive = match[1].toUpperCase();
+  const rest = match[2] ?? '';
+  return rest.length > 0 ? `${drive}:/${rest}` : `${drive}:/`;
+}
+
 /** Stderr labels per event for user-facing messages. */
 const STDERR_LABELS: Record<HookEventType, { success: string; prefix: string }> = {
   'session:start': { success: 'Memory loaded.', prefix: 'Memory loaded' },
@@ -131,7 +147,8 @@ export async function hookCommand(eventName: string, _logger?: ILogger): Promise
 
   try {
     const input = await readStdin<IHookInput>();
-    const cwd = input.cwd ?? process.cwd();
+    const cwd = normalizeHookCwd(input.cwd ?? process.cwd());
+    const normalizedInput: IHookInput = { ...input, cwd };
     const repoRoot = findGitRoot(cwd);
 
     // Load .env from repository root for API keys (e.g., ANTHROPIC_API_KEY)
@@ -147,7 +164,7 @@ export async function hookCommand(eventName: string, _logger?: ILogger): Promise
     const container = createContainer({ scope: `hook:${eventName}` });
     const { eventBus } = container.cradle;
 
-    const event = buildEvent(eventType, input);
+    const event = buildEvent(eventType, normalizedInput);
     const results = await eventBus.emit(event);
 
     // Successful handler output → stdout (Claude context)

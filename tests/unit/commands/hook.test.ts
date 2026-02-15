@@ -8,7 +8,7 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { EVENT_MAP, isEventEnabled, buildEvent } from '../../../src/commands/hook';
+import { EVENT_MAP, isEventEnabled, buildEvent, normalizeHookCwd } from '../../../src/commands/hook';
 import type { IHooksConfig } from '../../../src/domain/interfaces/IHookConfig';
 
 // ── Fixture helpers ──────────────────────────────────────────────────
@@ -144,5 +144,29 @@ describe('buildEvent', () => {
 
     assert.equal(event.type, 'prompt:submit');
     assert.equal('prompt' in event && event.prompt, '');
+  });
+});
+
+// ── normalizeHookCwd ────────────────────────────────────────────────
+
+describe('normalizeHookCwd', () => {
+  it('should normalize MSYS drive path on win32', () => {
+    const normalized = normalizeHookCwd('/c/dev/git-mem', 'win32');
+    assert.equal(normalized, 'C:/dev/git-mem');
+  });
+
+  it('should normalize MSYS drive root on win32', () => {
+    const normalized = normalizeHookCwd('/d', 'win32');
+    assert.equal(normalized, 'D:/');
+  });
+
+  it('should leave non-MSYS path unchanged on win32', () => {
+    const normalized = normalizeHookCwd('C:/dev/git-mem', 'win32');
+    assert.equal(normalized, 'C:/dev/git-mem');
+  });
+
+  it('should leave path unchanged on non-win32', () => {
+    const normalized = normalizeHookCwd('/c/dev/git-mem', 'linux');
+    assert.equal(normalized, '/c/dev/git-mem');
   });
 });
