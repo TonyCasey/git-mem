@@ -959,6 +959,21 @@
       ],
       "createdAt": "2026-02-15T00:56:41.221Z",
       "updatedAt": "2026-02-15T00:56:41.221Z"
+    },
+    {
+      "id": "48528563-3941-4239-bc20-e8b3c6fdeb61",
+      "content": "guard YAML parsing against null values + update docs",
+      "type": "gotcha",
+      "sha": "64289f6392bb563682ae00196c24e728d10b8e8c",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-15T00:56:41.242Z",
+      "updatedAt": "2026-02-15T00:56:41.242Z"
     }
   ]
 }
