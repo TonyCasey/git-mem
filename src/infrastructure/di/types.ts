@@ -27,6 +27,7 @@ import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCap
 import type { ITrailerService } from '../../domain/interfaces/ITrailerService';
 import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
 import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
+import type { IIntentExtractor } from '../../domain/interfaces/IIntentExtractor';
 
 export interface ICradle {
   // Infrastructure
@@ -40,6 +41,7 @@ export interface ICradle {
   eventBus: IEventBus;
   agentResolver: IAgentResolver;
   hookConfigLoader: IHookConfigLoader;
+  intentExtractor: IIntentExtractor | null;
 
   // Application — core services
   memoryService: IMemoryService;
