@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "3f6325ef-1f0f-47ca-9227-c58795540c48",
+      "content": "generic Error for consistency with",
+      "type": "decision",
+      "sha": "012669c95ff8d68301cb114e48d224f2d95d69e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-15T01:14:47.239Z",
+      "updatedAt": "2026-02-15T01:14:47.239Z"
+    }
+  ]
+}
