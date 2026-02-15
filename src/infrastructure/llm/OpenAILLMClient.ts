@@ -39,12 +39,25 @@ export class OpenAILLMClient extends BaseLLMClient {
     userMessage: string,
     maxTokens?: number,
   ): Promise<IAPICallResult> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let OpenAI: any;
+    type OpenAIConstructor = new (opts: { apiKey: string }) => {
+      chat: {
+        completions: {
+          create: (params: {
+            model: string;
+            max_tokens: number;
+            messages: Array<{ role: 'system' | 'user'; content: string }>;
+          }) => Promise<{
+            choices: Array<{ message?: { content?: string } }>;
+            usage?: { prompt_tokens?: number; completion_tokens?: number };
+          }>;
+        };
+      };
+    };
+    let OpenAI: OpenAIConstructor;
     try {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const mod = require('openai');
-      OpenAI = mod.default ?? mod;
+      const mod: unknown = require('openai');
+      OpenAI = ((mod as { default?: OpenAIConstructor }).default ?? mod) as OpenAIConstructor;
     } catch {
       throw new LLMError(
         'OpenAI SDK not installed. Run: npm install openai',

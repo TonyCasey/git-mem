@@ -39,12 +39,25 @@ export class GeminiLLMClient extends BaseLLMClient {
     userMessage: string,
     maxTokens?: number,
   ): Promise<IAPICallResult> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let GoogleGenerativeAI: any;
+    type GeminiModel = {
+      generateContent: (params: {
+        contents: Array<{ role: string; parts: Array<{ text: string }> }>;
+        generationConfig: { maxOutputTokens: number };
+      }) => Promise<{
+        response: {
+          text: () => string;
+          usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number };
+        };
+      }>;
+    };
+    type GenAIConstructor = new (apiKey: string) => {
+      getGenerativeModel: (opts: { model: string; systemInstruction: string }) => GeminiModel;
+    };
+    let GoogleGenerativeAI: GenAIConstructor;
     try {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const mod = require('@google/generative-ai');
-      GoogleGenerativeAI = mod.GoogleGenerativeAI;
+      const mod: unknown = require('@google/generative-ai');
+      GoogleGenerativeAI = (mod as { GoogleGenerativeAI: GenAIConstructor }).GoogleGenerativeAI;
     } catch {
       throw new LLMError(
         'Google Generative AI SDK not installed. Run: npm install @google/generative-ai',
