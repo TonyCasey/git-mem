@@ -83,6 +83,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.memoryContextLoader,
         container.cradle.contextFormatter,
         container.cradle.logger,
+        container.cradle.hookConfigLoader,
+        container.cradle.intentExtractor,
       ));
       bus.on('git:commit', new PostCommitHandler(
         container.cradle.notesService,
