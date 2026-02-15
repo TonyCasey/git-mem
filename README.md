@@ -1,28 +1,28 @@
-# Git Mem
+# git-mem
 
-Your git history is the perfect context for AI.
-It just needs to be extracted for agents....
+Track AI contributions in your git history.
 
 ## Why?
 
-Your git history already contains the decisions, conventions, and gotchas that matter — git-mem extracts them and makes them available to Claude automatically.
+AI writes code now. Your commits should show when, which agent, and which model.
+
+git-mem adds AI metadata to every commit automatically — no workflow changes, no extra steps.
 
 ## How?
 
-When initialized in your repo, git-mem reviews your last (n) commits and extracts knowledge automatically.
-Each commit is updated with background AI metadata, which Claude can use to improve its understanding of your codebase.
+Every commit gets AI trailers:
 
-Every **new** commit is automatically populated with the folowing metadata..
+```
+feat: add user authentication
 
-- **AI-Agent:** Claude/Opus-4.5
-- **AI-Decision:** JWT over sessions — stateless API, scales horizontally
-- **AI-Context:** [pattern/middleware, entity/auth-module]
-- **AI-Confidence:** 0.95
-- **AI-Memory:** milestone/auth-implementation
+AI-Agent: claude-code
+AI-Model: claude-sonnet-4-5-20250929
+AI-Decision: JWT over sessions — stateless API, scales horizontally
+AI-Context: [pattern/middleware, entity/auth-module]
 
-Going forward, AI knowledge will be embedded in each commit for future references
+```
 
----
+That's it. Your git history now tracks AI contributions.
 
 ## Install
 
@@ -32,9 +32,23 @@ cd your-repo
 git-mem init
 ```
 
-`init` sets up hooks, MCP config, .gitignore entries, and runs an initial extract from your history.
+30 seconds. Done.
 
-See the [Getting Started Guide](./docs/getting-started.md) for full CLI and MCP setup docs.
+## What else?
+
+git-mem also extracts decisions, conventions, and gotchas from your commit history — and makes them available to your AI agent as persistent memory.
+
+Your agent stops re-learning your codebase every session.
+
+```bash
+# Extract knowledge from recent commits
+git-mem extract
+
+# Query what git-mem knows
+git-mem recall "authentication"
+```
+
+See the [Getting Started Guide](./docs/getting-started.md) for CLI and MCP setup.
 
 ## License
 

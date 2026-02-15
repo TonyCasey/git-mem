@@ -75,7 +75,7 @@ Uses **`node:test`** (native Node.js test runner) with **`tsx`** for TypeScript,
 - **`cwd` parameter**: Must be threaded through all service calls when operating on a repo that isn't the current working directory
 - **Commit triage**: Weighted scoring based on conventional prefixes, decision keywords, diff size, PR merges
 - **TypeScript config**: Relaxed strict mode for development (`strict: false` in tsconfig.json)
-- **Hook config**: `.git-mem.json` at project root, loaded by `src/hooks/utils/config.ts`. Never throws — returns defaults on error
+- **Hook config**: `.git-mem/.git-mem.yaml` loaded by `src/hooks/utils/config.ts`. Never throws — returns defaults on error
 - **Hook stdin**: `src/hooks/utils/stdin.ts` reads JSON from stdin. Returns `{}` on TTY or parse error — hooks must never crash
 - **EventBus error isolation**: Handler exceptions are caught and returned as failed `IEventResult[]` — one failing handler doesn't block others
 - **Hook timeout**: 10s hard limit via `setupShutdown()` — hooks must never hang Claude Code
@@ -91,6 +91,8 @@ Rules are automatically loaded as context. See `.claude/rules/`:
 - `code-quality-rules.md` - TypeScript/ESLint configuration, error prevention
 - `git-rules.md` - Commit workflow, PR creation, memory milestones
 - `testing-principles.md` - Testing pyramid, mocking strategies
+- `memory-rules.md` - Handling session memory
+
 
 ### TypeScript Rules
 - `coding-standards.md` - Naming conventions, type safety, async patterns
@@ -101,5 +103,13 @@ Rules are automatically loaded as context. See `.claude/rules/`:
 ## Git Workflow
 
 - Branch per Linear issue, named with ticket number (e.g. `GIT-15`)
+- Use the SKILL .claude/skills/github/SKILL.md for interacting with GitHub
+- PR workflow use the skill .claude/skills/pr/SKILL.md
+  - Create the PR
+  - Wait for 120 seconds to allow for review from coderabbit
+  - Address comments directly inline to the comment
+  - if a fix is applied, mark the comment as resolved
+  - wait for another 120 seconds to allow for review from coderabbit
+  - repeat the steps until all comments are resolved
 - PRs merge into `main`
 - Clean up feature branches after merge
