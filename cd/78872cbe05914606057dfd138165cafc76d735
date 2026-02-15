@@ -1,7 +1,43 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-15T18:40:46.632Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-15T18:40:46.632Z"
+      }
+    },
+    {
+      "id": "a5f55b4c-da16-4277-b75b-d75bd2c95762",
+      "content": "The project has repositioned its messaging to lead with AI metadata tracking rather than memory extraction, suggesting the primary value prop is tracking AI contributions in git history.",
+      "type": "decision",
+      "sha": "cd78872cbe05914606057dfd138165cafc76d735",
+      "confidence": "verified",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "documentation",
+        "product-positioning",
+        "ai-metadata",
+        "configuration",
+        "yaml",
+        "migration",
+        "breaking-change",
+        "versioning",
+        "changelog",
+        "feature-consolidation",
+        "hooks",
+        "error-handling",
+        "config",
+        "reliability",
+        "git-trailers",
+        "commit-format",
+        "timeout",
+        "claude-code"
+      ],
+      "createdAt": "2026-02-15T18:49:40.778Z",
+      "updatedAt": "2026-02-15T18:49:40.778Z"
+    }
+  ]
 }
