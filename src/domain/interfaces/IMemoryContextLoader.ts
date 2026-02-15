@@ -30,4 +30,15 @@ export interface IMemoryContextResult {
 export interface IMemoryContextLoader {
   /** Load memories with optional filters. */
   load(options?: IMemoryContextOptions): IMemoryContextResult;
+
+  /**
+   * Load memories filtered by a search query.
+   * Searches both git notes and commit trailers for matching memories.
+   *
+   * @param query - Search keywords (e.g., "authentication, GIT-95, LoginHandler")
+   * @param limit - Maximum memories to return
+   * @param cwd - Working directory for git operations
+   * @returns Matching memories from both notes and trailers
+   */
+  loadWithQuery(query: string, limit?: number, cwd?: string): IMemoryContextResult;
 }

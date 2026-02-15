@@ -163,4 +163,107 @@ describe('MemoryContextLoader', () => {
 
     assert.equal(result.filtered, 1);
   });
+
+  describe('loadWithQuery', () => {
+    function createMockMemoryService(memories: IMemoryEntity[]) {
+      return {
+        remember: () => memories[0]!,
+        recall: (query?: string, options?: { limit?: number; cwd?: string }) => {
+          let result = [...memories];
+          if (query) {
+            result = result.filter(m =>
+              m.content.toLowerCase().includes(query.toLowerCase())
+            );
+          }
+          if (options?.limit) {
+            result = result.slice(0, options.limit);
+          }
+          return { memories: result, total: memories.length };
+        },
+        get: () => null,
+        delete: () => false,
+      };
+    }
+
+    it('should search memories using MemoryService.recall', () => {
+      const memories = [
+        createMemory({ id: '1', content: 'JWT authentication decision' }),
+        createMemory({ id: '2', content: 'Database migration gotcha' }),
+      ];
+      const repo = createMockRepository(memories);
+      const service = createMockMemoryService(memories);
+      const loader = new MemoryContextLoader(repo, undefined, service);
+
+      const result = loader.loadWithQuery('JWT');
+
+      assert.equal(result.filtered, 1);
+      assert.ok(result.memories[0]!.content.includes('JWT'));
+    });
+
+    it('should fall back to load() when MemoryService not available', () => {
+      const memories = [
+        createMemory({ id: '1', content: 'Test memory' }),
+        createMemory({ id: '2', content: 'Another memory' }),
+      ];
+      const repo = createMockRepository(memories);
+      const logger = createMockLogger();
+      const loader = new MemoryContextLoader(repo, logger);
+
+      const result = loader.loadWithQuery('anything');
+
+      assert.equal(result.total, 2);
+      assert.equal(result.filtered, 2);
+      assert.ok(logger.warnCalled, 'expected warning about fallback');
+    });
+
+    it('should apply limit when using MemoryService', () => {
+      const memories = [
+        createMemory({ id: '1', content: 'Auth memory' }),
+        createMemory({ id: '2', content: 'Auth decision' }),
+        createMemory({ id: '3', content: 'Auth gotcha' }),
+      ];
+      const repo = createMockRepository(memories);
+      const service = createMockMemoryService(memories);
+      const loader = new MemoryContextLoader(repo, undefined, service);
+
+      const result = loader.loadWithQuery('Auth', 2);
+
+      assert.equal(result.filtered, 2);
+    });
+
+    it('should pass cwd to MemoryService', () => {
+      let capturedCwd: string | undefined;
+      const repo = createMockRepository([]);
+      const service = {
+        remember: () => createMemory(),
+        recall: (_query?: string, options?: { cwd?: string }) => {
+          capturedCwd = options?.cwd;
+          return { memories: [], total: 0 };
+        },
+        get: () => null,
+        delete: () => false,
+      };
+      const loader = new MemoryContextLoader(repo, undefined, service);
+
+      loader.loadWithQuery('test', 10, '/custom/path');
+
+      assert.equal(capturedCwd, '/custom/path');
+    });
+
+    it('should return total from repository for accurate stats', () => {
+      const repoMemories = [
+        createMemory({ id: '1' }),
+        createMemory({ id: '2' }),
+        createMemory({ id: '3' }),
+      ];
+      const repo = createMockRepository(repoMemories);
+      const service = createMockMemoryService([createMemory({ id: '1' })]);
+      const loader = new MemoryContextLoader(repo, undefined, service);
+
+      const result = loader.loadWithQuery('test');
+
+      assert.equal(result.total, 3, 'total should come from repository');
+      assert.equal(result.filtered, 1, 'filtered should come from query result');
+    });
+  });
 });
