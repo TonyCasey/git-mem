@@ -31,7 +31,7 @@ export interface IPromptSubmitConfig {
   readonly surfaceContext: boolean;
   /** Enable LLM-based intent extraction for smarter memory retrieval. */
   readonly extractIntent: boolean;
-  /** Timeout in ms for intent extraction LLM call. Default: 3000. Must be under hook timeout (10s). */
+  /** Timeout in ms for intent extraction LLM call. Default: 3000. */
   readonly intentTimeout: number;
   /** Minimum word count to trigger intent extraction. Default: 5. */
   readonly minWords: number;
