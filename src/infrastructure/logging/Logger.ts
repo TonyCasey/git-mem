@@ -22,6 +22,21 @@ const LEVEL_COLORS: Record<LogLevel, string> = {
 
 const RESET = '\x1b[0m';
 
+/** JSON.stringify that handles circular references and Error objects. */
+function safeStringify(obj: unknown): string {
+  const seen = new WeakSet();
+  return JSON.stringify(obj, (_key, value) => {
+    if (value instanceof Error) {
+      return { message: value.message, stack: value.stack };
+    }
+    if (typeof value === 'object' && value !== null) {
+      if (seen.has(value)) return '[Circular]';
+      seen.add(value);
+    }
+    return value;
+  });
+}
+
 function formatTimestamp(): string {
   const now = new Date();
   const pad = (n: number, len = 2) => String(n).padStart(len, '0');
@@ -85,7 +100,7 @@ export class Logger implements ILogger {
     if (!this.isLevelEnabled(level)) return;
 
     const merged = { ...this.bindings, ...context };
-    const contextStr = Object.keys(merged).length > 0 ? ` ${JSON.stringify(merged)}` : '';
+    const contextStr = Object.keys(merged).length > 0 ? ` ${safeStringify(merged)}` : '';
     const timestamp = formatTimestamp();
     const levelUpper = level.toUpperCase().padEnd(5);
 
