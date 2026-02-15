@@ -419,6 +419,21 @@
       ],
       "createdAt": "2026-02-15T18:14:12.129Z",
       "updatedAt": "2026-02-15T18:14:12.129Z"
+    },
+    {
+      "id": "511ca846-5e99-4d2b-9adc-c0b7a576d28d",
+      "content": "and word count logic",
+      "type": "convention",
+      "sha": "3164edf9fcc46ec0f38160e5c5660367f2e86380",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-15T18:14:41.915Z",
+      "updatedAt": "2026-02-15T18:14:41.915Z"
     }
   ]
 }
