@@ -3,20 +3,29 @@
  *
  * Handles the prompt:submit event by loading relevant memories
  * and formatting them as context for Claude Code.
+ *
+ * When intent extraction is enabled, extracts searchable keywords
+ * from the prompt and queries memories with those keywords.
+ * Falls back to loading recent memories if extraction is skipped
+ * or no keywords are found.
  */
 
 import type { IPromptSubmitHandler } from '../interfaces/IPromptSubmitHandler';
 import type { IPromptSubmitEvent } from '../../domain/events/HookEvents';
 import type { IEventResult } from '../../domain/interfaces/IEventResult';
-import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
+import type { IMemoryContextLoader, IMemoryContextResult } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ILogger } from '../../domain/interfaces/ILogger';
+import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
+import type { IIntentExtractor } from '../../domain/interfaces/IIntentExtractor';
 
 export class PromptSubmitHandler implements IPromptSubmitHandler {
   constructor(
     private readonly memoryContextLoader: IMemoryContextLoader,
     private readonly contextFormatter: IContextFormatter,
     private readonly logger?: ILogger,
+    private readonly hookConfigLoader?: IHookConfigLoader,
+    private readonly intentExtractor?: IIntentExtractor | null,
   ) {}
 
   async handle(event: IPromptSubmitEvent): Promise<IEventResult> {
@@ -24,9 +33,61 @@ export class PromptSubmitHandler implements IPromptSubmitHandler {
       this.logger?.info('Prompt submit handler invoked', {
         sessionId: event.sessionId,
         cwd: event.cwd,
+        hasPrompt: !!event.prompt,
       });
 
-      const result = this.memoryContextLoader.load({ cwd: event.cwd });
+      // Load config
+      const config = this.hookConfigLoader?.loadConfig(event.cwd);
+      const promptConfig = config?.hooks.promptSubmit ?? {
+        surfaceContext: true,
+        extractIntent: false,
+        memoryLimit: 20,
+        minWords: 5,
+        intentTimeout: 3000,
+      };
+
+      // Early exit if context surfacing is disabled
+      if (!promptConfig.surfaceContext) {
+        this.logger?.debug('Context surfacing disabled');
+        return {
+          handler: 'PromptSubmitHandler',
+          success: true,
+          output: '',
+        };
+      }
+
+      // Try intent extraction if enabled
+      let result: IMemoryContextResult;
+
+      if (promptConfig.extractIntent && this.intentExtractor && event.prompt) {
+        const intentResult = await this.intentExtractor.extract({ prompt: event.prompt });
+
+        if (!intentResult.skipped && intentResult.intent) {
+          this.logger?.debug('Intent extracted, querying with keywords', {
+            intent: intentResult.intent,
+          });
+          result = this.memoryContextLoader.loadWithQuery(
+            intentResult.intent,
+            promptConfig.memoryLimit,
+            event.cwd,
+          );
+        } else {
+          this.logger?.debug('Intent extraction skipped', {
+            reason: intentResult.reason,
+          });
+          // Fall back to loading recent memories
+          result = this.memoryContextLoader.load({
+            cwd: event.cwd,
+            limit: promptConfig.memoryLimit,
+          });
+        }
+      } else {
+        // No intent extraction, load recent memories
+        result = this.memoryContextLoader.load({
+          cwd: event.cwd,
+          limit: promptConfig.memoryLimit,
+        });
+      }
 
       if (result.memories.length === 0) {
         this.logger?.debug('No memories found for prompt context');
