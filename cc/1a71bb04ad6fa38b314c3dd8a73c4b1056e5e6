@@ -209,6 +209,21 @@
       ],
       "createdAt": "2026-02-15T18:14:12.156Z",
       "updatedAt": "2026-02-15T18:14:12.156Z"
+    },
+    {
+      "id": "cd287d7c-02c0-45cf-942d-03302000cb58",
+      "content": "dumping all memories,",
+      "type": "decision",
+      "sha": "cc1a71bb04ad6fa38b314c3dd8a73c4b1056e5e6",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-15T18:14:41.960Z",
+      "updatedAt": "2026-02-15T18:14:41.960Z"
     }
   ]
 }
