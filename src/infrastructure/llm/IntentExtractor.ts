@@ -13,6 +13,7 @@ import type {
   IIntentExtractorResult,
 } from '../../domain/interfaces/IIntentExtractor';
 import type { ILogger } from '../../domain/interfaces/ILogger';
+import { LLMError } from '../../domain/errors/LLMError';
 
 export interface IIntentExtractorOptions {
   /** Anthropic API key. Falls back to ANTHROPIC_API_KEY env var. */
@@ -45,7 +46,7 @@ export class IntentExtractor implements IIntentExtractor {
   constructor(options: IIntentExtractorOptions) {
     const apiKey = options.apiKey || process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
-      throw new Error('Anthropic API key required for IntentExtractor');
+      throw new LLMError('Anthropic API key required for IntentExtractor');
     }
 
     this.client = new Anthropic({ apiKey });
@@ -97,15 +98,27 @@ export class IntentExtractor implements IIntentExtractor {
 
   /**
    * Call LLM with timeout enforcement.
+   * Clears timeout after Promise.race to avoid lingering timers.
    */
   private async extractWithTimeout(prompt: string): Promise<string | null> {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
     const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('Intent extraction timed out')), this.timeout);
+      timeoutId = setTimeout(
+        () => reject(new LLMError('Intent extraction timed out')),
+        this.timeout,
+      );
     });
 
     const extractPromise = this.callLLM(prompt);
 
-    return Promise.race([extractPromise, timeoutPromise]);
+    try {
+      return await Promise.race([extractPromise, timeoutPromise]);
+    } finally {
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
+    }
   }
 
   /**
