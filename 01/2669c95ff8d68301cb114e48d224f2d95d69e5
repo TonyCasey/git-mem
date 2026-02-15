@@ -554,6 +554,21 @@
       ],
       "createdAt": "2026-02-15T18:11:15.976Z",
       "updatedAt": "2026-02-15T18:11:15.976Z"
+    },
+    {
+      "id": "4e585582-65fa-4bda-bfd6-a30ec64a58a2",
+      "content": "Timeouts should be cleared after Promise",
+      "type": "gotcha",
+      "sha": "012669c95ff8d68301cb114e48d224f2d95d69e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-15T18:11:15.995Z",
+      "updatedAt": "2026-02-15T18:11:15.995Z"
     }
   ]
 }
