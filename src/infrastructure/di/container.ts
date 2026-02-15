@@ -25,6 +25,7 @@ import { TrailerService } from '../services/TrailerService';
 import { EventBus } from '../events/EventBus';
 import { createLogger } from '../logging/factory';
 import { createLLMClient } from '../llm/LLMClientFactory';
+import { IntentExtractor } from '../llm/IntentExtractor';
 import { AgentResolver } from '../services/AgentResolver';
 import { HookConfigLoader } from '../services/HookConfigLoader';
 
@@ -108,6 +109,22 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         return null;
       }
       return createLLMClient() ?? null;
+    }).singleton(),
+
+    intentExtractor: asFunction(() => {
+      // Intent extraction requires an API key. Return null for graceful degradation.
+      const apiKey = process.env.ANTHROPIC_API_KEY;
+      if (!apiKey) {
+        return null;
+      }
+      try {
+        return new IntentExtractor({
+          apiKey,
+          logger: container.cradle.logger,
+        });
+      } catch {
+        return null;
+      }
     }).singleton(),
 
     // ── Application services ─────────────────────────────────────
