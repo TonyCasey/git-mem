@@ -85,7 +85,7 @@ export class MemoryRepository implements IMemoryRepository {
     }
 
     if (options?.tag) {
-      filtered = filtered.filter(m => m.tags.includes(options.tag!));
+      filtered = filtered.filter(m => m.tags?.includes(options.tag!) ?? false);
     }
 
     if (options?.since) {

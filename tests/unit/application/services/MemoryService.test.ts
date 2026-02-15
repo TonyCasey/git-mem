@@ -200,10 +200,32 @@ describe('MemoryService', () => {
     });
 
     it('should handle query on memories with undefined content gracefully (GIT-96)', () => {
-      // Regression test: ensure matchesQuery doesn't throw on malformed data
-      // The service should handle memories where content could be undefined at runtime
+      // Regression test: inject actual malformed data with missing content/tags
+      const malformedFile = join(repoDir, 'git-96-memsvc-malformed.txt');
+      writeFileSync(malformedFile, 'malformed memory service test');
+      git(['add', 'git-96-memsvc-malformed.txt'], repoDir);
+      git(['commit', '-m', 'git-96 memsvc malformed memory'], repoDir);
+      const malformedSha = git(['rev-parse', 'HEAD'], repoDir);
+
+      // Write a malformed note payload (missing content and tags fields)
+      const malformedPayload = JSON.stringify({
+        memories: [{
+          id: 'git-96-memsvc-malformed-id',
+          type: 'gotcha',
+          sha: malformedSha,
+          confidence: 'medium',
+          source: 'user-explicit',
+          lifecycle: 'project',
+          // Intentionally omit content and tags to simulate malformed data
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }],
+      });
+
+      git(['notes', '--ref', 'refs/notes/mem', 'add', '-f', '-m', malformedPayload, malformedSha], repoDir);
+
+      // Query should not throw even with malformed data
       const result = service.recall('test-query', { cwd: repoDir });
-      // Should not throw - just return results (or empty)
       assert.ok(Array.isArray(result.memories));
     });
   });

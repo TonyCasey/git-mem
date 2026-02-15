@@ -121,10 +121,38 @@ describe('MemoryRepository', () => {
     });
 
     it('should handle query on memories with undefined content gracefully (GIT-96)', () => {
-      // Regression test: query should not throw on malformed data
-      // This ensures the query filter handles potential undefined content at runtime
-      const result = repo.query({ query: 'test-search', cwd: repoDir });
-      assert.ok(Array.isArray(result.memories));
+      // Regression test: inject actual malformed data with missing content/tags
+      // to verify the defensive guards work
+      const malformedFile = join(repoDir, 'git-96-malformed.txt');
+      writeFileSync(malformedFile, 'malformed memory test');
+      git(['add', 'git-96-malformed.txt'], repoDir);
+      git(['commit', '-m', 'git-96 malformed memory'], repoDir);
+      const malformedSha = git(['rev-parse', 'HEAD'], repoDir);
+
+      // Write a malformed note payload (missing content and tags fields)
+      const malformedPayload = JSON.stringify({
+        memories: [{
+          id: 'git-96-malformed-id',
+          type: 'decision',
+          sha: malformedSha,
+          confidence: 'high',
+          source: 'user-explicit',
+          lifecycle: 'project',
+          // Intentionally omit content and tags to simulate malformed data
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+        }],
+      });
+
+      git(['notes', '--ref', 'refs/notes/mem', 'add', '-f', '-m', malformedPayload, malformedSha], repoDir);
+
+      // Query with text search should not throw
+      const queryResult = repo.query({ query: 'test-search', cwd: repoDir });
+      assert.ok(Array.isArray(queryResult.memories));
+
+      // Query with tag filter should not throw
+      const tagResult = repo.query({ tag: 'some-tag', cwd: repoDir });
+      assert.ok(Array.isArray(tagResult.memories));
     });
   });
 
