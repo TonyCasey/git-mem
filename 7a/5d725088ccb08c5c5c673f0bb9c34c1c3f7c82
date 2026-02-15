@@ -1,7 +1,33 @@
 {
-  "session": {
-    "agent": "Claude-Code/2.1.42",
-    "model": "claude-opus-4-5-20251101",
-    "timestamp": "2026-02-15T18:10:59.679Z"
-  }
+  "memories": [
+    {
+      "session": {
+        "agent": "Claude-Code/2.1.42",
+        "model": "claude-opus-4-5-20251101",
+        "timestamp": "2026-02-15T18:10:59.679Z"
+      }
+    },
+    {
+      "id": "557c83d9-0015-441e-8158-af61e687dec5",
+      "content": "The UserPromptSubmit hook default behavior changed from disabled to enabled by default.",
+      "type": "decision",
+      "sha": "7a5d725088ccb08c5c5c673f0bb9c34c1c3f7c82",
+      "confidence": "verified",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "hooks",
+        "user-prompt-submit",
+        "defaults",
+        "init-hooks",
+        "commit-msg",
+        "ai-trailers",
+        "console-output",
+        "user-experience"
+      ],
+      "createdAt": "2026-02-15T18:11:16.044Z",
+      "updatedAt": "2026-02-15T18:11:16.044Z"
+    }
+  ]
 }
