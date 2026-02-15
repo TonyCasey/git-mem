@@ -85,7 +85,7 @@ export class MemoryRepository implements IMemoryRepository {
     }
 
     if (options?.tag) {
-      filtered = filtered.filter(m => m.tags.includes(options.tag!));
+      filtered = filtered.filter(m => m.tags?.includes(options.tag!) ?? false);
     }
 
     if (options?.since) {
@@ -96,8 +96,8 @@ export class MemoryRepository implements IMemoryRepository {
     if (options?.query) {
       const q = options.query.toLowerCase();
       filtered = filtered.filter(m =>
-        m.content.toLowerCase().includes(q) ||
-        m.tags.some(t => t.toLowerCase().includes(q))
+        (m.content?.toLowerCase().includes(q) ?? false) ||
+        (m.tags?.some(t => t?.toLowerCase().includes(q)) ?? false)
       );
     }
 

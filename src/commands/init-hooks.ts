@@ -202,12 +202,26 @@ export function buildGitMemConfig(): Record<string, unknown> {
         threshold: 3,
       },
       promptSubmit: {
-        enabled: false,
+        enabled: true,
         recordPrompts: false,
         surfaceContext: true,
+        extractIntent: true,
+        intentTimeout: 3000,
+        minWords: 5,
+        memoryLimit: 20,
+        includeCommitMessages: true,
       },
       postCommit: {
         enabled: true,
+      },
+      commitMsg: {
+        enabled: true,
+        autoAnalyze: true,
+        inferTags: true,
+        requireType: false,
+        defaultLifecycle: 'project',
+        enrich: true,
+        enrichTimeout: 8000,
       },
     },
   };
@@ -293,7 +307,8 @@ export async function initHooksCommand(options: IInitHooksOptions, logger?: ILog
   console.log('\nHooks configured:');
   console.log('  SessionStart     — Load memories into Claude context on startup');
   console.log('  Stop             — Capture memories from session commits on exit');
-  console.log('  UserPromptSubmit — Surface relevant memories per prompt (disabled by default)');
+  console.log('  UserPromptSubmit — Surface relevant memories per prompt');
+  console.log('  CommitMsg        — Analyze commits and add AI trailers');
 
   console.log('\nNext steps:');
   console.log('  1. Start Claude Code in this repo: claude');
