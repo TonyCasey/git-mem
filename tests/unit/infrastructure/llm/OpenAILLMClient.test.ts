@@ -21,6 +21,8 @@ describe('OpenAILLMClient', () => {
       } finally {
         if (saved !== undefined) {
           process.env.OPENAI_API_KEY = saved;
+        } else {
+          delete process.env.OPENAI_API_KEY;
         }
       }
     });

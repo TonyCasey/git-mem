@@ -41,6 +41,7 @@ export class OllamaLLMClient extends BaseLLMClient {
   protected async callAPI(
     systemPrompt: string,
     userMessage: string,
+    maxTokens?: number,
   ): Promise<IAPICallResult> {
     const url = `${this.baseUrl}/api/chat`;
     const body = JSON.stringify({
@@ -51,7 +52,7 @@ export class OllamaLLMClient extends BaseLLMClient {
       ],
       stream: false,
       options: {
-        num_predict: this.maxTokens,
+        num_predict: maxTokens ?? this.maxTokens,
       },
     });
 

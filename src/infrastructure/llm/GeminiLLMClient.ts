@@ -37,9 +37,12 @@ export class GeminiLLMClient extends BaseLLMClient {
   protected async callAPI(
     systemPrompt: string,
     userMessage: string,
+    maxTokens?: number,
   ): Promise<IAPICallResult> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let GoogleGenerativeAI: any;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const mod = require('@google/generative-ai');
       GoogleGenerativeAI = mod.GoogleGenerativeAI;
     } catch {
@@ -57,7 +60,7 @@ export class GeminiLLMClient extends BaseLLMClient {
     try {
       const result = await model.generateContent({
         contents: [{ role: 'user', parts: [{ text: userMessage }] }],
-        generationConfig: { maxOutputTokens: this.maxTokens },
+        generationConfig: { maxOutputTokens: maxTokens ?? this.maxTokens },
       });
 
       const response = result.response;

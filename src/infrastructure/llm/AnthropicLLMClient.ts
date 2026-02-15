@@ -38,10 +38,11 @@ export class AnthropicLLMClient extends BaseLLMClient {
   protected async callAPI(
     systemPrompt: string,
     userMessage: string,
+    maxTokens?: number,
   ): Promise<IAPICallResult> {
     const response = await this.client.messages.create({
       model: this.model,
-      max_tokens: this.maxTokens,
+      max_tokens: maxTokens ?? this.maxTokens,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
     });

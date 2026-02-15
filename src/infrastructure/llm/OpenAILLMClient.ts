@@ -40,9 +40,12 @@ export class OpenAILLMClient extends BaseLLMClient {
   protected async callAPI(
     systemPrompt: string,
     userMessage: string,
+    maxTokens?: number,
   ): Promise<IAPICallResult> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let OpenAI: any;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const mod = require('openai');
       OpenAI = mod.default ?? mod;
     } catch {
@@ -56,7 +59,7 @@ export class OpenAILLMClient extends BaseLLMClient {
     try {
       const response = await client.chat.completions.create({
         model: this.model,
-        max_tokens: this.maxTokens,
+        max_tokens: maxTokens ?? this.maxTokens,
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userMessage },

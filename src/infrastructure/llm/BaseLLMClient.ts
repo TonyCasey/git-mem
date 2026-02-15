@@ -65,11 +65,13 @@ export abstract class BaseLLMClient implements ILLMClient, ILLMCaller {
   }
 
   /**
-   * Provider-specific API call for enrichment.
+   * Provider-specific API call.
+   * @param maxTokens - Optional override for max response tokens.
    */
   protected abstract callAPI(
     systemPrompt: string,
     userMessage: string,
+    maxTokens?: number,
   ): Promise<IAPICallResult>;
 
   /**
@@ -77,7 +79,7 @@ export abstract class BaseLLMClient implements ILLMClient, ILLMCaller {
    * Default implementation delegates to callAPI and returns just the text.
    */
   async complete(options: ILLMCallerOptions): Promise<string> {
-    const result = await this.callAPI(options.system, options.userMessage);
+    const result = await this.callAPI(options.system, options.userMessage, options.maxTokens);
     return result.text;
   }
 
@@ -85,7 +87,7 @@ export abstract class BaseLLMClient implements ILLMClient, ILLMCaller {
     const userMessage = this.buildUserMessage(input);
 
     try {
-      const result = await this.callAPI(ENRICHMENT_SYSTEM_PROMPT, userMessage);
+      const result = await this.callAPI(ENRICHMENT_SYSTEM_PROMPT, userMessage, this.maxTokens);
       const facts = this.parseResponse(result.text);
 
       return {

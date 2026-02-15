@@ -35,6 +35,7 @@ export function createLLMClient(options?: ILLMClientFactoryOptions): ILLMClient 
     case 'anthropic': {
       const apiKey = options?.apiKey || process.env.ANTHROPIC_API_KEY;
       if (!apiKey) return null;
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { AnthropicLLMClient } = require('./AnthropicLLMClient');
       return new AnthropicLLMClient({
         apiKey,
@@ -46,6 +47,7 @@ export function createLLMClient(options?: ILLMClientFactoryOptions): ILLMClient 
       const apiKey = options?.apiKey || process.env.OPENAI_API_KEY;
       if (!apiKey) return null;
       try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { OpenAILLMClient } = require('./OpenAILLMClient');
         return new OpenAILLMClient({
           apiKey,
@@ -60,6 +62,7 @@ export function createLLMClient(options?: ILLMClientFactoryOptions): ILLMClient 
       const apiKey = options?.apiKey || process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
       if (!apiKey) return null;
       try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { GeminiLLMClient } = require('./GeminiLLMClient');
         return new GeminiLLMClient({
           apiKey,
@@ -72,6 +75,7 @@ export function createLLMClient(options?: ILLMClientFactoryOptions): ILLMClient 
 
     case 'ollama': {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { OllamaLLMClient } = require('./OllamaLLMClient');
         return new OllamaLLMClient({
           model: options?.model,
