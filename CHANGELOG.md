@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Documentation repositioning** — README and getting-started now lead with AI metadata tracking, memory as "level up"
 
-## [0.4.0] - 2026-02-15
+## [0.5.0] - 2026-02-16
 
 ### Added
 
@@ -31,12 +31,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Detects memory type (decision, gotcha, convention, fact) from patterns
   - Infers tags from conventional commit scope and file paths
   - Adds AI-Agent, AI-Model, AI-Confidence, AI-Lifecycle, AI-Memory-Id trailers
+- **Multi-provider LLM enrichment** (GIT-110) — OpenAI, Gemini, Ollama alongside Anthropic; auto-detected from env vars or configured in `.git-mem.yaml`
+- **Multi-agent detection** (GIT-121) — auto-detects Claude Code and Codex from env vars, resolves model from config files (session JSONL, config.toml)
+- **`git mem trailers` command** (GIT-71) — inspect AI-* trailers on commits, query across history, list distinct keys
 
 ### Fixed
 
 - Edge cases in commit-msg hook (empty messages, missing env vars)
 - Duplicate Agent/Model trailers prevention
 - Hook chaining — all hooks now install by default
+- **Hook LLM config passthrough** (GIT-122) — hook command now forwards `llm` config from `.git-mem.yaml` to DI container
+- **Init MCP** — support source-checkout local server resolution (GIT-80)
+- **Init push semantics** — preserve default push semantics for notes refs (GIT-117)
+- **Circular error references** — in logger and handlers (GIT-109)
+- **Git root resolution** — for init paths + Windows test compat (GIT-108)
+- **Undefined content** — handle undefined content in memory query (GIT-96)
+- **Windows compat** — PowerShell-safe lint globs (GIT-118), cross-platform test commands (GIT-119)
 
 ## [0.3.0] - 2026-02-12
 
