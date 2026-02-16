@@ -509,6 +509,21 @@
       ],
       "createdAt": "2026-02-16T14:33:57.817Z",
       "updatedAt": "2026-02-16T14:33:57.817Z"
+    },
+    {
+      "id": "18132b4c-22af-470d-91f8-edddcebeda36",
+      "content": "When cleaning up environment variables in tests, use `delete` instead of assignment when the original value was undefined to avoid setting env vars to the string 'undefined'",
+      "type": "gotcha",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-16T14:33:57.838Z",
+      "updatedAt": "2026-02-16T14:33:57.838Z"
     }
   ]
 }
