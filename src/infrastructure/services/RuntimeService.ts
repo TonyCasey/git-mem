@@ -67,9 +67,16 @@ export class RuntimeService implements IRuntimeService {
       // Check TTL
       const ttl = ttlMs ?? DEFAULT_TTL_MS;
       const timestamp = new Date(data.timestamp).getTime();
+
+      // Reject invalid or non-parseable timestamps
+      if (!Number.isFinite(timestamp)) {
+        return undefined;
+      }
+
       const age = Date.now() - timestamp;
 
-      if (age > ttl) {
+      // Reject future timestamps (with small skew allowance) or stale data
+      if (age < -60000 || age > ttl) {
         return undefined;
       }
 

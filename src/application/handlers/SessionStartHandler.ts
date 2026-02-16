@@ -13,7 +13,6 @@ import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContex
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ILogger } from '../../domain/interfaces/ILogger';
 import type { IRuntimeService } from '../../domain/interfaces/IRuntimeService';
-import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
 
 export class SessionStartHandler implements ISessionStartHandler {
   constructor(
@@ -21,7 +20,12 @@ export class SessionStartHandler implements ISessionStartHandler {
     private readonly contextFormatter: IContextFormatter,
     private readonly logger?: ILogger,
     private readonly runtimeService?: IRuntimeService,
-    private readonly agentResolver?: IAgentResolver,
+    /**
+     * Env-only agent detection function. Uses direct env var detection
+     * to avoid reading runtime.json (which we're about to write).
+     */
+    private readonly detectAgent?: () => string | undefined,
+    private readonly detectModel?: () => string | undefined,
   ) {}
 
   async handle(event: ISessionStartEvent): Promise<IEventResult> {
@@ -76,16 +80,18 @@ export class SessionStartHandler implements ISessionStartHandler {
 
   /**
    * Activate runtime.json with current agent/model detection.
+   * Uses env-only detection to avoid reading runtime.json (circular).
    * Never throws — activation errors are logged and ignored.
    */
   private activateRuntime(event: ISessionStartEvent): void {
-    if (!this.runtimeService || !this.agentResolver) {
+    if (!this.runtimeService || !this.detectAgent || !this.detectModel) {
       return;
     }
 
     try {
-      const agent = this.agentResolver.resolveAgent();
-      const model = this.agentResolver.resolveModel();
+      // Use env-only detection to avoid reading runtime.json we're about to write
+      const agent = this.detectAgent();
+      const model = this.detectModel();
 
       // Determine source based on which env var is set
       const source = this.detectSource();

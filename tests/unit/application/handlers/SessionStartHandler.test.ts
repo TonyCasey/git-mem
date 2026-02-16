@@ -10,7 +10,6 @@ import type { IContextFormatter } from '../../../../src/domain/interfaces/IConte
 import type { ISessionStartEvent } from '../../../../src/domain/events/HookEvents';
 import type { IMemoryEntity } from '../../../../src/domain/entities/IMemoryEntity';
 import type { IRuntimeService, IRuntimeData } from '../../../../src/domain/interfaces/IRuntimeService';
-import type { IAgentResolver } from '../../../../src/domain/interfaces/IAgentResolver';
 
 function createEvent(overrides?: Partial<ISessionStartEvent>): ISessionStartEvent {
   return {
@@ -61,10 +60,10 @@ function createMockRuntimeService(overrides?: Partial<IRuntimeService>): IRuntim
   };
 }
 
-function createMockAgentResolver(agent?: string, model?: string): IAgentResolver {
+function createDetectFunctions(agent?: string, model?: string): { detectAgent: () => string | undefined; detectModel: () => string | undefined } {
   return {
-    resolveAgent: () => agent,
-    resolveModel: () => model,
+    detectAgent: () => agent,
+    detectModel: () => model,
   };
 }
 
@@ -178,8 +177,8 @@ describe('SessionStartHandler', () => {
       const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
       const formatter = createMockFormatter('');
       const runtimeService = createMockRuntimeService();
-      const agentResolver = createMockAgentResolver('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
-      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+      const { detectAgent, detectModel } = createDetectFunctions('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, detectAgent, detectModel);
 
       await handler.handle(createEvent({ sessionId: 'session-123', cwd: '/my/repo' }));
 
@@ -202,7 +201,7 @@ describe('SessionStartHandler', () => {
       assert.equal(result.success, true);
     });
 
-    it('should not crash if agentResolver is not provided', async () => {
+    it('should not crash if detect functions are not provided', async () => {
       const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
       const formatter = createMockFormatter('');
       const runtimeService = createMockRuntimeService();
@@ -220,8 +219,8 @@ describe('SessionStartHandler', () => {
       const runtimeService = createMockRuntimeService({
         activate: () => { throw new Error('activate failed'); },
       });
-      const agentResolver = createMockAgentResolver('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
-      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+      const { detectAgent, detectModel } = createDetectFunctions('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, detectAgent, detectModel);
 
       const result = await handler.handle(createEvent());
 
@@ -232,8 +231,8 @@ describe('SessionStartHandler', () => {
       const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
       const formatter = createMockFormatter('');
       const runtimeService = createMockRuntimeService();
-      const agentResolver = createMockAgentResolver(undefined, undefined);
-      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+      const { detectAgent, detectModel } = createDetectFunctions(undefined, undefined);
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, detectAgent, detectModel);
 
       await handler.handle(createEvent());
 

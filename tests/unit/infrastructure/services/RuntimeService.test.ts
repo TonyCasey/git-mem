@@ -246,5 +246,53 @@ describe('RuntimeService', () => {
         cleanup();
       }
     });
+
+    it('should return undefined when timestamp is invalid/unparseable', () => {
+      try {
+        const gitMemDir = join(testDir, '.git-mem');
+        mkdirSync(gitMemDir, { recursive: true });
+        // Valid JSON with unparseable timestamp
+        writeFileSync(join(gitMemDir, 'runtime.json'), JSON.stringify({
+          sessionId: 'test',
+          timestamp: 'not-a-date',
+          agent: 'test',
+          model: 'test',
+          source: 'test',
+        }), 'utf8');
+
+        const result = service.read(testDir);
+        assert.equal(result, undefined, 'read should return undefined for invalid timestamp');
+      } finally {
+        cleanup();
+      }
+    });
+
+    it('should return undefined when timestamp is in the future', () => {
+      try {
+        // Create data with timestamp 2 minutes in the future (beyond 1 minute skew allowance)
+        const futureTimestamp = new Date(Date.now() + 2 * 60 * 1000).toISOString();
+        const data = createRuntimeData({ timestamp: futureTimestamp });
+        service.activate(data, testDir);
+
+        const result = service.read(testDir);
+        assert.equal(result, undefined, 'read should return undefined for future timestamp');
+      } finally {
+        cleanup();
+      }
+    });
+
+    it('should allow small clock skew for recent timestamps', () => {
+      try {
+        // Create data with timestamp 30 seconds in the future (within 1 minute skew allowance)
+        const slightlyFutureTimestamp = new Date(Date.now() + 30 * 1000).toISOString();
+        const data = createRuntimeData({ timestamp: slightlyFutureTimestamp });
+        service.activate(data, testDir);
+
+        const result = service.read(testDir);
+        assert.ok(result, 'read should allow small clock skew');
+      } finally {
+        cleanup();
+      }
+    });
   });
 });

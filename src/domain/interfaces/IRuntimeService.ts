@@ -26,7 +26,7 @@ export interface IRuntimeService {
   /**
    * Write runtime.json with session data.
    * Creates .git-mem/ directory if missing.
-   * Never throws — logs errors and continues silently.
+   * Never throws — errors are silently ignored.
    * @param data - Runtime data to persist
    * @param cwd - Working directory (defaults to process.cwd())
    */

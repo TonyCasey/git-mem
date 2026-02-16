@@ -29,6 +29,7 @@ import { IntentExtractor } from '../llm/IntentExtractor';
 import { AgentResolver } from '../services/AgentResolver';
 import { HookConfigLoader } from '../services/HookConfigLoader';
 import { RuntimeService } from '../services/RuntimeService';
+import { resolveAgent, resolveModel } from '../detect-agent';
 
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
@@ -84,7 +85,8 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.contextFormatter,
         container.cradle.logger,
         container.cradle.runtimeService,
-        container.cradle.agentResolver,
+        resolveAgent,  // Env-only detection (no runtime fallback)
+        resolveModel,  // Env-only detection (no runtime fallback)
       ));
       bus.on('session:stop', new SessionStopHandler(
         container.cradle.sessionCaptureService,
