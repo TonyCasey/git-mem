@@ -284,6 +284,21 @@
       ],
       "createdAt": "2026-02-16T16:13:21.557Z",
       "updatedAt": "2026-02-16T16:13:21.557Z"
+    },
+    {
+      "id": "f4b03f5f-c053-4049-8eed-48b3122ebcea",
+      "content": "eslint-disable for no-explicit-any",
+      "type": "decision",
+      "sha": "9ce67356085db84ac3117cef9501d42c865436e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:13:21.579Z",
+      "updatedAt": "2026-02-16T16:13:21.579Z"
     }
   ]
 }
