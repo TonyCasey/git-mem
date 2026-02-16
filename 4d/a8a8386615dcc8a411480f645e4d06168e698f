@@ -1709,6 +1709,21 @@
       ],
       "createdAt": "2026-02-16T16:31:07.212Z",
       "updatedAt": "2026-02-16T16:31:07.212Z"
+    },
+    {
+      "id": "da8a93dc-2a2b-47c7-a9e4-5a583f0cbed9",
+      "content": "assignment when the original value was undefined to avoid setting env vars to the string 'undefined'",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:31:07.232Z",
+      "updatedAt": "2026-02-16T16:31:07.232Z"
     }
   ]
 }
