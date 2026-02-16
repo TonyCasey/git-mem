@@ -74,6 +74,21 @@
       ],
       "createdAt": "2026-02-16T14:32:57.384Z",
       "updatedAt": "2026-02-16T14:32:57.384Z"
+    },
+    {
+      "id": "2d9875a3-ce24-4279-9e5e-dc2e7b917bd9",
+      "content": "forwarded the llm",
+      "type": "convention",
+      "sha": "09ff7bfbb067244e4be90ce733c3a5ebdcc3fd2f",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:never"
+      ],
+      "createdAt": "2026-02-16T14:32:57.404Z",
+      "updatedAt": "2026-02-16T14:32:57.404Z"
     }
   ]
 }
