@@ -644,6 +644,21 @@
       ],
       "createdAt": "2026-02-16T14:35:54.440Z",
       "updatedAt": "2026-02-16T14:35:54.440Z"
+    },
+    {
+      "id": "a0e2617f-dfdd-4bfe-9118-56424748ee48",
+      "content": "assignment when original value was undefined to",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T14:35:54.461Z",
+      "updatedAt": "2026-02-16T14:35:54.461Z"
     }
   ]
 }
