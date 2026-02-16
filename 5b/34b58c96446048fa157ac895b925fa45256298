@@ -104,6 +104,21 @@
       ],
       "createdAt": "2026-02-16T14:33:58.229Z",
       "updatedAt": "2026-02-16T14:33:58.229Z"
+    },
+    {
+      "id": "0168e963-60e0-459c-a417-c7d86ddbdf86",
+      "content": "Documentation code blocks should include language identifiers for proper syntax highlighting and formatting",
+      "type": "convention",
+      "sha": "5b34b58c96446048fa157ac895b925fa45256298",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-16T14:33:58.252Z",
+      "updatedAt": "2026-02-16T14:33:58.252Z"
     }
   ]
 }
