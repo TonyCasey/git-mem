@@ -1184,6 +1184,21 @@
       ],
       "createdAt": "2026-02-16T15:46:51.099Z",
       "updatedAt": "2026-02-16T15:46:51.099Z"
+    },
+    {
+      "id": "999231cc-9aac-43ea-bf0b-9cdccd336d4a",
+      "content": "Claude session data is stored in JSONL files at ~/",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-16T15:46:51.124Z",
+      "updatedAt": "2026-02-16T15:46:51.124Z"
     }
   ]
 }
