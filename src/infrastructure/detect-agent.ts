@@ -102,7 +102,6 @@ function detectClaudeModel(): string | undefined {
     if (files.length === 0) return undefined;
 
     const content = readFileSync(join(projectDir, files[0].name), 'utf8');
-    // Find the last occurrence of "model":"..." in the file
     // Find the last occurrence of "model":"..." without allocating all matches
     const modelRegex = /"model"\s*:\s*"([^"]+)"/g;
     let lastModel: string | undefined;
