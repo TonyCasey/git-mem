@@ -50,6 +50,9 @@ describe('PostCommitHandler', () => {
 
   beforeEach(() => {
     originalEnv = { ...process.env };
+    delete process.env.CODEX_HOME;
+    delete process.env.CODEX_THREAD_ID;
+    delete process.env.CODEX_MODEL;
   });
 
   afterEach(() => {

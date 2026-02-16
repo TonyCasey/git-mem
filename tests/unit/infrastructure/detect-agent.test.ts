@@ -1,11 +1,14 @@
 /**
  * detect-agent.ts — unit tests
  *
- * Tests agent and model detection from environment variables.
+ * Tests agent and model detection from environment variables and config files.
  */
 
 import { describe, it, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { detectClaudeAgent, resolveAgent, resolveModel } from '../../../src/infrastructure/detect-agent';
 
 describe('detect-agent', () => {
@@ -14,6 +17,14 @@ describe('detect-agent', () => {
 
   beforeEach(() => {
     originalEnv = { ...process.env };
+    delete process.env.CODEX_HOME;
+    delete process.env.CODEX_THREAD_ID;
+    delete process.env.CODEX_MODEL;
+    delete process.env.CLAUDE_MODEL;
+    delete process.env.OPENAI_MODEL;
+    delete process.env.GEMINI_MODEL;
+    delete process.env.OLLAMA_MODEL;
+    delete process.env.MODEL;
   });
 
   afterEach(() => {
@@ -41,6 +52,7 @@ describe('detect-agent', () => {
       delete process.env.GIT_MEM_AGENT;
       delete process.env.CLAUDECODE;
       delete process.env.CLAUDE_CODE;
+      delete process.env.CODEX_THREAD_ID;
     });
 
     it('should return explicit value when provided', () => {
@@ -53,6 +65,12 @@ describe('detect-agent', () => {
       process.env.GIT_MEM_AGENT = 'CustomAgent/2.0';
       const result = resolveAgent();
       assert.equal(result, 'CustomAgent/2.0');
+    });
+
+    it('should detect Codex when CODEX_THREAD_ID is set', () => {
+      process.env.CODEX_THREAD_ID = 'thread-123';
+      const result = resolveAgent();
+      assert.ok(result?.startsWith('Codex'), `Expected Codex agent, got: ${result}`);
     });
 
     it('should detect Claude-Code when CLAUDECODE is set', () => {
@@ -72,6 +90,13 @@ describe('detect-agent', () => {
       process.env.CLAUDECODE = '1';
       const result = resolveAgent();
       assert.equal(result, 'CustomAgent');
+    });
+
+    it('should prioritize CODEX_THREAD_ID over CLAUDECODE', () => {
+      process.env.CODEX_THREAD_ID = 'thread-123';
+      process.env.CLAUDECODE = '1';
+      const result = resolveAgent();
+      assert.ok(result?.startsWith('Codex'), `Expected Codex, got: ${result}`);
     });
 
     it('should prioritize CLAUDECODE over CLAUDE_CODE', () => {
@@ -97,6 +122,8 @@ describe('detect-agent', () => {
     beforeEach(() => {
       delete process.env.GIT_MEM_MODEL;
       delete process.env.ANTHROPIC_MODEL;
+      delete process.env.CLAUDECODE;
+      delete process.env.CODEX_THREAD_ID;
     });
 
     it('should return explicit value when provided', () => {
@@ -111,10 +138,66 @@ describe('detect-agent', () => {
       assert.equal(result, 'claude-opus-4-6');
     });
 
+    it('should detect model from Codex config.toml', () => {
+      const codexHome = mkdtempSync(join(tmpdir(), 'git-mem-codex-'));
+      writeFileSync(
+        join(codexHome, 'config.toml'),
+        'model = "gpt-5.3-codex"\napproval_policy = "never"\n',
+      );
+
+      process.env.CODEX_HOME = codexHome;
+      process.env.CODEX_THREAD_ID = 'thread-123';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'gpt-5.3-codex');
+      } finally {
+        rmSync(codexHome, { recursive: true, force: true });
+      }
+    });
+
+    it('should detect model from Claude session JSONL', () => {
+      const fakeHome = mkdtempSync(join(tmpdir(), 'git-mem-home-'));
+      const cwdEncoded = process.cwd().replace(/[:\\/]/g, '-').replace(/^-/, '');
+      const claudeDir = join(fakeHome, '.claude', 'projects', cwdEncoded);
+      mkdirSync(claudeDir, { recursive: true });
+      writeFileSync(
+        join(claudeDir, 'test-session.jsonl'),
+        '{"type":"message","model":"claude-opus-4-6"}\n',
+      );
+
+      const origUserProfile = process.env.USERPROFILE;
+      const origHome = process.env.HOME;
+      process.env.USERPROFILE = fakeHome;
+      process.env.HOME = fakeHome;
+      process.env.CLAUDECODE = '1';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'claude-opus-4-6');
+      } finally {
+        process.env.USERPROFILE = origUserProfile;
+        process.env.HOME = origHome;
+        rmSync(fakeHome, { recursive: true, force: true });
+      }
+    });
+
     it('should return ANTHROPIC_MODEL when set', () => {
       process.env.ANTHROPIC_MODEL = 'claude-sonnet-4-5';
       const result = resolveModel();
       assert.equal(result, 'claude-sonnet-4-5');
+    });
+
+    it('should return CLAUDE_MODEL when set', () => {
+      process.env.CLAUDE_MODEL = 'claude-haiku-4-5';
+      const result = resolveModel();
+      assert.equal(result, 'claude-haiku-4-5');
+    });
+
+    it('should return OPENAI_MODEL when set', () => {
+      process.env.OPENAI_MODEL = 'gpt-4o';
+      const result = resolveModel();
+      assert.equal(result, 'gpt-4o');
     });
 
     it('should prioritize GIT_MEM_MODEL over ANTHROPIC_MODEL', () => {
@@ -122,6 +205,13 @@ describe('detect-agent', () => {
       process.env.ANTHROPIC_MODEL = 'anthropic-model';
       const result = resolveModel();
       assert.equal(result, 'custom-model');
+    });
+
+    it('should prioritize ANTHROPIC_MODEL over OPENAI_MODEL', () => {
+      process.env.ANTHROPIC_MODEL = 'claude-sonnet';
+      process.env.OPENAI_MODEL = 'gpt-4o';
+      const result = resolveModel();
+      assert.equal(result, 'claude-sonnet');
     });
 
     it('should return undefined when no env vars are set', () => {
