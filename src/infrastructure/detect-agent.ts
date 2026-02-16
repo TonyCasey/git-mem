@@ -4,7 +4,9 @@
  * Agent detection chain:
  *   explicit > $GIT_MEM_AGENT > $CODEX_THREAD_ID > $CLAUDECODE > $CLAUDE_CODE
  * Model detection chain:
- *   explicit > $GIT_MEM_MODEL > Codex config.toml > Claude session JSONL >
+ *   explicit > $GIT_MEM_MODEL >
+ *   (if $CODEX_THREAD_ID) Codex config.toml >
+ *   (if $CLAUDECODE|$CLAUDE_CODE) Claude session JSONL >
  *   $ANTHROPIC_MODEL > $CLAUDE_MODEL > $OPENAI_MODEL > $GEMINI_MODEL > $OLLAMA_MODEL > $MODEL
  */
 
@@ -101,12 +103,14 @@ function detectClaudeModel(): string | undefined {
 
     const content = readFileSync(join(projectDir, files[0].name), 'utf8');
     // Find the last occurrence of "model":"..." in the file
-    const matches = content.match(/"model":"([^"]+)"/g);
-    if (matches && matches.length > 0) {
-      const last = matches[matches.length - 1];
-      return last.match(/"model":"([^"]+)"/)?.[1];
+    // Find the last occurrence of "model":"..." without allocating all matches
+    const modelRegex = /"model"\s*:\s*"([^"]+)"/g;
+    let lastModel: string | undefined;
+    let m: RegExpExecArray | null;
+    while ((m = modelRegex.exec(content)) !== null) {
+      lastModel = m[1];
     }
-    return undefined;
+    return lastModel;
   } catch {
     return undefined;
   }
@@ -139,7 +143,7 @@ export function resolveModel(explicit?: string): string | undefined {
     if (codexModel) return codexModel;
   }
 
-  if (process.env.CLAUDECODE) {
+  if (process.env.CLAUDECODE || process.env.CLAUDE_CODE) {
     const claudeModel = detectClaudeModel();
     if (claudeModel) return claudeModel;
   }
