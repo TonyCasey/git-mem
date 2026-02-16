@@ -124,7 +124,7 @@ export function resolveAgent(explicit?: string): string | undefined {
   if (process.env.GIT_MEM_AGENT) return process.env.GIT_MEM_AGENT;
   if (process.env.CODEX_THREAD_ID) return detectCodexAgent();
   if (process.env.CLAUDECODE) return detectClaudeAgent();
-  if (process.env.CLAUDE_CODE) return 'Claude-Code';
+  if (process.env.CLAUDE_CODE) return detectClaudeAgent();
   return undefined;
 }
 

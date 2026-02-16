@@ -79,10 +79,10 @@ describe('detect-agent', () => {
       assert.ok(result?.startsWith('Claude-Code'), `Expected Claude-Code, got: ${result}`);
     });
 
-    it('should return Claude-Code when legacy CLAUDE_CODE is set', () => {
+    it('should detect Claude-Code when legacy CLAUDE_CODE is set', () => {
       process.env.CLAUDE_CODE = '1';
       const result = resolveAgent();
-      assert.equal(result, 'Claude-Code');
+      assert.ok(result?.startsWith('Claude-Code'), `Expected Claude-Code, got: ${result}`);
     });
 
     it('should prioritize GIT_MEM_AGENT over CLAUDECODE', () => {
