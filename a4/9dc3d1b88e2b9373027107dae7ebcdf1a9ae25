@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "8cf4b38c-b44d-459b-967a-276ee3fba2b9",
+      "content": "published) into 0",
+      "type": "convention",
+      "sha": "a49dc3d1b88e2b9373027107dae7ebcdf1a9ae25",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:never"
+      ],
+      "createdAt": "2026-02-16T12:43:34.716Z",
+      "updatedAt": "2026-02-16T12:43:34.716Z"
+    }
+  ]
+}
