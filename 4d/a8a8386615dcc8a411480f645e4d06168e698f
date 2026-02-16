@@ -1304,6 +1304,21 @@
       ],
       "createdAt": "2026-02-16T16:13:21.681Z",
       "updatedAt": "2026-02-16T16:13:21.681Z"
+    },
+    {
+      "id": "a329cfae-1d8f-4840-92ff-bb4a00f6157c",
+      "content": "match-all to avoid allocating all matches",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:13:21.707Z",
+      "updatedAt": "2026-02-16T16:13:21.707Z"
     }
   ]
 }
