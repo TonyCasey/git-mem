@@ -74,6 +74,21 @@
       ],
       "createdAt": "2026-02-16T12:43:34.892Z",
       "updatedAt": "2026-02-16T12:43:34.892Z"
+    },
+    {
+      "id": "50b93a27-f0b1-444b-b506-8b3a8eb0c011",
+      "content": "guard tag filter and strengthen regression tests",
+      "type": "gotcha",
+      "sha": "1269edb29306d99007c3a29b88934ce35104f05f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-16T12:43:34.914Z",
+      "updatedAt": "2026-02-16T12:43:34.914Z"
     }
   ]
 }
