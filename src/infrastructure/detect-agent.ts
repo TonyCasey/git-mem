@@ -106,6 +106,7 @@ function detectClaudeModel(): string | undefined {
       const last = matches[matches.length - 1];
       return last.match(/"model":"([^"]+)"/)?.[1];
     }
+    return undefined;
   } catch {
     return undefined;
   }
