@@ -304,11 +304,75 @@ describe('detect-agent', () => {
       }
     });
 
+    it('should prioritize Claude session over env var fallbacks', () => {
+      const fakeHome = mkdtempSync(join(tmpdir(), 'git-mem-home-pri-'));
+      const cwdEncoded = process.cwd().replace(/[:\\/]/g, '-').replace(/^-/, '');
+      const claudeDir = join(fakeHome, '.claude', 'projects', cwdEncoded);
+      mkdirSync(claudeDir, { recursive: true });
+      writeFileSync(
+        join(claudeDir, 'test-session.jsonl'),
+        '{"type":"message","model":"claude-opus-4-6"}\n',
+      );
+
+      const origUserProfile = process.env.USERPROFILE;
+      const origHome = process.env.HOME;
+      process.env.USERPROFILE = fakeHome;
+      process.env.HOME = fakeHome;
+      process.env.CLAUDECODE = '1';
+      process.env.ANTHROPIC_MODEL = 'claude-sonnet';
+      process.env.OPENAI_MODEL = 'gpt-4o';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'claude-opus-4-6');
+      } finally {
+        if (origUserProfile === undefined) {
+          delete process.env.USERPROFILE;
+        } else {
+          process.env.USERPROFILE = origUserProfile;
+        }
+        if (origHome === undefined) {
+          delete process.env.HOME;
+        } else {
+          process.env.HOME = origHome;
+        }
+        rmSync(fakeHome, { recursive: true, force: true });
+      }
+    });
+
     it('should prioritize ANTHROPIC_MODEL over OPENAI_MODEL', () => {
       process.env.ANTHROPIC_MODEL = 'claude-sonnet';
       process.env.OPENAI_MODEL = 'gpt-4o';
       const result = resolveModel();
       assert.equal(result, 'claude-sonnet');
+    });
+
+    it('should prioritize CLAUDE_MODEL over OPENAI_MODEL', () => {
+      process.env.CLAUDE_MODEL = 'claude-haiku';
+      process.env.OPENAI_MODEL = 'gpt-4o';
+      const result = resolveModel();
+      assert.equal(result, 'claude-haiku');
+    });
+
+    it('should prioritize OPENAI_MODEL over GEMINI_MODEL', () => {
+      process.env.OPENAI_MODEL = 'gpt-4o';
+      process.env.GEMINI_MODEL = 'gemini-2.0-flash';
+      const result = resolveModel();
+      assert.equal(result, 'gpt-4o');
+    });
+
+    it('should prioritize GEMINI_MODEL over OLLAMA_MODEL', () => {
+      process.env.GEMINI_MODEL = 'gemini-2.0-flash';
+      process.env.OLLAMA_MODEL = 'llama3.2';
+      const result = resolveModel();
+      assert.equal(result, 'gemini-2.0-flash');
+    });
+
+    it('should prioritize OLLAMA_MODEL over MODEL', () => {
+      process.env.OLLAMA_MODEL = 'llama3.2';
+      process.env.MODEL = 'generic-model';
+      const result = resolveModel();
+      assert.equal(result, 'llama3.2');
     });
 
     it('should return undefined when no env vars are set', () => {
