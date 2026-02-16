@@ -44,6 +44,21 @@
       ],
       "createdAt": "2026-02-16T12:43:34.796Z",
       "updatedAt": "2026-02-16T12:43:34.796Z"
+    },
+    {
+      "id": "0bfed454-7ca9-4589-8c2e-6b1cd359d78c",
+      "content": "The hook command must explicitly pass LLM configuration from",
+      "type": "gotcha",
+      "sha": "09ff7bfbb067244e4be90ce733c3a5ebdcc3fd2f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-16T14:32:57.364Z",
+      "updatedAt": "2026-02-16T14:32:57.364Z"
     }
   ]
 }
