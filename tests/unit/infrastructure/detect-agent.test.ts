@@ -190,6 +190,40 @@ describe('detect-agent', () => {
       }
     });
 
+    it('should detect model from Claude session JSONL via legacy CLAUDE_CODE', () => {
+      const fakeHome = mkdtempSync(join(tmpdir(), 'git-mem-home-'));
+      const cwdEncoded = process.cwd().replace(/[:\\/]/g, '-').replace(/^-/, '');
+      const claudeDir = join(fakeHome, '.claude', 'projects', cwdEncoded);
+      mkdirSync(claudeDir, { recursive: true });
+      writeFileSync(
+        join(claudeDir, 'test-session.jsonl'),
+        '{"type":"message","model":"claude-opus-4-6"}\n',
+      );
+
+      const origUserProfile = process.env.USERPROFILE;
+      const origHome = process.env.HOME;
+      process.env.USERPROFILE = fakeHome;
+      process.env.HOME = fakeHome;
+      process.env.CLAUDE_CODE = '1';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'claude-opus-4-6');
+      } finally {
+        if (origUserProfile === undefined) {
+          delete process.env.USERPROFILE;
+        } else {
+          process.env.USERPROFILE = origUserProfile;
+        }
+        if (origHome === undefined) {
+          delete process.env.HOME;
+        } else {
+          process.env.HOME = origHome;
+        }
+        rmSync(fakeHome, { recursive: true, force: true });
+      }
+    });
+
     it('should return ANTHROPIC_MODEL when set', () => {
       process.env.ANTHROPIC_MODEL = 'claude-sonnet-4-5';
       const result = resolveModel();
