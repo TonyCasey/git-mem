@@ -1109,6 +1109,21 @@
       ],
       "createdAt": "2026-02-16T15:46:50.975Z",
       "updatedAt": "2026-02-16T15:46:50.975Z"
+    },
+    {
+      "id": "06f46b64-9676-4ed9-86df-3d00f8b498f7",
+      "content": "returning a static string",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T15:46:51.001Z",
+      "updatedAt": "2026-02-16T15:46:51.001Z"
     }
   ]
 }
