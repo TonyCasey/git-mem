@@ -374,6 +374,21 @@
       ],
       "createdAt": "2026-02-16T16:31:07.609Z",
       "updatedAt": "2026-02-16T16:31:07.609Z"
+    },
+    {
+      "id": "6aabd3cf-dd7e-45f7-a827-575b2f7a5440",
+      "content": "chosen, causing",
+      "type": "convention",
+      "sha": "09ff7bfbb067244e4be90ce733c3a5ebdcc3fd2f",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:always"
+      ],
+      "createdAt": "2026-02-16T16:31:07.630Z",
+      "updatedAt": "2026-02-16T16:31:07.630Z"
     }
   ]
 }
