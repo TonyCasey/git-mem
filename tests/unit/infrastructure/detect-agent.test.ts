@@ -176,8 +176,16 @@ describe('detect-agent', () => {
         const result = resolveModel();
         assert.equal(result, 'claude-opus-4-6');
       } finally {
-        process.env.USERPROFILE = origUserProfile;
-        process.env.HOME = origHome;
+        if (origUserProfile === undefined) {
+          delete process.env.USERPROFILE;
+        } else {
+          process.env.USERPROFILE = origUserProfile;
+        }
+        if (origHome === undefined) {
+          delete process.env.HOME;
+        } else {
+          process.env.HOME = origHome;
+        }
         rmSync(fakeHome, { recursive: true, force: true });
       }
     });
