@@ -914,6 +914,21 @@
       ],
       "createdAt": "2026-02-16T14:37:18.088Z",
       "updatedAt": "2026-02-16T14:37:18.088Z"
+    },
+    {
+      "id": "bc94bd48-dda5-4b51-9dca-64b236cfb69a",
+      "content": "TypeScript requires explicit return statements in all code paths of functions with declared return types, even when the implicit return would be undefined",
+      "type": "gotcha",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-16T14:37:18.110Z",
+      "updatedAt": "2026-02-16T14:37:18.110Z"
     }
   ]
 }
