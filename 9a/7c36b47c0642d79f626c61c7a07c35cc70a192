@@ -222,6 +222,21 @@
       ],
       "createdAt": "2026-02-16T16:13:21.972Z",
       "updatedAt": "2026-02-16T16:13:21.972Z"
+    },
+    {
+      "id": "07bf5927-4d9e-4e26-948a-03ed67b59acb",
+      "content": "git hook shells on Windows can provide MSYS-style paths (/c/",
+      "type": "decision",
+      "sha": "9a7c36b47c0642d79f626c61c7a07c35cc70a192",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:because-clause"
+      ],
+      "createdAt": "2026-02-16T16:13:21.992Z",
+      "updatedAt": "2026-02-16T16:13:21.992Z"
     }
   ]
 }
