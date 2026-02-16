@@ -9,6 +9,8 @@ import type { IMemoryContextLoader, IMemoryContextResult } from '../../../../src
 import type { IContextFormatter } from '../../../../src/domain/interfaces/IContextFormatter';
 import type { ISessionStartEvent } from '../../../../src/domain/events/HookEvents';
 import type { IMemoryEntity } from '../../../../src/domain/entities/IMemoryEntity';
+import type { IRuntimeService, IRuntimeData } from '../../../../src/domain/interfaces/IRuntimeService';
+import type { IAgentResolver } from '../../../../src/domain/interfaces/IAgentResolver';
 
 function createEvent(overrides?: Partial<ISessionStartEvent>): ISessionStartEvent {
   return {
@@ -45,6 +47,24 @@ function createMockLoader(result: IMemoryContextResult): IMemoryContextLoader {
 function createMockFormatter(output: string): IContextFormatter {
   return {
     format: () => output,
+  };
+}
+
+function createMockRuntimeService(overrides?: Partial<IRuntimeService>): IRuntimeService & { activateCalls: IRuntimeData[] } {
+  const activateCalls: IRuntimeData[] = [];
+  return {
+    activateCalls,
+    activate: (data: IRuntimeData) => { activateCalls.push(data); },
+    deactivate: () => {},
+    read: () => undefined,
+    ...overrides,
+  };
+}
+
+function createMockAgentResolver(agent?: string, model?: string): IAgentResolver {
+  return {
+    resolveAgent: () => agent,
+    resolveModel: () => model,
   };
 }
 
@@ -151,5 +171,75 @@ describe('SessionStartHandler', () => {
 
     assert.equal(result.success, false);
     assert.equal(result.error!.message, 'format failed');
+  });
+
+  describe('runtime activation', () => {
+    it('should call runtimeService.activate with detected agent/model', async () => {
+      const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
+      const formatter = createMockFormatter('');
+      const runtimeService = createMockRuntimeService();
+      const agentResolver = createMockAgentResolver('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+
+      await handler.handle(createEvent({ sessionId: 'session-123', cwd: '/my/repo' }));
+
+      assert.equal(runtimeService.activateCalls.length, 1);
+      const activateData = runtimeService.activateCalls[0];
+      assert.equal(activateData.sessionId, 'session-123');
+      assert.equal(activateData.agent, 'Claude-Code/2.1.0');
+      assert.equal(activateData.model, 'claude-opus-4-5-20251101');
+      assert.ok(activateData.timestamp);
+      assert.ok(activateData.source);
+    });
+
+    it('should not crash if runtimeService is not provided', async () => {
+      const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
+      const formatter = createMockFormatter('');
+      const handler = new SessionStartHandler(loader, formatter);
+
+      const result = await handler.handle(createEvent());
+
+      assert.equal(result.success, true);
+    });
+
+    it('should not crash if agentResolver is not provided', async () => {
+      const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
+      const formatter = createMockFormatter('');
+      const runtimeService = createMockRuntimeService();
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService);
+
+      const result = await handler.handle(createEvent());
+
+      assert.equal(result.success, true);
+      assert.equal(runtimeService.activateCalls.length, 0);
+    });
+
+    it('should continue if runtimeService.activate throws', async () => {
+      const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
+      const formatter = createMockFormatter('');
+      const runtimeService = createMockRuntimeService({
+        activate: () => { throw new Error('activate failed'); },
+      });
+      const agentResolver = createMockAgentResolver('Claude-Code/2.1.0', 'claude-opus-4-5-20251101');
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+
+      const result = await handler.handle(createEvent());
+
+      assert.equal(result.success, true);
+    });
+
+    it('should handle undefined agent and model', async () => {
+      const loader = createMockLoader({ memories: [], total: 0, filtered: 0 });
+      const formatter = createMockFormatter('');
+      const runtimeService = createMockRuntimeService();
+      const agentResolver = createMockAgentResolver(undefined, undefined);
+      const handler = new SessionStartHandler(loader, formatter, undefined, runtimeService, agentResolver);
+
+      await handler.handle(createEvent());
+
+      assert.equal(runtimeService.activateCalls.length, 1);
+      assert.equal(runtimeService.activateCalls[0].agent, undefined);
+      assert.equal(runtimeService.activateCalls[0].model, undefined);
+    });
   });
 });
