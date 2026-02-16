@@ -734,6 +734,21 @@
       ],
       "createdAt": "2026-02-16T14:35:54.561Z",
       "updatedAt": "2026-02-16T14:35:54.561Z"
+    },
+    {
+      "id": "70c41cb6-2919-4b3f-a6ff-1f77da6b309e",
+      "content": "to avoid allocating all matches at once for performance",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-16T14:35:54.582Z",
+      "updatedAt": "2026-02-16T14:35:54.582Z"
     }
   ]
 }
