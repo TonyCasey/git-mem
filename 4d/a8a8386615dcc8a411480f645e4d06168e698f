@@ -419,6 +419,21 @@
       ],
       "createdAt": "2026-02-16T14:32:57.206Z",
       "updatedAt": "2026-02-16T14:32:57.206Z"
+    },
+    {
+      "id": "3b83ff5e-199a-439f-ac7d-fee694441180",
+      "content": "session JSONL walking",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T14:33:57.710Z",
+      "updatedAt": "2026-02-16T14:33:57.710Z"
     }
   ]
 }
