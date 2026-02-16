@@ -48,6 +48,20 @@
       ],
       "createdAt": "2026-02-16T14:33:58.059Z",
       "updatedAt": "2026-02-16T14:33:58.059Z"
+    },
+    {
+      "id": "f3d8f31b-60f7-4970-a3b6-28b306609604",
+      "content": "add claude to test.txt. Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>",
+      "type": "fact",
+      "sha": "de28a19f696a6b4af86c9333d97a0a1c9f7e0db8",
+      "confidence": "low",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract"
+      ],
+      "createdAt": "2026-02-16T14:35:54.784Z",
+      "updatedAt": "2026-02-16T14:35:54.784Z"
     }
   ]
 }
