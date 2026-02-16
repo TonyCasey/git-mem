@@ -344,6 +344,21 @@
       ],
       "createdAt": "2026-02-16T16:16:03.107Z",
       "updatedAt": "2026-02-16T16:16:03.107Z"
+    },
+    {
+      "id": "07579d27-3450-40e0-9a2b-3d8fa56f5a2f",
+      "content": "'any' to maintain type safety while allowing for optional dependencies",
+      "type": "decision",
+      "sha": "9ce67356085db84ac3117cef9501d42c865436e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:16:03.126Z",
+      "updatedAt": "2026-02-16T16:16:03.126Z"
     }
   ]
 }
