@@ -207,6 +207,61 @@ describe('detect-agent', () => {
       assert.equal(result, 'custom-model');
     });
 
+    it('should return GEMINI_MODEL when set', () => {
+      process.env.GEMINI_MODEL = 'gemini-2.0-flash';
+      const result = resolveModel();
+      assert.equal(result, 'gemini-2.0-flash');
+    });
+
+    it('should return OLLAMA_MODEL when set', () => {
+      process.env.OLLAMA_MODEL = 'llama3.2';
+      const result = resolveModel();
+      assert.equal(result, 'llama3.2');
+    });
+
+    it('should return MODEL when set', () => {
+      process.env.MODEL = 'generic-model';
+      const result = resolveModel();
+      assert.equal(result, 'generic-model');
+    });
+
+    it('should prioritize GIT_MEM_MODEL over config-based detection', () => {
+      const codexHome = mkdtempSync(join(tmpdir(), 'git-mem-codex-pri-'));
+      writeFileSync(
+        join(codexHome, 'config.toml'),
+        'model = "gpt-5.3-codex"\n',
+      );
+      process.env.CODEX_HOME = codexHome;
+      process.env.CODEX_THREAD_ID = 'thread-123';
+      process.env.GIT_MEM_MODEL = 'explicit-model';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'explicit-model');
+      } finally {
+        rmSync(codexHome, { recursive: true, force: true });
+      }
+    });
+
+    it('should prioritize Codex config over env var fallbacks', () => {
+      const codexHome = mkdtempSync(join(tmpdir(), 'git-mem-codex-pri2-'));
+      writeFileSync(
+        join(codexHome, 'config.toml'),
+        'model = "gpt-5.3-codex"\n',
+      );
+      process.env.CODEX_HOME = codexHome;
+      process.env.CODEX_THREAD_ID = 'thread-123';
+      process.env.ANTHROPIC_MODEL = 'claude-sonnet';
+      process.env.OPENAI_MODEL = 'gpt-4o';
+
+      try {
+        const result = resolveModel();
+        assert.equal(result, 'gpt-5.3-codex');
+      } finally {
+        rmSync(codexHome, { recursive: true, force: true });
+      }
+    });
+
     it('should prioritize ANTHROPIC_MODEL over OPENAI_MODEL', () => {
       process.env.ANTHROPIC_MODEL = 'claude-sonnet';
       process.env.OPENAI_MODEL = 'gpt-4o';

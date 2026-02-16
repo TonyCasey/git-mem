@@ -109,7 +109,6 @@ function detectClaudeModel(): string | undefined {
   } catch {
     return undefined;
   }
-  return undefined;
 }
 
 /**
