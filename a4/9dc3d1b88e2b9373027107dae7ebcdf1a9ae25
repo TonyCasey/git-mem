@@ -179,6 +179,21 @@
       ],
       "createdAt": "2026-02-16T15:46:51.379Z",
       "updatedAt": "2026-02-16T15:46:51.379Z"
+    },
+    {
+      "id": "501d8137-f266-4849-815c-4f5b3610af81",
+      "content": "published) into 0",
+      "type": "convention",
+      "sha": "a49dc3d1b88e2b9373027107dae7ebcdf1a9ae25",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:never"
+      ],
+      "createdAt": "2026-02-16T16:13:22.053Z",
+      "updatedAt": "2026-02-16T16:13:22.053Z"
     }
   ]
 }
