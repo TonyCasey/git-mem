@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "c88d762c-9bbc-40b8-b701-9062451f66cf",
+      "content": "session JSONL walking",
+      "type": "decision",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T12:43:34.346Z",
+      "updatedAt": "2026-02-16T12:43:34.346Z"
+    }
+  ]
+}
