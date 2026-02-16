@@ -239,6 +239,21 @@
       ],
       "createdAt": "2026-02-16T15:46:51.553Z",
       "updatedAt": "2026-02-16T15:46:51.553Z"
+    },
+    {
+      "id": "6779d096-3c3b-4979-8bc7-793f447b5bb2",
+      "content": "handle undefined content in memory query (GIT-96)",
+      "type": "gotcha",
+      "sha": "1269edb29306d99007c3a29b88934ce35104f05f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:gotcha"
+      ],
+      "createdAt": "2026-02-16T16:13:22.225Z",
+      "updatedAt": "2026-02-16T16:13:22.225Z"
     }
   ]
 }
