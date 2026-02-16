@@ -329,6 +329,21 @@
       ],
       "createdAt": "2026-02-16T14:32:57.086Z",
       "updatedAt": "2026-02-16T14:32:57.086Z"
+    },
+    {
+      "id": "3cb89219-853c-4764-a583-16f9f7cedd48",
+      "content": "Claude session data is stored in a directory structure at ~/",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:convention"
+      ],
+      "createdAt": "2026-02-16T14:32:57.107Z",
+      "updatedAt": "2026-02-16T14:32:57.107Z"
     }
   ]
 }
