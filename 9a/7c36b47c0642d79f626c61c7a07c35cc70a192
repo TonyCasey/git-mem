@@ -67,6 +67,25 @@
       ],
       "createdAt": "2026-02-16T14:32:57.254Z",
       "updatedAt": "2026-02-16T14:32:57.254Z"
+    },
+    {
+      "id": "057e10cf-260c-4641-91ec-6e6ef5eea801",
+      "content": "spawnSync git ENOENT",
+      "type": "convention",
+      "sha": "9a7c36b47c0642d79f626c61c7a07c35cc70a192",
+      "confidence": "low",
+      "source": "commit-trailer",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "hooks",
+        "commands",
+        "tests",
+        "unit",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-16T14:33:58.009Z",
+      "updatedAt": "2026-02-16T14:33:58.009Z"
     }
   ]
 }
