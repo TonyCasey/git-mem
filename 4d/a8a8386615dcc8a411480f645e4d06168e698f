@@ -824,6 +824,21 @@
       ],
       "createdAt": "2026-02-16T14:35:54.689Z",
       "updatedAt": "2026-02-16T14:35:54.689Z"
+    },
+    {
+      "id": "c28e2b16-a12d-4bab-9652-8b46ef5935b5",
+      "content": "allocating all matches at once for performance",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-16T14:35:54.709Z",
+      "updatedAt": "2026-02-16T14:35:54.709Z"
     }
   ]
 }
