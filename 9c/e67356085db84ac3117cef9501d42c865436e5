@@ -59,6 +59,21 @@
       ],
       "createdAt": "2026-02-16T14:32:56.871Z",
       "updatedAt": "2026-02-16T14:32:56.871Z"
+    },
+    {
+      "id": "0ec95acc-e8fc-4c37-a7d0-872ec4401e6e",
+      "content": "eslint-disable for no-explicit-any",
+      "type": "decision",
+      "sha": "9ce67356085db84ac3117cef9501d42c865436e5",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T14:32:56.891Z",
+      "updatedAt": "2026-02-16T14:32:56.891Z"
     }
   ]
 }
