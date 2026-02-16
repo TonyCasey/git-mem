@@ -1019,6 +1019,21 @@
       ],
       "createdAt": "2026-02-16T14:37:18.233Z",
       "updatedAt": "2026-02-16T14:37:18.233Z"
+    },
+    {
+      "id": "e25bfc42-0751-4e90-a00f-911e9c1fb4ab",
+      "content": "allocating all matches",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-16T14:37:18.253Z",
+      "updatedAt": "2026-02-16T14:37:18.253Z"
     }
   ]
 }
