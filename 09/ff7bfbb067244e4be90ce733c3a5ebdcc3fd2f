@@ -299,6 +299,21 @@
       ],
       "createdAt": "2026-02-16T16:13:22.121Z",
       "updatedAt": "2026-02-16T16:13:22.121Z"
+    },
+    {
+      "id": "39459838-777f-44bf-9e7e-bfff376e76df",
+      "content": "forwarded the llm",
+      "type": "convention",
+      "sha": "09ff7bfbb067244e4be90ce733c3a5ebdcc3fd2f",
+      "confidence": "low",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:never"
+      ],
+      "createdAt": "2026-02-16T16:13:22.140Z",
+      "updatedAt": "2026-02-16T16:13:22.140Z"
     }
   ]
 }
