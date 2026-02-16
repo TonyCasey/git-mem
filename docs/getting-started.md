@@ -138,7 +138,7 @@ Options:
 - `--commit-count <n>` — Max commits to process
 - `--dry-run` — Preview without writing
 - `--threshold <n>` — Interest score threshold (default: 3)
-- `--enrich` — Enable LLM enrichment (requires `ANTHROPIC_API_KEY`)
+- `--enrich` — Enable LLM enrichment (requires an LLM provider API key)
 
 ### context
 
@@ -164,6 +164,24 @@ git mem sync --push   # push only
 git mem sync --pull   # pull only
 ```
 
+### trailers
+
+Inspect AI-* trailers on commits.
+
+```bash
+git mem trailers              # show trailers on HEAD
+git mem trailers abc123       # show trailers on specific commit
+git mem trailers --query AI-Decision  # search across history
+git mem trailers --keys       # list all distinct AI-* trailer keys
+```
+
+Options:
+- `--query <key>` — Search for trailer key across history (e.g. `AI-Decision`)
+- `--since <date>` — Filter commits after date
+- `--keys` — List all distinct AI-* trailer keys in the repo
+- `-n, --limit <n>` — Max commits to search
+- `--json` — Output as JSON
+
 ---
 
 ## Using Claude Code?
@@ -177,6 +195,8 @@ If you use Claude Code, git-mem can do more than just add trailers & notes — i
 | **SessionStart** | Loads stored memories into Claude's context on startup |
 | **Stop** | Extracts knowledge from commits made during the session |
 | **UserPromptSubmit** | Surfaces relevant memories per prompt (disabled by default) |
+| **PostCommit** | Records AI agent and model metadata on each commit |
+| **CommitMsg** | Analyzes commit message and adds AI-* trailers (with optional LLM enrichment) |
 
 These hooks read the AI trailers from your commits and build a searchable memory layer that Claude can query.
 
@@ -195,6 +215,12 @@ hooks:
   promptSubmit:
     enabled: false
     surfaceContext: true
+  commitMsg:
+    enabled: true
+    enrich: false          # set true + provide LLM API key for enriched extraction
+    enrichTimeout: 8000
+  postCommit:
+    enabled: true
 ```
 
 
@@ -202,6 +228,22 @@ hooks:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `ANTHROPIC_API_KEY` | Only for `--enrich` | Anthropic API key for LLM enrichment during extract. Get one at [console.anthropic.com](https://console.anthropic.com/). |
+| `ANTHROPIC_API_KEY` | For Anthropic LLM | Anthropic (Claude) API key |
+| `OPENAI_API_KEY` | For OpenAI LLM | OpenAI API key (requires `npm install openai`) |
+| `GOOGLE_API_KEY` / `GEMINI_API_KEY` | For Gemini LLM | Google Gemini API key (requires `npm install @google/generative-ai`) |
+| `OLLAMA_HOST` | For Ollama | Ollama server URL (default: `http://localhost:11434`) |
+| `GIT_MEM_LLM_PROVIDER` | No | Force provider: `anthropic`, `openai`, `gemini`, `ollama` |
 
-If `--enrich` is used without an API key, git-mem falls back to heuristic extraction only.
+Only one provider is needed. If `--enrich` is used without any LLM API key, git-mem falls back to heuristic extraction with a warning.
+
+### LLM Configuration
+
+You can also configure the LLM provider in `.git-mem/.git-mem.yaml`:
+
+```yaml
+llm:
+  provider: openai       # auto-detected from env vars if omitted
+  model: gpt-4o          # uses provider default if omitted
+  intentModel: gpt-4o-mini
+  baseUrl: http://localhost:11434  # for ollama
+```

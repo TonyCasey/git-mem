@@ -1,7 +1,7 @@
 {
   "name": "git-mem",
-  "version": "0.4.0",
-  "description": "Git-native memory layer for AI coding tools. Store decisions, context, and knowledge directly in your git repository using commit trailers and git notes.",
+  "version": "0.5.0",
+  "description": "Add AI metadata to git commits automatically. Tracks agent, model, and decisions via commit trailers and git notes.",
   "bin": {
     "git-mem": "dist/cli.js",
     "git-mem-mcp": "dist/mcp-server.js"

@@ -2,6 +2,8 @@
 
 Track AI contributions in your git history.
 
+![AI commit metadata](git-mem.png)
+
 ## Why?
 
 AI writes code now. Your commits should show when, which agent, and which model.
