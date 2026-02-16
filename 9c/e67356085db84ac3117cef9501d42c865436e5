@@ -359,6 +359,21 @@
       ],
       "createdAt": "2026-02-16T16:16:03.126Z",
       "updatedAt": "2026-02-16T16:16:03.126Z"
+    },
+    {
+      "id": "6aa3c369-f35b-46ed-af61-c5e17125d785",
+      "content": "Anthropic SDK directly",
+      "type": "decision",
+      "sha": "9ce67356085db84ac3117cef9501d42c865436e5",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:31:07.121Z",
+      "updatedAt": "2026-02-16T16:31:07.121Z"
     }
   ]
 }
