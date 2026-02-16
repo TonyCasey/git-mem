@@ -794,6 +794,21 @@
       ],
       "createdAt": "2026-02-16T14:35:54.644Z",
       "updatedAt": "2026-02-16T14:35:54.644Z"
+    },
+    {
+      "id": "a1b0d9f5-d78f-4704-b677-61df343e74cc",
+      "content": "setting env vars to the string 'undefined'",
+      "type": "convention",
+      "sha": "4da8a8386615dcc8a411480f645e4d06168e698f",
+      "confidence": "medium",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:avoid"
+      ],
+      "createdAt": "2026-02-16T14:35:54.669Z",
+      "updatedAt": "2026-02-16T14:35:54.669Z"
     }
   ]
 }
