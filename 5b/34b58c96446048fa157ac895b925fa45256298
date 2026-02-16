@@ -209,6 +209,21 @@
       ],
       "createdAt": "2026-02-16T15:46:51.504Z",
       "updatedAt": "2026-02-16T15:46:51.504Z"
+    },
+    {
+      "id": "6e3b2e63-67cf-4a56-9944-56791effcb24",
+      "content": "memory extraction, suggesting the primary value prop is tracking AI contributions in git history",
+      "type": "decision",
+      "sha": "5b34b58c96446048fa157ac895b925fa45256298",
+      "confidence": "high",
+      "source": "heuristic-extraction",
+      "lifecycle": "project",
+      "tags": [
+        "extract",
+        "pattern:instead-of"
+      ],
+      "createdAt": "2026-02-16T16:13:22.180Z",
+      "updatedAt": "2026-02-16T16:13:22.180Z"
     }
   ]
 }
