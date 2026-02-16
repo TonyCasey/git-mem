@@ -439,7 +439,10 @@ describe('Integration: hook commit-msg', () => {
     it('should detect Claude Code agent from CLAUDECODE env var', () => {
       delete process.env.GIT_MEM_AGENT;
       process.env.CLAUDECODE = '1';
-      process.env.ANTHROPIC_MODEL = 'claude-opus-4-5-20251101';
+      // Use GIT_MEM_MODEL (highest priority) rather than ANTHROPIC_MODEL,
+      // because detectClaudeModel() reads session JSONL files when CLAUDECODE
+      // is set, which can find real sessions in the dev environment.
+      process.env.GIT_MEM_MODEL = 'claude-opus-4-5-20251101';
 
       const commitMsg = 'feat: claude code commit';
       const msgPath = createCommitMsgFile(repoDir, commitMsg);
@@ -457,7 +460,7 @@ describe('Integration: hook commit-msg', () => {
         modifiedMsg.includes('Claude-Code') || modifiedMsg.includes('claude-code'),
         'Agent should be Claude Code variant',
       );
-      assert.ok(modifiedMsg.includes('AI-Model: claude-opus-4-5-20251101'), 'Should use ANTHROPIC_MODEL');
+      assert.ok(modifiedMsg.includes('AI-Model: claude-opus-4-5-20251101'), 'Should use GIT_MEM_MODEL');
     });
   });
 

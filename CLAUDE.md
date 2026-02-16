@@ -37,7 +37,7 @@ Clean architecture with three layers. Dependencies point inward only: Infrastruc
 **Infrastructure** (`src/infrastructure/`) — Implements domain interfaces. `GitClient` wraps git CLI. `NotesService` reads/writes `refs/notes/mem`. `TrailerService` queries commit trailers. `MemoryRepository` persists `IMemoryEntity[]` as JSON in git notes. `HeuristicPatterns` provides regex-based extraction rules. `EventBus` provides pub/sub event dispatch with error isolation (failing handlers don't crash the hook).
 
 **Entry points:**
-- `src/cli.ts` — Commander.js CLI with 6 commands (remember, recall, context, extract, sync, init)
+- `src/cli.ts` — Commander.js CLI with 8 commands (remember, recall, context, extract, sync, init, trailers, hook)
 - `src/mcp-server.ts` — MCP server over stdio; `src/mcp/server.ts` creates the server and registers 4 tools
 - `src/commands/hook.ts` — Unified hook entry point: reads stdin JSON, loads config, emits typed event via EventBus
 - `src/commands/init.ts` — Interactive setup: hooks, MCP config, .gitignore, initial extract
@@ -51,7 +51,7 @@ const container = createContainer({ logger, scope: 'remember' });
 const { memoryService } = container.cradle;
 ```
 
-Uses `InjectionMode.CLASSIC` (matches constructor parameter names to registration names). `ICradle` in `types.ts` defines the typed container shape with all interface references. The container also registers the `EventBus` with three hook handlers (`session:start`, `session:stop`, `prompt:submit`) wired during creation.
+Uses `InjectionMode.CLASSIC` (matches constructor parameter names to registration names). `ICradle` in `types.ts` defines the typed container shape with all interface references. The container also registers the `EventBus` with five hook handlers (`session:start`, `session:stop`, `prompt:submit`, `commit:msg`, `post:commit`) wired during creation.
 
 **Hook event flow:** `git-mem hook <event>` → `readStdin()` → `loadHookConfig()` → `createContainer()` → `eventBus.emit(typedEvent)` → handlers return `IEventResult[]` → output to stdout (context), summary to stderr. Hooks have a 10s hard timeout and never throw — failures are caught and reported silently.
 
