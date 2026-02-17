@@ -3,6 +3,7 @@
  *
  * Handles the session:stop event by capturing memories from
  * commits made during the session via SessionCaptureService.
+ * Also deactivates runtime.json to prevent stale agent/model attribution.
  */
 
 import type { ISessionStopHandler } from '../interfaces/ISessionStopHandler';
@@ -10,11 +11,13 @@ import type { ISessionStopEvent } from '../../domain/events/HookEvents';
 import type { IEventResult } from '../../domain/interfaces/IEventResult';
 import type { ISessionCaptureService } from '../../domain/interfaces/ISessionCaptureService';
 import type { ILogger } from '../../domain/interfaces/ILogger';
+import type { IRuntimeService } from '../../domain/interfaces/IRuntimeService';
 
 export class SessionStopHandler implements ISessionStopHandler {
   constructor(
     private readonly sessionCaptureService: ISessionCaptureService,
     private readonly logger?: ILogger,
+    private readonly runtimeService?: IRuntimeService,
   ) {}
 
   async handle(event: ISessionStopEvent): Promise<IEventResult> {
@@ -50,6 +53,29 @@ export class SessionStopHandler implements ISessionStopHandler {
         success: false,
         error: err,
       };
+    } finally {
+      // Always deactivate runtime.json on session stop, even if capture fails
+      this.deactivateRuntime(event.cwd);
+    }
+  }
+
+  /**
+   * Deactivate runtime.json to prevent stale agent/model attribution.
+   * Never throws — deactivation errors are logged and ignored.
+   */
+  private deactivateRuntime(cwd: string): void {
+    if (!this.runtimeService) {
+      return;
+    }
+
+    try {
+      this.runtimeService.deactivate(cwd);
+      this.logger?.debug('Runtime deactivated');
+    } catch (error) {
+      // Never fail the handler due to runtime deactivation errors
+      this.logger?.warn('Failed to deactivate runtime', {
+        error: error instanceof Error ? error.message : String(error),
+      });
     }
   }
 }

@@ -1,0 +1,34 @@
+name: ClickUp Linking Checks
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+    branches: [main]
+
+jobs:
+  validate-clickup-linking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch and PR include ClickUp task ID
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          set -euo pipefail
+
+          BRANCH_NO_PREFIX="${BRANCH_NAME#codex/}"
+
+          if [[ ! "$BRANCH_NO_PREFIX" =~ ^GIT-[A-Za-z0-9]+_.+ ]]; then
+            echo "Branch name must match codex/GIT-<taskId>_<taskName> (example: codex/GIT-123abc_fix-mcp-auth)." >&2
+            exit 1
+          fi
+
+          TASK_ID="${BRANCH_NO_PREFIX%%_*}"
+
+          if [[ "$PR_TITLE" != *"$TASK_ID"* ]] && [[ "${PR_BODY:-}" != *"$TASK_ID"* ]]; then
+            echo "PR title or body must include task ID: $TASK_ID" >&2
+            exit 1
+          fi
+
+          echo "ClickUp linking checks passed for task ID: $TASK_ID"
