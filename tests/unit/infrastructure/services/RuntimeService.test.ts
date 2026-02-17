@@ -6,34 +6,34 @@ import { tmpdir } from 'node:os';
 import { RuntimeService } from '../../../../src/infrastructure/services/RuntimeService';
 import type { IRuntimeData } from '../../../../src/domain/interfaces/IRuntimeService';
 
+function createRuntimeData(overrides?: Partial<IRuntimeData>): IRuntimeData {
+  return {
+    sessionId: 'test-session-123',
+    agent: 'Claude-Code/2.1.0',
+    model: 'claude-opus-4-5-20251101',
+    timestamp: new Date().toISOString(),
+    source: 'env:CLAUDECODE',
+    ...overrides,
+  };
+}
+
+function withTestDir(run: (testDir: string) => void): void {
+  const testDir = mkdtempSync(join(tmpdir(), 'git-mem-runtime-test-'));
+  try {
+    run(testDir);
+  } finally {
+    if (existsSync(testDir)) {
+      rmSync(testDir, { recursive: true, force: true });
+    }
+  }
+}
+
 describe('RuntimeService', () => {
   let service: RuntimeService;
 
   before(() => {
     service = new RuntimeService();
   });
-
-  function createRuntimeData(overrides?: Partial<IRuntimeData>): IRuntimeData {
-    return {
-      sessionId: 'test-session-123',
-      agent: 'Claude-Code/2.1.0',
-      model: 'claude-opus-4-5-20251101',
-      timestamp: new Date().toISOString(),
-      source: 'env:CLAUDECODE',
-      ...overrides,
-    };
-  }
-
-  function withTestDir(run: (testDir: string) => void): void {
-    const testDir = mkdtempSync(join(tmpdir(), 'git-mem-runtime-test-'));
-    try {
-      run(testDir);
-    } finally {
-      if (existsSync(testDir)) {
-        rmSync(testDir, { recursive: true, force: true });
-      }
-    }
-  }
 
   describe('activate', () => {
     it('should create runtime.json with correct content', () => {

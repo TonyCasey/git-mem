@@ -118,7 +118,7 @@ Rules are automatically loaded as context. See `.claude/rules/`:
 
 ## Git Workflow
 
-- Branch per ClickUp task, named with task ID (e.g. `GIT-123abc`)
+- Branch per ClickUp task, named using `codex/GIT-<taskId>_<taskName>` (e.g. `codex/GIT-123abc_fix-mcp-auth`)
 - Use the SKILL .claude/skills/github/SKILL.md for interacting with GitHub
 - PR workflow use the skill .claude/skills/pr/SKILL.md
   - Create the PR

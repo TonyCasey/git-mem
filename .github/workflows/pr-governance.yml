@@ -16,20 +16,36 @@ jobs:
       - name: Enforce Sonar quality gate and new issues policy
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          SONAR_PROJECT_KEY: ${{ github.repository_owner }}_${{ github.event.repository.name }}
+          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION || github.repository_owner }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY || replace(github.repository, '/', '_') }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_MAX_POLL_ITERATIONS: "30"
+          SONAR_POLL_INTERVAL_SECONDS: "10"
         run: |
           set -euo pipefail
 
+          MAX_POLL_ITERATIONS="${SONAR_MAX_POLL_ITERATIONS:-30}"
+          POLL_INTERVAL_SECONDS="${SONAR_POLL_INTERVAL_SECONDS:-10}"
+          SONAR_AUTH_ARGS=()
+          if [[ -n "${SONAR_TOKEN:-}" ]]; then
+            SONAR_AUTH_ARGS=(-u "${SONAR_TOKEN}:")
+          fi
+
           quality_status=""
-          for _ in {1..30}; do
-            response="$(curl -sS "https://sonarcloud.io/api/project_pull_requests/list?project=${SONAR_PROJECT_KEY}")"
+          attempt=1
+          while (( attempt <= MAX_POLL_ITERATIONS )); do
+            response="$(
+              curl -sS "${SONAR_AUTH_ARGS[@]}" \
+                "https://sonarcloud.io/api/project_pull_requests/list?organization=${SONAR_ORGANIZATION}&project=${SONAR_PROJECT_KEY}"
+            )"
             quality_status="$(jq -r --arg pr "${PR_NUMBER}" '.pullRequests[]? | select(.key == $pr) | .status.qualityGateStatus' <<<"$response")"
 
             if [[ -n "$quality_status" && "$quality_status" != "NONE" ]]; then
               break
             fi
 
-            sleep 10
+            sleep "${POLL_INTERVAL_SECONDS}"
+            attempt=$((attempt + 1))
           done
 
           if [[ -z "$quality_status" || "$quality_status" == "NONE" ]]; then
@@ -42,7 +58,10 @@ jobs:
             exit 1
           fi
 
-          issues_response="$(curl -sS "https://sonarcloud.io/api/issues/search?componentKeys=${SONAR_PROJECT_KEY}&pullRequest=${PR_NUMBER}&issueStatuses=OPEN,CONFIRMED&sinceLeakPeriod=true&ps=1")"
+          issues_response="$(
+            curl -sS "${SONAR_AUTH_ARGS[@]}" \
+              "https://sonarcloud.io/api/issues/search?organization=${SONAR_ORGANIZATION}&componentKeys=${SONAR_PROJECT_KEY}&pullRequest=${PR_NUMBER}&issueStatuses=OPEN,CONFIRMED&sinceLeakPeriod=true&ps=1"
+          )"
           new_issues="$(jq -r '.total // 0' <<<"$issues_response")"
 
           if [[ "$new_issues" != "0" ]]; then
@@ -57,6 +76,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO_OWNER: ${{ github.repository_owner }}
           REPO_NAME: ${{ github.event.repository.name }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
 
@@ -66,11 +86,17 @@ jobs:
               pullRequest(number:$number) {
                 author { login }
                 reviewThreads(first:100) {
+                  pageInfo {
+                    hasNextPage
+                  }
                   nodes {
                     id
                     isResolved
                     isOutdated
                     comments(first:100) {
+                      pageInfo {
+                        hasNextPage
+                      }
                       nodes {
                         author { login }
                       }
@@ -83,6 +109,17 @@ jobs:
 
           response="$(gh api graphql -f query="$query" -F owner="$REPO_OWNER" -F repo="$REPO_NAME" -F number="$PR_NUMBER")"
           pr_author="$(jq -r '.data.repository.pullRequest.author.login' <<<"$response")"
+
+          has_more_threads="$(jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.hasNextPage' <<<"$response")"
+          has_more_comments="$(jq -r '
+            .data.repository.pullRequest.reviewThreads.nodes
+            | any(.comments.pageInfo.hasNextPage == true)
+          ' <<<"$response")"
+
+          if [[ "$has_more_threads" == "true" || "$has_more_comments" == "true" ]]; then
+            echo "Review thread pagination limit reached; increase pagination handling before enforcing this check." >&2
+            exit 1
+          fi
 
           unresolved_count="$(jq -r '
             .data.repository.pullRequest.reviewThreads.nodes
