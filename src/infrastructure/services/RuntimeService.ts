@@ -6,8 +6,8 @@
  * agent/model detection when environment variables aren't available.
  */
 
-import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { IRuntimeService, IRuntimeData } from '../../domain/interfaces/IRuntimeService';
 import { getConfigDir } from '../../hooks/utils/config';
 
@@ -60,7 +60,12 @@ export class RuntimeService implements IRuntimeService {
       const data = JSON.parse(content) as IRuntimeData;
 
       // Validate structure
-      if (!data || typeof data.timestamp !== 'string') {
+      if (
+        !data ||
+        typeof data.timestamp !== 'string' ||
+        typeof data.sessionId !== 'string' ||
+        typeof data.source !== 'string'
+      ) {
         return undefined;
       }
 

@@ -17,7 +17,9 @@ import { resolveAgent, resolveModel } from '../detect-agent';
  */
 export class AgentResolver implements IAgentResolver {
   /** Cached runtime data to avoid repeated file reads. */
-  private cachedRuntimeData: IRuntimeData | undefined | null = null;
+  private cachedRuntimeData: IRuntimeData | undefined;
+  /** Tracks whether runtime data was read from disk. */
+  private runtimeDataLoaded = false;
 
   constructor(
     private readonly runtimeService?: IRuntimeService,
@@ -50,9 +52,9 @@ export class AgentResolver implements IAgentResolver {
    * Get cached runtime data, reading from file only once per instance.
    */
   private getRuntimeData(): IRuntimeData | undefined {
-    // null = not yet read, undefined = read but no data
-    if (this.cachedRuntimeData === null) {
-      this.cachedRuntimeData = this.runtimeService?.read(this.cwd);
+    if (!this.runtimeDataLoaded) {
+      this.cachedRuntimeData ??= this.runtimeService?.read(this.cwd);
+      this.runtimeDataLoaded = true;
     }
     return this.cachedRuntimeData;
   }
