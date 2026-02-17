@@ -81,11 +81,14 @@ describe('RuntimeService', () => {
     });
 
     it('should handle write errors gracefully (never throw)', () => {
-      withTestDir(() => {
-        // Try to write to an invalid path (root or protected directory)
-        // This should not throw
+      withTestDir((testDir) => {
+        // Force write path failure deterministically by using a file as cwd.
+        const invalidCwd = join(testDir, 'not-a-dir');
+        writeFileSync(invalidCwd, 'x', 'utf8');
+
         const data = createRuntimeData();
-        service.activate(data, '/nonexistent/path/that/should/not/exist');
+        service.activate(data, invalidCwd);
+
         // If we get here without throwing, the test passes
         assert.ok(true, 'activate should not throw on write errors');
       });
