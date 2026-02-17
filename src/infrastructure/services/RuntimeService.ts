@@ -6,8 +6,8 @@
  * agent/model detection when environment variables aren't available.
  */
 
-import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { IRuntimeService, IRuntimeData } from '../../domain/interfaces/IRuntimeService';
 import { getConfigDir } from '../../hooks/utils/config';
 
