@@ -16,6 +16,8 @@ const RUNTIME_FILE = 'runtime.json';
 
 /** Default TTL: 2 hours in milliseconds. */
 const DEFAULT_TTL_MS = 2 * 60 * 60 * 1000;
+/** Allow up to 1 minute of future timestamp skew. */
+const CLOCK_SKEW_ALLOWANCE_MS = 60 * 1000;
 
 export class RuntimeService implements IRuntimeService {
   activate(data: IRuntimeData, cwd?: string): void {
@@ -81,7 +83,7 @@ export class RuntimeService implements IRuntimeService {
       const age = Date.now() - timestamp;
 
       // Reject future timestamps (with small skew allowance) or stale data
-      if (age < -60000 || age > ttl) {
+      if (age < -CLOCK_SKEW_ALLOWANCE_MS || age > ttl) {
         return undefined;
       }
 

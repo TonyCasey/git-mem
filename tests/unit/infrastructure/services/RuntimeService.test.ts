@@ -88,7 +88,6 @@ describe('RuntimeService', () => {
 
         const data = createRuntimeData();
         service.activate(data, invalidCwd);
-
         // If we get here without throwing, the test passes
         assert.ok(true, 'activate should not throw on write errors');
       });
