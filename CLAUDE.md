@@ -118,7 +118,7 @@ Rules are automatically loaded as context. See `.claude/rules/`:
 
 ## Git Workflow
 
-- Branch per Linear issue, named with ticket number (e.g. `GIT-15`)
+- Branch per ClickUp task, named using only custom ID: `codex/GIT-<taskId>` (e.g. `codex/GIT-202`)
 - Use the SKILL .claude/skills/github/SKILL.md for interacting with GitHub
 - PR workflow use the skill .claude/skills/pr/SKILL.md
   - Create the PR
