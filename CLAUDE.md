@@ -123,7 +123,9 @@ Rules are automatically loaded as context. See `.claude/rules/`:
 - PR workflow use the skill .claude/skills/pr/SKILL.md
   - Create the PR
   - Wait for 120 seconds to allow for review from coderabbit
+  - SonarCloud quality gate must pass and Sonar "New issues" must be 0
   - Address comments directly inline to the comment
+  - Do not respond to review feedback in top-level PR comments when an inline thread exists
   - if a fix is applied, mark the comment as resolved
   - wait for another 120 seconds to allow for review from coderabbit
   - repeat the steps until all comments are resolved

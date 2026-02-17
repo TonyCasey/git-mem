@@ -1,0 +1,111 @@
+name: PR Governance
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  enforce-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enforce Sonar quality gate and new issues policy
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          SONAR_PROJECT_KEY: ${{ github.repository_owner }}_${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+
+          quality_status=""
+          for _ in {1..30}; do
+            response="$(curl -sS "https://sonarcloud.io/api/project_pull_requests/list?project=${SONAR_PROJECT_KEY}")"
+            quality_status="$(jq -r --arg pr "${PR_NUMBER}" '.pullRequests[]? | select(.key == $pr) | .status.qualityGateStatus' <<<"$response")"
+
+            if [[ -n "$quality_status" && "$quality_status" != "NONE" ]]; then
+              break
+            fi
+
+            sleep 10
+          done
+
+          if [[ -z "$quality_status" || "$quality_status" == "NONE" ]]; then
+            echo "Sonar result not ready for PR #${PR_NUMBER}." >&2
+            exit 1
+          fi
+
+          if [[ "$quality_status" != "OK" ]]; then
+            echo "Sonar quality gate must pass. Current status: ${quality_status}" >&2
+            exit 1
+          fi
+
+          issues_response="$(curl -sS "https://sonarcloud.io/api/issues/search?componentKeys=${SONAR_PROJECT_KEY}&pullRequest=${PR_NUMBER}&issueStatuses=OPEN,CONFIRMED&sinceLeakPeriod=true&ps=1")"
+          new_issues="$(jq -r '.total // 0' <<<"$issues_response")"
+
+          if [[ "$new_issues" != "0" ]]; then
+            echo "PR introduces ${new_issues} Sonar new issue(s). New issues must be 0." >&2
+            exit 1
+          fi
+
+          echo "Sonar checks passed: quality gate OK and 0 new issues."
+
+      - name: Enforce inline review replies and resolved threads
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+
+          query='
+          query($owner:String!, $repo:String!, $number:Int!) {
+            repository(owner:$owner, name:$repo) {
+              pullRequest(number:$number) {
+                author { login }
+                reviewThreads(first:100) {
+                  nodes {
+                    id
+                    isResolved
+                    isOutdated
+                    comments(first:100) {
+                      nodes {
+                        author { login }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }'
+
+          response="$(gh api graphql -f query="$query" -F owner="$REPO_OWNER" -F repo="$REPO_NAME" -F number="$PR_NUMBER")"
+          pr_author="$(jq -r '.data.repository.pullRequest.author.login' <<<"$response")"
+
+          unresolved_count="$(jq -r '
+            .data.repository.pullRequest.reviewThreads.nodes
+            | map(select(.isOutdated | not))
+            | map(select(.isResolved | not))
+            | length
+          ' <<<"$response")"
+
+          missing_inline_reply_count="$(jq -r --arg author "$pr_author" '
+            .data.repository.pullRequest.reviewThreads.nodes
+            | map(select(.isOutdated | not))
+            | map(select(([.comments.nodes[]?.author.login] | index($author)) | not))
+            | length
+          ' <<<"$response")"
+
+          if [[ "$missing_inline_reply_count" != "0" ]]; then
+            echo "Each active review thread must include an inline reply from PR author (${pr_author})." >&2
+            exit 1
+          fi
+
+          if [[ "$unresolved_count" != "0" ]]; then
+            echo "All active review threads must be resolved before merge." >&2
+            exit 1
+          fi
+
+          echo "Review thread checks passed."
