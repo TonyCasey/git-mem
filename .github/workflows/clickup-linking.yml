@@ -19,12 +19,12 @@ jobs:
 
           BRANCH_NO_PREFIX="${BRANCH_NAME#codex/}"
 
-          if [[ ! "$BRANCH_NO_PREFIX" =~ ^GIT-[A-Za-z0-9]+_.+ ]]; then
-            echo "Branch name must match codex/GIT-<taskId>_<taskName> (example: codex/GIT-123abc_fix-mcp-auth)." >&2
+          if [[ ! "$BRANCH_NO_PREFIX" =~ ^GIT-[A-Za-z0-9]+$ ]]; then
+            echo "Branch name must match codex/GIT-<taskId> (example: codex/GIT-202)." >&2
             exit 1
           fi
 
-          TASK_ID="${BRANCH_NO_PREFIX%%_*}"
+          TASK_ID="${BRANCH_NO_PREFIX}"
 
           if [[ "$PR_TITLE" != *"$TASK_ID"* ]] && [[ "${PR_BODY:-}" != *"$TASK_ID"* ]]; then
             echo "PR title or body must include task ID: $TASK_ID" >&2
