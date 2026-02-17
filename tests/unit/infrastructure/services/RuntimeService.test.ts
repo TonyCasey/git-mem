@@ -169,20 +169,16 @@ describe('RuntimeService', () => {
       });
     });
 
-    it('should return undefined when file is missing', () => {
+    it('should return undefined when file is missing or JSON is invalid', () => {
       withTestDir((testDir) => {
-        const result = service.read(testDir);
+        let result = service.read(testDir);
         assert.equal(result, undefined, 'read should return undefined for missing file');
-      });
-    });
 
-    it('should return undefined when JSON is invalid', () => {
-      withTestDir((testDir) => {
         const gitMemDir = join(testDir, '.git-mem');
         mkdirSync(gitMemDir, { recursive: true });
         writeFileSync(join(gitMemDir, 'runtime.json'), 'not valid json{{{', 'utf8');
 
-        const result = service.read(testDir);
+        result = service.read(testDir);
         assert.equal(result, undefined, 'read should return undefined for invalid JSON');
       });
     });
