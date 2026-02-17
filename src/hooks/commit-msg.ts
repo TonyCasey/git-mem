@@ -17,7 +17,7 @@ import { execFileSync } from 'child_process';
 const HOOK_FINGERPRINT_PREFIX = '# git-mem:commit-msg';
 
 /** Full fingerprint with version — used for upgrade detection. */
-const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v6`;
+const HOOK_FINGERPRINT = `${HOOK_FINGERPRINT_PREFIX} v7`;
 
 /**
  * The shell hook script.
@@ -43,6 +43,12 @@ head -1 "$COMMIT_MSG_FILE" | grep -qiE "^(fixup|squash|amend)! " && exit 0
 
 # Skip revert commits (auto-generated)
 head -1 "$COMMIT_MSG_FILE" | grep -qiE '^Revert "' && exit 0
+
+# Require ClickUp task ID in commit message for GitHub/ClickUp linking
+grep -qiE '\\bGIT-[A-Za-z0-9]+\\b' "$COMMIT_MSG_FILE" || {
+  echo "git-mem: commit message must include a ClickUp task ID (e.g. GIT-123abc)." >&2
+  exit 1
+}
 
 # Resolve repository root for hook context.
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)

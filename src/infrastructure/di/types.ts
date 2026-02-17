@@ -29,6 +29,7 @@ import type { IAgentResolver } from '../../domain/interfaces/IAgentResolver';
 import type { IHookConfigLoader } from '../../domain/interfaces/IHookConfigLoader';
 import type { IIntentExtractor } from '../../domain/interfaces/IIntentExtractor';
 import type { ILLMConfig } from '../../domain/interfaces/IHookConfig';
+import type { IRuntimeService } from '../../domain/interfaces/IRuntimeService';
 
 export interface ICradle {
   // Infrastructure
@@ -43,6 +44,7 @@ export interface ICradle {
   agentResolver: IAgentResolver;
   hookConfigLoader: IHookConfigLoader;
   intentExtractor: IIntentExtractor | null;
+  runtimeService: IRuntimeService;
 
   // Application — core services
   memoryService: IMemoryService;

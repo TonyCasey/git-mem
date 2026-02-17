@@ -28,6 +28,8 @@ import { createLLMClient } from '../llm/LLMClientFactory';
 import { IntentExtractor } from '../llm/IntentExtractor';
 import { AgentResolver } from '../services/AgentResolver';
 import { HookConfigLoader } from '../services/HookConfigLoader';
+import { RuntimeService } from '../services/RuntimeService';
+import { resolveAgent, resolveModel } from '../detect-agent';
 
 // Application — core services
 import { MemoryService } from '../../application/services/MemoryService';
@@ -63,8 +65,16 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
     gitClient: asClass(GitClient).singleton(),
     memoryRepository: asClass(MemoryRepository).singleton(),
     trailerService: asClass(TrailerService).singleton(),
-    agentResolver: asClass(AgentResolver).singleton(),
+    runtimeService: asClass(RuntimeService).singleton(),
     hookConfigLoader: asClass(HookConfigLoader).singleton(),
+
+    // AgentResolver needs runtimeService for fallback detection
+    agentResolver: asFunction(() => {
+      return new AgentResolver(
+        container.cradle.runtimeService,
+        options?.cwd,
+      );
+    }).singleton(),
 
     eventBus: asFunction(() => {
       const bus = new EventBus(container.cradle.logger);
@@ -74,10 +84,14 @@ export function createContainer(options?: IContainerOptions): AwilixContainer<IC
         container.cradle.memoryContextLoader,
         container.cradle.contextFormatter,
         container.cradle.logger,
+        container.cradle.runtimeService,
+        resolveAgent,  // Env-only detection (no runtime fallback)
+        resolveModel,  // Env-only detection (no runtime fallback)
       ));
       bus.on('session:stop', new SessionStopHandler(
         container.cradle.sessionCaptureService,
         container.cradle.logger,
+        container.cradle.runtimeService,
       ));
       bus.on('prompt:submit', new PromptSubmitHandler(
         container.cradle.memoryContextLoader,
