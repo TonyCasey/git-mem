@@ -161,7 +161,7 @@ export async function hookCommand(eventName: string, _logger?: ILogger): Promise
       return;
     }
 
-    const container = createContainer({ scope: `hook:${eventName}`, llm: config.llm });
+    const container = createContainer({ scope: `hook:${eventName}`, llm: config.llm, cwd });
     const { eventBus } = container.cradle;
 
     const event = buildEvent(eventType, normalizedInput);
