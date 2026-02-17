@@ -3,6 +3,7 @@
  *
  * Handles the session:start event by loading stored memories
  * and formatting them as markdown for Claude Code's context.
+ * Also activates runtime.json for cross-hook agent/model detection.
  */
 
 import type { ISessionStartHandler } from '../interfaces/ISessionStartHandler';
@@ -11,12 +12,20 @@ import type { IEventResult } from '../../domain/interfaces/IEventResult';
 import type { IMemoryContextLoader } from '../../domain/interfaces/IMemoryContextLoader';
 import type { IContextFormatter } from '../../domain/interfaces/IContextFormatter';
 import type { ILogger } from '../../domain/interfaces/ILogger';
+import type { IRuntimeService } from '../../domain/interfaces/IRuntimeService';
 
 export class SessionStartHandler implements ISessionStartHandler {
   constructor(
     private readonly memoryContextLoader: IMemoryContextLoader,
     private readonly contextFormatter: IContextFormatter,
     private readonly logger?: ILogger,
+    private readonly runtimeService?: IRuntimeService,
+    /**
+     * Env-only agent detection function. Uses direct env var detection
+     * to avoid reading runtime.json (which we're about to write).
+     */
+    private readonly detectAgent?: () => string | undefined,
+    private readonly detectModel?: () => string | undefined,
   ) {}
 
   async handle(event: ISessionStartEvent): Promise<IEventResult> {
@@ -25,6 +34,9 @@ export class SessionStartHandler implements ISessionStartHandler {
         trigger: event.trigger,
         cwd: event.cwd,
       });
+
+      // Activate runtime.json for cross-hook agent/model detection
+      this.activateRuntime(event);
 
       const result = this.memoryContextLoader.load({ cwd: event.cwd });
 
@@ -64,5 +76,54 @@ export class SessionStartHandler implements ISessionStartHandler {
         error: err,
       };
     }
+  }
+
+  /**
+   * Activate runtime.json with current agent/model detection.
+   * Uses env-only detection to avoid reading runtime.json (circular).
+   * Never throws — activation errors are logged and ignored.
+   */
+  private activateRuntime(event: ISessionStartEvent): void {
+    if (!this.runtimeService || !this.detectAgent || !this.detectModel) {
+      return;
+    }
+
+    try {
+      // Use env-only detection to avoid reading runtime.json we're about to write
+      const agent = this.detectAgent();
+      const model = this.detectModel();
+
+      // Determine source based on which env var is set
+      const source = this.detectSource();
+
+      this.runtimeService.activate(
+        {
+          sessionId: event.sessionId,
+          agent,
+          model,
+          timestamp: new Date().toISOString(),
+          source,
+        },
+        event.cwd,
+      );
+
+      this.logger?.debug('Runtime activated', { agent, model, source });
+    } catch (error) {
+      // Never fail the handler due to runtime activation errors
+      this.logger?.warn('Failed to activate runtime', {
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+
+  /**
+   * Determine the source of agent detection from environment variables.
+   */
+  private detectSource(): string {
+    if (process.env.CLAUDECODE) return 'env:CLAUDECODE';
+    if (process.env.CLAUDE_CODE) return 'env:CLAUDE_CODE';
+    if (process.env.CODEX_THREAD_ID) return 'env:CODEX_THREAD_ID';
+    if (process.env.GIT_MEM_AGENT) return 'env:GIT_MEM_AGENT';
+    return 'env:unknown';
   }
 }

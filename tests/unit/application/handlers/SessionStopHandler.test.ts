@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { SessionStopHandler } from '../../../../src/application/handlers/SessionStopHandler';
 import type { ISessionCaptureService, ISessionCaptureResult } from '../../../../src/domain/interfaces/ISessionCaptureService';
 import type { ISessionStopEvent } from '../../../../src/domain/events/HookEvents';
+import type { IRuntimeService } from '../../../../src/domain/interfaces/IRuntimeService';
 
 function createEvent(overrides?: Partial<ISessionStopEvent>): ISessionStopEvent {
   return {
@@ -25,6 +26,17 @@ function createMockCaptureService(result: Partial<ISessionCaptureResult> = {}): 
       summary: 'Captured 2 memories from 5 commits.',
       ...result,
     }),
+  };
+}
+
+function createMockRuntimeService(overrides?: Partial<IRuntimeService>): IRuntimeService & { deactivateCalls: string[] } {
+  const deactivateCalls: string[] = [];
+  return {
+    deactivateCalls,
+    activate: () => {},
+    deactivate: (cwd?: string) => { deactivateCalls.push(cwd ?? ''); },
+    read: () => undefined,
+    ...overrides,
   };
 }
 
@@ -81,5 +93,59 @@ describe('SessionStopHandler', () => {
     assert.equal(result.success, false);
     assert.ok(result.error instanceof Error);
     assert.equal(result.error!.message, 'string error');
+  });
+
+  describe('runtime deactivation', () => {
+    it('should call runtimeService.deactivate with cwd after capture', async () => {
+      const captureService = createMockCaptureService();
+      const runtimeService = createMockRuntimeService();
+      const handler = new SessionStopHandler(captureService, undefined, runtimeService);
+
+      await handler.handle(createEvent({ cwd: '/my/repo' }));
+
+      assert.equal(runtimeService.deactivateCalls.length, 1);
+      assert.equal(runtimeService.deactivateCalls[0], '/my/repo');
+    });
+
+    it('should not crash if runtimeService is not provided', async () => {
+      const captureService = createMockCaptureService();
+      const handler = new SessionStopHandler(captureService);
+
+      const result = await handler.handle(createEvent());
+
+      assert.equal(result.success, true);
+    });
+
+    it('should continue if runtimeService.deactivate throws', async () => {
+      const captureService = createMockCaptureService();
+      const runtimeService = createMockRuntimeService({
+        deactivate: () => { throw new Error('deactivate failed'); },
+      });
+      const handler = new SessionStopHandler(captureService, undefined, runtimeService);
+
+      const result = await handler.handle(createEvent());
+
+      assert.equal(result.success, true);
+    });
+
+    it('should call deactivate after capture completes', async () => {
+      const callOrder: string[] = [];
+      const captureService: ISessionCaptureService = {
+        capture: async () => {
+          callOrder.push('capture');
+          return { commitsScanned: 0, memoriesExtracted: 0, summary: '' };
+        },
+      };
+      const runtimeService: IRuntimeService = {
+        activate: () => {},
+        deactivate: () => { callOrder.push('deactivate'); },
+        read: () => undefined,
+      };
+      const handler = new SessionStopHandler(captureService, undefined, runtimeService);
+
+      await handler.handle(createEvent());
+
+      assert.deepEqual(callOrder, ['capture', 'deactivate']);
+    });
   });
 });
