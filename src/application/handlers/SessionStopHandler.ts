@@ -21,8 +21,6 @@ export class SessionStopHandler implements ISessionStopHandler {
   ) {}
 
   async handle(event: ISessionStopEvent): Promise<IEventResult> {
-    let handlerResult: IEventResult;
-
     try {
       this.logger?.info('Session stop handler invoked', {
         sessionId: event.sessionId,
@@ -39,7 +37,7 @@ export class SessionStopHandler implements ISessionStopHandler {
         memoriesExtracted: result.memoriesExtracted,
       });
 
-      handlerResult = {
+      return {
         handler: 'SessionStopHandler',
         success: true,
         output: result.summary,
@@ -50,7 +48,7 @@ export class SessionStopHandler implements ISessionStopHandler {
         error: err.message,
         stack: err.stack,
       });
-      handlerResult = {
+      return {
         handler: 'SessionStopHandler',
         success: false,
         error: err,
@@ -59,8 +57,6 @@ export class SessionStopHandler implements ISessionStopHandler {
       // Always deactivate runtime.json on session stop, even if capture fails
       this.deactivateRuntime(event.cwd);
     }
-
-    return handlerResult;
   }
 
   /**
